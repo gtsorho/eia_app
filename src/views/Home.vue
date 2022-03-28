@@ -61,7 +61,7 @@
       <label class="form-check-label ">Pesticide</label>
     </div>
     <div class="calendar">
-      <Calendar v-for="(item, index) in cropdata" :key="index"  :calendar_data="cropdata[index]"/>
+      <Calendar class="calendar_item" v-for="(item, index) in cropdata" :key="index"  :calendar_data="cropdata[index]"/>
     </div>
 
     <Footer/>
@@ -189,7 +189,21 @@ export default {
       max-width: 80%;
       left: 45%;  
   }
-} 
+}
+
+@media screen and (max-width: 530px) {
+    .calendar {
+      margin-inline: auto;
+      width: 80%; 
+      overflow-x: auto;
+      
+  }
+  .calendar_item{
+    width: 1000px;
+  }
+}
+
+
 
 </style>
 
