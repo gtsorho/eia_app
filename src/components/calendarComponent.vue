@@ -97,6 +97,7 @@ export default {
 </style>
 
 <style scoped>
+
 .bg-brown{
   background-color: rgb(155, 104, 37) !important;
 }

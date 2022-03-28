@@ -16,12 +16,19 @@ p, h1,h2,h3,h4,h5, small, strong, a, li,option, form ,div{
 body{
       background-color: #f5f5ff !important;
 }
+html, body {
+   margin:0;
+   padding:0;
+   height:100%;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  min-height:100%;
+  position:relative;
 }
 
 #nav {

@@ -1,5 +1,5 @@
 <template>
-    <footer class="d-flex flex-wrap bg-dark  fixed-bottom justify-content-between align-items-center py-1 my-4 border-top">
+    <footer class="d-flex flex-wrap bg-dark   justify-content-between align-items-center py-1 my-4 border-top">
         <div class="col-md-4 d-flex align-items-center">
         <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
             <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
@@ -24,5 +24,8 @@ export default {
         margin-bottom: 0% !important;
         margin-top:4.3rem !important;
         height: 50px;
+        position:absolute;
+        bottom:0;
+        width:100%;
     }
 </style>

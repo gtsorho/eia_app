@@ -60,7 +60,9 @@
       <input class="form-check-input bg-danger" disabled type="checkbox">
       <label class="form-check-label ">Pesticide</label>
     </div>
-    <Calendar v-for="(item, index) in cropdata" :key="index"  :calendar_data="cropdata[index]" />
+    <div class="calendar">
+      <Calendar v-for="(item, index) in cropdata" :key="index"  :calendar_data="cropdata[index]"/>
+    </div>
 
     <Footer/>
 </template>
@@ -123,7 +125,10 @@ export default {
 </script>
 
 <style scoped>
-
+.calendar{
+    padding:10px;
+   padding-bottom:50px;   /* Height of the footer */
+}
 * {
   box-sizing: border-box;
 }
@@ -178,6 +183,13 @@ export default {
   top       : 50%;
   transform : translate(-50%, -50%);
 }
+  
+@media screen and (max-width: 530px) {
+    .bg-img .container {
+      max-width: 80%;
+      left: 45%;  
+  }
+} 
 
 </style>
 
