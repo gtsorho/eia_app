@@ -6,16 +6,19 @@
           <span class="input-group-text"><img src="https://cdn-icons-png.flaticon.com/512/2917/2917995.png" height="15px"></span>
           <select class="form-select" id="inputGroupSelect01">
             <option selected>Select CropType</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option value="1" selected>Maize</option>
+            <option value="2">Cowpea</option>
+            <option value="3">Soyabean</option>
+            <option value="3">GroundNuts</option>
+            <option value="3">Yam</option>
+            <option value="3">Beans</option>
           </select>
           <span class="input-group-text"><img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" height="15px"></span>
           <select class="form-select" id="inputGroupSelect01">
             <option selected>Choose Region</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option value="1" selected>Northen Region</option>
+            <option value="2">Upper East Region</option>
+            <option value="3">Upper West Region</option>
           </select>
         </div>
       </form>
@@ -86,7 +89,7 @@ export default {
     return {
         cropdata:[
           {
-          town:"accra",
+          town:"Cheyohi",
           crop:"maize",
           landpreparation:["02-02","03-25","06-8"],
           weeding:["02-04","06-14","08-12"],
@@ -97,7 +100,7 @@ export default {
           pesticide:["03-04", "05-14"]
         },
         {
-          town:"Tema",
+          town:"Tingoli",
           crop:"maize",
           landpreparation:["01-02","02-25","08-8"],
           weeding:["02-04","06-14","10-12"],
@@ -108,13 +111,24 @@ export default {
           pesticide:["04-04", "06-14"]
         },
         {
-            town:"Amasan",
+            town:"Duku",
             crop:"maize",
             landpreparation:["03-02","07-25","12-8"],
             weeding:["03-04","07-14","12-12"],
             Rain:["02-12","08-20","06-14"],
             planting:["04-30","08-30"],
             firtilizer:["05-08","10-12"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+          {
+            town:"Tibali",
+            crop:"maize",
+            landpreparation:["03-02","04-25","08-8"],
+            weeding:["04-04","10-14","12-12"],
+            Rain:["04-12","05-20","08-14","10-14"],
+            planting:["03-30","06-30"],
+            firtilizer:["03-31","07-12", "05-14"],
             Harvesting:["07-27","12-03"],
             pesticide:["12-04", "11-14"]
           }
@@ -196,7 +210,11 @@ export default {
       margin-inline: auto;
       width: 80%; 
       overflow-x: auto;
-      
+  }
+  .calendar::after{
+    content: "<ouPlease Scroll";
+    font-size: 10px;
+    /* margin-bottom: 20%; */
   }
   .calendar_item{
     width: 1000px;

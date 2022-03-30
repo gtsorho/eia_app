@@ -50,6 +50,11 @@ html, body {
   -webkit-overflow-scrolling: touch;
 }
 
+/* ::-webkit-scrollbar- {
+  width: 10px;
+  -webkit-overflow-scrolling: touch;
+} */
+
 /* Track */
 ::-webkit-scrollbar-track {
   background: #cfcfcf;
