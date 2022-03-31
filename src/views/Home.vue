@@ -4,21 +4,21 @@
       <form action="/action_page.php" class="container">
         <div class="input-group  input-group-sm">
           <span class="input-group-text"><img src="https://cdn-icons-png.flaticon.com/512/2917/2917995.png" height="15px"></span>
-          <select class="form-select" id="inputGroupSelect01">
+          <select class="form-select" id="inputGroupSelect01" v-model="searchCrop" @change="selectionChange">
             <option selected>Select CropType</option>
-            <option value="1" selected>Maize</option>
-            <option value="2">Cowpea</option>
-            <option value="3">Soyabean</option>
-            <option value="3">GroundNuts</option>
-            <option value="3">Yam</option>
-            <option value="3">Beans</option>
+            <option value="maize" selected>Maize</option>
+            <option value="cowpea">Cowpea</option>
+            <option value="soyabean">Soyabean</option>
+            <option value="groundnut">GroundNuts</option>
+            <option value="yam">Yam</option>
+            <option value="beans">Beans</option>
           </select>
           <span class="input-group-text"><img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" height="15px"></span>
-          <select class="form-select" id="inputGroupSelect01">
+          <select class="form-select" id="inputGroupSelect01" v-model="searchRegion">
             <option selected>Choose Region</option>
-            <option value="1" selected>Northen Region</option>
-            <option value="2">Upper East Region</option>
-            <option value="3">Upper West Region</option>
+            <option value="northen" selected>Northen Region</option>
+            <option value="uer">Upper East Region</option>
+            <option value="uwr">Upper West Region</option>
           </select>
         </div>
       </form>
@@ -64,7 +64,7 @@
       <label class="form-check-label ">Pesticide</label>
     </div>
     <div class="calendar">
-      <Calendar class="calendar_item" v-for="(item, index) in cropdata" :key="index"  :calendar_data="cropdata[index]"/>
+      <Calendar class="calendar_item" v-for="(item, index) in selectionChange" :key="index"  :calendar_data="selectionChange[index]"/>
     </div>
 
     <Footer/>
@@ -87,10 +87,13 @@ export default {
   },
   data() {
     return {
+        searchRegion: "",
+        searchCrop: "",
         cropdata:[
           {
           town:"Cheyohi",
           crop:"maize",
+          region:"uer",
           landpreparation:["02-02","03-25","06-8"],
           weeding:["02-04","06-14","08-12"],
           Rain:["03-12","08-20","07-14"],
@@ -100,8 +103,21 @@ export default {
           pesticide:["03-04", "05-14"]
         },
         {
+            town:"Tibali",
+            crop:"maize",
+            region: "uer",
+            landpreparation:["03-02","04-25","08-8"],
+            weeding:["04-04","10-14","12-12"],
+            Rain:["04-12","05-20","08-14","10-14"],
+            planting:["03-30","06-30"],
+            firtilizer:["03-31","07-12", "05-14"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+        {
           town:"Tingoli",
           crop:"maize",
+          region:"uwr",
           landpreparation:["01-02","02-25","08-8"],
           weeding:["02-04","06-14","10-12"],
           Rain:["03-12","08-20","06-14"],
@@ -113,6 +129,7 @@ export default {
         {
             town:"Duku",
             crop:"maize",
+            region:"northen",
             landpreparation:["03-02","07-25","12-8"],
             weeding:["03-04","07-14","12-12"],
             Rain:["02-12","08-20","06-14"],
@@ -124,6 +141,7 @@ export default {
           {
             town:"Tibali",
             crop:"maize",
+            region: "northen",
             landpreparation:["03-02","04-25","08-8"],
             weeding:["04-04","10-14","12-12"],
             Rain:["04-12","05-20","08-14","10-14"],
@@ -131,8 +149,687 @@ export default {
             firtilizer:["03-31","07-12", "05-14"],
             Harvesting:["07-27","12-03"],
             pesticide:["12-04", "11-14"]
-          }
+          },
+          {
+          town:"Tingoli",
+          crop:"maize",
+          region:"northen",
+          landpreparation:["01-02","02-25","08-8"],
+          weeding:["02-04","06-14","10-12"],
+          Rain:["03-12","08-20","06-14"],
+          planting:["06-30"],
+          firtilizer:["12-08","08-12"],
+          Harvesting:["04-27","11-03"],
+          pesticide:["04-04", "06-14"]
+        },
+        // cowpea
+        {
+          town:"Cheyohi",
+          crop:"cowpea",
+          region:"uwr",
+          landpreparation:["02-02","03-25","06-8"],
+          weeding:["02-04","06-14","08-12"],
+          Rain:["03-12","08-20","07-14"],
+          planting:["06-30"],
+          firtilizer:["10-08","07-12"],
+          Harvesting:["08-27","12-03"],
+          pesticide:["03-04", "05-14"]
+        },
+        {
+            town:"Tibali",
+            crop:"cowpea",
+            region: "uwr",
+            landpreparation:["03-02","04-25","08-8"],
+            weeding:["04-04","10-14","12-12"],
+            Rain:["04-12","05-20","08-14","10-14"],
+            planting:["03-30","06-30"],
+            firtilizer:["03-31","07-12", "05-14"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+        {
+            town:"Duku",
+            crop:"uwr",
+            region:"northen",
+            landpreparation:["03-02","07-25","12-8"],
+            weeding:["03-04","07-14","12-12"],
+            Rain:["02-12","08-20","06-14"],
+            planting:["04-30","08-30"],
+            firtilizer:["05-08","10-12"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+        {
+            town:"Tibali",
+            crop:"cowpea",
+            region: "northen",
+            landpreparation:["03-02","04-25","08-8"],
+            weeding:["04-04","10-14","12-12"],
+            Rain:["04-12","05-20","08-14","10-14"],
+            planting:["03-30","06-30"],
+            firtilizer:["03-31","07-12", "05-14"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+        {
+          town:"Tingoli",
+          crop:"cowpea",
+          region:"northen",
+          landpreparation:["01-02","02-25","08-8"],
+          weeding:["02-04","06-14","10-12"],
+          Rain:["03-12","08-20","06-14"],
+          planting:["06-30"],
+          firtilizer:["12-08","08-12"],
+          Harvesting:["04-27","11-03"],
+          pesticide:["04-04", "06-14"]
+        },
+        {
+            town:"Duku",
+            crop:"cowpea",
+            region:"uer",
+            landpreparation:["03-02","07-25","12-8"],
+            weeding:["03-04","07-14","12-12"],
+            Rain:["02-12","08-20","06-14"],
+            planting:["04-30","08-30"],
+            firtilizer:["05-08","10-12"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+          {
+            town:"Tibali",
+            crop:"cowpea",
+            region: "uer",
+            landpreparation:["03-02","04-25","08-8"],
+            weeding:["04-04","10-14","12-12"],
+            Rain:["04-12","05-20","08-14","10-14"],
+            planting:["03-30","06-30"],
+            firtilizer:["03-31","07-12", "05-14"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+          {
+          town:"Tingoli",
+          crop:"cowpea",
+          region:"uer",
+          landpreparation:["01-02","02-25","08-8"],
+          weeding:["02-04","06-14","10-12"],
+          Rain:["03-12","08-20","06-14"],
+          planting:["06-30"],
+          firtilizer:["12-08","08-12"],
+          Harvesting:["04-27","11-03"],
+          pesticide:["04-04", "06-14"]
+        },
+        // beans
+        {
+          town:"Cheyohi",
+          crop:"beans",
+          region:"uwr",
+          landpreparation:["02-02","03-25","06-8"],
+          weeding:["02-04","06-14","08-12"],
+          Rain:["03-12","08-20","07-14"],
+          planting:["06-30"],
+          firtilizer:["10-08","07-12"],
+          Harvesting:["08-27","12-03"],
+          pesticide:["03-04", "05-14"]
+        },
+        {
+            town:"Duku",
+            crop:"uwr",
+            region:"northen",
+            landpreparation:["03-02","07-25","12-8"],
+            weeding:["03-04","07-14","12-12"],
+            Rain:["02-12","08-20","06-14"],
+            planting:["04-30","08-30"],
+            firtilizer:["05-08","10-12"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+        {
+            town:"Tibali",
+            crop:"beans",
+            region: "northen",
+            landpreparation:["03-02","04-25","08-8"],
+            weeding:["04-04","10-14","12-12"],
+            Rain:["04-12","05-20","08-14","10-14"],
+            planting:["03-30","06-30"],
+            firtilizer:["03-31","07-12", "05-14"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+        {
+          town:"Tingoli",
+          crop:"beans",
+          region:"northen",
+          landpreparation:["01-02","02-25","08-8"],
+          weeding:["02-04","06-14","10-12"],
+          Rain:["03-12","08-20","06-14"],
+          planting:["06-30"],
+          firtilizer:["12-08","08-12"],
+          Harvesting:["04-27","11-03"],
+          pesticide:["04-04", "06-14"]
+        },
+        {
+            town:"Duku",
+            crop:"beans",
+            region:"uwr",
+            landpreparation:["03-02","07-25","12-8"],
+            weeding:["03-04","07-14","12-12"],
+            Rain:["02-12","08-20","06-14"],
+            planting:["04-30","08-30"],
+            firtilizer:["05-08","10-12"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+          {
+            town:"Tibali",
+            crop:"beans",
+            region: "uwr",
+            landpreparation:["03-02","04-25","08-8"],
+            weeding:["04-04","10-14","12-12"],
+            Rain:["04-12","05-20","08-14","10-14"],
+            planting:["03-30","06-30"],
+            firtilizer:["03-31","07-12", "05-14"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+          {
+          town:"Tingoli",
+          crop:"beans",
+          region:"uwr",
+          landpreparation:["01-02","02-25","08-8"],
+          weeding:["02-04","06-14","10-12"],
+          Rain:["03-12","08-20","06-14"],
+          planting:["06-30"],
+          firtilizer:["12-08","08-12"],
+          Harvesting:["04-27","11-03"],
+          pesticide:["04-04", "06-14"]
+        },
+        // groundnut
+        {
+          town:"Cheyohi",
+          crop:"groundnut",
+          region:"uwr",
+          landpreparation:["02-02","03-25","06-8"],
+          weeding:["02-04","06-14","08-12"],
+          Rain:["03-12","08-20","07-14"],
+          planting:["06-30"],
+          firtilizer:["10-08","07-12"],
+          Harvesting:["08-27","12-03"],
+          pesticide:["03-04", "05-14"]
+        },
+        {
+            town:"Tibali",
+            crop:"groundnut",
+            region: "uwr",
+            landpreparation:["03-02","04-25","08-8"],
+            weeding:["04-04","10-14","12-12"],
+            Rain:["04-12","05-20","08-14","10-14"],
+            planting:["03-30","06-30"],
+            firtilizer:["03-31","07-12", "05-14"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+        {
+            town:"Duku",
+            crop:"uwr",
+            region:"northen",
+            landpreparation:["03-02","07-25","12-8"],
+            weeding:["03-04","07-14","12-12"],
+            Rain:["02-12","08-20","06-14"],
+            planting:["04-30","08-30"],
+            firtilizer:["05-08","10-12"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+        {
+            town:"Tibali",
+            crop:"groundnut",
+            region: "northen",
+            landpreparation:["03-02","04-25","08-8"],
+            weeding:["04-04","10-14","12-12"],
+            Rain:["04-12","05-20","08-14","10-14"],
+            planting:["03-30","06-30"],
+            firtilizer:["03-31","07-12", "05-14"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+        {
+          town:"Tingoli",
+          crop:"groundnut",
+          region:"northen",
+          landpreparation:["01-02","02-25","08-8"],
+          weeding:["02-04","06-14","10-12"],
+          Rain:["03-12","08-20","06-14"],
+          planting:["06-30"],
+          firtilizer:["12-08","08-12"],
+          Harvesting:["04-27","11-03"],
+          pesticide:["04-04", "06-14"]
+        },
+        {
+            town:"Duku",
+            crop:"groundnut",
+            region:"uer",
+            landpreparation:["03-02","07-25","12-8"],
+            weeding:["03-04","07-14","12-12"],
+            Rain:["02-12","08-20","06-14"],
+            planting:["04-30","08-30"],
+            firtilizer:["05-08","10-12"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+          {
+            town:"Tibali",
+            crop:"groundnut",
+            region: "uer",
+            landpreparation:["03-02","04-25","08-8"],
+            weeding:["04-04","10-14","12-12"],
+            Rain:["04-12","05-20","08-14","10-14"],
+            planting:["03-30","06-30"],
+            firtilizer:["03-31","07-12", "05-14"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+          {
+          town:"Tingoli",
+          crop:"groundnut",
+          region:"uer",
+          landpreparation:["01-02","02-25","08-8"],
+          weeding:["02-04","06-14","10-12"],
+          Rain:["03-12","08-20","06-14"],
+          planting:["06-30"],
+          firtilizer:["12-08","08-12"],
+          Harvesting:["04-27","11-03"],
+          pesticide:["04-04", "06-14"]
+        },
+        {
+          town:"Tibali",
+          crop:"groundnut",
+          region: "northen",
+          landpreparation:["03-02","04-25","08-8"],
+          weeding:["04-04","10-14","12-12"],
+          Rain:["04-12","05-20","08-14","10-14"],
+          planting:["03-30","06-30"],
+          firtilizer:["03-31","07-12", "05-14"],
+          Harvesting:["07-27","12-03"],
+          pesticide:["12-04", "11-14"]
+        },
+        // soyabean
+        {
+          town:"Cheyohi",
+          crop:"soyabean",
+          region:"uwr",
+          landpreparation:["02-02","03-25","06-8"],
+          weeding:["02-04","06-14","08-12"],
+          Rain:["03-12","08-20","07-14"],
+          planting:["06-30"],
+          firtilizer:["10-08","07-12"],
+          Harvesting:["08-27","12-03"],
+          pesticide:["03-04", "05-14"]
+        },
+        {
+            town:"Tibali",
+            crop:"soyabean",
+            region: "uwr",
+            landpreparation:["03-02","04-25","08-8"],
+            weeding:["04-04","10-14","12-12"],
+            Rain:["04-12","05-20","08-14","10-14"],
+            planting:["03-30","06-30"],
+            firtilizer:["03-31","07-12", "05-14"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+        {
+            town:"Tibali",
+            crop:"soyabean",
+            region: "uwr",
+            landpreparation:["03-02","04-25","08-8"],
+            weeding:["04-04","10-14","12-12"],
+            Rain:["04-12","05-20","08-14","10-14"],
+            planting:["03-30","06-30"],
+            firtilizer:["03-31","07-12", "05-14"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+        {
+            town:"Duku",
+            crop:"uwr",
+            region:"northen",
+            landpreparation:["03-02","07-25","12-8"],
+            weeding:["03-04","07-14","12-12"],
+            Rain:["02-12","08-20","06-14"],
+            planting:["04-30","08-30"],
+            firtilizer:["05-08","10-12"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+        {
+            town:"Tibali",
+            crop:"soyabean",
+            region: "northen",
+            landpreparation:["03-02","04-25","08-8"],
+            weeding:["04-04","10-14","12-12"],
+            Rain:["04-12","05-20","08-14","10-14"],
+            planting:["03-30","06-30"],
+            firtilizer:["03-31","07-12", "05-14"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+        {
+          town:"Tingoli",
+          crop:"soyabean",
+          region:"northen",
+          landpreparation:["01-02","02-25","08-8"],
+          weeding:["02-04","06-14","10-12"],
+          Rain:["03-12","08-20","06-14"],
+          planting:["06-30"],
+          firtilizer:["12-08","08-12"],
+          Harvesting:["04-27","11-03"],
+          pesticide:["04-04", "06-14"]
+        },
+        {
+            town:"Duku",
+            crop:"soyabean",
+            region:"uer",
+            landpreparation:["03-02","07-25","12-8"],
+            weeding:["03-04","07-14","12-12"],
+            Rain:["02-12","08-20","06-14"],
+            planting:["04-30","08-30"],
+            firtilizer:["05-08","10-12"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+          {
+            town:"Tibali",
+            crop:"soyabean",
+            region: "uer",
+            landpreparation:["03-02","04-25","08-8"],
+            weeding:["04-04","10-14","12-12"],
+            Rain:["04-12","05-20","08-14","10-14"],
+            planting:["03-30","06-30"],
+            firtilizer:["03-31","07-12", "05-14"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+          {
+          town:"Tingoli",
+          crop:"soyabean",
+          region:"uer",
+          landpreparation:["01-02","02-25","08-8"],
+          weeding:["02-04","06-14","10-12"],
+          Rain:["03-12","08-20","06-14"],
+          planting:["06-30"],
+          firtilizer:["12-08","08-12"],
+          Harvesting:["04-27","11-03"],
+          pesticide:["04-04", "06-14"]
+        },
+        {
+          town:"Tibali",
+          crop:"soyabean",
+          region: "northen",
+          landpreparation:["03-02","04-25","08-8"],
+          weeding:["04-04","10-14","12-12"],
+          Rain:["04-12","05-20","08-14","10-14"],
+          planting:["03-30","06-30"],
+          firtilizer:["03-31","07-12", "05-14"],
+          Harvesting:["07-27","12-03"],
+          pesticide:["12-04", "11-14"]
+        },
+        // yam
+            {
+          town:"Cheyohi",
+          crop:"yam",
+          region:"uwr",
+          landpreparation:["02-02","03-25","06-8"],
+          weeding:["02-04","06-14","08-12"],
+          Rain:["03-12","08-20","07-14"],
+          planting:["06-30"],
+          firtilizer:["10-08","07-12"],
+          Harvesting:["08-27","12-03"],
+          pesticide:["03-04", "05-14"]
+        },
+        {
+            town:"Tibali",
+            crop:"yam",
+            region: "uwr",
+            landpreparation:["03-02","04-25","08-8"],
+            weeding:["04-04","10-14","12-12"],
+            Rain:["04-12","05-20","08-14","10-14"],
+            planting:["03-30","06-30"],
+            firtilizer:["03-31","07-12", "05-14"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+        {
+            town:"Tibali",
+            crop:"yam",
+            region: "uwr",
+            landpreparation:["03-02","04-25","08-8"],
+            weeding:["04-04","10-14","12-12"],
+            Rain:["04-12","05-20","08-14","10-14"],
+            planting:["03-30","06-30"],
+            firtilizer:["03-31","07-12", "05-14"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+        {
+            town:"Duku",
+            crop:"uwr",
+            region:"northen",
+            landpreparation:["03-02","07-25","12-8"],
+            weeding:["03-04","07-14","12-12"],
+            Rain:["02-12","08-20","06-14"],
+            planting:["04-30","08-30"],
+            firtilizer:["05-08","10-12"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+        {
+            town:"Tibali",
+            crop:"yam",
+            region: "northen",
+            landpreparation:["03-02","04-25","08-8"],
+            weeding:["04-04","10-14","12-12"],
+            Rain:["04-12","05-20","08-14","10-14"],
+            planting:["03-30","06-30"],
+            firtilizer:["03-31","07-12", "05-14"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+        {
+          town:"Tingoli",
+          crop:"yam",
+          region:"northen",
+          landpreparation:["01-02","02-25","08-8"],
+          weeding:["02-04","06-14","10-12"],
+          Rain:["03-12","08-20","06-14"],
+          planting:["06-30"],
+          firtilizer:["12-08","08-12"],
+          Harvesting:["04-27","11-03"],
+          pesticide:["04-04", "06-14"]
+        },
+        {
+            town:"Duku",
+            crop:"yam",
+            region:"uer",
+            landpreparation:["03-02","07-25","12-8"],
+            weeding:["03-04","07-14","12-12"],
+            Rain:["02-12","08-20","06-14"],
+            planting:["04-30","08-30"],
+            firtilizer:["05-08","10-12"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+          {
+            town:"Tibali",
+            crop:"yam",
+            region: "uer",
+            landpreparation:["03-02","04-25","08-8"],
+            weeding:["04-04","10-14","12-12"],
+            Rain:["04-12","05-20","08-14","10-14"],
+            planting:["03-30","06-30"],
+            firtilizer:["03-31","07-12", "05-14"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+          {
+          town:"Tingoli",
+          crop:"yam",
+          region:"uer",
+          landpreparation:["01-02","02-25","08-8"],
+          weeding:["02-04","06-14","10-12"],
+          Rain:["03-12","08-20","06-14"],
+          planting:["06-30"],
+          firtilizer:["12-08","08-12"],
+          Harvesting:["04-27","11-03"],
+          pesticide:["04-04", "06-14"]
+        },
+        {
+          town:"Tibali",
+          crop:"yam",
+          region: "northen",
+          landpreparation:["03-02","04-25","08-8"],
+          weeding:["04-04","10-14","12-12"],
+          Rain:["04-12","05-20","08-14","10-14"],
+          planting:["03-30","06-30"],
+          firtilizer:["03-31","07-12", "05-14"],
+          Harvesting:["07-27","12-03"],
+          pesticide:["12-04", "11-14"]
+        },
+        // beans
+        {
+          town:"Cheyohi",
+          crop:"beans",
+          region:"uwr",
+          landpreparation:["02-02","03-25","06-8"],
+          weeding:["02-04","06-14","08-12"],
+          Rain:["03-12","08-20","07-14"],
+          planting:["06-30"],
+          firtilizer:["10-08","07-12"],
+          Harvesting:["08-27","12-03"],
+          pesticide:["03-04", "05-14"]
+        },
+        {
+            town:"Tibali",
+            crop:"beans",
+            region: "uwr",
+            landpreparation:["03-02","04-25","08-8"],
+            weeding:["04-04","10-14","12-12"],
+            Rain:["04-12","05-20","08-14","10-14"],
+            planting:["03-30","06-30"],
+            firtilizer:["03-31","07-12", "05-14"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+        {
+            town:"Tibali",
+            crop:"beans",
+            region: "uwr",
+            landpreparation:["03-02","04-25","08-8"],
+            weeding:["04-04","10-14","12-12"],
+            Rain:["04-12","05-20","08-14","10-14"],
+            planting:["03-30","06-30"],
+            firtilizer:["03-31","07-12", "05-14"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+        {
+            town:"Duku",
+            crop:"uwr",
+            region:"northen",
+            landpreparation:["03-02","07-25","12-8"],
+            weeding:["03-04","07-14","12-12"],
+            Rain:["02-12","08-20","06-14"],
+            planting:["04-30","08-30"],
+            firtilizer:["05-08","10-12"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+        {
+            town:"Tibali",
+            crop:"beans",
+            region: "northen",
+            landpreparation:["03-02","04-25","08-8"],
+            weeding:["04-04","10-14","12-12"],
+            Rain:["04-12","05-20","08-14","10-14"],
+            planting:["03-30","06-30"],
+            firtilizer:["03-31","07-12", "05-14"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+        {
+          town:"Tingoli",
+          crop:"beans",
+          region:"northen",
+          landpreparation:["01-02","02-25","08-8"],
+          weeding:["02-04","06-14","10-12"],
+          Rain:["03-12","08-20","06-14"],
+          planting:["06-30"],
+          firtilizer:["12-08","08-12"],
+          Harvesting:["04-27","11-03"],
+          pesticide:["04-04", "06-14"]
+        },
+        {
+            town:"Duku",
+            crop:"beans",
+            region:"uer",
+            landpreparation:["03-02","07-25","12-8"],
+            weeding:["03-04","07-14","12-12"],
+            Rain:["02-12","08-20","06-14"],
+            planting:["04-30","08-30"],
+            firtilizer:["05-08","10-12"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+          {
+            town:"Tibali",
+            crop:"beans",
+            region: "uer",
+            landpreparation:["03-02","04-25","08-8"],
+            weeding:["04-04","10-14","12-12"],
+            Rain:["04-12","05-20","08-14","10-14"],
+            planting:["03-30","06-30"],
+            firtilizer:["03-31","07-12", "05-14"],
+            Harvesting:["07-27","12-03"],
+            pesticide:["12-04", "11-14"]
+          },
+          {
+          town:"Tingoli",
+          crop:"beans",
+          region:"uer",
+          landpreparation:["01-02","02-25","08-8"],
+          weeding:["02-04","06-14","10-12"],
+          Rain:["03-12","08-20","06-14"],
+          planting:["06-30"],
+          firtilizer:["12-08","08-12"],
+          Harvesting:["04-27","11-03"],
+          pesticide:["04-04", "06-14"]
+        },
+        {
+          town:"Tibali",
+          crop:"beans",
+          region: "northen",
+          landpreparation:["03-02","04-25","08-8"],
+          weeding:["04-04","10-14","12-12"],
+          Rain:["04-12","05-20","08-14","10-14"],
+          planting:["03-30","06-30"],
+          firtilizer:["03-31","07-12", "05-14"],
+          Harvesting:["07-27","12-03"],
+          pesticide:["12-04", "11-14"]
+        },
         ]
+    }
+  },
+  computed: {
+    selectionChange(){
+      var results = [];
+      console.log(this.cropdata)
+      for (var i=0 ; i < this.cropdata.length ; i++)
+      {
+          if (this.cropdata[i].crop == this.searchCrop && this.cropdata[i].region == this.searchRegion) {
+            results.push(this.cropdata[i]);
+          }
+      }
+      return results
     }
   },
 }
