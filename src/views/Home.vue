@@ -5,7 +5,7 @@
         <div class="input-group  input-group-sm">
           <span class="input-group-text"><img src="https://cdn-icons-png.flaticon.com/512/2917/2917995.png" height="15px"></span>
           <select class="form-select" id="inputGroupSelect01" v-model="searchCrop" @change="selectionChange">
-            <option selected>Select CropType</option>
+            <option selected value="default">Select CropType</option>
             <option value="maize" selected>Maize</option>
             <option value="cowpea">Cowpea</option>
             <option value="soyabean">Soyabean</option>
@@ -15,7 +15,7 @@
           </select>
           <span class="input-group-text"><img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" height="15px"></span>
           <select class="form-select" id="inputGroupSelect01" v-model="searchRegion">
-            <option selected>Choose Region</option>
+            <option selected value="default">Choose Region</option>
             <option value="northen" selected>Northen Region</option>
             <option value="uer">Upper East Region</option>
             <option value="uwr">Upper West Region</option>
@@ -65,6 +65,7 @@
     </div>
     <div class="calendar">
       <Calendar class="calendar_item" v-for="(item, index) in selectionChange" :key="index"  :calendar_data="selectionChange[index]"/>
+      <p v-show="selectionChange.length == 0" class="fw-bolder fs-5 my-5 text-danger">No result found, Please make your selections</p>
     </div>
 
     <Footer/>
@@ -87,8 +88,8 @@ export default {
   },
   data() {
     return {
-        searchRegion: "",
-        searchCrop: "",
+        searchRegion: "default",
+        searchCrop: "default",
         cropdata:[
           {
           town:"Cheyohi",
@@ -822,7 +823,6 @@ export default {
   computed: {
     selectionChange(){
       var results = [];
-      console.log(this.cropdata)
       for (var i=0 ; i < this.cropdata.length ; i++)
       {
           if (this.cropdata[i].crop == this.searchCrop && this.cropdata[i].region == this.searchRegion) {
