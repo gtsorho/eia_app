@@ -1,13 +1,25 @@
 <template>
-  <!-- <div id="nav"> -->
-    <!-- <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> -->
-  <!-- </div> -->
-  <router-view/>
+  <Navbar/>
+    <!-- <div id="nav"> -->
+      <!-- <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link> -->
+    <!-- </div> -->
+    <router-view/>
+  <Footer/>
 </template>
 
-<style>
+<script>
+import Navbar from "../src/components/navbar.vue";
+import Footer from "../src/components/footer.vue";
 
+export default {
+  components: {
+    Navbar,
+    Footer
+  },
+}
+</script>
+<style>
 @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 
 p, h1,h2,h3,h4,h5, small, strong, a, li,option, form ,div{
@@ -57,7 +69,10 @@ html, body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #cfcfcf;
+  background: #212529;
+}
+::-webkit-scrollbar-track:hover {
+  background: #cfcfcf !important;
 }
 
 /* Handle */
@@ -67,7 +82,7 @@ html, body {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(59, 59, 59);
+  background: #212529;
 }
 html {
     overflow-y: scroll; 

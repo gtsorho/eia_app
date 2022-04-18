@@ -1,5 +1,4 @@
 <template>
-  <Navbar />
   <div class="bg-img">
     <form action="/action_page.php" class="container">
       <div class="input-group input-group-sm">
@@ -89,7 +88,6 @@
     </p>
   </div>
 
-  <Footer />
 </template>
 
 <script>

@@ -13,10 +13,11 @@
             </p>
         </div>
         <div class="col-sm-4 offset-md-1 py-4">
-            <h4 class="text-white">Cropping Calendar</h4>
+            <h4 class="text-white">Menu</h4>
             <hr style="color:white">
             <ul class="list-unstyled">
-            <li><a href="#" class="text-white">Dashboards</a></li>
+            <li><router-link to="/" class="text-white">Cropping Calendar</router-link></li>
+            <li><router-link to="/dashboard" class="text-white">Dashboards</router-link></li>
             <li><a href="#" class="text-white">API's</a></li>
             <li><a href="#" class="text-white">Contacts</a></li>
             </ul>
