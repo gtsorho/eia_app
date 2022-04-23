@@ -37,7 +37,7 @@
 </div>
 
 <a  class="float align-middle" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-  <i class="bi bi-menu-button-wide fs-3 my-float "></i>
+  <i class="bi bi-menu-button-wide fs-4 my-float "></i>
 </a>
 
 </template>
@@ -92,7 +92,7 @@ export default {
 }
 .float{
 	position:fixed;
-	width:40px;
+	width:41px;
 	height:40px;
 	bottom:48%;
 	left:15px;
@@ -104,16 +104,16 @@ export default {
 	box-shadow: 2px 2px 3px #999;
 }
 .my-float{
-  position: absolute;
-  left: 9.5px;
-    top: 6px;
+    position: absolute;
+    left: 22%;
+    top: 9%;
 }
 
 .float2{
   font-weight: bolder;
   display: inline;
   padding-inline:9px;
-  padding-bottom: 7px;
+  padding-bottom: 6.5px;
   padding-top: 8px;
   opacity: .9;
 	left:15px;

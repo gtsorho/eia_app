@@ -4,10 +4,10 @@
         <!-- offcanvas header -->
         <div class="offcanvas-header">
             <u>
-                <h4 class="offcanvas-title fw-bolder text-uppercase" id="offcanvasExampleLabel">Dashboard</h4>
+                <h6 class="offcanvas-title fw-bolder text-uppercase" id="offcanvasExampleLabel">Dashboard</h6>
             </u>
             
-            <button class="btn btn-warning px-5" @click="addPanel()">Add Panel</button>
+            <button class="btn btn-warning px-5 btn-sm" @click="addPanel()">Add Panel</button>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <!-- offcanvas header end | offcanvas body start -->
@@ -18,7 +18,7 @@
                 <div class="accordion-item mb-3" v-for="(data, index) in formdata" :key="index" v-show=" index < 4">
                     <!-- accordion header -->
                     <div class="accordion-header " :id="`panelsStayOpen-heading${index}`">
-                        <button class="btn  float-end text-danger trashbtn" @click="formdata.splice(index, 1)"><i class="bi bi-trash3-fill"></i></button>
+                        <button class="btn  float-end text-danger trashbtn"  @click="formdata.splice(index, 1)"><i class="bi bi-trash3-fill"></i></button>
                         <button class="accordion-button text-light fw-normal" style="width:90% !important;" type="button" data-bs-toggle="collapse"
                         :style="{'backgroundColor': '#'+Math.floor(Math.random()*16777215).toString(16)}"
                             :data-bs-target="`#panelsStayOpen-collapse${index}`" aria-expanded="true"
@@ -131,13 +131,17 @@
     }
 </script>
 <style scoped>
+.accordion-button{
+    height: 40px;
+}
 .trashbtn{
     width: 10% !important;
-    padding: 1rem 0.25rem;
+    padding: 0rem 0.25rem;
     border-end-start-radius: 0px;
     border-end-end-radius: 0px;
     border-start-start-radius: 0px;
     border: 0px !important;
+    height: 40px;
     background-color: #e7f1ff;
 }
 .trashbtn:focus {

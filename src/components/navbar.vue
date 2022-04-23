@@ -16,9 +16,9 @@
             <h4 class="text-white">Menu</h4>
             <hr style="color:white">
             <ul class="list-unstyled">
-            <li><router-link to="/" class="text-white">Cropping Calendar</router-link></li>
-            <li><router-link to="/dashboard" class="text-white">Dashboards</router-link></li>
-            <li><a href="#" class="text-white">API's</a></li>
+            <li><router-link to="/main/Croppingcalendar" class="text-white">Cropping Calendar</router-link></li>
+            <li><router-link to="/main/dashboard" class="text-white">Dashboards</router-link></li>
+            <li><router-link to="/main/storyset" class="text-white">StorySet</router-link></li>
             <li><a href="#" class="text-white">Contacts</a></li>
             </ul>
         </div>
@@ -28,8 +28,10 @@
     <div class="navbar navbar-dark bg-dark shadow-sm">
     <div class="container">
         <a href="#" class="navbar-brand d-flex align-items-center">
-        <img src="../assets/agronomy.png" height="30px">
-        <!-- <strong>Album</strong> -->
+        <!-- <img src="../assets/agronomy.png" height="30px"> -->
+        <router-link to="/">
+            <h5 class="float-md-start mb-0 fw-bolder"><span class="me-1 text-success">I.</span><span class="me-1 text-light">I.</span> <span class="me-1 text-warning">T.</span><span class="me-1 text-primary">A</span></h5>
+        </router-link>
         </a>
         <button
         class="navbar-toggler"
