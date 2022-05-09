@@ -3,7 +3,7 @@
 <div class="row row-cols-md-2 row-cols-lg-3">
     <div  class="col-lg-4" v-for="(story, index) in storyset" :key="index">
         <div class="card card-margin">
-            <div class="card-body pt-3 ">
+            <div class="card-body pt-3" style="min-height:80%">
                 <div class="widget-49">
                     <div class="widget-49-title-wrapper">
                         <div :class="widgetColors[Math.floor(Math.random() * 7)]">
@@ -16,10 +16,10 @@
                         </div>
                     </div>
                     <p class="widget-49-meeting-points">{{story.description}}</p>
-                    <div class="widget-49-meeting-action">
-                        <a href="#" class="btn btn-sm btn-flash-border-primary">View All</a>
-                    </div>
                 </div>
+            </div>
+            <div class="widget-49-meeting-action card-footer border-0 bg-transparent text-end">
+                <a href="#" class="btn rounded-pill btn-sm px-3" style="background-color:pink">View All</a>
             </div>
         </div>
     </div>
