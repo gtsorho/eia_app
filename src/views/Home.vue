@@ -3,11 +3,14 @@
          <div class="cover-container d-flex w-100 p-3 mx-auto flex-column">
   <header class="mb-auto mx-5">
     <div>
-      <h2 class="float-md-start mb-0"><span class="me-1 text-success">I.</span><span class="me-1">I.</span> <span class="me-1 text-warning">T.</span><span class="me-1 text-primary">A</span></h2>
+      <h2 class="float-md-start mb-0" style="color:#e76e83">AG-DATAHUB</h2>
       <nav class="nav nav-masthead justify-content-center float-md-end">
-        <a class="nav-link" :class="{active:active === 'cropping'}" href="#" @click="changeTopic(0), active = 'cropping'" >Cropping Calendar</a>
+        <a class="nav-link" :class="{active:active === 'cropping'}" href="#" @click="changeTopic(0), active = 'cropping'">Tools</a>
         <a class="nav-link" :class="{active:active === 'Dashbords'}" href="#" @click="changeTopic(1),  active = 'Dashbords'">Dashbords</a>
         <a class="nav-link" :class="{active:active === 'Storyset'}" href="#" @click="changeTopic(2), active = 'Storyset'">Storyset</a>
+        <a class="nav-link" :class="{active:active === 'Dataset'}" href="#" @click="changeTopic(3), active = 'Dataset'">Dataset</a>
+        <!-- <a class="nav-link" :class="{active:active === 'Storyset'}" href="#" @click="changeTopic(2), active = 'Storyset'">Storyset</a> -->
+
       </nav>
     </div>
   </header>
@@ -18,9 +21,22 @@
         <h1>{{displayParam.Title}}</h1>
         <hr class="mx-auto" style="width:90%">
         <p class="lead fs-6 px-5">{{displayParam.text}}</p>
-        <p class="lead">
-          <router-link :to="displayParam.link" class="btn btn-md btn-secondary fw-bold border-white bg-white">Get Started</router-link>
+        <p class="lead"  v-show="!displayParam.id == 0">
+          <router-link :to="displayParam.link" class="btn btn-md btn-secondary fw-bold border-white bg-white">View More</router-link>
         </p>
+
+            <div class="dropdown" v-show="displayParam.id == 0" >
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                See Tools
+              </button>
+              <ul class="dropdown-menu shadow-sm dropdown-menu-dark" style="" aria-labelledby="dropdownMenuButton2">
+                <li><a class="nav-link"  href="#" @click="changeTopic(4)">Cropping Calendar</a></li>
+                <li><a class="nav-link"  href="#" @click="changeTopic(5)">Weather Application</a></li>
+                <!-- <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Separated link</a></li> -->
+              </ul>
+          </div>
         <a  class="float align-middle" href="#offcanvasExample"  aria-controls="offcanvasExample" @click="previous(displayParam.id)">
           <i class="bi bi-chevron-left fs-4 my-float" style="left: 6.4px;"></i>
         </a>
@@ -48,29 +64,50 @@ data() {
     vectordetails:[
       {
         id: 0,
-        img:'croping.svg',
-        Title:'Cropping Calendar',
+        img:'tools.svg',
+        Title:'Our Tools',
         text:'Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.',
-        link:'/main/Croppingcalendar'
+        link:''
       },
       {
         id: 1,
-        img:'Dashbords.svg',
+        img:'dash.svg',
         Title:'Dashbords',
         text:'Cover is a one-page template for building simple and beautiful home pages. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet at Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet at nam doloribus ducimus repellendus ipsa adipisci alias dignissimos! Laudantium illum excepturi sunt odit nobis dolores est vero rem. Dicta, debitis. nam doloribus ducimus repellendus ipsa adipisci alias dignissimos! Laudantium illum excepturi sunt odit nobis dolores est vero rem. Dicta, debitis. Download, edit the text, and add your own fullscreen background photo to make it your own.',
         link:'/main/dashboard'
       },
       {
         id: 2,
-        img:'story2.svg',
+        img:'story.svg',
         Title:'StorySet',
         text:'  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis, temporibus. Sapiente rerum ipsa minima aut molestiae   Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis, temporibus. Sapiente rerum ipsa minima aut molestiae dolore fugiat molestias eos, autem dolorem, omnis ad magni maxime natus. Quis, blanditiis aliquid.dolore fugiat molestias eos, autem dolorem, omnis ad magni maxime natus. Quis, blanditiis aliquid.',
         link:'/main/storyset'
       },
+      {
+        id: 3,
+        img:'dataset.svg',
+        Title:'DataSets',
+        text:'  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis, temporibus. Sapiente rerum ipsa minima aut molestiae   Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis, temporibus. Sapiente rerum ipsa minima aut molestiae dolore fugiat molestias eos, autem dolorem, omnis ad magni maxime natus. Quis, blanditiis aliquid.dolore fugiat molestias eos, autem dolorem, omnis ad magni maxime natus. Quis, blanditiis aliquid.',
+        link:'/main/datasets'
+      },
+      {
+        id: 4,
+        img:'story.svg',
+        Title:'Cropping Calendar',
+        text:'  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis, temporibus. Sapiente rerum ipsa minima aut molestiae   Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis, temporibus. Sapiente rerum ipsa minima aut molestiae dolore fugiat molestias eos, autem dolorem, omnis ad magni maxime natus. Quis, blanditiis aliquid.dolore fugiat molestias eos, autem dolorem, omnis ad magni maxime natus. Quis, blanditiis aliquid.',
+        link:'/main/Croppingcalendar'
+      },
+      {
+        id: 5,
+        img:'story.svg',
+        Title:'Weather Widget',
+        text:'  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis, temporibus. Sapiente rerum ipsa minima aut molestiae   Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis, temporibus. Sapiente rerum ipsa minima aut molestiae dolore fugiat molestias eos, autem dolorem, omnis ad magni maxime natus. Quis, blanditiis aliquid.dolore fugiat molestias eos, autem dolorem, omnis ad magni maxime natus. Quis, blanditiis aliquid.',
+        link:'/main/Croppingcalendar'
+      },
     ],
     displayParam:{
         id: 2,
-        img:'story2.svg',
+        img:'story.svg',
         Title:'Story Sets',
         text:'  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis, temporibus. Sapiente rerum ipsa minima aut molestiae   Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis, temporibus. Sapiente rerum ipsa minima aut molestiae dolore fugiat molestias eos, autem dolorem, omnis ad magni maxime natus. Quis, blanditiis aliquid.dolore fugiat molestias eos, autem dolorem, omnis ad magni maxime natus. Quis, blanditiis aliquid.',
         link:'/main/storyset'
@@ -104,6 +141,18 @@ methods:{
 </script>
 
 <style scoped>
+
+.dropdown-menu{
+  min-width: 20rem !important;
+  inset: 5px auto auto -100px !important
+}
+.dropdown-menu .nav-link:hover{
+  background-color: rgb(99, 99, 99);
+  opacity: .8;
+}
+.nav-link{
+  color: rgb(230, 230, 230) !important;
+}
 
 .float{
 	position:fixed;

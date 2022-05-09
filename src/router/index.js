@@ -3,6 +3,7 @@ import CroppingCalendar from '../views/CroppingCalendar.vue'
 import Home from '../views/Home.vue'
 import Main from '../views/Main.vue'
 import StorySet from '../views/storyset.vue'
+import DataSets from '../views/datasets.vue'
 
 
 
@@ -26,6 +27,11 @@ const routes = [
         path: 'storyset',
         name: 'Storyset',
         component: StorySet
+      },
+      {
+        path: 'datasets',
+        name: 'Datasets',
+        component: DataSets
       },
       {
         path: 'dashboard',

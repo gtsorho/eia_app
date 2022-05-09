@@ -30,7 +30,7 @@
         <a href="#" class="navbar-brand d-flex align-items-center">
         <!-- <img src="../assets/agronomy.png" height="30px"> -->
         <router-link to="/">
-            <h5 class="float-md-start mb-0 fw-bolder"><span class="me-1 text-success">I.</span><span class="me-1 text-light">I.</span> <span class="me-1 text-warning">T.</span><span class="me-1 text-primary">A</span></h5>
+            <h5 class="float-md-start mb-0 fw-bolder" style="color:#e76e83">AG-DATAHUB</h5>
         </router-link>
         </a>
         <button

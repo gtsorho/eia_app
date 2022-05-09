@@ -19,11 +19,16 @@
                     <!-- accordion header -->
                     <div class="accordion-header " :id="`panelsStayOpen-heading${index}`">
                         <button class="btn  float-end text-danger trashbtn"  @click="formdata.splice(index, 1)"><i class="bi bi-trash3-fill"></i></button>
-                        <button class="accordion-button text-light fw-normal" style="width:90% !important;" type="button" data-bs-toggle="collapse"
-                        :style="{'backgroundColor': '#'+Math.floor(Math.random()*16777215).toString(16)}"
+                        <button class="accordion-button text-light fw-normal" style="width:90% !important; background-color:#e76e83" type="button" data-bs-toggle="collapse"
                             :data-bs-target="`#panelsStayOpen-collapse${index}`" aria-expanded="true"
                             :aria-controls="`panelsStayOpen-collapse${index}`">
-                            Panel {{index + 1}}
+                            P {{index + 1}}
+                            <select class="form-select form-select-sm w-50 mx-4" @change="getFormValue()" v-model="data.datasetVal" aria-label=".form-select-sm example">
+                                <option value="default">Select Dataset</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
                         </button>
                     </div>
                     <!-- accordion header end -->
@@ -35,8 +40,8 @@
                                 <div class="text-start mb-1">
                                     <label for="exampleFormControlInput1" class="form-label mb-0"
                                         style="font-size:10px">Y-data</label>
-                                    <select class="form-select form-select-sm" @change="formvalue()" v-model="data.data1" aria-label=".form-select-sm example">
-                                        <option selected>Y-Data</option>
+                                    <select class="form-select form-select-sm" @change="getFormValue()" v-model="data.data1" aria-label=".form-select-sm example">
+                                        <option >Y-Data</option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
                                         <option value="3">Three</option>
@@ -45,8 +50,8 @@
                                 <div class="text-start mb-1">
                                     <label for="exampleFormControlInput1" class="form-label mb-0"
                                         style="font-size:10px">X-Data</label>
-                                    <select class="form-select form-select-sm" @change="formvalue()" v-model="data.data2" aria-label=".form-select-sm example">
-                                        <option selected>X-Data</option>
+                                    <select class="form-select form-select-sm" @change="getFormValue()" v-model="data.data2" aria-label=".form-select-sm example">
+                                        <option >X-Data</option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
                                         <option value="3">Three</option>
@@ -56,8 +61,8 @@
                                     <div class="col text-start">
                                         <label for="exampleFormControlInput1" class="form-label mb-0"
                                             style="font-size:10px">Category</label>
-                                        <select class="form-select form-select-sm" @change="formvalue()" v-model="data.data3" aria-label=".form-select-sm example">
-                                            <option selected>X-Data</option>
+                                        <select class="form-select form-select-sm" @change="getFormValue()" v-model="data.data3" aria-label=".form-select-sm example">
+                                            <option >X-Data</option>
                                             <option value="1">One</option>
                                             <option value="2">Two</option>
                                             <option value="3">Three</option>
@@ -66,8 +71,8 @@
                                     <div class="col text-start">
                                         <label for="exampleFormControlInput1" class="form-label mb-0"
                                             style="font-size:10px">Properties</label>
-                                        <select class="form-select form-select-sm" @change="formvalue()" v-model="data.data4" aria-label=".form-select-sm example">
-                                            <option selected>X-Data</option>
+                                        <select class="form-select form-select-sm" @change="getFormValue()" v-model="data.data4" aria-label=".form-select-sm example">
+                                            <option >X-Data</option>
                                             <option value="1">One</option>
                                             <option value="2">Two</option>
                                             <option value="3">Three</option>
@@ -95,10 +100,11 @@
             return {
                 formdata: [
                 {
-                    data1: "Foxconn",
-                    data2: "Engineer",
-                    data3: "Foxconn",
-                    data4: "Engineer",
+                    datasetVal:'default',
+                    data1: "1",
+                    data2: "2",
+                    data3: "1",
+                    data4: "3",
                 },
                 ]
             }
@@ -112,15 +118,15 @@
                     data4: ''
                 })
             },
-            formvalue(){
-                // console.log(this.formdata) 
+            getFormValue(){
+                console.log(this.formdata) 
                 this.$emit("panelValues", this.formdata)
             },
             submit () {
-            const data = {
-                workExperiences: this.workExperiences
-            }
-            alert(JSON.stringify(data, null, 2))
+                const data = {
+                    workExperiences: this.workExperiences
+                }
+                alert(JSON.stringify(data, null, 2))
             }
         },
         computed:{
@@ -142,7 +148,10 @@
     border-start-start-radius: 0px;
     border: 0px !important;
     height: 40px;
-    background-color: #e7f1ff;
+    background-color: #e76e83;
+}
+.form-select{
+    background-color: #fedbdb70;
 }
 .trashbtn:focus {
     outline: 0;
