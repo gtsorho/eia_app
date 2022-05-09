@@ -80,6 +80,10 @@ export default {
     margin-bottom: 1.875rem;
 }
 
+.card-footer a:hover{
+  background-color: rgb(250, 151, 167) !important;
+}
+
 .card {
     border: 0;
     box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);

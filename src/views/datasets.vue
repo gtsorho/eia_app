@@ -3,7 +3,7 @@
 <div class="row row-cols-md-2 row-cols-lg-3">
     <div  class="col-lg-4" v-for="(story, index) in storyset" :key="index">
         <div class="card card-margin">
-            <div class="card-body pt-3 ">
+            <div class="card-body pt-3 " style="min-height:80%">
                 <div class="widget-49">
                     <div class="widget-49-title-wrapper">
                         <div :class="widgetColors[Math.floor(Math.random() * 7)]">
@@ -16,10 +16,10 @@
                         </div>
                     </div>
                     <p class="widget-49-meeting-points">{{story.description}}</p>
-                    <div class="widget-49-meeting-action">
-                        <a href="#" class="btn btn-sm btn-flash-border-primary">View All</a>
-                    </div>
                 </div>
+            </div>
+            <div class=" card-footer bg-transparent border-0 text-end text-uppercase">
+              <a href="#" class="btn btn-sm rounded-pill px-3" style="background-color:pink ">View All</a>
             </div>
         </div>
     </div>
@@ -226,6 +226,11 @@ input[type=file]::file-selector-button {
   transition: 1s;
   
 }
+
+.card-footer a:hover{
+  background-color: rgb(250, 151, 167) !important;
+}
+
 .form-control[data-v-6a57b8d6]:focus {
     
     background-color: rgb(176 176 176 / 0%) !important;

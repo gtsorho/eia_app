@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="widget-49-meeting-action card-footer border-0 bg-transparent">
-                <a href="#" class="btn btn-sm float-end btn-flash-border-primary">View All</a>
+                <a href="#" class="btn btn-sm float-end btn-flash-border-primary rounded-pill">View All</a>
             </div>
         </div>
     </div>
@@ -113,6 +113,11 @@ input[type=file]::file-selector-button {
   transition: 1s;
   
 }
+
+.card-footer a:hover{
+  border-color: rgb(250, 151, 167) !important;
+}
+
 .form-control[data-v-6a57b8d6]:focus {
     
     background-color: rgb(176 176 176 / 0%) !important;
