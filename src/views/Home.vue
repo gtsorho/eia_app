@@ -21,22 +21,19 @@
         <h1>{{displayParam.Title}}</h1>
         <hr class="mx-auto" style="width:90%">
         <p class="lead fs-6 px-5">{{displayParam.text}}</p>
-        <p class="lead"  v-show="!displayParam.id == 0">
+        <p class="lead">
           <router-link :to="displayParam.link" class="btn btn-md btn-secondary fw-bold border-white bg-white">View More</router-link>
         </p>
 
-            <div class="dropdown" v-show="displayParam.id == 0" >
+            <!-- <div class="dropdown" v-show="displayParam.id == 0" >
               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                 See Tools
               </button>
               <ul class="dropdown-menu shadow-sm dropdown-menu-dark" style="" aria-labelledby="dropdownMenuButton2">
                 <li><a class="nav-link"  href="#" @click="changeTopic(4)">Cropping Calendar</a></li>
                 <li><a class="nav-link"  href="#" @click="changeTopic(5)">Weather Application</a></li>
-                <!-- <li><a class="dropdown-item" href="#">Something else here</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Separated link</a></li> -->
               </ul>
-          </div>
+          </div> -->
         <a  class="float align-middle" href="#offcanvasExample"  aria-controls="offcanvasExample" @click="previous(displayParam.id)">
           <i class="bi bi-chevron-left fs-4 my-float" style="left: 6.4px;"></i>
         </a>
@@ -67,7 +64,7 @@ data() {
         img:'tools.svg',
         Title:'Our Tools',
         text:'Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.',
-        link:''
+        link:'/main/tools'
       },
       {
         id: 1,

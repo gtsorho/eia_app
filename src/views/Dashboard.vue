@@ -96,7 +96,7 @@ export default {
 	height:40px;
 	bottom:48%;
 	left:15px;
-	background-color:rgb(60, 62, 62);
+	background-color:#c2213d;
 	color:#FFF;
 	border-radius:50px;
   transition: transform .2s;
@@ -117,7 +117,7 @@ export default {
   padding-top: 8px;
   opacity: .9;
 	left:15px;
-	background-color:rgb(60, 62, 62);
+	background-color:#c2213d;
 	color:#FFF;
 	border-radius:50px;
   transition: transform .2s;
@@ -126,7 +126,7 @@ export default {
 }
 .float:hover{
   transform: scale(1.1); 
-	background-color:rgb(75, 76, 76);
+	background-color:#ff607a;
 
 }
 </style>
