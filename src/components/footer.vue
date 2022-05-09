@@ -4,7 +4,7 @@
         <a href="/" class="mb-3 me-2 mb-md-0 text-light text-decoration-none lh-1">
             <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
         </a>
-        <span class="text-light">&copy; 2021 Company, Inc</span>
+        <span class="text-light fw-bolder">&copy; 2022 Ag-Datahub</span>
         </div>
 
         <ul class="nav col-md-4  me-5 justify-content-end list-unstyled  d-flex">
