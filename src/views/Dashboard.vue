@@ -101,7 +101,7 @@ export default {
 	border-radius:50px;
   transition: transform .2s;
 	text-align:center;
-	box-shadow: 2px 2px 3px #999;
+	box-shadow: 0px 0px 5px #c2213d;
 }
 .my-float{
     position: absolute;
@@ -122,7 +122,7 @@ export default {
 	border-radius:50px;
   transition: transform .2s;
 	text-align:center;
-	box-shadow: 2px 2px 3px #999;
+	box-shadow: 0px 0px 5px #c2213d;
 }
 .float:hover{
   transform: scale(1.1); 

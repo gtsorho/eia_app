@@ -280,12 +280,12 @@ input[type=file]::file-selector-button:hover {
 	height:40px;
 	bottom:70%;
 	left:15px;
-	background-color:rgb(60, 62, 62);
+	background-color:#c2213d;
 	color:#FFF;
 	border-radius:50px;
   transition: transform .2s;
 	text-align:center;
-	box-shadow: 0px 0px 5px #999;
+	box-shadow: 0px 0px 5px #c2213d;
 }
 .my-float{
     position: absolute;
@@ -294,7 +294,7 @@ input[type=file]::file-selector-button:hover {
 }
 .float:hover{
   transform: scale(1.1); 
-	background-color:rgb(75, 76, 76);
+	background-color:#e74963;
 
 }
 
@@ -305,13 +305,13 @@ input[type=file]::file-selector-button:hover {
 	height:40px;
 	bottom:80%;
 	left:15px;
-	background-color:rgb(60, 62, 62);
+	background-color:#c2213d;
 	color:#FFF;
 	border-radius:50px;
   transition: width 1s;
   transition-timing-function: ease-in-out;
 	text-align:center;
-	box-shadow: 0px 0px 5px #999;
+	box-shadow: 0px 0px 5px #c2213d;
 }
 .my-float2{
     position: absolute;
@@ -327,7 +327,7 @@ input[type=file]::file-selector-button:hover {
 }
 .float2:hover{
   width:200px;
-	background-color:rgb(75, 76, 76);
+	background-color:#c2213d;
 
 }
 

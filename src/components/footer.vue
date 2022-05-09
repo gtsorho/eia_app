@@ -1,16 +1,17 @@
 <template>
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-1 my-4 border-top"  style="background-color:#c2213d !important" >
         <div class="col-md-4 d-flex align-items-center">
-        <a href="/" class="mb-3 me-2 mb-md-0 text-dark text-decoration-none lh-1">
+        <a href="/" class="mb-3 me-2 mb-md-0 text-light text-decoration-none lh-1">
             <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
         </a>
-        <span class="text-dark">&copy; 2021 Company, Inc</span>
+        <span class="text-light">&copy; 2021 Company, Inc</span>
         </div>
 
-        <ul class="nav col-md-4  justify-content-end list-unstyled  d-flex">
-        <li class="ms-3"><a class="text-dark" href="#"></a></li>
-        <li class="ms-3"><a class="text-dark" href="#"></a></li>
-        <li class="ms-3"><a class="text-dark" href="#"></a></li>
+        <ul class="nav col-md-4  me-5 justify-content-end list-unstyled  d-flex">
+            <li class="ms-3"><router-link to="/main/tools" class="text-light">Tools</router-link></li>
+            <li class="ms-3"><router-link to="/main/dashboard" class="text-light">Dashboards</router-link></li>
+            <li class="ms-3"><router-link to="/main/storyset" class="text-light">StorySet</router-link></li>
+            <li class="ms-3"><router-link to="/main/datasets" class="text-light">Dataset</router-link></li>
         </ul>
     </footer>
 </template>
@@ -27,5 +28,16 @@ export default {
         position:absolute;
         bottom:0;
         width:100%;
+    }
+    li .text-light{
+        text-decoration: none;
+    }
+    li{
+        transition:  .5s;
+    }
+    li:hover{
+        background-color: rgb(253, 158, 174);
+        border-radius: 50px;
+        padding-inline: 15px;
     }
 </style>

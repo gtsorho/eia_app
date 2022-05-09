@@ -34,7 +34,7 @@
             </router-link>
             </a>
             <button
-            class="navbar-toggler"
+            class="navbar-toggler border-light"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarHeader"
