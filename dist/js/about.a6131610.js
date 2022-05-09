@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkcropping"]=self["webpackChunkcropping"]||[]).push([[443],{834:function(n,r,u){u.r(r),u.d(r,{default:function(){return f}});var t=u(252);const a={class:"about"},c=(0,t._)("h1",null,"This is an about page",-1),e=[c];function s(n,r){return(0,t.wg)(),(0,t.iD)("div",a,e)}var i=u(744);const o={},p=(0,i.Z)(o,[["render",s]]);var f=p}}]);
-//# sourceMappingURL=about.a6131610.js.map
