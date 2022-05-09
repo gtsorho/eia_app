@@ -324,6 +324,7 @@ input[type=file]::file-selector-button:hover {
     font-size: 15px !important;
     transform: translate(-4px,0px);
     margin-block: 5px;
+    top: 3px !important;
 }
 .float2:hover{
   width:200px;
