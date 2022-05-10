@@ -11,7 +11,7 @@
     <p class="d-inline ms-2"> to add a chart</p>
   </div>
 
-  <div class="row row-cols-sm-1 row-cols-md-2 mb-4">
+  <div class="row row-cols-sm-1 justify-content-center row-cols-md-2 mb-4">
     <div class="col mb-4" v-for="(data , i) in chartdata" :key="i" v-show="i < 4" >
         <div class="card">
           <div class="card-header text-start">

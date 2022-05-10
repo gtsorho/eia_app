@@ -1,6 +1,6 @@
 <template>
   <Navbar/>
-    <router-view></router-view>
+    <router-view data-bs-toggle="collapse" data-bs-target="#navbarHeader.show"></router-view>
   <Footer/>
 </template>
 
@@ -13,5 +13,8 @@ export default {
     Navbar,
     Footer
   },
+  methods:{
+
+  }
 }
 </script>

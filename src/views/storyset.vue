@@ -1,6 +1,6 @@
 <template>
     <div class="container my-5">
-<div class="row row-cols-md-2 row-cols-lg-3">
+<div class="row row-cols-md-2 justify-content-center row-cols-lg-3">
     <div  class="col-lg-4" v-for="(story, index) in storyset" :key="index">
         <div class="card card-margin">
             <div class="card-body pt-3" style="min-height:80%">

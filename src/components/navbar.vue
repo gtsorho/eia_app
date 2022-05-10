@@ -16,10 +16,10 @@
                 <h4 class="text-dark">Menu</h4>
                 <hr style="color:#ff3f60 !important">
                 <ul class="list-unstyled">
-                <li><router-link to="/main/tools" class="text-dark">Tools</router-link></li>
-                <li><router-link to="/main/dashboard" class="text-dark">Dashboards</router-link></li>
-                <li><router-link to="/main/storyset" class="text-dark">StorySet</router-link></li>
-                <li><router-link to="/main/datasets" class="text-dark">Dataset</router-link></li>
+                    <li class="w-100 px-2 rounded-pill"><router-link to="/main/tools" class="text-dark " @click="collapseCloseOnclick()"   >Tools</router-link></li>
+                    <li class="w-100 px-2 rounded-pill"><router-link to="/main/dashboard" class="text-dark" @click="collapseCloseOnclick()">Dashboards</router-link></li>
+                    <li class="w-100 px-2 rounded-pill"><router-link to="/main/storyset" class="text-dark" @click="collapseCloseOnclick()" >StorySet</router-link></li>
+                    <li class="w-100 px-2 rounded-pill"><router-link to="/main/datasets" class="text-dark" @click="collapseCloseOnclick()" >Dataset</router-link></li>
                 </ul>
             </div>
             </div>
@@ -34,8 +34,9 @@
             </router-link>
             </a>
             <button
-            class="navbar-toggler border-light"
+            class="navbar-toggler" style="border-color:#ffffffa6!important"
             type="button"
+            ref="toggleCollapse"
             data-bs-toggle="collapse"
             data-bs-target="#navbarHeader"
             aria-controls="navbarHeader"
@@ -51,12 +52,24 @@
 <script>
 export default {
     name: "Navbar",
+    methods:{
+        collapseCloseOnclick(){
+           this.$refs.toggleCollapse.click()
+        }
+    }
 };
 </script>
 <style scoped>
 .nav-link:hover {
 opacity: 0.8;
 }
+li a{
+    padding-inline-end: 100%;
+}
+li:hover{
+    background-color: pink;
+}
+
 .col-sm-8, .col-sm-4{
     text-align: start;
 }
