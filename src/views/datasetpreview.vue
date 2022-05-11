@@ -137,6 +137,7 @@
     </table>
         </div>
         <!-- scrollspy3 -->
+        <br><br>
         <div class="row" id="scrollspyHeading3">
           <div class="col  text-start">
             <h5 class="fw-bold">Data Summary</h5>
