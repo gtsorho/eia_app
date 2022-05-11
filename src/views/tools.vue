@@ -1,7 +1,7 @@
 <template>
     <div class="container my-5">
 <div class="row row-cols-md-2 row-cols-lg-3 justify-content-center">
-    <div  class="col-lg-4" v-for="(story, index) in storyset" :key="index">
+    <div  class="col-lg-4" v-for="(tool, index) in tools" :key="index">
         <div class="card card-margin">
             <div class="card-body pt-3" style="height: 75%;">
                 <div class="widget-49">
@@ -11,15 +11,14 @@
                             <!-- bi bi-bar-chart-line fs-2 -->
                         </div>
                         <div class="widget-49-meeting-info mx-auto py-2 rounded-pill" style="width: 70%; background-color:#ffd2d6" >
-                            <span class="widget-49-pro-title fw-bold text-uppercase">{{story.title}}</span>
-                            <!-- <span class="widget-49-meeting-time">12:00 to 13.30 Hrs</span> -->
+                            <span class="widget-49-pro-title fw-bold text-uppercase">{{tool.title}}</span>
                         </div>
                     </div>
-                    <p class="widget-49-meeting-points">{{story.description}}</p>
+                    <p class="widget-49-meeting-points">{{tool.description}}</p>
                 </div>
             </div>
             <div class="widget-49-meeting-action card-footer border-0 bg-transparent">
-                <a href="#" class="btn btn-sm float-end btn-flash-border-primary rounded-pill">View All</a>
+                <a href="#" class="btn btn-sm float-end fw-bold px-4 btn-flash-border-primary border-2 rounded-pill">Utilize</a>
             </div>
         </div>
     </div>
@@ -33,7 +32,7 @@ export default {
             searchbar:false,
             signin:true,
             authenticated:true,
-            storyset:[
+            tools:[
                 {
                     title:'Cropping Calendar',
                     description:'Data used for this report was collected from 24 distinct communities across the Northern, Savanna and Upper East regions of Ghana. 47% of records came from the Northern region, 30% of the records were collected in the Savanna region and the  remaining 23% came from the Upper East region. Details of records is shown to the left.',
@@ -113,8 +112,12 @@ input[type=file]::file-selector-button {
   transition: 1s;
   
 }
+.card-footer a{
+  background-color: rgba(250, 151, 167, 0.33) !important;
+}
 
 .card-footer a:hover{
+
   border-color: rgb(250, 151, 167) !important;
 }
 

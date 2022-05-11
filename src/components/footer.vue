@@ -15,18 +15,15 @@
         </ul>
     </footer>
 </template>
-<script>
-export default {
-    
-}
-</script>
+
+
 <style scoped>
     footer{
         margin-bottom: 0% !important;
         margin-top:4.3rem !important;
         height: 50px;
         position:absolute;
-        bottom:0;
+        bottom: -7%;
         width:100%;
     }
     li .text-light{

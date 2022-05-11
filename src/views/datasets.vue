@@ -18,8 +18,9 @@
                     <p class="widget-49-meeting-points">{{story.description}}</p>
                 </div>
             </div>
-            <div class=" card-footer bg-transparent border-0 text-end text-uppercase">
-              <a href="#" class="btn btn-sm rounded-pill px-3" style="background-color:pink ">View All</a>
+            <div class=" card-footer bg-transparent border-0 text-end ">
+              <router-link class="btn btn-sm rounded-pill px-3" style="background-color:pink" to="/main/datasetpreview">Preview</router-link>
+              <!-- <a href="#" class="btn btn-sm rounded-pill px-3" style="background-color:pink ">Preview</a> -->
             </div>
         </div>
     </div>
@@ -51,6 +52,8 @@
           <form>
             <label for="fileUpload">Upload file</label>
             <input class="form-control form-control-sm fileUpload" @click="fileupload"  type="file" id="fileUpload">
+            <button class="btn btn-sm rounded-pill px-3 fw-bold" style="background-color:pink ">Add</button>
+            <p class="mb-0 mt-1 text-muted text-start" style="font-size:12px">Accepted file formats; xls, csv, pdf, doc(x)</p>
           </form>
           
           <!-- <input class="form-control form-control-sm" id="formFileSm" type="file" data-multiple-caption="{count} files selected" multiple>
@@ -222,7 +225,7 @@ input[type=file]::file-selector-button {
   border: 2px solid #7567d900;
   padding: .2em .4em;
   border-radius: .2em;
-  background-color: #5c5c5c;
+  background-color: pink;
   transition: 1s;
   
 }
@@ -245,7 +248,7 @@ input[type = file]{
     margin-inline: 5px;
 }
 input[type=file]::file-selector-button:hover {
-  background-color: #81ecec;
+  background-color: #baa3a7;
   border: 2px solid #00cec9;
 }
 

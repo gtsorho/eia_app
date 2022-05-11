@@ -1,6 +1,6 @@
 <template>
   <Navbar/>
-    <router-view data-bs-toggle="collapse" data-bs-target="#navbarHeader.show"></router-view>
+    <router-view ></router-view>
   <Footer/>
 </template>
 
@@ -8,7 +8,7 @@
 import Navbar from "../components/navbar.vue";
 import Footer from "../components/footer.vue";
 
-export default {
+export default{
   components: {
     Navbar,
     Footer

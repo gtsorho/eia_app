@@ -5,6 +5,8 @@ import Main from '../views/Main.vue'
 import StorySet from '../views/storyset.vue'
 import DataSets from '../views/datasets.vue'
 import Tools from '../views/tools.vue'
+import DatasetPreview from '../views/datasetpreview.vue'
+
 
 
 
@@ -38,7 +40,12 @@ const routes = [
       {
         path: 'datasets',
         name: 'Datasets',
-        component: DataSets
+        component: DataSets,
+      },
+      {
+        path: 'datasetpreview',
+        name: 'DatasetPreview',
+        component: DatasetPreview
       },
       {
         path: 'dashboard',
