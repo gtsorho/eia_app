@@ -23,7 +23,7 @@
         margin-top:4.3rem !important;
         height: 50px;
         position:absolute;
-        bottom: -7%;
+        bottom: 0;
         width:100%;
     }
     li .text-light{

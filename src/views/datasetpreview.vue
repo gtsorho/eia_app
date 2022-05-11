@@ -164,7 +164,7 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-3 col-sm-12 py-lg-5">
+    <div class="col-lg-3 col-md-3 col-sm-12 py-lg-5 d-none d-md-block">
       
       <ul class="list-group list-group-flush ps-3  text-start list-unstyled">
         <br>
@@ -175,7 +175,7 @@
         <li class="nav-item my-1"><a class="nav-link"  href="#scrollspyHeading3">Activity & Summary </a></li>
         <li class="nav-item my-1"><a class="nav-link" href="#scrollspyHeading4">License | Download</a></li>
       </ul>
-<br><br><br>
+<!-- <br><br><br> -->
     </div>
     
   </div>
