@@ -146,7 +146,7 @@ export default {
                       ]
                     },
                     {
-                      title:'Educational Affinity',
+                      title:'Insurance Affinity by Crop',
                       description:'Maize is registered as the most insured crop leading with 77.2% of purchased insurance followed by groundnut forming 15.8% of purchased insurance. Only one farmer insured soyabean. While no specific mention is made of cowpea insurance, some 7% of farmers purchased insurance for other varieties of crops including rice.',
                       chart_type:'Radar',
                       datasets: [

@@ -104,12 +104,12 @@ export default {
     width: 75% !important;
   }
 }
-.card{
-  /* height: 281px; */
+/* .card{
+  height: 281px;
 }
 .card-body{
-  /* height: 90%; */
-}
+  height: 90%;
+} */
 
 .float{
 	position:fixed;
