@@ -9,8 +9,8 @@
         <hr class="w-50 mx-auto">
         <!-- scrollspy2 -->
         <h4 id="scrollspyHeading2" class="text-start mt-5">Data Preview</h4>
-        <div class="table-responsive rounded-3 border-secondary" style="border: 1px solid ">
-         <table class="table table table-sm table-striped table-hover">
+        <div class="table-responsive rounded-1 border-secondary border-start border-end" >
+         <table class="table table table-sm table-striped table-hover" style="font-size:12px !important">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -63,7 +63,7 @@
           <td>Cell</td>
         </tr>
         <tr>
-          <th scope="row">1</th>
+          <th scope="row">4</th>
           <td>Cell</td>
           <td>Cell</td>
           <td>Cell</td>
@@ -75,7 +75,7 @@
           <td>Cell</td>
         </tr>
         <tr>
-          <th scope="row">2</th>
+          <th scope="row">5</th>
           <td>Cell</td>
           <td>Cell</td>
           <td>Cell</td>
@@ -87,7 +87,7 @@
           <td>Cell</td>
         </tr>
         <tr>
-          <th scope="row">3</th>
+          <th scope="row">6</th>
           <td>Cell</td>
           <td>Cell</td>
           <td>Cell</td>
@@ -98,7 +98,7 @@
           <td>Cell</td>
           <td>Cell</td>
         </tr><tr>
-          <th scope="row">1</th>
+          <th scope="row">7</th>
           <td>Cell</td>
           <td>Cell</td>
           <td>Cell</td>
@@ -110,7 +110,7 @@
           <td>Cell</td>
         </tr>
         <tr>
-          <th scope="row">2</th>
+          <th scope="row">8</th>
           <td>Cell</td>
           <td>Cell</td>
           <td>Cell</td>
@@ -122,7 +122,7 @@
           <td>Cell</td>
         </tr>
         <tr>
-          <th scope="row">3</th>
+          <th scope="row">9</th>
           <td>Cell</td>
           <td>Cell</td>
           <td>Cell</td>
@@ -191,6 +191,11 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
+table{
+  font-family: 'Space Mono', sans-serif !important;
+}
+
 .right-side{
   /* background-color: lightblue; */
   height: 90%;

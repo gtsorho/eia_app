@@ -22,6 +22,7 @@
         name: "BarChart",
         components: { Bar },
         props: {
+            graphValues: Array,
             chartId: {
                 type: String,
                 default: "bar-chart",
@@ -32,11 +33,11 @@
             },
             width: {
                 type: Number,
-                default: 400,
+                default: 500,
             },
             height: {
                 type: Number,
-                default: 300,
+                default: 350,
             },
             cssClasses: {
                 default: "",
@@ -49,30 +50,39 @@
         },
         data() {
             return {
+                colors:['#c2213d', '#0b0e6d' ,'#105d15','#806c11'],
                 styles:{
                     height: '100%'
                 },
                 chartData :{
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                datasets: [
-                    {
-                        label: 'Data One',
-                        backgroundColor: '#f87979',
-                        data: [40, 39, 10, 40, 39, 80, 40]
-                    },
-                    {
-                        label: 'Data two',
-                        backgroundColor: '#0451a4',
-                        data: [40, 39, 10, 40, 39, 80, 40]
-                    }
-                ]
-            },
+                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                    datasets: []
+                },
                 chartOptions: {
                     responsive: true,
                     maintainAspectRatio: false
                 },
             };
         },
+        mounted(){
+             this.chartData.labels = this.graphValues[0].lables
+             var LegendArray = this.graphValues[1] 
+
+             this.graphValues.splice(0 , 2)
+             
+             this.graphValues.forEach((element , i) => {
+
+                 this.chartData.datasets.push(
+                     {
+                        label: LegendArray[i],
+                        backgroundColor: this.colors[i],
+                        data: element
+                    },
+                 )
+             });
+
+            console.log(this.graphValues);
+        }
     };
 
 

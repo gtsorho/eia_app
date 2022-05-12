@@ -35,6 +35,7 @@ export default {
         Doughnut 
     },
     props: {
+        graphValues: Array,
         chartId: {
             type: String,
             default: "Doughnut-chart",
@@ -45,11 +46,11 @@ export default {
         },
         width: {
             type: Number,
-            default: 400,
+            default: 500,
         },
         height: {
             type: Number,
-            default: 250,
+            default: 350,
         },
         cssClasses: {
             default: "",
@@ -58,21 +59,15 @@ export default {
     },
     data() {
         return {
+            colors:['#c2213d', '#0b0e6d' ,'#105d15','#806c11', '#78470b','#0b7678'],
             styles:{
                     height: '100%'
                 },
             chartData :{
                 labels: ['VueJs', 'EmberJs', 'ReactJs', 'AngularJs'],
-                    datasets: [
-                        {
-                        backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
-                        data: [40, 20, 80, 10]
-                        },
-                        {
-                        backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
-                        data: [10, 30, 70, 15]
-                        }
-                    ]
+                datasets: [
+                
+                ]
             },
             chartOptions : {
                 responsive: true,
@@ -80,5 +75,23 @@ export default {
             }
         };
     },
+    mounted(){
+        this.chartData.labels = this.graphValues[0].lables
+        this.graphValues.splice(0 , 2)
+        
+        this.graphValues.forEach((element , i) => {
+            var elementColor = this.colors.slice(0, element.length)
+            this.chartData.datasets.push(
+                {
+                    backgroundColor: elementColor,
+                    data: element
+                },
+            )
+        });
+        console.log(this.graphValues);
+    }
 };
 </script>    
+<style scoped>
+
+</style>

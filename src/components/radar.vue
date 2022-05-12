@@ -44,6 +44,7 @@ export default {
         Radar 
     },
     props: {
+        graphValues: Array,
         chartId: {
             type: String,
             default: "Radar-chart",
@@ -54,11 +55,11 @@ export default {
         },
         width: {
             type: Number,
-            default: 400,
+            default: 500,
         },
         height: {
             type: Number,
-            default: 250,
+            default: 350,
         },
         cssClasses: {
             default: "",
@@ -67,41 +68,23 @@ export default {
     },
     data() {
         return {
+            colors:['#c2213d', '#0b0e6d' ,'#105d15','#806c11'],
             styles:{
-                    height: '100%'
-                },
+                height: '100%'
+            },
             chartData :{
-                labels: [
-                    'Eating',
-                    'Drinking',
-                    'Sleeping',
-                    'Designing',
-                    'Coding',
-                    'Cycling',
-                    'Running'
-                ],
-                    datasets: [
-                        {
-                            label: 'My First dataset',
-                            backgroundColor: 'rgba(179,181,198,0.2)',
-                            borderColor: 'rgba(179,181,198,1)',
-                            pointBackgroundColor: 'rgba(179,181,198,1)',
-                            pointBorderColor: '#fff',
-                            pointHoverBackgroundColor: '#fff',
-                            pointHoverBorderColor: 'rgba(179,181,198,1)',
-                            data: [65, 59, 90, 81, 56, 55, 40]
-                            },
-                            {
-                            label: 'My Second dataset',
-                            backgroundColor: 'rgba(255,99,132,0.2)',
-                            borderColor: 'rgba(255,99,132,1)',
-                            pointBackgroundColor: 'rgba(255,99,132,1)',
-                            pointBorderColor: '#fff',
-                            pointHoverBackgroundColor: '#fff',
-                            pointHoverBorderColor: 'rgba(255,99,132,1)',
-                            data: [28, 48, 40, 19, 96, 27, 100]
-                            }
-                    ]
+            labels: [
+                'Eating',
+                'Drinking',
+                'Sleeping',
+                'Designing',
+                'Coding',
+                'Cycling',
+                'Running'
+            ],
+            datasets: [
+
+            ]
             },
             chartOptions : {
                 responsive: true,
@@ -109,5 +92,28 @@ export default {
             }
         };
     },
+    mounted(){
+        this.chartData.labels = this.graphValues[0].lables
+        var LegendArray = this.graphValues[1] 
+
+        this.graphValues.splice(0 , 2)
+        
+        this.graphValues.forEach((element , i) => {
+
+            this.chartData.datasets.push(
+                {
+                    label: LegendArray[i],
+                    backgroundColor: this.colors[i]  + '16',
+                    borderColor: this.colors[i],
+                    pointBackgroundColor: this.colors[i],
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: this.colors[i],
+                    data: element
+                }
+            )
+        });
+    console.log(this.graphValues);
+    }
 };
 </script>    

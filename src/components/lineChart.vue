@@ -46,6 +46,7 @@ export default {
         Line 
     },
     props: {
+        graphValues: Array,
         chartId: {
             type: String,
             default: "Line-chart",
@@ -56,11 +57,11 @@ export default {
         },
         width: {
             type: Number,
-            default: 400,
+            default: 500,
         },
         height: {
             type: Number,
-            default: 250,
+            default: 350,
         },
         cssClasses: {
             default: "",
@@ -69,26 +70,14 @@ export default {
     },
     data() {
         return {
+            colors:['#c2213d', '#0b0e6d' ,'#105d15','#806c11'],
             styles:{
                     height: '100%'
                 },
             chartData :{
                 labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
                 datasets: [
-                    {
-                        label: 'Data One',
-                        backgroundColor: '#f879796e',
-                        borderColor:'#f87979',
-                        data: [40, 39, 10, 40, 39, 80, 40],
-                        fill:true
-                    },
-                    {
-                        label: 'Data two',
-                        backgroundColor: '#0451a46e',
-                        borderColor:'#0451a4',
-                        data: [10, 34, 12, 50, 24, 18, 40],
-                        fill:true
-                    }
+                   
                 ]
             },
             chartOptions : {
@@ -97,6 +86,27 @@ export default {
             }
         };
     },
+    mounted(){
+        this.chartData.labels = this.graphValues[0].lables
+        var LegendArray = this.graphValues[1] 
+
+        this.graphValues.splice(0 , 2)
+        
+        this.graphValues.forEach((element , i) => {
+
+            this.chartData.datasets.push(
+                {
+                    label: LegendArray[i],
+                    backgroundColor: this.colors[i] + '19',
+                    borderColor: this.colors[i],
+                    data: element,
+                    fill:true
+                }
+            )
+        });
+
+        console.log(this.graphValues);
+    }
 };
 </script>    
 
