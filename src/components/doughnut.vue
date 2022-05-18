@@ -89,7 +89,28 @@ export default {
             )
         });
         console.log(this.graphValues);
-    }
+    },
+    watch:{
+            async graphValues(newval){
+                console.log(newval)
+                this.chartData.labels = newval[0].lables
+                // var LegendArray = newval[1] 
+
+                newval.splice(0 , 2)
+                
+                newval.forEach((element , i) => {
+                    var elementColor = this.colors.slice(0, element.length)
+
+                    this.chartData.datasets = []
+                    this.chartData.datasets.push(
+                        {
+                            backgroundColor: elementColor,
+                            data: element
+                        },
+                    )
+                });
+            }
+        }
 };
 </script>    
 <style scoped>

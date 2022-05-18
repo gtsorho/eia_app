@@ -114,6 +114,26 @@ export default {
             )
         });
     console.log(this.graphValues);
+    },
+    watch:{
+        async graphValues(newval){
+            console.log(newval)
+            this.chartData.labels = newval[0].lables
+            var LegendArray = newval[1] 
+
+            newval.splice(0 , 2)
+            
+            newval.forEach((element , i) => {
+                this.chartData.datasets = []
+                this.chartData.datasets.push(
+                    {
+                        label: LegendArray[i],
+                        backgroundColor: this.colors[Math.floor(Math.random() * 5)],
+                        data: element
+                    },
+                )
+            });
+        }
     }
 };
 </script>    

@@ -15,19 +15,19 @@
             <!-- accordion -->
             <div class="accordion" id="accordionPanelsStayOpenExample">
                 <!-- accordion item  -->
-                <div class="accordion-item mb-3" v-for="(data, index) in formdata" :key="index" v-show=" index < 4">
+                <div class="accordion-item mb-3" v-for="(data, index) in datasets" :key="index" v-show=" index < 4">
                     <!-- accordion header -->
                     <div class="accordion-header " :id="`panelsStayOpen-heading${index}`">
-                        <button class="btn  float-end text-danger trashbtn"  @click="formdata.splice(index, 1)"><i class="bi bi-trash3-fill"></i></button>
+                        <button class="btn  float-end text-danger trashbtn"  @click="datasets.splice(index, 1)"><i class="bi bi-trash3-fill"></i></button>
                         <button class="accordion-button text-light fw-normal" style="width:90% !important; background-color:#e76e83" type="button" data-bs-toggle="collapse"
                             :data-bs-target="`#panelsStayOpen-collapse${index}`" aria-expanded="true"
                             :aria-controls="`panelsStayOpen-collapse${index}`">
                             P {{index + 1}}
                             <select class="form-select form-select-sm w-50 mx-4" @change="getFormValue()" v-model="data.datasetVal" aria-label=".form-select-sm example">
                                 <option value="default">Select Dataset</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <option value="1">IITA Dataset</option>
+                                <!-- <option value="2">Two</option>
+                                <option value="3">Three</option> -->
                             </select>
                         </button>
                     </div>
@@ -40,24 +40,24 @@
                                 <div class="text-start mb-1">
                                     <label for="exampleFormControlInput1" class="form-label mb-0"
                                         style="font-size:10px">Y-data</label>
-                                    <select class="form-select form-select-sm" @change="getFormValue()" v-model="data.data1" aria-label=".form-select-sm example">
+                                    <select class="form-select form-select-sm" @change="getFormValue()" v-model="datasets[index].y_data" aria-label=".form-select-sm example">
                                         <option >Y-Data</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        <option :value="option" v-for="(option, i) in y_data" :key="i">{{i}}</option>
+                                        <!-- <option value="2">Two</option>
+                                        <option value="3">Three</option> -->
                                     </select>
                                 </div>
                                 <div class="text-start mb-1">
                                     <label for="exampleFormControlInput1" class="form-label mb-0"
                                         style="font-size:10px">X-Data</label>
-                                    <select class="form-select form-select-sm" @change="getFormValue()" v-model="data.data2" aria-label=".form-select-sm example">
+                                    <select class="form-select form-select-sm" @change="getFormValue()" v-model="datasets[index].x_data" aria-label=".form-select-sm example">
                                         <option >X-Data</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        <option :value="option" v-for="(option, i) in x_data" :key="i">{{i}}</option>
+                                        <!-- <option value="2">Two</option>
+                                        <option value="3">Three</option> -->
                                     </select>
                                 </div>
-                                <div class="row">
+                                <!-- <div class="row">
                                     <div class="col text-start">
                                         <label for="exampleFormControlInput1" class="form-label mb-0"
                                             style="font-size:10px">Category</label>
@@ -78,7 +78,7 @@
                                             <option value="3">Three</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div> -->
                             </form>
                             <!-- form item end-->
                         </div>
@@ -98,36 +98,53 @@
             ],
         data() {
             return {
-                formdata: [
-                {
-                    datasetVal:'default',
-                    data1: "1",
-                    data2: "2",
-                    data3: "1",
-                    data4: "3",
+                datasets: [
+                    {
+                        datasetVal:'default',
+                        x_data: "choose data",
+                        y_data: "choose data"
+                    },
+                ],
+
+                // form data to send************************
+                y_data: {
+                    population: [6,46,68,155,391],
+                    farmer_population:[6,36,68,74, 82],
+                    insurance_perventafes:[11, 8, 2, 21],
+                    stress_affectedFarmers:[6,46,27,101,71]
                 },
-                ]
+
+                x_data:{
+                    farm_size: ['1-4', '5-10', '11-15', '16 up'],
+                    age_group: ['18-22', '23-27', '28-32', '33-37', '38-up'],
+                },
+
+                datagroup:{
+                    sex:['male', 'female'],
+                    croptype:['maize', 'cowpea', 'groundnut']
+                },
             }
         },
         methods: {
             addPanel() {
-                this.formdata.push({
-                    data1: '',
-                    data2: '',
-                    data3: '',
-                    data4: ''
-                })
+                this.datasets.push(
+                    {
+                        datasetVal:'default',
+                        x_data: "choose x data",
+                        y_data: "choose y data"
+                    }
+                )
             },
             getFormValue(){
-                console.log(this.formdata) 
-                this.$emit("panelValues", this.formdata)
+                console.log(this.datasets)
+                this.$emit("panelValues", this.datasets)
             },
-            submit () {
-                const data = {
-                    workExperiences: this.workExperiences
-                }
-                alert(JSON.stringify(data, null, 2))
-            }
+            // submit () {
+            //     const data = {
+            //         workExperiences: this.workExperiences
+            //     }
+            //     alert(JSON.stringify(data, null, 2))
+            // }
         },
         computed:{
             jsColor(){

@@ -65,6 +65,7 @@
             };
         },
         mounted(){
+            console.log(this.graphValues)
              this.chartData.labels = this.graphValues[0].lables
              var LegendArray = this.graphValues[1] 
 
@@ -80,8 +81,26 @@
                     },
                  )
              });
+        },
+        watch:{
+            async graphValues(newval){
+                console.log(newval)
+                this.chartData.labels = newval[0].lables
+                var LegendArray = newval[1] 
 
-            console.log(this.graphValues);
+                newval.splice(0 , 2)
+                
+                newval.forEach((element , i) => {
+                    this.chartData.datasets = []
+                    this.chartData.datasets.push(
+                        {
+                            label: LegendArray[i],
+                            backgroundColor: this.colors[Math.floor(Math.random() * 5)],
+                            data: element
+                        },
+                    )
+                });
+            }
         }
     };
 

@@ -28,7 +28,15 @@
           </div>
           <div class="card-body">
             <KeepAlive>
-              <component :is="currentChart[i]"></component>
+              <component :is="currentChart[i]" :graphValues="
+                [
+                  {
+                    lables: data.x_data
+                  },
+                  ['16 and above', '11 to 15 Acres',' 5 to 10 Acres',' 1 to 4 Acres'],
+                  data.y_data
+                ]
+              "></component>
             </KeepAlive>
           </div>
         </div>
@@ -64,21 +72,24 @@ export default {
   },
   data() {
     return {
-      chartdata:null,
+      chartdata:[],
       currentChart:{
         0:'Line',
-        1:'Line',
-        2:'Line',
-        3:'Line',
-        4:'Line',
-      }
+        1:'Chart',
+        2:'Doughnut',
+        3:'Scatter',
+        4:'Radar'
+      },
     }
   },
   methods:{
     formValues(n){
-      console.log(this.currentChart)
-      this.chartdata = n
+      console.log(n)
+      this.chartdata =  n
     }
+  },
+  computed:{
+
   }
 }
 </script>
