@@ -14,8 +14,9 @@
   <div class="row row-cols-sm-1 justify-content-center row-cols-md-2 mb-4">
     <div class="col mb-4" v-for="(data , i) in chartdata" :key="i" v-show="i < 4" >
         <div class="card">
-          <div class="card-header text-start">
-            Featured
+          <div class="card-header text-start text-capitalize">
+            <small class="fw-bold" v-if="!data.xyKeys[0] || !data.xyKeys[1] ">{{`plot of x data by y data`}}</small>
+            <small v-else class="fw-bold">{{`plot of ${data.xyKeys[0]} by ${data.xyKeys[1]}`}}</small>
             <select class="form-select form-select-sm w-25 float-end" v-model="currentChart[i]" aria-label=".form-select-sm example">
               <option value="type">Type</option>
               <option value="Chart">Bar Chart</option>
@@ -79,12 +80,11 @@ export default {
         2:'Doughnut',
         3:'Scatter',
         4:'Radar'
-      },
+      }
     }
   },
   methods:{
     formValues(n){
-      console.log(n)
       this.chartdata =  n
     }
   },

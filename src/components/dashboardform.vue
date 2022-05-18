@@ -41,8 +41,10 @@
                                     <label for="exampleFormControlInput1" class="form-label mb-0"
                                         style="font-size:10px">Y-data</label>
                                     <select class="form-select form-select-sm" @change="getFormValue()" v-model="datasets[index].y_data" aria-label=".form-select-sm example">
-                                        <option >Y-Data</option>
+                                        <option value="choose data" >Y-Data</option>
                                         <option :value="option" v-for="(option, i) in y_data" :key="i">{{i}}</option>
+                                        {{datasets[index].xyKeys[1] = this.getKeyByValue(y_data, datasets[index].y_data) }}
+                                    
                                         <!-- <option value="2">Two</option>
                                         <option value="3">Three</option> -->
                                     </select>
@@ -51,8 +53,9 @@
                                     <label for="exampleFormControlInput1" class="form-label mb-0"
                                         style="font-size:10px">X-Data</label>
                                     <select class="form-select form-select-sm" @change="getFormValue()" v-model="datasets[index].x_data" aria-label=".form-select-sm example">
-                                        <option >X-Data</option>
                                         <option :value="option" v-for="(option, i) in x_data" :key="i">{{i}}</option>
+                                        <option value="choose data" >X-Data</option>
+                                        {{datasets[index].xyKeys[0] = this.getKeyByValue(x_data, datasets[index].x_data) }}
                                         <!-- <option value="2">Two</option>
                                         <option value="3">Three</option> -->
                                     </select>
@@ -102,41 +105,46 @@
                     {
                         datasetVal:'default',
                         x_data: "choose data",
-                        y_data: "choose data"
+                        y_data: "choose data",
+                        xyKeys:['x data', ' y data']
                     },
                 ],
 
                 // form data to send************************
                 y_data: {
-                    population: [6,46,68,155,391],
-                    farmer_population:[6,36,68,74, 82],
-                    insurance_perventafes:[11, 8, 2, 21],
-                    stress_affectedFarmers:[6,46,27,101,71]
+                    'population': [6,46,68,155,391],
+                    'farmer population':[6,36,68,74, 82],
+                    'insurance perventables':[11, 8, 2, 21],
+                    'stress affected Farmers':[6,46,27,101,71]
                 },
 
                 x_data:{
-                    farm_size: ['1-4', '5-10', '11-15', '16 up'],
-                    age_group: ['18-22', '23-27', '28-32', '33-37', '38-up'],
+                    'farm size': ['1-4', '5-10', '11-15', '16 up'],
+                    'age group': ['18-22', '23-27', '28-32', '33-37', '38-up'],
                 },
 
                 datagroup:{
-                    sex:['male', 'female'],
-                    croptype:['maize', 'cowpea', 'groundnut']
+                    'sex':['male', 'female'],
+                    'croptype':['maize', 'cowpea', 'groundnut']
                 },
             }
         },
         methods: {
+            getKeyByValue(object, value){
+                return Object.keys(object).find(key => object[key] === value);
+            },
             addPanel() {
                 this.datasets.push(
                     {
                         datasetVal:'default',
                         x_data: "choose x data",
-                        y_data: "choose y data"
+                        y_data: "choose y data",
+                        xyKeys:['x data', ' y data']
+
                     }
                 )
             },
             getFormValue(){
-                console.log(this.datasets)
                 this.$emit("panelValues", this.datasets)
             },
             // submit () {
