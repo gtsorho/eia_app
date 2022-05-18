@@ -120,8 +120,8 @@ export default {
                     this.chartData.datasets.push(
                         {
                             label: LegendArray[i],
-                            backgroundColor: this.colors[Math.floor(Math.random() * 5)] + '19',
-                            borderColor: this.colors[Math.floor(Math.random() * 5)],
+                            backgroundColor: this.colors[Math.floor(Math.random() * 3)] + '19',
+                            borderColor: this.colors[Math.floor(Math.random() * 3)],
                             data: element
                         },
                     )

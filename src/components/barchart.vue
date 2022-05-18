@@ -95,7 +95,7 @@
                     this.chartData.datasets.push(
                         {
                             label: LegendArray[i],
-                            backgroundColor: this.colors[Math.floor(Math.random() * 5)],
+                            backgroundColor: this.colors[Math.floor(Math.random() * 3)],
                             data: element
                         },
                     )
