@@ -15,6 +15,13 @@ export default{
   },
   methods:{
 
+  },
+  beforeCreate(){
+  if (document.getElementById('app').classList.contains("home")) {
+    console.log("home")
+    document.getElementById('app').classList.remove("home");
   }
+
+},
 }
 </script>

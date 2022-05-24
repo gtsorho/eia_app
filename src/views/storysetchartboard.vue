@@ -34,7 +34,7 @@
             </div>
             <div class="float-end h-100 col">
               <KeepAlive>
-                <component :is="story.chart_type" :graphValues="story.datasets"></component>
+                <component  :is="story.chart_type" :graphValues="story.datasets"></component>
               </KeepAlive>
             </div>
           </div>

@@ -29,6 +29,9 @@ p, h1,h2,h3,h4,h5, small, strong, a, li,option, form ,div{
 body{
       background-color: #f5f5ff !important;
 }
+ #app.home{
+   height: 100% !important;
+ }
 html, body {
    margin:0;
    padding:0;

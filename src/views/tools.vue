@@ -18,7 +18,9 @@
                 </div>
             </div>
             <div class="widget-49-meeting-action card-footer border-0 bg-transparent">
-                <a href="#" class="btn btn-sm float-end fw-bold px-4 btn-flash-border-primary border-2 rounded-pill">Utilize</a>
+              
+                <router-link :to="tool.link" class="btn btn-sm float-end fw-bold px-4 btn-flash-border-primary border-2 rounded-pill">Utilize</router-link>
+                <!-- <a href="#" class="btn btn-sm float-end fw-bold px-4 btn-flash-border-primary border-2 rounded-pill">Utilize</a> -->
             </div>
         </div>
     </div>
@@ -36,12 +38,14 @@ export default {
                 {
                     title:'Cropping Calendar',
                     description:'Data used for this report was collected from 24 distinct communities across the Northern, Savanna and Upper East regions of Ghana. 47% of records came from the Northern region, 30% of the records were collected in the Savanna region and the  remaining 23% came from the Upper East region. Details of records is shown to the left.',
-                    dataset_id:'ss001'
+                    dataset_id:'ss001',
+                    link: 'Croppingcalendar'
                 },
                 {
                     title:'Weather Api',
-                    description:'A total of 373 farmers forming 59.5% of respondents were males and 254 respondents forming 40.5% were females. Over 62% of the respondents were in the maximum age bracket (above 38 years) with a little less than 1% being between the minimum age bracket of 18 to 22 years.',
-                    dataset_id:'ss002'
+                    description:'Weather is something that never remains constant. Getting to know precise weather conditions helps people to plan out their daily schedule. Our Weather App enables the user to search numerous locations within Ghana and verify the weather data accordingly. The user will be able to view the updated weather data in sync with the Ghana Meteorological Agency.',
+                    dataset_id:'ss002',
+                    link:'/weather'
                 },
                 
             ],

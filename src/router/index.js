@@ -18,6 +18,12 @@ const routes = [
     component: Home
   },
   {
+    path: "/weather",
+    beforeEnter(to, from, next) {
+      window.location.href = "http://ghmeteo.herokuapp.com/";
+    }
+  },
+  {
     path: '/main',
     name: 'Main',
     component: Main,
