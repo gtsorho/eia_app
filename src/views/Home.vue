@@ -9,11 +9,28 @@
         <a class="nav-link" :class="{active:active === 'Dashbords'}" href="#" @click="changeTopic(1),  active = 'Dashbords'">Dashbords</a>
         <a class="nav-link" :class="{active:active === 'Storyset'}" href="#" @click="changeTopic(2), active = 'Storyset'">Storyset</a>
         <a class="nav-link" :class="{active:active === 'Dataset'}" href="#" @click="changeTopic(3), active = 'Dataset'">Dataset</a>
-        <!-- <a class="nav-link" :class="{active:active === 'Storyset'}" href="#" @click="changeTopic(2), active = 'Storyset'">Storyset</a> -->
+        <a class="nav-link" :class="{active:active === 'Storyset'}" href="#" @click="changeTopic(2), active = 'Storyset'">Storyset</a>
 
       </nav>
     </div>
   </header>
+
+  <!-- <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"><h2 class="float-md-start mb-0" style="color:#f56a6a">AG-DATAHUB</h2></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav ">
+        <a class="nav-link" :class="{active:active === 'cropping'}" href="#" @click="changeTopic(0), active = 'cropping'">Tools</a>
+        <a class="nav-link" :class="{active:active === 'Dashbords'}" href="#" @click="changeTopic(1),  active = 'Dashbords'">Dashbords</a>
+        <a class="nav-link" :class="{active:active === 'Storyset'}" href="#" @click="changeTopic(2), active = 'Storyset'">Storyset</a>
+        <a class="nav-link" :class="{active:active === 'Dataset'}" href="#" @click="changeTopic(3), active = 'Dataset'">Dataset</a>
+      </div>
+    </div>
+  </div>
+</nav> -->
 
   <main class="px-3">
     <div class="row  row-cols-1  row-cols-md-2">
@@ -24,17 +41,6 @@
         <p class="lead">
           <router-link :to="displayParam.link" class="btn btn-md btn-secondary fw-bold border-white bg-white">View More</router-link>
         </p>
-
-
-            <!-- <div class="dropdown" v-show="displayParam.id == 0" >
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                See Tools
-              </button>
-              <ul class="dropdown-menu shadow-sm dropdown-menu-dark" style="" aria-labelledby="dropdownMenuButton2">
-                <li><a class="nav-link"  href="#" @click="changeTopic(4)">Cropping Calendar</a></li>
-                <li><a class="nav-link"  href="#" @click="changeTopic(5)">Weather Application</a></li>
-              </ul>
-          </div> -->
         <a  class="float align-middle" href="#offcanvasExample"  aria-controls="offcanvasExample" @click="previous(displayParam.id)">
           <i class="bi bi-chevron-left fs-4 my-float" style="left: 6.4px;"></i>
         </a>
@@ -48,7 +54,7 @@
     </div>
   </main>
   <footer class="mt-auto text-dark-50">
-    <p>@Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam repellendus </p>
+    <small>Want to know more about us @ <a href="http://poc.miphost.com/" class=" text-decoration-none ">poc.miphost.com</a>   let's walk you through our Proof of Concepts</small>
   </footer>
 </div>
     </div>
