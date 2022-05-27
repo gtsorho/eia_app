@@ -2,20 +2,16 @@
     <div class="main-div d-flex text-center text-dark bg-light">
          <div class="cover-container d-flex w-100 p-3 mx-auto flex-column">
   <header class="mb-auto mx-5">
-    <div>
+    <!-- <div>
       <h2 class="float-md-start mb-0" style="color:#f56a6a">AG-DATAHUB</h2>
       <nav class="nav nav-masthead justify-content-center float-md-end text-dark">
         <a class="nav-link" :class="{active:active === 'cropping'}" href="#" @click="changeTopic(0), active = 'cropping'">Tools</a>
         <a class="nav-link" :class="{active:active === 'Dashbords'}" href="#" @click="changeTopic(1),  active = 'Dashbords'">Dashbords</a>
         <a class="nav-link" :class="{active:active === 'Storyset'}" href="#" @click="changeTopic(2), active = 'Storyset'">Storyset</a>
         <a class="nav-link" :class="{active:active === 'Dataset'}" href="#" @click="changeTopic(3), active = 'Dataset'">Dataset</a>
-        <a class="nav-link" :class="{active:active === 'Storyset'}" href="#" @click="changeTopic(2), active = 'Storyset'">Storyset</a>
-
       </nav>
-    </div>
-  </header>
-
-  <!-- <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+    </div> -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
   <div class="container-fluid">
     <a class="navbar-brand" href="#"><h2 class="float-md-start mb-0" style="color:#f56a6a">AG-DATAHUB</h2></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +26,10 @@
       </div>
     </div>
   </div>
-</nav> -->
+</nav>
+  </header>
+
+  
 
   <main class="px-3">
     <div class="row  row-cols-1  row-cols-md-2">
@@ -162,7 +161,7 @@ methods:{
   transition:  .5s;
 }
 .nav-link:hover{
-  background-color: rgb(253, 158, 174) !important;
+  background-color: #f56a6a !important;
   border-radius: 50px !important;
   padding-inline: 15px !important;
   color: rgba(246, 246, 246, 0.807) !important;
@@ -247,30 +246,36 @@ methods:{
   max-width: 100%;
 }
 
-
+.navbar-nav {
+    display: flex;
+    flex-direction: column;
+    padding-left: 60% !important;
+    margin-bottom: 0;
+    text-align: end !important;
+    list-style: none;
+}
 /*
  * Header
  */
 
-.nav-masthead .nav-link {
-  padding: .05rem 0;
-  font-weight: 700;
+ .nav-link {
+  padding: .02rem 0;
+  font-weight: 500;
   color: rgba(50, 49, 49, 0.5);
   background-color: transparent;
   border-bottom: .25rem solid transparent;
 }
 
-.nav-masthead .nav-link:hover,
-.nav-masthead .nav-link:focus {
+ .nav-link:hover,
+ .nav-link:focus {
       text-shadow: 0 0.05rem 0.05rem rgb(0 0 0 / 28%) !important;
-  /* border-bottom-color: rgba(255, 255, 255, .25); */
 }
 
-.nav-masthead .nav-link + .nav-link {
+ .nav-link + .nav-link {
   margin-left: 1rem;
 }
 
-.nav-masthead .active {
+ .active {
   color: #fff;
   border-bottom-color: #fff;
 }
