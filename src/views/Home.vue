@@ -100,6 +100,7 @@ data() {
       //   text:'  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis, temporibus. Sapiente rerum ipsa minima aut molestiae   Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis, temporibus. Sapiente rerum ipsa minima aut molestiae dolore fugiat molestias eos, autem dolorem, omnis ad magni maxime natus. Quis, blanditiis aliquid.dolore fugiat molestias eos, autem dolorem, omnis ad magni maxime natus. Quis, blanditiis aliquid.',
       //   link:'/main/Croppingcalendar'
       // },
+      
       // {
       //   id: 5,
       //   img:'story.svg',
