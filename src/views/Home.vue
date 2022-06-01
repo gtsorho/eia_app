@@ -5,7 +5,7 @@
     <!-- <div>
       <h2 class="float-md-start mb-0" style="color:#f56a6a">AG-DATAHUB</h2>
       <nav class="nav nav-masthead justify-content-center float-md-end text-dark">
-        <a class="nav-link" :class="{active:active === 'cropping'}" href="#" @click="changeTopic(0), active = 'cropping'">Tools</a>
+        <a class="nav-link" :class="{active:active === 'cropping'}" href="#" @click="changeTopic(0), active = 'cropping'">Services</a>
         <a class="nav-link" :class="{active:active === 'Dashbords'}" href="#" @click="changeTopic(1),  active = 'Dashbords'">Dashbords</a>
         <a class="nav-link" :class="{active:active === 'Storyset'}" href="#" @click="changeTopic(2), active = 'Storyset'">Storyset</a>
         <a class="nav-link" :class="{active:active === 'Dataset'}" href="#" @click="changeTopic(3), active = 'Dataset'">Dataset</a>
@@ -19,7 +19,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav ">
-        <a class="nav-link" :class="{active:active === 'cropping'}" href="#" @click="changeTopic(0), active = 'cropping'">Tools</a>
+        <a class="nav-link" :class="{active:active === 'cropping'}" href="#" @click="changeTopic(0), active = 'cropping'">Services</a>
         <a class="nav-link" :class="{active:active === 'Dashbords'}" href="#" @click="changeTopic(1),  active = 'Dashbords'">Dashbords</a>
         <a class="nav-link" :class="{active:active === 'Storyset'}" href="#" @click="changeTopic(2), active = 'Storyset'">Storyset</a>
         <a class="nav-link" :class="{active:active === 'Dataset'}" href="#" @click="changeTopic(3), active = 'Dataset'">Dataset</a>
@@ -68,9 +68,9 @@ data() {
       {
         id: 0,
         img:'tools.svg',
-        Title:'Our Tools',
-        text:'Utilize our tools created by our team of expects to assist you in your field of intrest, these are Applications created from the very data found here, these have been refined to develop Apps that suit you ',
-        link:'/main/tools'
+        Title:'Our Services',
+        text:'Utilize our Services created by our team of expects to assist you in your field of intrest, these are Applications created from the very data found here, these have been refined to develop Apps that suit you ',
+        link:'/main/services'
       },
       {
         id: 1,
@@ -100,7 +100,7 @@ data() {
       //   text:'  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis, temporibus. Sapiente rerum ipsa minima aut molestiae   Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis, temporibus. Sapiente rerum ipsa minima aut molestiae dolore fugiat molestias eos, autem dolorem, omnis ad magni maxime natus. Quis, blanditiis aliquid.dolore fugiat molestias eos, autem dolorem, omnis ad magni maxime natus. Quis, blanditiis aliquid.',
       //   link:'/main/Croppingcalendar'
       // },
-      
+
       // {
       //   id: 5,
       //   img:'story.svg',

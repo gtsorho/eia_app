@@ -17,7 +17,7 @@
                         <hr style="color:#ff3f60 !important">
                         <ul class="list-unstyled">
                             <li class="w-100 px-2 rounded-pill">
-                                <router-link to="/main/tools" class="text-dark " @click="collapseCloseOnclick()">Tools
+                                <router-link to="/main/services" class="text-dark " @click="collapseCloseOnclick()">Services
                                 </router-link>
                             </li>
                             <li class="w-100 px-2 rounded-pill">
