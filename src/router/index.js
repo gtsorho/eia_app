@@ -7,6 +7,8 @@ import DataSets from '../views/datasets.vue'
 import services from '../views/tools.vue'
 import DatasetPreview from '../views/datasetpreview.vue'
 import Storysetchartboard from '../views/storysetchartboard'
+import tempRain from '../views/temprain'
+
 
 
 
@@ -33,6 +35,11 @@ const routes = [
         path: 'Croppingcalendar',
         name: 'CroppingCalendar',
         component: CroppingCalendar
+      },
+      {
+        path: 'temprain',
+        name: 'TempRain',
+        component: tempRain
       },
       {
         path: 'storyset',

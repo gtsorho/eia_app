@@ -47,6 +47,12 @@ export default {
                     dataset_id:'ss002',
                     link:'/weather'
                 },
+                {
+                    title:'Temperature & Rain',
+                    description:'Weather is something that never remains constant. Getting to know precise weather conditions helps people to plan out their daily schedule. Our Weather App enables the user to search numerous locations within Ghana and verify the weather data accordingly. The user will be able to view the updated weather data in sync with the Ghana Meteorological Agency.',
+                    dataset_id:'ss002',
+                    link:'/main/temprain'
+                },
                 
             ],
             icons:[
