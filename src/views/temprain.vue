@@ -46,6 +46,7 @@ export default {
         axios.get('https://impactgt.herokuapp.com/api/alladdress')
             .then(response =>  {
                 this.locations = response.data
+                console.log(response.data)
             }).catch(error => {
                 console.log(error);
             })
