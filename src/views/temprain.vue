@@ -43,7 +43,7 @@ export default {
     },
     created(){
         console.log(this.tempset)
-        axios.get('http://127.0.0.1:8000/api/alladdress')
+        axios.get('https://impactgt.herokuapp.com/api/alladdress')
             .then(response =>  {
                 this.locations = response.data
             }).catch(error => {
@@ -54,7 +54,7 @@ export default {
         selectAddress(){
             // console.log(this)
 
-            axios.post('http://127.0.0.1:8000/api/weatherdata', 
+            axios.post('https://impactgt.herokuapp.com/api/weatherdata', 
             {
                 'latitude':this.addressVal.latitude,
                 'longitude': this.addressVal.longitude,
