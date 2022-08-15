@@ -86,7 +86,8 @@ export default {
             }
         };
     },
-    mounted(){
+    mounted(){      
+
         this.chartData.labels = this.graphValues[0].lables
         var LegendArray = this.graphValues[1] 
 
@@ -105,18 +106,19 @@ export default {
             )
         });
 
-        console.log(this.graphValues);
+
     },
     watch:{
             async graphValues(newval){
-                console.log(newval)
-                this.chartData.labels = newval[0].lables
-                var LegendArray = newval[1] 
-
-                newval.splice(0 , 2)
+                var test = JSON.stringify(newval)
+                var Nnewval = JSON.parse(test)
+                this.chartData.labels = Nnewval[0].lables
                 
-                newval.forEach((element , i) => {
-                    this.chartData.datasets = []
+                var LegendArray = Nnewval[1]
+                Nnewval.splice(0 , 2)
+                this.chartData.datasets = []
+
+                Nnewval.forEach((element , i) => {
                     this.chartData.datasets.push(
                         {
                             label: LegendArray[i],

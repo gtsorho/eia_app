@@ -10,12 +10,12 @@
         <div class="card my-3 shadow-lg">
             <h6 class="card-header text-start">Temperature (&#8451;) against Last 7days</h6>
             <div class="card-body" v-if="tempset.length > 0">
-                <Line   :graphValues="tempset"></Line>
+                <Line :graphValues="tempset"></Line>
             </div>
         </div>
         <div class="card my-3 shadow-lg" >
             <h6 class="card-header text-start">Rain levels (&#13212;) against Last 7days</h6>
-            <div class="card-body" v-if="tempset.length > 0">
+            <div class="card-body" v-if="rainset.length > 0">
                 <Line  :graphValues="rainset"></Line>
             </div>
         </div>
@@ -27,11 +27,13 @@
 <script>
 
 import axios from 'axios'
+import Chart from "../components/barchart.vue"
 import Line from "../components/lineChart.vue"
 
 export default {
     components:{
-        Line
+        Line,
+        Chart
     },
     data() {
         return {
@@ -42,85 +44,101 @@ export default {
         }      
     },
     created(){
-        console.log(this.tempset)
+        // console.log(this.tempset)
         axios.get('https://impactgt.herokuapp.com/api/alladdress')
             .then(response =>  {
                 this.locations = response.data
-                console.log(response.data)
+                // console.log(response.data)
             }).catch(error => {
                 console.log(error);
             })
     },
-    methods: {
-        selectAddress(){
-            // console.log(this)
+    computed:{
 
-            axios.post('https://impactgt.herokuapp.com/api/weatherdata', 
+    },
+    methods: {
+      async selectAddress(){
+
+                let datearr = [] 
+                let tempForcastArr = []
+                let rainForcastArr = []
+                let liveTempArr = []
+                let liveRainArr = []
+
+           await axios.post('https://impactgt.herokuapp.com/api/weatherdata', 
             {
                 'latitude':this.addressVal.latitude,
                 'longitude': this.addressVal.longitude,
             })
             .then(response =>  {
-                let datearr = [] 
-                let tempNowArr = []
-                let tempNextArr = []
-
-                let rainNowArr = []
-                let rainNextArr = []
-
                 response.data.forEach(item => {
-                    var temp_now =   item.current_temperature.slice(0, -1)
-                    var temp_next = item.next_temperature.slice(0,-1)
-                    let now_val = temp_now.split("-")
-                    let next_val = temp_next.split("-")
+                    var temp_Forcast =   item.current_temperature.slice(0, -1)
+                    let tempForcast_val = temp_Forcast.split("-")
 
 
                     var regex = /[.,\s]/g;
                     var currentresult = item.current_rain_level.replace(regex, '');
-                    var nextresult = item.next_rain_level.replace(regex, '');
+
+                    var rain_Forcast =   currentresult.slice(0, -2)
+                    let RainForcast_val = rain_Forcast.split("-")
+
+                    let date = new Date(item.date)
+                    let forcastDate = new Date(date).setDate(date.getDate() + 2); 
 
 
-                    var rain_now =   currentresult.slice(0, -2)
-                    var rain_next = nextresult.slice(0,-2)
-                    let Rainnow_val = rain_now.split("-")
-                    let Rainnext_val = rain_next.split("-")                    
+                    tempForcast_val = eval(tempForcast_val.join('+'))/tempForcast_val.length
 
-                    let date = item.date
-                    now_val = eval(now_val.join('+'))/now_val.length
-                    next_val = eval(next_val.join('+'))/next_val.length
-
-                    Rainnow_val = eval(Rainnow_val.join('+'))/Rainnow_val.length
-                    Rainnext_val = eval(Rainnext_val.join('+'))/Rainnext_val.length
+                    RainForcast_val = eval(RainForcast_val.join('+'))/RainForcast_val.length
                    
-                        datearr.push(date)
-                        tempNowArr.push(now_val)
-                        tempNextArr.push(next_val)
-                        rainNowArr.push(Rainnow_val)
-                        rainNextArr.push(Rainnext_val)
+                    datearr.push(new Date(forcastDate).toDateString().split(' ').slice(1,3).join(' '))
+                    tempForcastArr.push(tempForcast_val)
+                    rainForcastArr.push(RainForcast_val)
                 });
-
-                    this.tempset.push(
-                        {
-                            lables:datearr
-                        },
-                        ['Forcast','Present'],
-                        tempNowArr,
-                        tempNextArr
-                    )   
-
-                    this.rainset.push(
-                        {
-                            lables:datearr
-                        },
-                        ['Forcast','Present'],
-                        rainNowArr,
-                        rainNextArr
-                    )   
-
-
             }).catch(error => {
                 console.log(error);
             })
+
+
+// ****************************************************************************************
+            await axios.post('https://impactgt.herokuapp.com/api/liveweather', 
+            {
+                'latitude':this.addressVal.latitude,
+                'longitude': this.addressVal.longitude,
+            })
+            .then(response =>  {
+                response.data.forEach(item => {
+                    var temp_now =   item.temperature
+                    var rain_now =   item.rain
+                    // let date = item.date
+
+                        liveTempArr.push(temp_now)
+                        liveRainArr.push(rain_now)
+                });
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
+             this.tempset = 
+                [
+                {
+                    lables:datearr
+                },
+                ['Actual','Forcast'],
+                liveTempArr,
+                tempForcastArr
+                ]
+            
+
+            this.rainset =
+               [ 
+                {
+                    lables:datearr
+                },
+                ['Actual','Forcast'],
+                liveRainArr,
+                rainForcastArr]
+            
         }
     },
 }

@@ -116,11 +116,14 @@
                     'farmer population':[6,36,68,74, 82],
                     'insurance perventables':[11, 8, 2, 21],
                     'stress affected Farmers':[6,46,27,101,71]
-                },
+                },  
 
                 x_data:{
                     'farm size': ['1-4', '5-10', '11-15', '16 up'],
                     'age group': ['18-22', '23-27', '28-32', '33-37', '38-up'],
+                    
+                    'sex':['male', 'female'],
+                    'croptype':['maize', 'cowpea', 'groundnut']
                 },
 
                 datagroup:{

@@ -122,9 +122,9 @@ export default {
             var LegendArray = newval[1] 
 
             newval.splice(0 , 2)
-            
+
+            this.chartData.datasets = []
             newval.forEach((element , i) => {
-                this.chartData.datasets = []
                 this.chartData.datasets.push(
                     {
                         label: LegendArray[i],

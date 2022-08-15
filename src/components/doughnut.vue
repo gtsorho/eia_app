@@ -98,10 +98,10 @@ export default {
 
                 newval.splice(0 , 2)
                 
+                    this.chartData.datasets = []
+
                 newval.forEach((element , i) => {
                     var elementColor = this.colors.slice(0, element.length)
-
-                    this.chartData.datasets = []
                     this.chartData.datasets.push(
                         {
                             backgroundColor: elementColor,
