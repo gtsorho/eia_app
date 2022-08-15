@@ -249,7 +249,7 @@ methods:{
 
 .navbar-nav {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     padding-left: 60% !important;
     margin-bottom: 0;
     text-align: end !important;
@@ -283,6 +283,6 @@ methods:{
 .main-div{
      height: 100%;
     text-shadow: 0 0.05rem 0.1rem rgb(0 0 0 / 50%);
-    box-shadow: inset 0 0 5rem rgb(0 0 0 / 50%);
+    /* box-shadow: inset 0 0 5rem rgb(0 0 0 / 50%); */
 }
 </style>
