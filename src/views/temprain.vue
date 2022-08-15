@@ -1,11 +1,17 @@
 <template lang="">
 
-    <div class="container my-4 ">
-                <select @change="selectAddress()" v-model="addressVal" class="form-select form-select-sm w-25"  aria-label=".form-select-sm example">
+    <div class="container my-4 text-start">
+            <select @change="selectAddress()" v-model="addressVal" class="form-select form-select-sm w-25 d-inline"  aria-label=".form-select-sm example">
                 <option value="default" selected>Select location from menu</option>
                 <option style="font-size:12px"  v-for="(address, index) in locations" :key="index" :value="address" >{{address.location}}</option>
             </select>
-               
+
+            <span class="d-inline" v-if="isLoading" style="color:#f56a6a !important">   
+                <small class="mx-1 fw-bolder">Loading...</small>
+                <div class="spinner-border spinner-border-sm" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </span>
 
         <div class="card my-3 shadow-lg">
             <h6 class="card-header text-start">Temperature (&#8451;) against Last 7days</h6>
@@ -40,10 +46,28 @@ export default {
             addressVal:'default',
             locations:null,
             tempset: [],
-            rainset: []
+            rainset: [],
+            refCount: 0,
+            isLoading: false
         }      
     },
     created(){
+            axios.interceptors.request.use((config) => {
+            this.setLoading(true);
+            return config;
+            }, (error) => {
+            this.setLoading(false);
+            return Promise.reject(error);
+            });
+
+            axios.interceptors.response.use((response) => {
+            this.setLoading(false);
+            return response;
+            }, (error) => {
+            this.setLoading(false);
+            return Promise.reject(error);
+            });
+
         // console.log(this.tempset)
         axios.get('https://impactgt.herokuapp.com/api/alladdress')
             .then(response =>  {
@@ -52,11 +76,24 @@ export default {
             }).catch(error => {
                 console.log(error);
             })
-    },
-    computed:{
 
-    },
+
+            },
+
+
     methods: {
+
+         setLoading(isLoading) {
+      if (isLoading) {
+        this.refCount++;
+        this.isLoading = true;
+      } else if (this.refCount > 0) {
+        this.refCount--;
+        this.isLoading = (this.refCount > 0);
+      }
+    },
+
+
       async selectAddress(){
 
                 let datearr = [] 
