@@ -25,6 +25,12 @@
                 <Line  :graphValues="rainset"></Line>
             </div>
         </div>
+         <div class="card my-3 shadow-lg" >
+            <h6 class="card-header text-start">Rain levels (&#13212;) against Last 7days</h6>
+            <div class="card-body" v-if="rainTempset.length > 0">
+                <Line  :graphValues="rainTempset"></Line>
+            </div>
+        </div>
     </div>
     <br><br><br>
 
@@ -47,6 +53,7 @@ export default {
             locations:null,
             tempset: [],
             rainset: [],
+            rainTempset: [],
             refCount: 0,
             isLoading: false
         }      
@@ -78,7 +85,7 @@ export default {
             })
 
 
-            },
+    },
 
 
     methods: {
@@ -101,6 +108,7 @@ export default {
                 let rainForcastArr = []
                 let liveTempArr = []
                 let liveRainArr = []
+                
 
            await axios.post('https://impactgt.herokuapp.com/api/weatherdata', 
             {
@@ -108,6 +116,10 @@ export default {
                 'longitude': this.addressVal.longitude,
             })
             .then(response =>  {
+                console.log(response.data)
+                let impactTemp = []
+                let impactRain = []
+
                 response.data.forEach(item => {
                     var temp_Forcast =   item.current_temperature.slice(0, -1)
                     let tempForcast_val = temp_Forcast.split("-")
@@ -130,7 +142,54 @@ export default {
                     datearr.push(new Date(forcastDate).toDateString().split(' ').slice(1,3).join(' '))
                     tempForcastArr.push(tempForcast_val)
                     rainForcastArr.push(RainForcast_val)
+
+                    // *************************************************************************************************
+                    var nextTemp = item.current_temperature.slice(0, -1)
+                        nextTemp = temp_Forcast.split("-")
+                        nextTemp = eval(nextTemp.join('+'))/nextTemp.length
+
+                    var nextRain = item.current_rain_level.replace(regex, '');
+                        nextRain =   nextRain.slice(0, -2)
+                        nextRain = nextRain.split("-")
+                        nextRain = eval(nextRain.join('+'))/nextRain.length
+
+
+                    
+            
+                    var beforeTempDate, afterTempDate, beforeRainDate, afterRainDate
+                        beforeTempDate = new Date(date).setDate(date.getDate() + 2);
+                        afterTempDate = new Date(date).setDate(date.getDate() + 4);
+                        beforeRainDate = new Date(date).setDate(date.getDate() + 2);
+                        afterRainDate = new Date(date).setDate(date.getDate() + 4);
+
+
+                        for (let i = 0; i <= 6; i++) {
+                            if(new Date(beforeTempDate).getDay() == i){
+                                impactTemp[i] = tempForcast_val
+                            }else if(new Date(afterTempDate).getDay() == i){
+                                impactTemp[i] = nextTemp
+                            }
+
+                            if(new Date(beforeRainDate).getDay() == i){
+                                impactRain[i] = RainForcast_val
+                            }else if(new Date(afterRainDate).getDay() == i){
+                                impactRain[i] = nextRain
+                            }                            
+                        }
+                        
+                    console.log([date,new Date(beforeTempDate), new Date(afterTempDate),impactTemp ])
+                     //*************************************************************************************************** */
                 });
+
+                this.rainTempset =
+                [ 
+                    {
+                        lables: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+                    },
+                    ['Temp Forcast', 'Rain Forcast'],
+                    impactTemp,
+                    impactRain
+                ]
             }).catch(error => {
                 console.log(error);
             })
