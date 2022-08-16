@@ -26,7 +26,7 @@
             </div>
         </div>
          <div class="card my-3 shadow-lg" >
-            <h6 class="card-header text-start">Rain levels (&#13212;) against Last 7days</h6>
+            <h6 class="card-header text-start">Temperature(&#8451;) &#38; Rain(&#13212;) Forcasts within this Week</h6>
             <div class="card-body" v-if="rainTempset.length > 0">
                 <Line  :graphValues="rainTempset"></Line>
             </div>
