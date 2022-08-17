@@ -23,7 +23,7 @@ const routes = [
   {
     path: "/weather",
     beforeEnter(to, from, next) {
-      window.location.href = "http://ghmeteo.herokuapp.com/";
+      window.location.href = "https://ghmeteo.herokuapp.com/";
     }
   },
   {
