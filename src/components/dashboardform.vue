@@ -89,6 +89,7 @@
                 </div>
                 <!-- accordion item end -->
             </div>
+            <a class="text-warning float-end text-decoration-none fw-bolder "  href="#" @click="$emit('powerClick')">Go to PowerBi</a>
             <!-- accordion end -->
         </div>
     </div>
@@ -97,7 +98,8 @@
     export default {
         name: "dashboardform",
         emits:[
-            "panelValues"
+            "panelValues",
+            'powerClick'
             ],
         data() {
             return {

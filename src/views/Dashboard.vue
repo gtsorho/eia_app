@@ -1,15 +1,21 @@
 <template>
-<Dashboardform @panelValues="formValues" />
+<Dashboardform @panelValues="formValues" @powerClick="powerBi = true; chartdata=[]" />
 
 
 <div class="container-fluid p-4">
-  <div class="container fw-bolder text-dark" style="margin-top: 23rem;" v-show=" chartdata == null || chartdata.length < 1">
-    <p class="d-inline me-2"> No charts available Please select</p>
-    <a disabled class="float2 align-middle" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-      <i class="bi bi-menu-button-wide fs-6 my-float2 "></i>
-    </a>
-    <p class="d-inline ms-2"> to add a chart</p>
-  </div>
+  <span v-if="!powerBi">
+    <div class="container fw-bolder text-dark" style="margin-top: 23rem;" v-show="chartdata == null || chartdata.length < 1">
+      <p class="d-inline me-2"> No charts available Please select</p>
+        <a disabled class="float2 align-middle" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+          <i class="bi bi-menu-button-wide fs-6 my-float2 "></i>
+        </a>
+      <p class="d-inline ms-2"> to add a chart, go to <a href="#" class="text-decoration-none text-warning" @click="powerBi = true">PowerBi</a></p>
+    </div>
+  </span>
+  
+  <span v-if="chartdata == null || chartdata.length < 1"> 
+    <iframe v-if="powerBi " title="IITA" style="width:100%; height:6.2in"  src="https://app.powerbi.com/view?r=eyJrIjoiYzM2MmIyNGItYTYwYy00MzEwLTliYjktMDljYjNhYTNlMjdiIiwidCI6IjA1Y2UxNTMyLWZjY2ItNDc2Mi04YjRkLTkxOWIxNzRmZDkxMSIsImMiOjh9&amp;pageName=ReportSection039b7f79d60b91083bf9" frameborder="0" allowfullscreen="true"></iframe>
+  </span>
 
   <div class="row row-cols-sm-1 justify-content-center row-cols-md-2 mb-4">
     <div class="col mb-4" v-for="(data , i) in chartdata" :key="i" v-show="i < 4" >
@@ -73,6 +79,7 @@ export default {
   },
   data() {
     return {
+      powerBi:false,
       chartdata:[],
       currentChart:{
         0:'Line',
