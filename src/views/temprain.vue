@@ -90,7 +90,7 @@ export default {
 
     methods: {
 
-         setLoading(isLoading) {
+    setLoading(isLoading) {
       if (isLoading) {
         this.refCount++;
         this.isLoading = true;
@@ -116,9 +116,12 @@ export default {
                 'longitude': this.addressVal.longitude,
             })
             .then(response =>  {
-                console.log(response.data)
+                // console.log(response.data)
                 let impactTemp = []
                 let impactRain = []
+
+                response.data.splice(0,2)
+                response.data.splice(-1,1)
 
                 response.data.forEach(item => {
                     var temp_Forcast =   item.current_temperature.slice(0, -1)
@@ -133,7 +136,9 @@ export default {
 
                     let date = new Date(item.date)
                     let forcastDate = new Date(date).setDate(date.getDate() + 2); 
+                    // let forcastDate = new Date(date).setDate(date.getDate() + 0); 
 
+                    // console.log(date)
 
                     tempForcast_val = eval(tempForcast_val.join('+'))/tempForcast_val.length
 
@@ -162,6 +167,7 @@ export default {
                         beforeRainDate = new Date(date).setDate(date.getDate() + 2);
                         afterRainDate = new Date(date).setDate(date.getDate() + 4);
 
+                        console.log(date)
 
                         for (let i = 0; i <= 6; i++) {
                             if(new Date(beforeTempDate).getDay() == i){
@@ -177,10 +183,11 @@ export default {
                             }                            
                         }
                         
-                    console.log([date,new Date(beforeTempDate), new Date(afterTempDate),impactTemp ])
+                    // console.log([date,new Date(beforeTempDate), new Date(afterTempDate),impactTemp ])
                      //*************************************************************************************************** */
                 });
 
+                // console.log(impactTemp, impactRain)
                 this.rainTempset =
                 [ 
                     {
@@ -202,6 +209,9 @@ export default {
                 'longitude': this.addressVal.longitude,
             })
             .then(response =>  {
+                response.data.splice(0,2)
+                response.data.splice(-1,1)
+
                 response.data.forEach(item => {
                     var temp_now =   item.temperature
                     var rain_now =   item.rain
@@ -214,6 +224,7 @@ export default {
             .catch(error => {
                 console.log(error);
             })
+
 
              this.tempset = 
                 [
