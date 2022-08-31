@@ -1,6 +1,6 @@
 <template>
     <div class="container my-5">
-<div class="row row-cols-md-2 row-cols-lg-3 justify-content-center">
+<div class="row row-cols-md-2 row-cols-lg-3 justify-content-center" style="padding-bottom: 1in;">
     <div  class="col-lg-4" v-for="(tool, index) in tools" :key="index">
         <div class="card card-margin">
             <div class="card-body pt-3" style="height: 75%;">
@@ -52,6 +52,32 @@ export default {
                     description:'Weather is something that never remains constant. Getting to know precise weather conditions helps people to plan out their daily schedule. Our Weather App enables the user to search numerous locations within Ghana and verify the weather data accordingly. The user will be able to view the updated weather data in sync with the Ghana Meteorological Agency.',
                     dataset_id:'ss002',
                     link:'/main/temprain'
+                },
+
+
+                {
+                    title:'CSIRspace',
+                    description:"CSIRspace is a digital service that collects, preserves, and distributes digital material from researchers of the Coucil of Scientific &amp; Industrial Research. Repositories are important tools for preserving an organization's legacy; they facilitate digital preservation and scholarly communication.",
+                    dataset_id:'ss004',
+                    link:'/csirspace'
+                },
+                {
+                    title:'CSIR Agritech Advisor',
+                    description:'This is a mobile app that provides a platform for questions to be asked on specific agricultural related needs. Users and experts on the platform are by default enabled and given the opportunity to provide answers and vote on the accuracy of answers, this ultimately develops into an asynchronous knowledge hub for finding specialized and specific agriculture related information.',
+                    dataset_id:'ss005',
+                    link:'/technologies'
+                },
+                {
+                    title:'Kuafo Marketplace',
+                    description:'Kuafo Marketplace; a deliverable under the Modernising Agriculture in Ghana project is an ecommerce portal for businesses along the agriculture value chain.',
+                    dataset_id:'ss006',
+                    link:'/kuafo'
+                },
+                {
+                    title:'CSIR Technologies',
+                    description:'A web portal that showcases the various technologies created out of CSIR.Displayed in varions formats, most prominent is the digital map.',
+                    dataset_id:'ss002',
+                    link:'/advisor'
                 },
                 
             ],

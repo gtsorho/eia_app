@@ -27,6 +27,30 @@ const routes = [
     }
   },
   {
+    path: "/technologies",
+    beforeEnter(to, from, next) {
+      window.location.href = "http://technologies.csirgh.com/views/map";
+    }
+  },
+  {
+    path: "/kuafo",
+    beforeEnter(to, from, next) {
+      window.location.href = "http://kuafo.csirgh.com/";
+    }
+  },
+  {
+    path: "/advisor",
+    beforeEnter(to, from, next) {
+      window.location.href = "https://play.google.com/store/apps/details?id=com.insti.kuafo_Advisor";
+    }
+  },
+  {
+    path: "/csirspace",
+    beforeEnter(to, from, next) {
+      window.location.href = "http://csirspace.csirgh.com/";
+    }
+  },
+  {
     path: '/main',
     name: 'Main',
     component: Main,
