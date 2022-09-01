@@ -65,7 +65,7 @@ export default {
                     title:'CSIR Agritech Advisor',
                     description:'This is a mobile app that provides a platform for questions to be asked on specific agricultural related needs. Users and experts on the platform are by default enabled and given the opportunity to provide answers and vote on the accuracy of answers, this ultimately develops into an asynchronous knowledge hub for finding specialized and specific agriculture related information.',
                     dataset_id:'ss005',
-                    link:'/technologies'
+                    link:'/advisor'
                 },
                 {
                     title:'Kuafo Marketplace',
@@ -77,7 +77,7 @@ export default {
                     title:'CSIR Technologies',
                     description:'A web portal that showcases the various technologies created out of CSIR.Displayed in varions formats, most prominent is the digital map.',
                     dataset_id:'ss002',
-                    link:'/advisor'
+                    link:'/technologies'
                 },
                 
             ],
@@ -85,8 +85,10 @@ export default {
                 'bi bi-calendar-week fs-2',
                 'bi bi-cloud-sun-fill fs-2',
                 'bi bi-pie-chart-fill fs-2',
-                'bi bi-graph-up fs-2',
-                'bi bi-pie-chart fs-2'
+                'bi bi-globe fs-2',
+                'bi bi-lightbulb fs-2',
+                "bi bi-shop fs-2",
+                "bi bi-robot fs-2"
             ],
             widgetColors:[
                 'widget-49-date-primary',
