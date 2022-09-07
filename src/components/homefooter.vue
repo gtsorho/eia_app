@@ -258,6 +258,7 @@ export default {
     .list-group{  
     height: 1.8in;
     overflow-y: scroll;
+    
     }
     .list-group-item {
     position: relative;
