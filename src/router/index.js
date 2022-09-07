@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory,createWebHashHistory } from 'vue-router'
 import CroppingCalendar from '../views/CroppingCalendar.vue'
 import Home from '../views/Home.vue'
+import Weather from '../views/weatherHome.vue'
 import Main from '../views/Main.vue'
 import StorySet from '../views/storyset.vue'
 import DataSets from '../views/datasets.vue'
@@ -8,7 +9,7 @@ import services from '../views/tools.vue'
 import DatasetPreview from '../views/datasetpreview.vue'
 import Storysetchartboard from '../views/storysetchartboard'
 import tempRain from '../views/temprain'
-
+import weatherBg from "@/assets/pexels-pixabay-209831.jpg";
 
 
 
@@ -21,10 +22,10 @@ const routes = [
     component: Home
   },
   {
-    path: "/weather",
-    beforeEnter(to, from, next) {
-      window.location.href = "https://ghmeteo.herokuapp.com/";
-    }
+    path: '/weather',
+    name: 'weather',
+    component: Weather,
+    meta: {  bgImage: weatherBg }
   },
   {
     path: "/technologies",
@@ -106,6 +107,10 @@ const routes = [
   },
   
 ]
+
+
+
+
 
 const router = createRouter({
   history: createWebHashHistory(),

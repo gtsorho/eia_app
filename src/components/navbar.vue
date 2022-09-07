@@ -76,7 +76,8 @@ li a {
 }
 
 li:hover {
-    background-color: pink;
+    background-color: pink ;
+
 }
 
 .col-sm-8,

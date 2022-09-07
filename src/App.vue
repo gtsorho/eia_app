@@ -18,10 +18,19 @@ export default {
     Navbar,
     Footer
   },
+  
 }
 </script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+    /* html, body{
+        background-image: url('assets/pexels-pixabay-209831.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        overflow-x: hidden;
+        height: 100%;
+    } */
 
 p, h1,h2,h3,h4,h5, small, strong, a, li,option, form ,div{
   font-family: 'Raleway', sans-serif;
