@@ -94,7 +94,7 @@ export default {
     margin-top: 10rem !important;
     width: 80%;
     overflow-wrap: normal;
-    background-color: rgb(0 0 0 / 50%) !important;
+    background-color: rgba(1, 0, 0, 0.767) !important;
     border: 0px solid rgba(255, 255, 255, 0.125) !important;
 }
 /* If the screen size is 601px or more, set the font-size of <div> to 80px */

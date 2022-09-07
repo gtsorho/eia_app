@@ -212,7 +212,7 @@ export default {
     height: 30%;
     border-radius: 5px;
     backdrop-filter: blur(14px);
-    background-color: rgb(1, 0, 0, 0.6);
+    background-color: rgba(1, 0, 0, 0.767);
     text-align: center;
     color: aliceblue;
     } 
@@ -270,7 +270,7 @@ export default {
     border: none !important;
     }
     .list-group-item-action:focus, .list-group-item-action:hover {
-    color: #c2213d !important;
+    color: #f47d91 !important;
     border-radius: 51px;
     border: 10px !important;
     background-color: #6c757d29 !important;
