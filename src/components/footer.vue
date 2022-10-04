@@ -1,5 +1,5 @@
 <template>
-    <footer class="d-flex flex-wrap justify-content-between align-items-center pb-2 my-5 border-top "  style="background-color:#c2213d !important; height:70px" >
+    <footer class="d-flex flex-wrap justify-content-between align-items-center pb-2 my-5 border-top "  style="    background-image: linear-gradient(113deg, #0e140d, #4fab43);!important; height:70px" >
         <div class="col-md-4  d-flex mx-auto align-items-center">
             <!-- <a href="/" class="mb-3 me-2 mb-md-0 text-light text-decoration-none lh-1">
                 <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
@@ -11,7 +11,6 @@
             <li class="ms-3"><router-link to="/main/services" class="text-light">Services</router-link></li>
             <li class="ms-3"><router-link to="/main/dashboard" class="text-light">Dashboards</router-link></li>
             <li class="ms-3"><router-link to="/main/storyset" class="text-light">StorySet</router-link></li>
-            <li class="ms-3"><router-link to="/main/datasets" class="text-light">Dataset</router-link></li>
         </ul>
     </footer>
 </template>
@@ -33,7 +32,7 @@
         transition:  .5s;
     }
     li:hover{
-        background-color: rgb(253, 158, 174);
+        background-color: #4fab43;
         border-radius: 50px;
         padding-inline: 15px;
     }

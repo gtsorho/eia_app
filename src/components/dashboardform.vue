@@ -3,11 +3,8 @@
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <!-- offcanvas header -->
         <div class="offcanvas-header">
-            <u>
-                <h6 class="offcanvas-title fw-bolder text-uppercase" id="offcanvasExampleLabel">Dashboard</h6>
-            </u>
+                <h6 class="offcanvas-title fw-bolder" style="color:#c55118" id="offcanvasExampleLabel">Dashboard</h6>
             
-            <button class="btn btn-warning px-5 btn-sm" @click="addPanel()">Add Panel</button>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <!-- offcanvas header end | offcanvas body start -->
@@ -19,7 +16,7 @@
                     <!-- accordion header -->
                     <div class="accordion-header " :id="`panelsStayOpen-heading${index}`">
                         <button class="btn  float-end text-danger trashbtn"  @click="datasets.splice(index, 1)"><i class="bi bi-trash3-fill"></i></button>
-                        <button class="accordion-button text-light fw-normal" style="width:90% !important; background-color:#e76e83" type="button" data-bs-toggle="collapse"
+                        <button class="accordion-button text-light fw-normal" style="width:90% !important; background-color:#4fab43" type="button" data-bs-toggle="collapse"
                             :data-bs-target="`#panelsStayOpen-collapse${index}`" aria-expanded="true"
                             :aria-controls="`panelsStayOpen-collapse${index}`">
                             P {{index + 1}}
@@ -89,6 +86,8 @@
                 </div>
                 <!-- accordion item end -->
             </div>
+            <button class="btn btn-warning px-5 btn-sm float-start rounded-pill" @click="addPanel()">Add Panel</button>
+
             <a class="text-warning float-end text-decoration-none fw-bolder "  href="#" @click="$emit('powerClick')">Go to PowerBi</a>
             <!-- accordion end -->
         </div>
@@ -178,10 +177,10 @@
     border-start-start-radius: 0px;
     border: 0px !important;
     height: 40px;
-    background-color: #e76e83;
+    background-color: #4fab43;
 }
 .form-select{
-    background-color: #fedbdb70;
+    background-color: #b3fca970;
 }
 .trashbtn:focus {
     outline: 0;

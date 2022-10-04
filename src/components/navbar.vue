@@ -1,6 +1,6 @@
 <template>
     <header>
-        <div class="collapse text-dark" id="navbarHeader" style="background-color:#ffd6dd54 !important">
+        <div class="collapse text-dark" id="navbarHeader" style="background-color:rgb(27 244 0 / 10%)!important">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-8 col-md-7 py-4">
@@ -14,7 +14,7 @@
                     </div>
                     <div class="col-sm-4 offset-md-1 py-4">
                         <h4 class="text-dark">Menu</h4>
-                        <hr style="color:#ff3f60 !important">
+                        <hr style="color:#  4fab43 !important">
                         <ul class="list-unstyled">
                             <li class="w-100 px-2 rounded-pill">
                                 <router-link to="/main/services" class="text-dark " @click="collapseCloseOnclick()">Services
@@ -28,23 +28,22 @@
                                 <router-link to="/main/storyset" class="text-dark" @click="collapseCloseOnclick()">
                                     StorySet</router-link>
                             </li>
-                            <li class="w-100 px-2 rounded-pill">
-                                <router-link to="/main/datasets" class="text-dark" @click="collapseCloseOnclick()">
-                                    Dataset</router-link>
-                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="navbar navbar-dark shadow-sm" style="background-color:#c2213d !important">
+        <div class="navbar navbar-dark shadow-sm" style="    background-image: linear-gradient(113deg, #0e140d, #4fab43);!important">
             <div class="container">
                 <a href="#" class="navbar-brand d-flex align-items-center">
-                    <!-- <img src="../assets/agronomy.png" height="30px"> -->
                     <router-link to="/" class=" text-decoration-none">
-                        <h5 class="float-md-start text-light mb-0 fw-bolder">AG-DATAHUB | <h6 class=" fw-bold">
-                                {{ $route.name }}</h6>
-                        </h5>
+                            <span class="float-start text-start">
+                                <img  style="width:15%;" class="ms-2" src="../assets/logo.png" > 
+                                <hr style="width:60px; background-color:white; height:2px" class="my-1">
+                                <h6 class=" fw-bold text-light mb-0">
+                                    {{ $route.name }}
+                                </h6>
+                            </span>
                     </router-link>
                 </a>
                 <button class="navbar-toggler" style="border-color:#ffffffa6!important" type="button"
@@ -76,7 +75,7 @@ li a {
 }
 
 li:hover {
-    background-color: pink ;
+    background-color: #4fab43 ;
 
 }
 

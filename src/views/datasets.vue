@@ -19,8 +19,8 @@
                 </div>
             </div>
             <div class=" card-footer bg-transparent border-0 text-end ">
-              <router-link class="btn btn-sm rounded-pill px-3" style="background-color:pink" to="/main/datasetpreview">Preview</router-link>
-              <!-- <a href="#" class="btn btn-sm rounded-pill px-3" style="background-color:pink ">Preview</a> -->
+              <router-link class="btn btn-sm rounded-pill px-3" style="background-color:#4fab43" to="/main/datasetpreview">Preview</router-link>
+              <!-- <a href="#" class="btn btn-sm rounded-pill px-3" style="background-color:#4fab43 ">Preview</a> -->
             </div>
         </div>
     </div>
@@ -58,7 +58,7 @@
               <label for="Description" class="form-label float-start mt-2">Description</label>
               <textarea class="form-control" v-model="fileDescription" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
-            <button class="btn btn-sm rounded-pill px-3 fw-bold float-end" style="background-color:pink" @click="saveFile">Add</button>
+            <button class="btn btn-sm rounded-pill px-3 fw-bold float-end" style="background-color:#4fab43" @click="saveFile">Add</button>
 
             <!-- <input class="form-control form-control-sm" id="formFileSm" type="file" data-multiple-caption="{count} files selected" multiple>
             <label for="formFileSm" class=" formFilelable form-label px-5">Click here or drag file here</label> -->
@@ -252,7 +252,7 @@ input[type=file]::file-selector-button {
   border: 2px solid #7567d900;
   padding: .2em .4em;
   border-radius: .2em;
-  background-color: pink;
+  background-color: #4fab43;
   transition: 1s;
   
 }

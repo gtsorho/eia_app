@@ -207,7 +207,7 @@ table{
   padding: .2rem 1rem !important;
 }
 .nav-item:hover{
-  background-color: #c2213c41;
+  background-color: #4fab4341;
   border-radius: 50px;
 
 }

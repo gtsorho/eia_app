@@ -2,27 +2,17 @@
     <div class="main-div d-flex text-center text-dark bg-light">
          <div class="cover-container d-flex w-100 p-3 mx-auto flex-column">
   <header class="mb-auto mx-5">
-    <!-- <div>
-      <h2 class="float-md-start mb-0" style="color:#f56a6a">AG-DATAHUB</h2>
-      <nav class="nav nav-masthead justify-content-center float-md-end text-dark">
-        <a class="nav-link" :class="{active:active === 'cropping'}" href="#" @click="changeTopic(0), active = 'cropping'">Services</a>
-        <a class="nav-link" :class="{active:active === 'Dashbords'}" href="#" @click="changeTopic(1),  active = 'Dashbords'">Dashbords</a>
-        <a class="nav-link" :class="{active:active === 'Storyset'}" href="#" @click="changeTopic(2), active = 'Storyset'">Storyset</a>
-        <a class="nav-link" :class="{active:active === 'Dataset'}" href="#" @click="changeTopic(3), active = 'Dataset'">Dataset</a>
-      </nav>
-    </div> -->
     <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><h2 class="float-md-start mb-0" style="color:#f56a6a">AG-DATAHUB</h2></a>
+    <a class="navbar-brand" href="#"><img class="float-start" style="width:20%" src="../assets/logo.png" > </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav ">
+      <div class="navbar-nav">
         <a class="nav-link" :class="{active:active === 'cropping'}" href="#" @click="changeTopic(0), active = 'cropping'">Services</a>
         <a class="nav-link" :class="{active:active === 'Dashbords'}" href="#" @click="changeTopic(1),  active = 'Dashbords'">Dashbords</a>
         <a class="nav-link" :class="{active:active === 'Storyset'}" href="#" @click="changeTopic(2), active = 'Storyset'">Storyset</a>
-        <a class="nav-link" :class="{active:active === 'Dataset'}" href="#" @click="changeTopic(3), active = 'Dataset'">Dataset</a>
       </div>
     </div>
   </div>
@@ -35,7 +25,7 @@
     <div class="row  row-cols-1  row-cols-md-2">
       <div class="col my-auto">
         <h1>{{displayParam.Title}}</h1>
-        <hr class="mx-auto" style="width:90%; background-color:#f56a6a">
+        <hr class="mx-auto" style="width:90%; background-color:#4fab43">
         <p class="lead fs-6 px-5">{{displayParam.text}}</p>
         <p class="lead">
           <router-link :to="displayParam.link" class="btn btn-md btn-secondary fw-bold border-white bg-white">View More</router-link>
@@ -86,28 +76,6 @@ data() {
         text:'This details findings from exploratory to in-depth analysis (quantitative and qualitative) of a decade of data gathered and stored by the Africa RISING Dataverse portal. This report’s focus is centered on the cultivation of maize, soybean, cowpea and groundnut in the upper regions of Ghana. However, highlights are thrown on other crops of interest where the data supports our objective.', 
         link:'/main/storyset'
       },
-      {
-        id: 3,
-        img:'dataset.svg',
-        Title:'DataSets',
-        text:' Inside AgData-hub you\'ll find all the data you need to workon your projects and research. So explore our datasets, these are collections of data of prefered all fields and backgrounds from stakeholders both public and private, this means you get to upload and share your datasets with the etire community, just sign up to upload',
-        link:'/main/datasets'
-      },
-      // {
-      //   id: 4,
-      //   img:'story.svg',
-      //   Title:'Cropping Calendar',
-      //   text:'  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis, temporibus. Sapiente rerum ipsa minima aut molestiae   Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis, temporibus. Sapiente rerum ipsa minima aut molestiae dolore fugiat molestias eos, autem dolorem, omnis ad magni maxime natus. Quis, blanditiis aliquid.dolore fugiat molestias eos, autem dolorem, omnis ad magni maxime natus. Quis, blanditiis aliquid.',
-      //   link:'/main/Croppingcalendar'
-      // },
-
-      // {
-      //   id: 5,
-      //   img:'story.svg',
-      //   Title:'Weather Widget',
-      //   text:'  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis, temporibus. Sapiente rerum ipsa minima aut molestiae   Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis, temporibus. Sapiente rerum ipsa minima aut molestiae dolore fugiat molestias eos, autem dolorem, omnis ad magni maxime natus. Quis, blanditiis aliquid.dolore fugiat molestias eos, autem dolorem, omnis ad magni maxime natus. Quis, blanditiis aliquid.',
-      //   link:'/main/Croppingcalendar'
-      // },
     ],
     displayParam:{
         id: 2,
@@ -158,11 +126,11 @@ methods:{
   opacity: .8;
 }
 .nav-link{
-  color: #f56a6a !important;
+  color: #4fab43 !important;
   transition:  .5s;
 }
 .nav-link:hover{
-  background-color: #f56a6a !important;
+  background-color: #4fab43 !important;
   border-radius: 50px !important;
   padding-inline: 15px !important;
   color: rgba(246, 246, 246, 0.807) !important;
@@ -173,7 +141,7 @@ methods:{
 	height:40px;
 	bottom:48%;
 	left:15px;
-	background-color:#f56a6a;
+	background-color:#4fab43;
 	color:#FFF;
 	border-radius:50px;
   transition: transform .2s;
@@ -186,7 +154,7 @@ methods:{
 	height:40px;
 	bottom:48%;
 	right:15px;
-	background-color:#f56a6a;
+	background-color:#4fab43;
 	color:#FFF;
 	border-radius:50px;
   transition: transform .2s;
@@ -199,12 +167,12 @@ methods:{
 }
 .float:hover{
   transform: scale(1.1); 
-	background-color: #f56a6ad8;
+	background-color: #4fab43d8;
 
 }
 .float2:hover{
   transform: scale(1.1); 
-	background-color: #f56a6ad8;
+	background-color: #4fab43d8;
 
 }
 
@@ -229,11 +197,11 @@ methods:{
 /* Custom default button */
 .btn-secondary,
 .btn-secondary:focus {
-  background-color: #f56a6a !important;
+  background-color: #4fab43 !important;
   text-shadow: none; /* Prevent inheritance from `body` */
 }
 .btn-secondary:hover{
-  background-color: #f56a6ad8 !important;
+  background-color: #4fab43d8 !important;
 }
 
 

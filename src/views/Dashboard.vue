@@ -114,12 +114,12 @@ export default {
 	height:40px;
 	bottom:48%;
 	left:15px;
-	background-color:#c2213d;
+	background-color:#4fab43;
 	color:#FFF;
 	border-radius:50px;
   transition: transform .2s;
 	text-align:center;
-	box-shadow: 0px 0px 5px #c2213d;
+	box-shadow: 0px 0px 5px #4fab43;
 }
 .my-float{
     position: absolute;
@@ -135,16 +135,16 @@ export default {
   padding-top: 8px;
   opacity: .9;
 	left:15px;
-	background-color:#c2213d;
+	background-color:#4fab43;
 	color:#FFF;
 	border-radius:50px;
   transition: transform .2s;
 	text-align:center;
-	box-shadow: 0px 0px 5px #c2213d;
+	box-shadow: 0px 0px 5px #4fab43;
 }
 .float:hover{
   transform: scale(1.1); 
-	background-color:#ff607a;
+	background-color:#28891c;
 
 }
 </style>

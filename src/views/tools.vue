@@ -10,13 +10,13 @@
                         <div class="widget-49-date-primary">
                             <!-- <i :class="icons[index]"></i> -->
                         </div>
-                        <div class="widget-49-meeting-info mx-auto py-2 rounded-pill" style="width: 70%; background-color:#ffd2d6" >
+                        <div class="widget-49-meeting-info mx-auto py-2 rounded-pill" style="width: 70%; background-color:#aeffa39a" >
                             <span class="widget-49-pro-title fw-bold text-uppercase">Control Center</span>
                         </div>
                     </div>
                     <div class="mb-1">
                       <label for="password"  class="form-label text-dark float-start " style="font-size:15px">Username</label>
-                      <input type="email" v-model="username" class="form-control form-control-sm rounded-pill" id="password" placeholder="name@example.com">
+                      <input type="email" v-model="username" class="form-control form-control-sm rounded-pill " id="password" placeholder="name@example.com">
                     </div>
                     <div class="mb-1">
                       <label for="password" class="form-label text-dark float-start" style="font-size:15px">Password</label>
@@ -40,7 +40,7 @@
                             <i :class="icons[index]"></i>
                             <!-- bi bi-bar-chart-line fs-2 -->
                         </div>
-                        <div class="widget-49-meeting-info mx-auto py-2 rounded-pill" style="width: 70%; background-color:#ffd2d6" >
+                        <div class="widget-49-meeting-info mx-auto py-2 rounded-pill" style="width: 70%; background-color:#aeffa39a" >
                             <span class="widget-49-pro-title fw-bold text-uppercase">{{tool.title}}</span>
                         </div>
                     </div>
@@ -84,32 +84,6 @@ export default {
                     description:'Weather is something that never remains constant. Getting to know precise weather conditions helps people to plan out their daily schedule. Our Weather App enables the user to search numerous locations within Ghana and verify the weather data accordingly. The user will be able to view the updated weather data in sync with the Ghana Meteorological Agency.',
                     dataset_id:'ss002',
                     link:'/main/temprain'
-                },
-
-
-                {
-                    title:'CSIRspace',
-                    description:"CSIRspace is a digital service that collects, preserves, and distributes digital material from researchers of the Coucil of Scientific &amp; Industrial Research. Repositories are important tools for preserving an organization's legacy; they facilitate digital preservation and scholarly communication.",
-                    dataset_id:'ss004',
-                    link:'/csirspace'
-                },
-                {
-                    title:'CSIR Agritech Advisor',
-                    description:'This is a mobile app that provides a platform for questions to be asked on specific agricultural related needs. Users and experts on the platform are by default enabled and given the opportunity to provide answers and vote on the accuracy of answers, this ultimately develops into an asynchronous knowledge hub for finding specialized and specific agriculture related information.',
-                    dataset_id:'ss005',
-                    link:'/advisor'
-                },
-                {
-                    title:'Kuafo Marketplace',
-                    description:'Kuafo Marketplace; a deliverable under the Modernising Agriculture in Ghana project is an ecommerce portal for businesses along the agriculture value chain.',
-                    dataset_id:'ss006',
-                    link:'/kuafo'
-                },
-                {
-                    title:'CSIR Technologies',
-                    description:'A web portal that showcases the various technologies created out of CSIR.Displayed in varions formats, most prominent is the digital map.',
-                    dataset_id:'ss002',
-                    link:'/technologies'
                 },
                 
             ],
@@ -185,12 +159,11 @@ input[type=file]::file-selector-button {
   
 }
 .card-footer a{
-  background-color: rgba(250, 151, 167, 0.33) !important;
+  background-color: rgb(255 148 95) !important;
 }
 
 .card-footer a:hover{
-
-  border-color: rgb(250, 151, 167) !important;
+  border-color: rgb(28, 121, 26) !important;
 }
 
 .form-control[data-v-6a57b8d6]:focus {
@@ -393,11 +366,11 @@ form i, .bi-search {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: #ffd2d6;
+  background-color: #aeffa39a;
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
-  color: #f7667f;
+  color: #1e721d;
   font-weight: 500;
   font-size: 1.5rem;
   line-height: 1;
