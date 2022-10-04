@@ -9,6 +9,7 @@ import services from '../views/tools.vue'
 import DatasetPreview from '../views/datasetpreview.vue'
 import Storysetchartboard from '../views/storysetchartboard'
 import tempRain from '../views/temprain'
+import ControlCenter from '../views/controlCenter'
 import weatherBg from "@/assets/pexels-pixabay-209831.jpg";
 
 
@@ -50,6 +51,12 @@ const routes = [
     beforeEnter(to, from, next) {
       window.location.href = "http://csirspace.csirgh.com/";
     }
+  },
+  {
+    path: "/controlcenter",
+    name: 'ControlCenter',
+    component: ControlCenter
+    
   },
   {
     path: '/main',

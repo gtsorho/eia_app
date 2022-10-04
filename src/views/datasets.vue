@@ -49,15 +49,19 @@
     <div class="modal-content bg-dark text-light">
       <div class="modal-body">
         <div class="">
-          <form>
-            <label for="fileUpload">Upload file</label>
-            <input class="form-control form-control-sm fileUpload" @click="fileupload"  type="file" id="fileUpload">
-            <button class="btn btn-sm rounded-pill px-3 fw-bold" style="background-color:pink ">Add</button>
-            <p class="mb-0 mt-1 text-muted text-start" style="font-size:12px">Accepted file formats; xls, csv, pdf, doc(x)</p>
-          </form>
-          
-          <!-- <input class="form-control form-control-sm" id="formFileSm" type="file" data-multiple-caption="{count} files selected" multiple>
-          <label for="formFileSm" class=" formFilelable form-label px-5">Click here or drag file here</label> -->
+            <div class="mb-3 float-start">
+              <label for="fileUpload">Upload file</label>
+              <input class="form-control form-control-sm fileUpload" @change="fileupload"  type="file" id="fileUpload">
+              <p class="mb-0 mt-1 text-muted text-start" style="font-size:12px">Accepted file formats; xls, csv, pdf, doc(x)</p>
+            </div>
+            <div class="mb-3">
+              <label for="Description" class="form-label float-start mt-2">Description</label>
+              <textarea class="form-control" v-model="fileDescription" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <button class="btn btn-sm rounded-pill px-3 fw-bold float-end" style="background-color:pink" @click="saveFile">Add</button>
+
+            <!-- <input class="form-control form-control-sm" id="formFileSm" type="file" data-multiple-caption="{count} files selected" multiple>
+            <label for="formFileSm" class=" formFilelable form-label px-5">Click here or drag file here</label> -->
         </div>
       </div>
     </div>
@@ -134,12 +138,17 @@
 </div>
 </template>
 <script>
+import axios from 'axios'
+
 export default {
     data() {
         return {
             searchbar:false,
             signin:true,
             authenticated:true,
+            file:null,
+            fileDescription:'',
+            postFormData: new FormData(),
             storyset:[
                 {
                     title:'Statistics of the Dataset',
@@ -195,9 +204,27 @@ export default {
           this.$refs.addDatasetTrig.click()
         }
       },
-      fileupload(){
-        console.log(document.getElementsByClassName('fileUpload'))
+      fileupload(e){
+        this.file = e.target.files[0]
       },
+      saveFile(){
+        this.postFormData.append('description', this.fileDescription);
+        this.postFormData.append('file', this.file);
+        
+        var contentType = {
+        headers: {
+            'content-type':'multipart/form-data'
+        }
+        }
+        axios.post('/upload', this.postFormData ,contentType )
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+      },
+
       showpassword(){
         const password = document.getElementsByClassName('password');
         const type = password.getAttribute('type') === 'password' ? 'text' : 'password';

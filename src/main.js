@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
+
 router.afterEach(to => {
     if (to.meta && to.meta.bgImage) {
       document.body.style.backgroundRepeat = "no-repeat";

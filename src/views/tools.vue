@@ -1,6 +1,36 @@
 <template>
     <div class="container my-5">
 <div class="row row-cols-md-2 row-cols-lg-3 justify-content-center" style="padding-bottom: 1in;">
+
+      <div  class="col-lg-4" >
+        <div class="card card-margin">
+            <div class="card-body pt-3" style="height: 75%;">
+                <div class="widget-49">
+                    <div class="widget-49-title-wrapper">
+                        <div class="widget-49-date-primary">
+                            <!-- <i :class="icons[index]"></i> -->
+                        </div>
+                        <div class="widget-49-meeting-info mx-auto py-2 rounded-pill" style="width: 70%; background-color:#ffd2d6" >
+                            <span class="widget-49-pro-title fw-bold text-uppercase">Control Center</span>
+                        </div>
+                    </div>
+                    <div class="mb-1">
+                      <label for="password"  class="form-label text-dark float-start " style="font-size:15px">Username</label>
+                      <input type="email" v-model="username" class="form-control form-control-sm rounded-pill" id="password" placeholder="name@example.com">
+                    </div>
+                    <div class="mb-1">
+                      <label for="password" class="form-label text-dark float-start" style="font-size:15px">Password</label>
+                      <input type="password"   class="form-control form-control-sm rounded-pill d-inline password">
+                      <i class="bi bi-eye" id="togglePassword"  @click="showpassword"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-49-meeting-action card-footer border-0 bg-transparent">
+              <a href="#" class="btn btn-sm float-end fw-bold px-4 btn-flash-border-primary border-2 rounded-pill" @click="centerLogin">Login</a>
+            </div>
+        </div>
+    </div>
+
     <div  class="col-lg-4" v-for="(tool, index) in tools" :key="index">
         <div class="card card-margin">
             <div class="card-body pt-3" style="height: 75%;">
@@ -34,6 +64,8 @@ export default {
             searchbar:false,
             signin:true,
             authenticated:true,
+            username:'',
+            password:'',
             tools:[
                 {
                     title:'Cropping Calendar',
@@ -116,11 +148,9 @@ export default {
           this.$refs.addDatasetTrig.click()
         }
       },
-      fileupload(){
-        console.log(document.getElementsByClassName('fileUpload'))
-      },
+
       showpassword(){
-        const password = document.getElementsByClassName('password');
+        const password = document.getElementsByClassName('password')[0];
         const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
         password.setAttribute('type', type);
 
@@ -133,6 +163,10 @@ export default {
           document.getElementById('togglePassword').classList.add('bi-eye-slash');
           document.getElementById('togglePassword').classList.remove('bi-eye');
         }
+      },
+      centerLogin(){
+        console.log(this.username, this.password)
+        this.$router.push('/controlcenter')
       }
     },
     created(){
@@ -160,7 +194,6 @@ input[type=file]::file-selector-button {
 }
 
 .form-control[data-v-6a57b8d6]:focus {
-    
     background-color: rgb(176 176 176 / 0%) !important;
     box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 0%) !important;
 }
@@ -281,7 +314,7 @@ form a{
   color: #72bcec;
 }
 .form-control:focus {
-    color: #e8e8e8;
+    color: #2c2c2c;
     background-color: rgb(176 176 176 / 17%);
     border-color: #86b7fe;
     outline: 0;
@@ -289,8 +322,9 @@ form a{
 }
 
 .form-control {
-    color: #e8e8e8;
+    color: #2c2c2c;
     background-color: rgb(176 176 176 / 17%);
+    
 }
 
 .search:focus {
