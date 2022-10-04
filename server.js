@@ -3,6 +3,7 @@ const path = require('path')
 const serveStatic = require('serve-static')
 const weather = require('./routes/weather')
 const broadcast = require('./routes/broadcast')
+const cors = require('cors');
 
 const mongoose =  require('mongoose')
 
@@ -10,6 +11,9 @@ const app = express()
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
+app.use(cors({
+    origin: '*'
+}));
 
 app.use('/api/weather', weather)
 app.use('/api/broadcast', broadcast)

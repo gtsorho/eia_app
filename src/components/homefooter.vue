@@ -124,9 +124,9 @@ export default {
         },
 
         search(location = null){
-            var url = `https://impactgt.herokuapp.com/api/searchlocations/${location}`
+            var url = `http://localhost:3000/api/weather/locations/${location}`
             if(!location){
-                url = `https://impactgt.herokuapp.com/api/alladdress`
+                url = `http://localhost:3000/api/weather/locations`
             }
             axios.get(url)
             .then(response =>  {
