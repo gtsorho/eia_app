@@ -5,7 +5,7 @@ const axios =  require('axios')
 const _ = require('lodash')
 
 
-mongoose.connect('mongodb://`root:t5f2KfqwvNRX8ii@srv-captain--weather/weatherDB')
+mongoose.connect('mongodb://root:t5f2KfqwvNRX8ii@srv-captain--weather:27017/weatherDB')
     .then(() => console.log('connected to mongodb'))
     .catch(err => console.error('could not connect to mongoDB', err))
 
