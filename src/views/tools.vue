@@ -1,36 +1,36 @@
 <template>
     <div class="container my-5">
-<div class="row row-cols-md-2 row-cols-lg-3 justify-content-center" style="padding-bottom: 1in;">
-
-      <div  class="col-lg-4" >
-        <div class="card card-margin">
-            <div class="card-body pt-3" style="height: 75%;">
-                <div class="widget-49">
-                    <div class="widget-49-title-wrapper">
-                        <div class="widget-49-date-primary">
-                            <!-- <i :class="icons[index]"></i> -->
-                        </div>
-                        <div class="widget-49-meeting-info mx-auto py-2 rounded-pill" style="width: 70%; background-color:#aeffa39a" >
-                            <span class="widget-49-pro-title fw-bold text-uppercase">Control Center</span>
-                        </div>
-                    </div>
-                    <div class="mb-1">
-                      <label for="password"  class="form-label text-dark float-start " style="font-size:15px">Username</label>
-                      <input type="email" v-model="username" class="form-control form-control-sm rounded-pill " id="password" placeholder="name@example.com">
-                    </div>
-                    <div class="mb-1">
-                      <label for="password" class="form-label text-dark float-start" style="font-size:15px">Password</label>
-                      <input type="password"   class="form-control form-control-sm rounded-pill d-inline password">
-                      <i class="bi bi-eye" id="togglePassword"  @click="showpassword"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="widget-49-meeting-action card-footer border-0 bg-transparent">
-              <a href="#" class="btn btn-sm float-end fw-bold px-4 btn-flash-border-primary border-2 rounded-pill" @click="centerLogin">Login</a>
-            </div>
-        </div>
-    </div>
-
+<div class="row">
+<div  class="col-lg-3" >
+      <div class="card card-margin">
+          <div class="card-body pt-3" >
+              <div class="widget-49">
+                  <div class="widget-49-title-wrapper">
+                      <div class="widget-49-date-primary">
+                          <i :class="icons[index]"></i>
+                      </div>
+                      <div class="widget-49-meeting-info mx-auto py-2 rounded-pill" style="width: 70%; background-color:#aeffa39a" >
+                          <span class="widget-49-pro-title fw-bold text-uppercase">Control Center</span>
+                      </div>
+                  </div>
+                  <div class="mb-1">
+                    <label for="password"  class="form-label text-dark float-start " style="font-size:15px">Username</label>
+                    <input type="email" v-model="username" class="form-control form-control-sm rounded-pill " id="password" placeholder="name@example.com">
+                  </div>
+                  <div class="mb-1">
+                    <label for="password" class="form-label text-dark float-start" style="font-size:15px">Password</label>
+                    <input type="password"   class="form-control form-control-sm rounded-pill d-inline password">
+                    <i class="bi bi-eye" id="togglePassword"  @click="showpassword"></i>
+                  </div>
+              </div>
+          </div>
+          <div class="widget-49-meeting-action card-footer border-0 bg-transparent">
+            <a href="#" class="btn btn-sm float-end fw-bold px-4 btn-flash-border-primary border-2 rounded-pill" @click="centerLogin">Login</a>
+          </div>
+      </div>
+  </div>
+  <div class="col">
+      <div class="row row-cols-md-2 row-cols-lg-3 justify-content-center" style="padding-bottom: 1in;">
     <div  class="col-lg-4" v-for="(tool, index) in tools" :key="index">
         <div class="card card-margin">
             <div class="card-body pt-3" style="height: 75%;">
@@ -55,6 +55,10 @@
         </div>
     </div>
 </div>
+
+  </div>
+</div>
+
 </div>
 </template>
 <script>
@@ -80,6 +84,12 @@ export default {
                     link:'/weather'
                 },
                 {
+                    title:'Temperature & Rain',
+                    description:'Weather is something that never remains constant. Getting to know precise weather conditions helps people to plan out their daily schedule. Our Weather App enables the user to search numerous locations within Ghana and verify the weather data accordingly. The user will be able to view the updated weather data in sync with the Ghana Meteorological Agency.',
+                    dataset_id:'ss002',
+                    link:'/main/temprain'
+                },
+                                {
                     title:'Temperature & Rain',
                     description:'Weather is something that never remains constant. Getting to know precise weather conditions helps people to plan out their daily schedule. Our Weather App enables the user to search numerous locations within Ghana and verify the weather data accordingly. The user will be able to view the updated weather data in sync with the Ghana Meteorological Agency.',
                     dataset_id:'ss002',

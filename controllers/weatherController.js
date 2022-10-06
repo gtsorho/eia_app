@@ -6,7 +6,7 @@ const axios =  require('axios')
 var express = require('express')
 
 
-mongoose.connect('mongodb://localhost/weatherDB')
+mongoose.connect('mongodb://`root:t5f2KfqwvNRX8ii@srv-captain--weather/weatherDB')
     .then(() => console.log('connected to mongodb'))
     .catch(err => console.error('could not connect to mongoDB', err))
 
@@ -22,16 +22,20 @@ module.exports = {
         res.send(addresses)   
     },
     weatherData: async (req, res) => {
-        let latitudeVal = req.body.latitude
-        let longitudeVal = req.body.longitude
+        let latitudeVal = req.body.latitude.toString()
+        let longitudeVal = req.body.longitude.toString()
+
+        console.log(typeof(latitudeVal))
+
         const weatherData = await DailyWeather.find({latitude : parseFloat(latitudeVal) , longitude : parseFloat(longitudeVal)}).sort({_id:-1}).limit(10)
-        res.send(weatherData)
+        console.log(weatherData)
+        res.json(weatherData)
     },
     liveData: async (req, res) => {
-            let latitudeVal = req.body.latitude
-            let longitudeVal = req.body.longitude
+        let latitudeVal = req.body.latitude.toString()
+        let longitudeVal = req.body.longitude.toString()
             const liveData = await LiveWeather.find({latitude : parseFloat(latitudeVal) , longitude : parseFloat(longitudeVal)}).sort({_id:-1}).limit(10)
-            res.send(liveData)
+            res.json(liveData)
         },
 
     createWeather: (req , res) => {

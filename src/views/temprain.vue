@@ -76,7 +76,7 @@ export default {
             });
 
         // console.log(this.tempset)
-        axios.get('https://impactgt.herokuapp.com/api/alladdress')
+        axios.get('http://localhost:3000/api/weather/locations')
             .then(response =>  {
                 this.locations = response.data
                 // console.log(response.data)
@@ -109,20 +109,24 @@ export default {
                 let liveTempArr = []
                 let liveRainArr = []
                 
+                console.log(this.addressVal.longitude, this.addressVal.latitude)
 
-           await axios.post('https://impactgt.herokuapp.com/api/weatherdata', 
-            {
-                'latitude':this.addressVal.latitude,
-                'longitude': this.addressVal.longitude,
+                
+            await axios({
+                method: 'post',       
+                url: 'http://localhost:3000/api/weather/weatherdata',
+                data: {
+                    'latitude':this.addressVal.latitude,
+                    'longitude': this.addressVal.longitude,
+                }
             })
             .then(response =>  {
-                // console.log(response.data)
                 let impactTemp = []
                 let impactRain = []
 
                 response.data.splice(0,2)
                 response.data.splice(-1,1)
-
+                
                 response.data.forEach(item => {
                     var temp_Forcast =   item.current_temperature.slice(0, -1)
                     let tempForcast_val = temp_Forcast.split("-")
@@ -187,7 +191,6 @@ export default {
                      //*************************************************************************************************** */
                 });
 
-                // console.log(impactTemp, impactRain)
                 this.rainTempset =
                 [ 
                     {
@@ -203,12 +206,13 @@ export default {
 
 
 // ****************************************************************************************
-            await axios.post('https://impactgt.herokuapp.com/api/liveweather', 
+             axios.post('http://localhost:3000/api/weather/livedata', 
             {
                 'latitude':this.addressVal.latitude,
                 'longitude': this.addressVal.longitude,
             })
             .then(response =>  {
+                console.log(response)
                 response.data.splice(0,2)
                 response.data.splice(-1,1)
 
