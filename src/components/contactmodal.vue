@@ -1,37 +1,37 @@
 <template>
         <!-- Modal -->
             <div class="modal-dialog modal-dialog-centered" >
-                <div class="modal-content " style="background-color:#1A2226 !important">
+                <div class="modal-content " style="background-color:#061704 !important">
                     <div class="modal-header text-light">
-                        <h5 class="modal-title text-light" id="exampleModalLabel">{{updateId ? 'Update Stock' : 'Add Stock'}}</h5>
-                        <button type="button" ref="closeModal" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title text-light" id="exampleModalLabel">{{extension.updateId ? 'Update Extention' : 'Add Extension'}}</h5>
+                        <button type="button" ref="closeModal" class="btn-close btn-close-sm  btn-outline-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+                        
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="sotckName" class="form-label float-start ">Name</label>
-                            <input type="text" class="form-control" v-model="stockData.name" style=" font-size: 0.75rem !important;"  placeholder="John Doe">
+                            <input type="text" class="form-control" v-model="extension.name" style=" font-size: 0.75rem !important;"  placeholder="John Doe">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label float-start">Email</label>
-                            <input type="email" class="form-control" v-model="stockData.location" style=" font-size: 0.75rem !important;"  placeholder="eg.doe@gmail.com">
+                            <input type="email" class="form-control" v-model="extension.email" style=" font-size: 0.75rem !important;"  placeholder="eg.doe@gmail.com">
                         </div>
                         <div class="row">
                             <div class="col">
                                 <label for="phone" class="form-label float-start">Phone</label>
-                                <input type="text" placeholder="059 xxx xxxx" class="form-control" v-model="stockData.expiryDate" style=" font-size: 0.75rem !important;">                            
+                                <input type="text" placeholder="059 xxx xxxx" class="form-control" v-model="extension.phone" style=" font-size: 0.75rem !important;">                            
                             </div>
-                            <div class="col">
-                                 <label for="quantity" class="form-label float-start">Location</label>
-                                <input type="text" v-model="stockData.quantity" class="form-control" style=" font-size: 0.75rem !important;"  placeholder="Assin">
-                            </div>
+                            <select class="form-select form-select-sm col" aria-label=".form-select-sm example" v-model="extension.addressId" >
+                                <option value="default">please select an Address</option>
+                                <option  v-for="(location, i) in locations" :key="i" :value="location.id">{{location.location}}</option>
+                            </select>
                         </div>
-                        
                     </div>
                      <p class="text-success text-center" style="font-size:10px">{{successMsg}}</p>
                     <p class="text-danger text-center " style="font-size:10px">{{errorMsg}}</p>
                     <div class="modal-footer">
                         <button type="button" class="btn  btn-outline-danger btn-sm" data-bs-dismiss="modal">Close</button>
-                         <button type="button" class="btn btn-outline-primary  btn-sm" @click="!updateId ? submit() : update()">{{updateId ? 'Update' : 'Add '}}</button>
+                         <button type="button" class="btn btn-outline-primary  btn-sm" @click="!extension.updateId ? submit() : update()">{{extension.updateId ? 'Update' : 'Add '}}</button>
                     </div>
                 </div>
             </div>
@@ -45,42 +45,38 @@ export default {
     ],
     data() {
         return {
-            products:[],
+            location: 'default',
+            locations:[],
             successMsg:'',
             errorMsg:'',
-            stockData : {
+            extension : {
                 name: '',
-                productName: 'defualt',
-                expiryDate: '',
-                quantity: '',
-                location: '',
+                phone: '',
+                email: '',
+                addressId: 'default',
                 updateId:null
             }
         }
     },
     created(){
-        // console.log(this.updatedata)
         
-        // this.updateId = this.updatedata.stockId
-        // this.stockData.name = this.updatedata.name
-        // this.stockData.productName = this.updatedata.productName
-        // this.stockData.expiryDate = this.updatedata.expiryDate
-        // this.stockData.quantity = this.updatedata.quantity
-        // this.stockData.location = this.updatedata.location
+       
     },
     watch:{
         updatedata(newVal){
-            if(newVal['productId'] == null){
-                this.updateId = null
-                this.name = ''
-                this.description = ''
-            }
+        this.extension.updateId = newVal.id
+        this.extension.name = newVal.name
+        this.extension.phone = newVal.phone
+        this.extension.email = newVal.email
+        this.extension.addressId = newVal.address.id
         }
     },
     methods: {
         submit(){
-            var token = this.getCookie('token')
-            axios.post('/api/stock', this.stockData,
+            console.log(this.extension)
+            // return
+            var token = this.getCookie('token') 
+            axios.post('/api/broadcast/contact', this.extension,
                 {headers:{'Authorization': `Bearer ${token}`}}
             ).then(response =>{
                 this.successMsg = response.data.name + ' has been added'
@@ -94,20 +90,20 @@ export default {
         },
         update(){
             var token = this.getCookie('token')
-
-            axios.post('/api/stock/update/' + this.updateId, 
-                    this.stockData
+            console.log(this.extension)
+            axios.post('/api/broadcast/contact/update/' + this.extension.updateId, 
+                    this.extension
                 ,
                 {headers:{'Authorization': `Bearer ${token}`}}
             ).then(response =>{
-                this.successMsg = this.stockData.name + ' has been updated'
+                this.successMsg = this.extension.name + ' has been updated'
                 this.$emit('modalSubmit')
                  setTimeout(() => {
                     this.$refs.closeModal.click();
                 }, 1000);
             }).catch(error =>{
-                console.log(error.response.data.message)
-                this.errorMsg = error.response.data.message
+                console.log(error.response)
+                this.errorMsg = error.response
 
             })
         },
@@ -129,13 +125,13 @@ export default {
     mounted(){
         var token = this.getCookie('token')
 
-        axios.get('/api/products', 
+        axios.get('/api/weather/locations', 
             { headers:{'Authorization': `Bearer ${token}`}})
         .then(response =>  {
             response.data.forEach(element => {
-                this.products.push(element.name)
+                this.locations.push({id:element.id, location:element.location})
             });
-            console.log(this.products);
+            console.log(this.locations);
         }).catch(error => {
             console.log(error);
         })
@@ -149,9 +145,9 @@ export default {
 }
 
 input, select {
-    background-color: #1A2226;
+    background-color: #061704;
     border: none;
-    border-bottom: 2px solid #0DB8DE;
+    border-bottom: 2px solid #ab3900;
     border-top: 0px;
     border-radius: 0px;
     font-weight:100;
@@ -167,9 +163,9 @@ input, select {
     border-color: inherit;
     -webkit-box-shadow: none;
     box-shadow: none;
-    border-bottom: 2px solid #0DB8DE !important ;
+    border-bottom: 2px solid #ab3900 !important ;
     outline: 0;
-    background-color: #1A2226;
+    background-color: #061704;
     color: #ECF0F5;
 }
 
@@ -191,8 +187,8 @@ label {
 
 .btn-outline-primary {
    border-radius: 5px !important;
-   border-color: #0DB8DE;
-    color: #0DB8DE;
+   border-color: #ab3900;
+    color: #ab3900;
     border-radius: 0px;
     font-weight: normal;
     font-size: 0.8rem !important;
@@ -201,7 +197,7 @@ label {
 }
 
 .btn-outline-primary:hover {
-    background-color: #0DB8DE;
+    background-color: #ab3900;
     right: 0px;
 }
 

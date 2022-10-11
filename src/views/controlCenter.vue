@@ -8,7 +8,7 @@
                 </button>
                 <ul class="dropdown-menu" style="width:2.5in">
                     <li><a class="dropdown-item" href="#">{{username}}</a></li>
-                    <li><a class="dropdown-item" href="#" @click="toLogin()">Go to Signup Page</a></li>
+                    <li><a class="dropdown-item" href="#" @click="toLogin()">Go to HomePage</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" style="font-size:12px" href="#"  @click="logout()"><i class="bi bi-box-arrow-left"></i> Logout</a></li>
                 </ul> 
@@ -18,30 +18,36 @@
     </div>
 </template>
 <script>
-import axios from 'axios'
+import jwt_decode from "jwt-decode";
+
 import Sidebar from '../components/sidebar.vue'
-import productReport from '../components/productReportWindow.vue'
-import stockReport from '../components/stockReportWindow.vue'
+import ExtentionsTab from '../components/ExtentionsTab.vue'
+import GroupsTab from '../components/GroupTab.vue'
+import UploadTab from '../components/UploadTab.vue'
 
 export default {
   components: { 
     Sidebar,
-    productReport,
-    stockReport,
+    ExtentionsTab,
+    UploadTab,
+    GroupsTab
   },
     data() {
         return {
-            currentTab:'productReport',
+            currentTab:'ExtentionsTab',
             sidebarbool:true,
-            username:'George Turkson'
+            username:''
         }
     },
     mounted() {
         this.currentReport = this.$route.params.currentReportTab
 
         var token = this.getCookie('token')
-        if(token == ''){
-            // this.$router.push('/main/services')
+        console.log(token)
+        var decoded = jwt_decode(token);
+        this.username = decoded.name
+        if(token == ''|| token == null){
+            this.$router.push('/main/services/')
         }
     },
     methods: {
@@ -50,19 +56,11 @@ export default {
             currentReport ='Pos'
         },
         logout(){
-        var token = this.getCookie('token')
-
-        axios.get('/api/logout', 
-            { headers:{'Authorization': `Bearer ${token}`}})
-        .then(response =>  {
-            this.setCookie('token','', 1 )
-            this.$router.push({name:'Login'})
-        }).catch(error => {
-            console.log(error);
-        })      
+            this.setCookie('token', null, 1 )
+            this.$router.push('/main/services/')
         },
         toLogin(){
-            this.$router.push({name:'Login'})
+            this.$router.push({name:'Home'})
         },
         getCookie(cname) {
             let name = cname + "=";
@@ -88,13 +86,6 @@ export default {
 }
 </script>
 <style scoped>
-/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap'); */
-@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro&family=Source+Sans+Pro:wght@300&display=swap');
-
-    a, h1,h2,h3,h4,h5,h6,p,button,th, label, span,td,div,legend {
-        font-family: 'Source Sans Pro', sans-serif !important;
-        font-weight:600 !important;
-    }
 
     body{
             min-height: 100vh;

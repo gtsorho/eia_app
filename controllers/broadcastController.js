@@ -1,53 +1,67 @@
-const { Broadcaster, validateB, validateBL,validateBU, validateC, validateCU, Contacts} = require('../models/weather') 
-const mongoose =  require('mongoose')
 const bcrypt = require('bcrypt')
 const axios =  require('axios')
 const _ = require('lodash')
+const db = require('../models')
+const Joi = require('joi')
+const jwt = require('jsonwebtoken')
+const { Op } = require("sequelize")
 
 
-mongoose.connect('mongodb://root:t5f2KfqwvNRX8ii@srv-captain--weather:27017/weatherDB')
-    .then(() => console.log('connected to mongodb'))
-    .catch(err => console.error('could not connect to mongoDB', err))
+const Address = db.Address
+const ExtensionOfficer = db.ExtensionOfficer
+const Extension = db.Extension
+const ExtGroup = db.ExtGroup
+const GroupLink = db.GroupLink
 
 
 module.exports = {
     // Broadcasters ****************************************************
     register: async (req, res) => {
-        const validate = validateB(req.body) 
+
+        function validExtOfficer(user){
+            const schema = Joi.object({
+                name:Joi.string().required(),
+                email:Joi.string().required().email(),
+                password:Joi.string().required(),
+                repeat_password: Joi.ref('password')
+            })
+            .with('password', 'repeat_password')
+    
+            return schema.validate(user)
+        }
+        const validate = validExtOfficer(req.body) 
         if (validate.error) return res.status(400).send(validate.error.details[0].message)
 
-        let user = await Broadcaster.findOne({email:validate.value.email})
+        let user = await ExtensionOfficer.findOne({where:{email:req.body.email}})
         if(user) return res.status(400).send('email already exists')
 
-         user = new Broadcaster({
-            'name': validate.value.name,
-            'email': validate.value.email,
-            'password': validate.value.password
-        })
+         user = {
+            'name': req.body.name,
+            'email': req.body.email,
+            'password': req.body.password
+        }
         const salt = await bcrypt.genSalt(10)
         user.password = await bcrypt.hash(user.password, salt)
 
-        await user.save()
-        const token = user.generateToken()
+        user = await ExtensionOfficer.create(user)
+
+        const token = jwt.sign(_.pick(user, ['id', 'name', 'email']), 'aghubJWTKey' ) //put in .env
         res.json(token)
      },
 
      login: async (req, res) => {
-        const validate = validateBL(req.body)
-        if (validate.error) return res.status(400).send(validate.error.details[0].message)
+        let user = await ExtensionOfficer.findOne({where:{email:req.body.email}})
+        if(!user) return res.status(400).send('invalid username')
 
-        let user = await Broadcaster.findOne({email:validate.value.email})
-        if(!user) return res.status(400).send('invalid username or password')
-
-        const validPass = await bcrypt.compare(validate.value.password, user.password)
+        const validPass = await bcrypt.compare(req.body.password, user.password)
         if(!validPass) return res.status(400).send('invalid password')
 
-        const token = user.generateToken()
+        const token = jwt.sign(_.pick(user, ['id', 'name', 'email']), 'aghubJWTKey' )  //put in .env
         res.json(token)
      },
 
     index: async (req, res) => {
-        const users = await Broadcaster.find()
+        const users = await ExtensionOfficer.findAll({})
         var userarr = []
         users.forEach(element => {
           userarr.push(_.pick(element, ['_id', 'name', 'email']))
@@ -56,82 +70,109 @@ module.exports = {
     },
 
     delete: async (req, res) => {
-        const user = await Broadcaster.findByIdAndRemove(req.params.id)
-        res.send(_.pick(user, ['_id', 'name', 'email']))
+        const user = await ExtensionOfficer.destroy({where:{id:req.params.id}})
+        res.send(`User with id:452${req.params.id} deleted successfully`)
     },
 
     update: async (req, res) => {
-        const validate = validateBU(req.body) 
-        if (validate.error) return res.status(400).send(validate.error.details[0].message)
-
-        if(validate.value.password){
+        console.log(req.body)
+        if(req.body.password){
             const salt = await bcrypt.genSalt(10)
-            validate.value.password = await bcrypt.hash(validate.value.password, salt)
+            req.body.password = await bcrypt.hash(req.body.password, salt)
         }
 
-        const user =  await Broadcaster.findByIdAndUpdate(req.params.id, {
-        $set:validate.value
-        },{new:true});
+        const user =  await ExtensionOfficer.update(req.body, {where:{id : req.params.id}});
         
-        res.send(_.pick(user, ['_id', 'name', 'email']))
+        res.status(200).send(`Ext Officer with id:452${req.params.id} has been updated`)
     },
 
     // Contacts ***************************************************************
     createContact : async (req, res) => {
-        const validate = validateC(req.body) 
-        if (validate.error) return res.status(400).send(validate.error.details[0].message)
 
-        // let contactEmail = await Contacts.findOne({email:validate.value.email})
-        // if(contactEmail) return res.status(400).send('email already exists')
-                
-         const contact = new Contacts({
-            broadcaster : req.auth._id.toString(),
-            'name': validate.value.name,
-            'email': validate.value.email,
-            'location': validate.value.location,
-            'phone': validate.value.phone
-        })
+       if(req.body.email){
+            let contactEmail = await Extension.findOne({where:{
+                email : req.body.email,
+            }})
+            if(contactEmail) return res.status(400).send('email already exists')
+       }
 
-        await contact.save();        
+         const contact =  {
+            'extensionsOfficerId' : req.auth.id,
+            'name': req.body.name,
+            'email': req.body.email,
+            'addressId': req.body.addressId,
+            'phone': req.body.phone
+        }
+
+        await Extension.create(contact);        
         res.send(contact)
+    },
+    searchContacts: async (req, res) => {
+        const extOfficer = await ExtensionOfficer.findOne({
+            where: {
+              id: req.auth.id
+            },
+        });
+        let searchVal = req.params.extname
+        const contacts = await extOfficer.getExtensions({ 
+            where: {name:{[Op.substring]: searchVal} }         
+         })
+        res.status(200).send(contacts)   
     },
 
     showContacts : async (req, res) => {
-        const contacts = await Contacts.find({broadcaster:req.auth._id})
+       const extOfficer = await ExtensionOfficer.findOne({
+            where: {
+              id: req.auth.id
+            },
+          });
+        const contacts = await extOfficer.getExtensions({            
+            include: Address
+        })
         res.send(contacts)
     },  
-
+    showContactOne : async (req, res) => {  
+        const extOfficer = await ExtensionOfficer.findOne({
+             where: {
+               id: req.auth.id
+             },
+           });
+         const contacts = await extOfficer.getExtensions({ 
+            where:{id:req.params.id},           
+            include: Address
+         })
+         res.send(contacts)
+     },  
+ 
     updateContact: async (req, res) => {
-        const validate = validateCU(req.body) 
-        if (validate.error) return res.status(400).send(validate.error.details[0].message)
 
-        var authcontacts = await Contacts.findById(req.params.id).select({broadcaster:1})
-        
-        if(authcontacts.broadcaster != req.auth._id) return res.status(401).send('unauthorized action')
+        var authOfficers = await Extension.findOne({where:{id:req.params.id}, attributes: ['extensionsOfficerId']})
 
-        const contact =  await Contacts.findByIdAndUpdate(req.params.id, {
-            $set:validate.value
-        },{new:true});
+        if(authOfficers.extensionsOfficerId != req.auth.id) return res.status(401).send('unauthorized action')
+
+        const contact =  await Extension.update(req.body, {where:
+            {id:req.params.id}
+        });
         
-        res.send(contact)
+        res.status(200).send(`Extension with id:0048${req.params.id} has been updated`)
     },
 
     deleteContact: async (req, res) => {
-        var authcontacts = await Contacts.findById(req.params.id).select({broadcaster:1})
+        var authOfficers = await Extension.findOne({where:{id:req.params.id}, attributes: ['extensionsOfficerId']})
+        if(authOfficers.extensionsOfficerId != req.auth.id) return res.status(401).send('unauthorized action')
 
-        if(authcontacts.broadcaster != req.auth._id) return res.status(401).send('unauthorized action')
-
-        const contact = await Contacts.findByIdAndRemove(req.params.id)
-        res.send(contact)
+        const contact = await Extension.destroy({where:{
+            id:req.params.id
+        }})
+        res.send(`the extention with id:0048${req.params.id} has been deleted`)
     },
 
     notify: async (req, res) => {
-        
         const apiKey = 'KSI5vjdg5z3LjV8ezU7OTElJxfOirVKbOshkMvAS4DEny' // move to env
-        let recipients =  req.body.recipient
+        let recipients =  req.body.recipients
         let msg = req.body.msg
-        endPoint = 'https://api.mnotify.com/api/sms/quick'
 
+        endPoint = 'https://api.mnotify.com/api/sms/quick'
         const data = {
              'recipient': recipients,
              'sender': 'Ikra',
@@ -139,23 +180,111 @@ module.exports = {
         }
         const link = endPoint + '?key=' + apiKey
         const config = {
-                method: 'post',
-                url: link,
-                headers : {
-                'Accept': 'application/json'
-                },
-                data : data
-         };
+            method: 'post',
+            url: link,
+            headers : {
+            'Accept': 'application/json'
+            },
+            data : data
+        };
 
-         await axios(config)  
-         .then(function (response)  {
-         res.send(JSON.stringify(response.data));  
-         })  
-         .catch(function (error)  {
-         res.send(error);  
-         })  
-
-
+        await axios(config)  
+        .then(function (response)  {
+            res.send(JSON.stringify(response.data));  
+        })  
+        .catch(function (error)  {
+            res.send(error);  
+        })  
     },
 
+    // ExtensionsGroup *************************************************
+    createExtGroup : async (req, res) => {
+        if(req.body.label){
+            let ExtGroupLabel = await ExtGroup.findOne({where:{
+                label : req.body.label,
+            }})
+            if(ExtGroupLabel) return res.status(400).send('Group already exists')
+        
+
+        const group =  {
+             'extensionsOfficerId' : req.auth.id,
+             'label': req.body.label,
+             'description': req.body.description
+         }
+ 
+         await ExtGroup.create(group);        
+         res.send(group)
+        }else{
+            return res.status(400).send('input is required')
+        }
+     },
+
+     showExtGroup : async (req, res) => {
+        const extOfficer = await ExtensionOfficer.findOne({
+             where: {
+               id: req.auth.id
+             },
+           });
+         const group = await extOfficer.getExtGroups()
+         res.send(group)
+     },  
+ 
+     updateExtGroup: async (req, res) => {
+ 
+         var authOfficers = await ExtGroup.findOne({where:{id:req.params.id}, attributes: ['extensionsOfficerId']})
+ 
+         if(authOfficers.extensionsOfficerId != req.auth.id) return res.status(401).send('unauthorized action')
+ 
+         const extGroup =  await ExtGroup.update(req.body, {where:
+             {id:req.params.id}
+         });
+         
+         res.status(200).send(`Extension with id:0048${req.params.id} has been updated`)
+     },
+ 
+     deleteExtGroup: async (req, res) => {
+         var authOfficers = await ExtGroup.findOne({where:{id:req.params.id}, attributes: ['extensionsOfficerId']})
+         if(authOfficers.extensionsOfficerId != req.auth.id) return res.status(401).send('unauthorized action')
+ 
+         const extGroup = await ExtGroup.destroy({where:{
+             id:req.params.id
+         }})
+         res.send(`the extention with id:0048${req.params.id} has been deleted`)
+     },
+
+
+    //  GroupLink*************************************************************************************
+    addGroupLink : async (req, res) => {
+
+        const grouplink =  {
+           'extensionId' : req.body.extensionId,
+           'extGroupId': req.body.extGroupId,
+       }
+
+       await GroupLink.create(grouplink);        
+       res.send(grouplink)
+   },
+
+   showGroupLink : async (req, res) => {
+      const extOfficer = await ExtensionOfficer.findOne({
+           where: {
+             id: req.auth.id
+           },
+         });
+       const group = await extOfficer.getExtGroups({where:{
+        id:req.params.ExtGroupId
+       }})
+       const link = await GroupLink.findAll({where:{
+        extGroupId:group[0].id
+       },include : Extension})
+       res.send(link)
+
+   },  
+
+   deleteGroupLink: async (req, res) => {
+       const extGroup = await GroupLink.destroy({where:{
+           id:req.params.id
+       }})
+       res.send(`the extention with id:0048${req.params.id} has been deleted`)
+   },
 }

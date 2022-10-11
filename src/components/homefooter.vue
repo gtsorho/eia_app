@@ -124,9 +124,9 @@ export default {
         },
 
         search(location = null){
-            var url = `http://localhost:3000/api/weather/locations/${location}`
+            var url = `/api/weather/locations/${location}`
             if(!location){
-                url = `http://localhost:3000/api/weather/locations`
+                url = `/api/weather/locations`
             }
             axios.get(url)
             .then(response =>  {

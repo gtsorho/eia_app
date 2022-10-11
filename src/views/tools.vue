@@ -1,26 +1,32 @@
 <template>
     <div class="container my-5">
 <div class="row">
-<div  class="col-lg-3" >
-      <div class="card card-margin">
-          <div class="card-body pt-3" >
+<div  class="col-lg-3 col-md-6">
+  
+      <div class="card card-margin text-light" style="height:6.7in; background-image: linear-gradient(67deg, #000000, #4fab43)!important;" >
+          <div class="card-body pt-3 login_body" >
               <div class="widget-49">
                   <div class="widget-49-title-wrapper">
-                      <div class="widget-49-date-primary">
-                          <i :class="icons[index]"></i>
+                      <div class="widget-49-date-primary" style="background-color: #ffffffe8;">
+                        <img  style="width:70%;" class="ms-0" src="../assets/logo.png" > 
                       </div>
-                      <div class="widget-49-meeting-info mx-auto py-2 rounded-pill" style="width: 70%; background-color:#aeffa39a" >
-                          <span class="widget-49-pro-title fw-bold text-uppercase">Control Center</span>
+                      <div class="widget-49-meeting-info mx-auto py-2 rounded-pill" style="background-color:#aeffa39a" >
+                          <span class="widget-49-pro-title fw-bold text-uppercase px-3">Ext. Portal</span>
                       </div>
                   </div>
-                  <div class="mb-1">
-                    <label for="password"  class="form-label text-dark float-start " style="font-size:15px">Username</label>
-                    <input type="email" v-model="username" class="form-control form-control-sm rounded-pill " id="password" placeholder="name@example.com">
-                  </div>
-                  <div class="mb-1">
-                    <label for="password" class="form-label text-dark float-start" style="font-size:15px">Password</label>
-                    <input type="password"   class="form-control form-control-sm rounded-pill d-inline password">
-                    <i class="bi bi-eye" id="togglePassword"  @click="showpassword"></i>
+                  <p class="widget-49-meeting-points mt-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum error corporis repellat maxime molestiae obcaecati vero saepe. Sed, velit dolore repudiandae, assumenda dicta aperiam consequatur ullam voluptatum eveniet est nihil?</p>
+                    <img src="../assets/tablet-login-animate.svg" style="height:200px" alt="">
+                  <div class="row mb-0 login_section" >
+                    <div class="mb-3 col-sm-12">
+                      <label for="password"  class="form-label text-light float-start " style="font-size:13px">Username</label>
+                      <br>
+                      <input type="email" v-model="username" class="form-control form-control-sm rounded-pill float-start" id="password" placeholder="name@example.com">
+                    </div>
+                    <div class="mb-1 col-sm-12">
+                      <label for="password" class="form-label text-light float-start" style="font-size:13px">Password</label>
+                      <input type="password" v-model="password"    class="form-control form-control-sm rounded-pill d-inline password float-start">
+                      <i class="bi bi-eye float-start"  id="togglePassword" @click="showpassword" style=" margin-left: -30px; cursor: pointer;"></i>
+                    </div>
                   </div>
               </div>
           </div>
@@ -30,8 +36,8 @@
       </div>
   </div>
   <div class="col">
-      <div class="row row-cols-md-2 row-cols-lg-3 justify-content-center" style="padding-bottom: 1in;">
-    <div  class="col-lg-4" v-for="(tool, index) in tools" :key="index">
+      <div class="row row-cols-md-1 row-cols-lg-3 justify-content-center" style="padding-bottom: 1in;">
+    <div  class="col-lg-6" v-for="(tool, index) in tools" :key="index">
         <div class="card card-margin">
             <div class="card-body pt-3" style="height: 75%;">
                 <div class="widget-49">
@@ -62,6 +68,9 @@
 </div>
 </template>
 <script>
+import axios from "axios"
+
+
 export default {
     data() {
         return {
@@ -75,7 +84,7 @@ export default {
                     title:'Cropping Calendar',
                     description:'Data used for this report was collected from 24 distinct communities across the Northern, Savanna and Upper East regions of Ghana. 47% of records came from the Northern region, 30% of the records were collected in the Savanna region and the  remaining 23% came from the Upper East region. Details of records is shown to the left.',
                     dataset_id:'ss001',
-                    link: 'Croppingcalendar'
+                    link: '/main/Croppingcalendar'
                 },
                 {
                     title:'Weather Api',
@@ -89,12 +98,7 @@ export default {
                     dataset_id:'ss002',
                     link:'/main/temprain'
                 },
-                                {
-                    title:'Temperature & Rain',
-                    description:'Weather is something that never remains constant. Getting to know precise weather conditions helps people to plan out their daily schedule. Our Weather App enables the user to search numerous locations within Ghana and verify the weather data accordingly. The user will be able to view the updated weather data in sync with the Ghana Meteorological Agency.',
-                    dataset_id:'ss002',
-                    link:'/main/temprain'
-                },
+
                 
             ],
             icons:[
@@ -149,9 +153,37 @@ export default {
         }
       },
       centerLogin(){
-        console.log(this.username, this.password)
-        this.$router.push('/controlcenter')
-      }
+            axios.post('/api/broadcast/login',{
+              email:this.username,
+              password:this.password
+            })
+            .then(response =>  {
+              this.setCookie('token', response.data, 1 )
+              this.$router.push({name : 'ControlCenter'})
+            }).catch(error => {
+                console.log(error);
+            })
+      },
+        getCookie(cname) {
+          let name = cname + "=";
+          let ca = document.cookie.split(';');
+          for(let i = 0; i < ca.length; i++) {
+              let c = ca[i];
+              while (c.charAt(0) == ' ') {
+              c = c.substring(1);
+              }
+              if (c.indexOf(name) == 0) {
+              return c.substring(name.length, c.length);
+              }
+          }
+          return "";
+        },
+          setCookie(cname, cvalue, exdays) {
+          const d = new Date();
+          d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+          let expires = "expires=" + d.toUTCString();
+          document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        },
     },
     created(){
       
@@ -160,6 +192,7 @@ export default {
 </script>
 
 <style scoped>
+/*  */
 input[type=file]::file-selector-button {
   border: 2px solid #7567d900;
   padding: .2em .4em;
@@ -297,7 +330,7 @@ form a{
   color: #72bcec;
 }
 .form-control:focus {
-    color: #2c2c2c;
+    color: #ffffff;
     background-color: rgb(176 176 176 / 17%);
     border-color: #86b7fe;
     outline: 0;
@@ -305,13 +338,13 @@ form a{
 }
 
 .form-control {
-    color: #2c2c2c;
+    color: #ffffff;
     background-color: rgb(176 176 176 / 17%);
     
 }
 
 .search:focus {
-    color: #e8e8e8;
+    color: #ffffff;
     background-color: rgb(176 176 176 / 17%);
     border-color: #86b7fe;
     outline: 0;

@@ -1,40 +1,55 @@
-const {Address, LiveWeather , DailyWeather} = require('../models/weather') 
-const mongoose =  require('mongoose')
+const db = require('../models')
+const { Op } = require("sequelize");
+
+const Address = db.Address
+const DailyWeather = db.DailyWeather
+const LiveWeather = db.LiveData
+
+
+
 const axios =  require('axios')
 
 
-var express = require('express')
-
-
-mongoose.connect('mongodb://root:t5f2KfqwvNRX8ii@srv-captain--weather:27017/weatherDB')
-    .then(() => console.log('connected to mongodb'))
-    .catch(err => console.error('could not connect to mongoDB', err))
 
 
 module.exports = {
     all_locations: async (req, res) => {
-       const addresses = await Address.find()
+       const addresses = await Address.findAll({})
        res.send(addresses)
     },
     searchLocations:async (req, res) => {
         let searchVal = req.params.location
-        const addresses = await Address.find({location:{$regex: searchVal, $options:'i'}})     
+
+        const addresses =  await Address.findAll({where: {location:{[Op.substring]: searchVal} }});
         res.send(addresses)   
     },
     weatherData: async (req, res) => {
-        let latitudeVal = req.body.latitude.toString()
-        let longitudeVal = req.body.longitude.toString()
+        let latitudeVal = req.body.latitude
+        let longitudeVal = req.body.longitude
 
-        console.log(typeof(latitudeVal))
-
-        const weatherData = await DailyWeather.find({latitude : parseFloat(latitudeVal) , longitude : parseFloat(longitudeVal)}).sort({_id:-1}).limit(10)
-        console.log(weatherData)
+        console.log(req.body)
+        const weatherData = await DailyWeather.findAll({
+            where:{
+                latitude : {[Op.substring]: latitudeVal},
+                longitude :{[Op.substring]: longitudeVal}
+            },
+            order:[['createdAt', 'DESC']],
+            limit: 10
+        })
         res.json(weatherData)
     },
     liveData: async (req, res) => {
-        let latitudeVal = req.body.latitude.toString()
-        let longitudeVal = req.body.longitude.toString()
-            const liveData = await LiveWeather.find({latitude : parseFloat(latitudeVal) , longitude : parseFloat(longitudeVal)}).sort({_id:-1}).limit(10)
+        let latitudeVal = req.body.latitude
+        let longitudeVal = req.body.longitude
+
+            const liveData = await LiveWeather.findAll({
+                where:{
+                    latitude : {[Op.substring]: latitudeVal},
+                    longitude :{[Op.substring]: longitudeVal}
+                },                
+                order:[['createdAt', 'DESC']],
+                limit: 10
+            })
             res.json(liveData)
         },
 
@@ -95,7 +110,9 @@ module.exports = {
 
                 async function getAddress(){
                     const address = await Address
-                    .find({latitude : String(neededBreakdown[0]) , longitude : String(neededBreakdown[1])})
+                    .findAll({
+                        where:{latitude : String(neededBreakdown[0]) , longitude : String(neededBreakdown[1])}
+                    })
                     return address
                 }
 
@@ -114,29 +131,31 @@ module.exports = {
                                 }
 
                             const createLiveData = async function (){
-                                const data = new LiveWeather({
+                                const data = {
                                     'latitude': response.data['coord']['lat'],
                                     'longitude': response.data['coord']['lon'],
                                     'temperature' : response.data['main']['temp'],
                                     'humidity' : response.data['main']['humidity'],
                                     'rain' : rain,
                                     'description' : response.data['weather'][0]['description'],
-                                })
-                                 await data.save();
+                                }
+
+                                 await LiveWeather.create(data);
                             }    
                             createLiveData()
 
                             }else{
                                 const createLiveData =  async function (){
-                                    const data =  new LiveWeather({
+                                    const data = {
                                         'latitude' : neededBreakdown[0],
                                         'longitude' : neededBreakdown[1],
                                         'temperature':  0.0,
                                         'humidity' : 0.0,
                                         'rain': 0.0,
                                         'description' : 0.0,
-                                    })
-                                    const liveData =  await data.save();
+                                    }
+
+                                    await LiveWeather.create(data);
                                 }
                                 createLiveData()
                             }
@@ -146,9 +165,9 @@ module.exports = {
                         
 
                         const createDailyData = async function(){
-                            let  addressId = result[0]._id.toString()
-                            const data = new DailyWeather({
-                                address: addressId,
+                            let  addressId = result[0].id
+                            const data = {
+                                'addressId': addressId,
                                 'latitude' : neededBreakdown[0],
                                 'longitude': neededBreakdown[1],  
                                 'date': neededBreakdown[2],
@@ -158,8 +177,8 @@ module.exports = {
                                 'next_temperature': neededBreakdown[6],
                                 'next_rain_level': neededBreakdown[8],
                                 'next_chance_rain' : neededBreakdown[7]
-                            })
-                            const newresult = await data.save()
+                            }
+                            const newresult = await DailyWeather.create(data)
                         }
                         createDailyData()
                     }

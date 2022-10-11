@@ -76,7 +76,7 @@ export default {
             });
 
         // console.log(this.tempset)
-        axios.get('http://localhost:3000/api/weather/locations')
+        axios.get('/api/weather/locations')
             .then(response =>  {
                 this.locations = response.data
                 // console.log(response.data)
@@ -114,7 +114,7 @@ export default {
                 
             await axios({
                 method: 'post',       
-                url: 'http://localhost:3000/api/weather/weatherdata',
+                url: '/api/weather/weatherdata',
                 data: {
                     'latitude':this.addressVal.latitude,
                     'longitude': this.addressVal.longitude,
@@ -206,7 +206,7 @@ export default {
 
 
 // ****************************************************************************************
-             axios.post('http://localhost:3000/api/weather/livedata', 
+             axios.post('/api/weather/livedata', 
             {
                 'latitude':this.addressVal.latitude,
                 'longitude': this.addressVal.longitude,

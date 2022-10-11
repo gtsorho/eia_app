@@ -32,65 +32,68 @@
                 </div>
                 <hr>
                 <h5 class="card-title fw-bolder">Uploads</h5>
-                <div class="row">
-                    <div class="col">
-                            <div class="card card-margin">
-                                <div class="card-body pt-3" style="height: 30%;">
-                                    <div class="widget-49">
-                                        <div class="widget-49-title-wrapper">
-                                            <div class="widget-49-date-primary">
-                                                <!-- <i :class="icons[index]"></i> -->
-                                            </div>
-                                            <div class="widget-49-meeting-info mx-auto py-2 rounded-pill" style="width: 70%; background-color:#ffd2d6" >
-                                                <span class="widget-49-pro-title fw-bold text-uppercase">Control Center</span>
-                                            </div>
-                                        </div>
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam beatae illo, amet eligendi obcaecati ducimus provident alias nisi modi placeat temporibus. Dicta, quidem? Natus dicta error praesentium assumenda iusto dolore.
+                <div class="row text-start row-cols-md-3 row-cols-sm-2 row-cols-lg-4" style="font-size:13px !important;">
+                        <div class="col">
+                            <div class="card mb-3" >
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <img src="../assets/icons/music.png" class="img-fluid rounded-start" style="width:100%" alt="">
                                     </div>
-                                </div>
-                                <div class="widget-49-meeting-action card-footer border-0 bg-transparent">
-                                <a href="#" class="btn btn-sm float-end fw-bold px-4 btn-flash-border-primary border-2 rounded-pill" @click="centerLogin">Login</a>
-                                </div>
-                            </div>
-                            <div class="card card-margin">
-                                <div class="card-body pt-3" style="height: 30%;">
-                                    <div class="widget-49">
-                                        <div class="widget-49-title-wrapper">
-                                            <div class="widget-49-date-primary">
-                                                <!-- <i :class="icons[index]"></i> -->
-                                            </div>
-                                            <div class="widget-49-meeting-info mx-auto py-2 rounded-pill" style="width: 70%; background-color:#ffd2d6" >
-                                                <span class="widget-49-pro-title fw-bold text-uppercase">Control Center</span>
-                                            </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body p-1">
+                                            <p class="card-text mb-1">This is a wider card with supporting text below as a natural.</p>
+                                            <p class="card-text mb-1"><small class="text-muted">Last updated 3 mins ago</small></p>
                                         </div>
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam beatae illo, amet eligendi obcaecati ducimus provident alias nisi modi placeat temporibus. Dicta, quidem? Natus dicta error praesentium assumenda iusto dolore.
                                     </div>
-                                </div>
-                                <div class="widget-49-meeting-action card-footer border-0 bg-transparent">
-                                <a href="#" class="btn btn-sm float-end fw-bold px-4 btn-flash-border-primary border-2 rounded-pill" @click="centerLogin">Login</a>
-                                </div>
-                            </div>
-                    </div>
-                    <div class="col">
-                            <div class="card card-margin">
-                                <div class="card-body pt-3" style="height: 30%;">
-                                    <div class="widget-49">
-                                        <div class="widget-49-title-wrapper">
-                                            <div class="widget-49-date-primary">
-                                                <!-- <i :class="icons[index]"></i> -->
-                                            </div>
-                                            <div class="widget-49-meeting-info mx-auto py-2 rounded-pill" style="width: 70%; background-color:#ffd2d6" >
-                                                <span class="widget-49-pro-title fw-bold text-uppercase">Control Center</span>
-                                            </div>
-                                        </div>
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam beatae illo, amet eligendi obcaecati ducimus provident alias nisi modi placeat temporibus. Dicta, quidem? Natus dicta error praesentium assumenda iusto dolore.
-                                    </div>
-                                </div>
-                                <div class="widget-49-meeting-action card-footer border-0 bg-transparent">
-                                <a href="#" class="btn btn-sm float-end fw-bold px-4 btn-flash-border-primary border-2 rounded-pill" @click="centerLogin">Login</a>
                                 </div>
                             </div>
                         </div>
+                        <div class="col">
+                            <div class="card mb-3" >
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                    <img src="../assets/icons/music.png" class="img-fluid rounded-start" style="width:100%" alt="">
+                                    </div>
+                                    <div class="col-md-8">
+                                    <div class="card-body p-1">
+                                        <p class="card-text mb-1">This is a wider card with supporting text below as a natural.</p>
+                                        <p class="card-text mb-1"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card mb-3" >
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                    <img src="../assets/icons/video.png" class="img-fluid rounded-start" style="width:100%" alt="">
+                                    </div>
+                                    <div class="col-md-8">
+                                    <div class="card-body p-1">
+                                        <p class="card-text mb-1">This is a wider card with supporting text below as a natural.</p>
+                                        <p class="card-text mb-1"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card mb-3" >
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                    <img src="../assets/icons/video.png" class="img-fluid rounded-start" style="width:100%" alt="">
+                                    </div>
+                                    <div class="col-md-8">
+                                    <div class="card-body p-1">
+                                        <p class="card-text mb-1">This is a wider card with supporting text below as a natural.</p>
+                                        <p class="card-text mb-1"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

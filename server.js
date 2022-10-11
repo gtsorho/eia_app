@@ -2,7 +2,7 @@ const express = require('express')
 const path = require('path')
 const serveStatic = require('serve-static')
 const weather = require('./routes/weather')
-const broadcast = require('./routes/broadcast')
+const broadcast = require('./routes/broadcast') 
 const cors = require('cors');
 
 const mongoose =  require('mongoose')

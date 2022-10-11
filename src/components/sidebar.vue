@@ -2,11 +2,11 @@
   <div id="mySidenav" class="sidenav" >
   <span style="font-size:30px;cursor:pointer"  class="text-secondary humburger text-center mx-2"  v-show="!sidebarVal" @click="sidebarVal = !sidebarVal; $emit('humburgerClick') ">&#9776;</span>
     <span class="text-start" v-show="sidebarVal">
-      <!-- <img class="mx-5 w-50" src="../../assets/logo/logo.png"> -->
-      <h1 class="text-center">ag</h1>
+        <img  style="width:25%;" class="ms-0" src="../assets/logo.png" > 
       <hr class="bg-light mx-2">  
-      <a href="#" @click="$emit('currentTab', 'productReport')"><i class="bi bi-box-seam me-1" ></i>Dashboard</a>
-      <a href="#" @click="$emit('currentTab', 'stockReport')"><i class="bi bi-box-seam me-1" ></i>Uploads</a>
+      <a href="#" @click="$emit('currentTab', 'ExtentionsTab')"><i class="bi bi-box-seam me-1" ></i>Extentions</a>
+      <a href="#" @click="$emit('currentTab', 'GroupsTab')"><i class="bi bi-people me-1" ></i>Groups | Messages</a>
+      <a href="#" @click="$emit('currentTab', 'UploadTab')"><i class="bi bi-box-seam me-1" ></i>Uploads</a>
     </span>
 </div>
 </template>
@@ -83,7 +83,7 @@ export default {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #1A2226;
+  background-image: linear-gradient(198deg, #000000, #1f6c15) !important;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 10px;
