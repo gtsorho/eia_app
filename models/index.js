@@ -17,6 +17,7 @@ const sequelize = new Sequelize(
     }
 );
 
+
 const db = {}
 db.sequelize = sequelize
 db.Sequelize = Sequelize
