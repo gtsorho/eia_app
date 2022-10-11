@@ -46,7 +46,7 @@ db.GroupLink.belongsTo(db.Extension)
 db.ExtGroup.hasMany(db.GroupLink)
 db.GroupLink.belongsTo(db.ExtGroup)
 
-sequelize.sync({ alter: false })
+sequelize.sync({ alter: true,  force: true })
 .then(()=>{
     console.log('all data in sync')
 })

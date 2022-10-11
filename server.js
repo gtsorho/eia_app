@@ -15,6 +15,7 @@ app.use(cors({
     origin: '*'
 }));
 
+// new
 app.use('/api/weather', weather)
 app.use('/api/broadcast', broadcast)
 
