@@ -29,7 +29,7 @@
                             </Transition>
 
                             <div class="dropdown d-inline" >
-                                <a href="#" class="dropdown-toggle text-decoration-none btn btn-sm btn-secondary"  data-bs-toggle="dropdown" aria-expanded="false">+<i class="bi bi-people"></i></a>
+                                <a href="#" class="dropdown-toggle text-decoration-none btn btn-sm btn-secondary rounded-pill"  data-bs-toggle="dropdown" aria-expanded="false">+<i class="bi bi-people"></i></a>
                                 <div class="dropdown-menu px-4" style="width:3in" aria-labelledby="dropdownMenuButton1">
                                     <div class="mb-3">
                                         <label for="Label" class="form-label" style="font-size:15px !important">Label</label>
@@ -42,12 +42,12 @@
                                     <button type="submit" class="btn btn-sm float-end rounded-pill text-light" style="font-size:15px !important; background-image: linear-gradient(198deg, #000000, #1f6c15) !important;" @click="createGroup()">create group</button>
                                 </div>
                             </div>
-                            <i class="btn btn-sm btn-danger bi bi-trash3 mx-2" :class="delete_display" @click="deletedata"></i>
+                            <i class="btn btn-sm btn-danger rounded-pill bi bi-trash3 mx-2" :class="delete_display" @click="deletedata"></i>
 
 
 
                             <div class="dropdown d-inline" >
-                                <i class="btn btn-sm bi bi-link-45deg mx-2 btn-success dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false" :class="delete_display" @click="getallgroups()"></i>
+                                <i class="btn btn-sm bi bi-link-45deg mx-2 btn-success rounded-pill dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false" :class="delete_display" @click="getallgroups()"></i>
                                 <div class="dropdown-menu px-4 py-0" style="width:3.5in" aria-labelledby="dropdownMenuButton1">  
                                     <div class=" input-group"  style="font-size:13px !important">
                                         <select class="form-select form-select-sm "  aria-label=".form-select-sm example" v-model="groupid" >

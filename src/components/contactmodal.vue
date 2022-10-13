@@ -27,7 +27,7 @@
                             </select>
                         </div>
                     </div>
-                     <p class="text-success text-center" style="font-size:10px">{{successMsg}}</p>
+                     <p class="text-success text-center" v-if="successMsg"  style="font-size:10px">{{successMsg}}</p>
                     <p class="text-danger text-center " style="font-size:10px">{{errorMsg}}</p>
                     <div class="modal-footer">
                         <button type="button" class="btn  btn-outline-danger btn-sm" data-bs-dismiss="modal">Close</button>
@@ -47,7 +47,7 @@ export default {
         return {
             location: 'default',
             locations:[],
-            successMsg:'',
+            successMsg:null,
             errorMsg:'',
             extension : {
                 name: '',
@@ -81,13 +81,21 @@ export default {
                 {headers:{'Authorization': `Bearer ${token}`}}
             ).then(response =>{
                 this.successMsg = response.data.name + ' has been added'
+                this.extension.name = ''
+                this.extension.phone = ''
+                this.extension.email = ''
+                this.extension.addressId = 'default'
                 this.$emit('modalSubmit')
                  setTimeout(() => {
+                    this.successMsg = null
                     this.$refs.closeModal.click();
                 }, 1000);
             }).catch(error =>{
                 console.log(error.response.data)
                 this.errorMsg = error.response.data
+                 setTimeout(() => {
+                    this.errorMsg = null
+                }, 1000);
             })
         },
         update(){

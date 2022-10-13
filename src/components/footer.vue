@@ -8,9 +8,9 @@
         </div>
 
         <ul class="nav col-md-6  mx-auto  me-md-5  justify-content-end list-unstyled  d-flex">
-            <li class="ms-3"><router-link to="/main/services" class="text-light">Services</router-link></li>
+            <li class="ms-3"><router-link to="/main/services" class="text-light">Advisories</router-link></li>
             <li class="ms-3"><router-link to="/main/dashboard" class="text-light">Dashboards</router-link></li>
-            <li class="ms-3"><router-link to="/main/storyset" class="text-light">StorySet</router-link></li>
+            <li class="ms-3"><router-link to="/main/storyset" class="text-light">Assembled Knowledge</router-link></li>
         </ul>
     </footer>
 </template>

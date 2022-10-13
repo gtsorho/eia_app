@@ -17,7 +17,7 @@
                         <hr style="color:#  4fab43 !important">
                         <ul class="list-unstyled">
                             <li class="w-100 px-2 rounded-pill">
-                                <router-link to="/main/services" class="text-dark " @click="collapseCloseOnclick()">Services
+                                <router-link to="/main/services" class="text-dark " @click="collapseCloseOnclick()">Advisories
                                 </router-link>
                             </li>
                             <li class="w-100 px-2 rounded-pill">
@@ -26,7 +26,7 @@
                             </li>
                             <li class="w-100 px-2 rounded-pill">
                                 <router-link to="/main/storyset" class="text-dark" @click="collapseCloseOnclick()">
-                                    StorySet</router-link>
+                                    Assembled Knowledge</router-link>
                             </li>
                         </ul>
                     </div>

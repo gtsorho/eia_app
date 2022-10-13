@@ -3,20 +3,24 @@
          <div class="cover-container d-flex w-100 p-3 mx-auto flex-column">
   <header class="mb-auto mx-5">
     <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img class="float-start" style="width:20%" src="../assets/logo.png" > </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link" :class="{active:active === 'cropping'}" href="#" @click="changeTopic(0), active = 'cropping'">Services</a>
-        <a class="nav-link" :class="{active:active === 'Dashbords'}" href="#" @click="changeTopic(1),  active = 'Dashbords'">Dashbords</a>
-        <a class="nav-link" :class="{active:active === 'Storyset'}" href="#" @click="changeTopic(2), active = 'Storyset'">Storyset</a>
+      <div class="container">
+        <a class="navbar-brand" href="#"><img class="float-start"  width="50" height="44" src="../assets/logo.png" > </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav me-auto mb-2 mb-lg-0">
+          </div>
+          <div >
+              <ul class="navbar-nav ">
+                <a class="nav-link" :class="{active:active === 'cropping'}" href="#" @click="changeTopic(0), active = 'cropping'">Advisories</a>
+                <a class="nav-link" :class="{active:active === 'Dashbords'}" href="#" @click="changeTopic(1),  active = 'Dashbords'">Dashbords</a>
+                <a class="nav-link" :class="{active:active === 'Storyset'}" href="#" @click="changeTopic(2), active = 'Storyset'"> Assembled Knowledge</a>
+              </ul>       
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</nav>
+    </nav>
   </header>
 
   
@@ -43,7 +47,7 @@
     </div>
   </main>
   <footer class="mt-auto text-dark-50">
-    <small>Want to know more about us @ <a href="http://poc.miphost.com/" class=" text-decoration-none ">poc.miphost.com</a>   let's walk you through our Proof of Concepts</small>
+    <!-- <small>Want to know more about us @ <a href="http://poc.miphost.com/" class=" text-decoration-none ">poc.miphost.com</a>   let's walk you through our Proof of Concepts</small> -->
   </footer>
 </div>
     </div>
@@ -129,12 +133,16 @@ methods:{
   color: #4fab43 !important;
   transition:  .5s;
 }
+.navbar-nav{
+    width: fit-content !important;
+    float: right !important;
+}
 .nav-link:hover{
   background-color: #4fab43 !important;
   border-radius: 50px !important;
   padding-inline: 15px !important;
   color: rgba(246, 246, 246, 0.807) !important;
-}
+} 
 .float{
 	position:fixed;
 	width:41px;
@@ -217,8 +225,7 @@ methods:{
 
 .navbar-nav {
     display: flex;
-    /* flex-direction: column; */
-    padding-left: 60% !important;
+    /* padding-left: 60% !important; */
     margin-bottom: 0;
     text-align: end !important;
     list-style: none;
@@ -226,8 +233,7 @@ methods:{
 /*
  * Header
  */
-
- .nav-link {
+.nav-link {
   padding: .02rem 0;
   font-weight: 500;
   color: rgba(50, 49, 49, 0.5);
@@ -242,7 +248,7 @@ methods:{
 
  .nav-link + .nav-link {
   margin-left: 1rem;
-}
+} 
 
  .active {
   color: #fff;

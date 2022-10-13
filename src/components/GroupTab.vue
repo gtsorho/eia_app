@@ -28,7 +28,7 @@
                             </Transition>
 
                             <div class="dropdown d-inline" >
-                                <a href="#" class="dropdown-toggle text-success text-decoration-none"  data-bs-toggle="dropdown" aria-expanded="false">+<i class="bi bi-people"></i></a>
+                                <a href="#" class="dropdown-toggle text-light fw-bold text-decoration-none btn btn-sm btn-secondary rounded-pill"  data-bs-toggle="dropdown" aria-expanded="false">+<i class="bi bi-people"></i></a>
                                 <div class="dropdown-menu px-4" style="width:3in" aria-labelledby="dropdownMenuButton1">
                                     <div class="mb-3">
                                         <label for="Label" class="form-label" style="font-size:15px !important">Label</label>
@@ -41,7 +41,7 @@
                                     <button type="submit" class="btn btn-sm float-end rounded-pill text-light" style="font-size:15px !important; background-image: linear-gradient(198deg, #000000, #1f6c15) !important;" @click="createGroup()">create group</button>
                                 </div>
                             </div>
-                            <i class="btn bi bi-trash3 mx-2" :class="delete_display" @click="deletedata" style="color:#fa0101; "></i>
+                            <i class="btn bi bi-trash3 mx-2 rounded-pill" :class="delete_display" @click="deletedata" style="color:#fa0101; "></i>
                             <button type="button" style="background-color:#061704"  class="btn rounded-pill text-light mx-2 shadow-md btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">+ contact</button>
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <Addcontent  @modalSubmit="reloadList()"  :updatedata="updateValues"/>
@@ -54,7 +54,7 @@
 
                 <div class="row">
                     <div class="col-lg-4">
-                        <div class="card " style=" border:3px solid rgb(21 84 12) !important;">
+                        <div class="card" style=" border:3px solid rgb(21 84 12) !important;">
                         <div class="card-body text-start">
                             <h5 class="card-title">Groups</h5>
                             <a href="#" class="text-decoration-none text-dark">
@@ -355,6 +355,7 @@
         min-height: 90% !important;
         min-width: 80% !important;
         /* overflow-x: scroll; */
+        border-radius: 1rem;
         transition: 0.5s;
         background-color: #ffffff !important;
     }
