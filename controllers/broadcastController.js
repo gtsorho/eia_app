@@ -216,7 +216,7 @@ module.exports = {
         function validExtOfficer(contact){
             const schema = Joi.object({
                 label:Joi.string().required(),
-                description:Joi.string().allow('', null),
+                description:Joi.string().allow(null).allow(''),
                 
             })
             .with('password', 'repeat_password')
