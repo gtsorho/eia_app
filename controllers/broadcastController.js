@@ -91,7 +91,7 @@ module.exports = {
         function validExtOfficer(contact){
             const schema = Joi.object({
                 name:Joi.string().required(),
-                email:Joi.string().email().allow('', null),
+                email:Joi.string().email().allow(null).allow(''),
                 addressId:Joi.number().required(),
                 phone: Joi.number().required()
             })
