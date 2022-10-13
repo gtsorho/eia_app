@@ -91,7 +91,7 @@ module.exports = {
         function validExtOfficer(contact){
             const schema = Joi.object({
                 name:Joi.string().required(),
-                email:Joi.string().email().allow(null).allow(''),
+                email:Joi.string().email(),
                 addressId:Joi.number().required(),
                 phone: Joi.number().required()
             })
@@ -216,7 +216,7 @@ module.exports = {
         function validExtOfficer(contact){
             const schema = Joi.object({
                 label:Joi.string().required(),
-                description:Joi.string().allow(null).allow(''),
+                description:Joi.string(),
                 
             })
             .with('password', 'repeat_password')
