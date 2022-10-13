@@ -7,7 +7,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         description: {
             type: DataTypes.STRING,
-            allowNull:false,
+            empty: true,
+            allowNull:true,
         },
     })
     return extension

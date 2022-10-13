@@ -102,6 +102,7 @@ module.exports = {
         const validate = validExtOfficer(req.body) 
         if (validate.error) return res.status(400).send(validate.error.details[0].message)
 
+        if( req.body.email == '') req.body.email = null
 
        if(req.body.email){
             let contactEmail = await Extension.findOne({where:{
@@ -216,7 +217,7 @@ module.exports = {
         function validExtOfficer(contact){
             const schema = Joi.object({
                 label:Joi.string().required(),
-                description:Joi.string(),
+                description:Joi.string().allow('').optional(),
                 
             })
             .with('password', 'repeat_password')
