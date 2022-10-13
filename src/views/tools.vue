@@ -32,6 +32,9 @@
           </div>
           <div class="widget-49-meeting-action card-footer border-0 bg-transparent">
             <a href="#" class="btn btn-sm float-end fw-bold px-4 btn-flash-border-primary border-2 rounded-pill" @click="centerLogin">Login</a>
+            <Transition>
+              <p v-if="resMsg" style="font-size:15px" class="text-danger">{{resMsg}}</p>
+            </Transition>
           </div>
       </div>
   </div>
@@ -74,6 +77,7 @@ import axios from "axios"
 export default {
     data() {
         return {
+            resMsg:'',
             searchbar:false,
             signin:true,
             authenticated:true,
@@ -161,7 +165,12 @@ export default {
               this.setCookie('token', response.data, 1 )
               this.$router.push({name : 'ControlCenter'})
             }).catch(error => {
-                console.log(error);
+                this.resMsg = error.response.data
+                setInterval(() => {
+                  this.resMsg = null
+                  
+                }, 2000);
+                console.log(error.response.data);
             })
       },
         getCookie(cname) {
@@ -192,6 +201,16 @@ export default {
 </script>
 
 <style scoped>
+  .v-enter-active,
+  .v-leave-active {
+    transition: opacity 0.5s ease;
+  }
+
+  .v-enter-from,
+  .v-leave-to {
+    opacity: 0;
+  }
+
 /*  */
 input[type=file]::file-selector-button {
   border: 2px solid #7567d900;

@@ -88,6 +88,20 @@ module.exports = {
 
     // Contacts ***************************************************************
     createContact : async (req, res) => {
+        function validExtOfficer(contact){
+            const schema = Joi.object({
+                name:Joi.string().required(),
+                email:Joi.string().email(),
+                addressId:Joi.number().required(),
+                phone: Joi.number().required()
+            })
+            .with('password', 'repeat_password')
+    
+            return schema.validate(contact)
+        }
+        const validate = validExtOfficer(req.body) 
+        if (validate.error) return res.status(400).send(validate.error.details[0].message)
+
 
        if(req.body.email){
             let contactEmail = await Extension.findOne({where:{
@@ -199,6 +213,20 @@ module.exports = {
 
     // ExtensionsGroup *************************************************
     createExtGroup : async (req, res) => {
+        function validExtOfficer(contact){
+            const schema = Joi.object({
+                label:Joi.string().required(),
+                description:Joi.string(),
+                
+            })
+            .with('password', 'repeat_password')
+    
+            return schema.validate(contact)
+        }
+        const validate = validExtOfficer(req.body) 
+        if (validate.error) return res.status(400).send(validate.error.details[0].message)
+
+
         if(req.body.label){
             let ExtGroupLabel = await ExtGroup.findOne({where:{
                 label : req.body.label,

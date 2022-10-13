@@ -10,18 +10,18 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="sotckName" class="form-label float-start ">Name</label>
-                            <input type="text" class="form-control" v-model="extension.name" style=" font-size: 0.75rem !important;"  placeholder="John Doe">
+                            <input type="text" class="form-control" v-model="extension.name" style=" font-size: 0.75rem !important;" required  placeholder="John Doe">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label float-start">Email</label>
-                            <input type="email" class="form-control" v-model="extension.email" style=" font-size: 0.75rem !important;"  placeholder="eg.doe@gmail.com">
+                            <input type="email" class="form-control" v-model="extension.email" style=" font-size: 0.75rem !important;" required  placeholder="eg.doe@gmail.com">
                         </div>
                         <div class="row">
                             <div class="col">
                                 <label for="phone" class="form-label float-start">Phone</label>
-                                <input type="text" placeholder="059 xxx xxxx" class="form-control" v-model="extension.phone" style=" font-size: 0.75rem !important;">                            
+                                <input type="text" placeholder="059 xxx xxxx" class="form-control" v-model="extension.phone" style=" required font-size: 0.75rem !important;">                            
                             </div>
-                            <select class="form-select form-select-sm col" aria-label=".form-select-sm example" v-model="extension.addressId" >
+                            <select class="form-select form-select-sm col" aria-label=".form-select-sm example" required v-model="extension.addressId" >
                                 <option value="default">please select an Address</option>
                                 <option  v-for="(location, i) in locations" :key="i" :value="location.id">{{location.location}}</option>
                             </select>
@@ -73,6 +73,7 @@ export default {
     },
     methods: {
         submit(){
+            delete this.extension.updateId
             console.log(this.extension)
             // return
             var token = this.getCookie('token') 
@@ -85,7 +86,8 @@ export default {
                     this.$refs.closeModal.click();
                 }, 1000);
             }).catch(error =>{
-                this.errorMsg = error.response.data.message
+                console.log(error.response.data)
+                this.errorMsg = error.response.data
             })
         },
         update(){
@@ -156,10 +158,10 @@ input, select {
     padding-left: 0px;
     color: #ECF0F5;
 }
-.form-control-sm{
+.form-control-sm,.form-select-sm{
     font-size: 0.75rem !important;
 }
-.form-control:focus {
+.form-control:focus ,.form-select-sm:focus {
     border-color: inherit;
     -webkit-box-shadow: none;
     box-shadow: none;

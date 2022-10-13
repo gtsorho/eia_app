@@ -6,15 +6,34 @@ const ExtensionOfficer = require('./ExtensionOfficer')
 const Extension = require('./Extention')
 const ExtGroup = require('./ExtGroup')
 const GroupLink = require('./GroupLink')
+   
+const prod = [   
+   'eia_db',
+   'root',
+   'OzxHZ4eZDBU1LVmV',
+   {
+      host: 'srv-captain--datalake-db',
+      dialect: 'mysql'
+   }
+]
 
+let dev = [   
+   'eia_db',
+   'root',
+   '',
+   {
+      host: 'localhost',
+      dialect: 'mysql'
+   }
+]
 const sequelize = new Sequelize(
    'eia_db',
    'root',
    'OzxHZ4eZDBU1LVmV',
-    {
+   {
       host: 'srv-captain--datalake-db',
       dialect: 'mysql'
-    }
+   }
 );
 
 

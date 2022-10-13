@@ -5,7 +5,7 @@
                     <div class="col-12 col-md-3 col-lg-3">
                         <!-- <div class="input-group  input-group-sm mb-3" > -->
                             <div class="dropdown">
-                            <input type="text" class="form-control-sm form-control border-end-0 border-start-0 fs-6 border-3 border-dark rounded-pill dropdown-toggle"
+                            <input type="text" class="form-control-sm form-control border-end-0 border-start-0 fs-6 border-3   dropdown-toggle"
                                 id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false"
                                 placeholder="&#xF52A;"  aria-describedby="basic-addon2" 
                                 style=" font-family:'bootstrap-icons'"
@@ -36,10 +36,10 @@
                         <div class="col">
                             <div class="card mb-3" >
                                 <div class="row g-0">
-                                    <div class="col-md-4">
+                                    <div class="col-lg-4 col-md-12">
                                         <img src="../assets/icons/music.png" class="img-fluid rounded-start" style="width:100%" alt="">
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-lg-8 col-md-12">
                                         <div class="card-body p-1">
                                             <p class="card-text mb-1">This is a wider card with supporting text below as a natural.</p>
                                             <p class="card-text mb-1"><small class="text-muted">Last updated 3 mins ago</small></p>
@@ -51,10 +51,10 @@
                         <div class="col">
                             <div class="card mb-3" >
                                 <div class="row g-0">
-                                    <div class="col-md-4">
+                                    <div class="col-lg-4 col-md-12">
                                     <img src="../assets/icons/music.png" class="img-fluid rounded-start" style="width:100%" alt="">
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-lg-8 col-md-12">
                                     <div class="card-body p-1">
                                         <p class="card-text mb-1">This is a wider card with supporting text below as a natural.</p>
                                         <p class="card-text mb-1"><small class="text-muted">Last updated 3 mins ago</small></p>
@@ -66,10 +66,10 @@
                         <div class="col">
                             <div class="card mb-3" >
                                 <div class="row g-0">
-                                    <div class="col-md-4">
+                                    <div class="col-lg-4 col-md-12">
                                     <img src="../assets/icons/video.png" class="img-fluid rounded-start" style="width:100%" alt="">
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-lg-8 col-md-12">
                                     <div class="card-body p-1">
                                         <p class="card-text mb-1">This is a wider card with supporting text below as a natural.</p>
                                         <p class="card-text mb-1"><small class="text-muted">Last updated 3 mins ago</small></p>
@@ -81,10 +81,10 @@
                         <div class="col">
                             <div class="card mb-3" >
                                 <div class="row g-0">
-                                    <div class="col-md-4">
+                                    <div class="col-lg-4 col-md-12">
                                     <img src="../assets/icons/video.png" class="img-fluid rounded-start" style="width:100%" alt="">
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-lg-8 col-md-12">
                                     <div class="card-body p-1">
                                         <p class="card-text mb-1">This is a wider card with supporting text below as a natural.</p>
                                         <p class="card-text mb-1"><small class="text-muted">Last updated 3 mins ago</small></p>
@@ -184,6 +184,48 @@
     }
 </script>
 <style scoped>
+
+    .form-control-sm, .form-select-sm {
+        background-color: #1a222600;
+        border: none;
+        border-bottom: 2px solid #01600a;
+        border-top: 0px;
+        border-radius: 0px;
+        font-weight:100;
+        outline: 0;
+        margin-bottom: 20px;
+        padding-left: 10px;
+        color: #1a1a1a;
+    }
+    .form-control-sm, .form-select-sm{
+        font-size: 0.75rem !important;
+    }
+    .form-control:focus, .form-select-sm:focus {
+        border-color: inherit;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        border-bottom: 2px solid #01600a !important ;
+        outline: 0;
+        background-color: #31383b00;
+        color: #1e1e1e;
+    }
+
+    input:focus, select:focus {
+        outline: none;
+        box-shadow: 0 0 0;
+    }
+
+    label {
+        margin-bottom: 0px;
+    }
+
+    .form-label {
+        font-size: 10px;
+        color: #6C6C6C;
+        font-weight:100;
+        letter-spacing: 1px;
+    }
+
     .card{
         margin-top:4%;
         /* min-height: 90% !important; */

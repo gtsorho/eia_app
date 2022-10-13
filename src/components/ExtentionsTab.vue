@@ -248,16 +248,17 @@
                     }, 2000);
                 })
             },
-            deletedata(){
+            deletedata() {
                 var token = this.getCookie('token')
 
                 let arr = []
                 let axiosarray = []
                 let checkeddata2 = this.checkeddata
+                console.log(checkeddata2)
                 if (confirm('All selection(s) will be deleted/distroyed(Permanently)')){
                     checkeddata2.forEach(data => 
                     {
-                        var newpromise = axios.get('/api/contact/delete/'+ data, 
+                        var newpromise = axios.get('/api/broadcast/contact/delete/'+ data, 
                             { headers:{'Authorization': `Bearer ${token}`}}
                         )
                         axiosarray.push(newpromise)
@@ -267,6 +268,8 @@
                         responses.forEach(
                             res =>arr.push(res.data)
                         )
+                        console.log(arr)
+
                         if(arr.length == checkeddata2.length){
                             console.log('success')
                             this.reloadList()
