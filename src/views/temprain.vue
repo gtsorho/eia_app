@@ -1,5 +1,4 @@
-<template lang="">
-
+<template>
     <div class="container my-4 text-start">
             <select @change="selectAddress()" v-model="addressVal" class="form-select form-select-sm w-25 d-inline"  aria-label=".form-select-sm example">
                 <option value="default" selected>Select location from menu</option>
@@ -16,19 +15,19 @@
         <div class="card my-3 shadow-lg">
             <h6 class="card-header text-start">Temperature (&#8451;) against Last 7days</h6>
             <div class="card-body" v-if="tempset.length > 0">
-                <Line :graphValues="tempset"></Line>
+                <line-chart :graphValues="tempset"></line-chart>
             </div>
         </div>
         <div class="card my-3 shadow-lg" >
             <h6 class="card-header text-start">Rain levels (&#13212;) against Last 7days</h6>
             <div class="card-body" v-if="rainset.length > 0">
-                <Line  :graphValues="rainset"></Line>
+                <line-chart :graphValues="rainset"></line-chart>
             </div>
         </div>
          <div class="card my-3 shadow-lg" >
             <h6 class="card-header text-start">Temperature(&#8451;) &#38; Rain(&#13212;) Forcasts within this Week</h6>
             <div class="card-body" v-if="rainTempset.length > 0">
-                <Line  :graphValues="rainTempset"></Line>
+                <line-chart :graphValues="rainTempset"></line-chart>
             </div>
         </div>
     </div>
@@ -39,13 +38,12 @@
 <script>
 
 import axios from 'axios'
-import Chart from "../components/barchart.vue"
-import Line from "../components/lineChart.vue"
+import Linechart from "../components/lineChart.vue"
 
 export default {
-    components:{
-        Line,
-        Chart
+    name: 'temprainTool',
+    components:{    
+       'line-chart' : Linechart,
     },
     data() {
         return {
@@ -75,46 +73,37 @@ export default {
             return Promise.reject(error);
             });
 
-        // console.log(this.tempset)
-        axios.get('/api/weather/locations')
+        axios.get('http://aghub.miphost.com/api/weather/locations')
             .then(response =>  {
                 this.locations = response.data
-                // console.log(response.data)
             }).catch(error => {
                 console.log(error);
             })
 
-
     },
-
-
     methods: {
+        setLoading(isLoading) {
+            if (isLoading) {
+                this.refCount++;
+                this.isLoading = true;
+            } else if (this.refCount > 0) {
+                this.refCount--;
+                this.isLoading = (this.refCount > 0);
+            }
+        },
+        async selectAddress(){
+            let datearr = [] 
+            let tempForcastArr = []
+            let rainForcastArr = []
+            let liveTempArr = []
+            let liveRainArr = []
+            
+            console.log(this.addressVal.longitude, this.addressVal.latitude)
 
-    setLoading(isLoading) {
-      if (isLoading) {
-        this.refCount++;
-        this.isLoading = true;
-      } else if (this.refCount > 0) {
-        this.refCount--;
-        this.isLoading = (this.refCount > 0);
-      }
-    },
-
-
-      async selectAddress(){
-
-                let datearr = [] 
-                let tempForcastArr = []
-                let rainForcastArr = []
-                let liveTempArr = []
-                let liveRainArr = []
-                
-                console.log(this.addressVal.longitude, this.addressVal.latitude)
-
-                
+                        
             await axios({
                 method: 'post',       
-                url: '/api/weather/weatherdata',
+                url: 'http://aghub.miphost.com/api/weather/weatherdata',
                 data: {
                     'latitude':this.addressVal.latitude,
                     'longitude': this.addressVal.longitude,
@@ -126,41 +115,28 @@ export default {
 
                 response.data.splice(0,2)
                 response.data.splice(-1,1)
+
+               
                 
                 response.data.forEach(item => {
-                    var temp_Forcast =   item.current_temperature.slice(0, -1)
-                    let tempForcast_val = temp_Forcast.split("-")
-
-
-                    var regex = /[.,\s]/g;
-                    var currentresult = item.current_rain_level.replace(regex, '');
-
-                    var rain_Forcast =   currentresult.slice(0, -2)
-                    let RainForcast_val = rain_Forcast.split("-")
 
                     let date = new Date(item.date)
-                    let forcastDate = new Date(date).setDate(date.getDate() + 2); 
-                    // let forcastDate = new Date(date).setDate(date.getDate() + 0); 
+                    let forcastDate = new Date(date).setDate(date.getDate() + 2);
 
-                    // console.log(date)
+                   let tempForcast_val = item.current_temperature
 
-                    tempForcast_val = eval(tempForcast_val.join('+'))/tempForcast_val.length
+                   let RainForcast_val =   item.current_rain_level
 
-                    RainForcast_val = eval(RainForcast_val.join('+'))/RainForcast_val.length
-                   
+                    
+                    
                     datearr.push(new Date(forcastDate).toDateString().split(' ').slice(1,3).join(' '))
                     tempForcastArr.push(tempForcast_val)
                     rainForcastArr.push(RainForcast_val)
 
                     // *************************************************************************************************
-                    var nextTemp = item.current_temperature.slice(0, -1)
-                        nextTemp = temp_Forcast.split("-")
-                        nextTemp = eval(nextTemp.join('+'))/nextTemp.length
+                    var nextTemp = item.current_temperature
 
-                    var nextRain = item.current_rain_level.replace(regex, '');
-                        nextRain =   nextRain.slice(0, -2)
-                        nextRain = nextRain.split("-")
-                        nextRain = eval(nextRain.join('+'))/nextRain.length
+                    var nextRain = item.current_rain_level
 
 
                     
@@ -173,22 +149,20 @@ export default {
 
                         console.log(date)
 
-                        for (let i = 0; i <= 6; i++) {
-                            if(new Date(beforeTempDate).getDay() == i){
-                                impactTemp[i] = tempForcast_val
-                            }else if(new Date(afterTempDate).getDay() == i){
-                                impactTemp[i] = nextTemp
-                            }
-
-                            if(new Date(beforeRainDate).getDay() == i){
-                                impactRain[i] = RainForcast_val
-                            }else if(new Date(afterRainDate).getDay() == i){
-                                impactRain[i] = nextRain
-                            }                            
+                    for (let i = 0; i <= 6; i++) {
+                        if(new Date(beforeTempDate).getDay() == i){
+                            impactTemp[i] = tempForcast_val
+                        }else if(new Date(afterTempDate).getDay() == i){
+                            impactTemp[i] = nextTemp
                         }
-                        
-                    // console.log([date,new Date(beforeTempDate), new Date(afterTempDate),impactTemp ])
-                     //*************************************************************************************************** */
+
+                        if(new Date(beforeRainDate).getDay() == i){
+                            impactRain[i] = RainForcast_val
+                        }else if(new Date(afterRainDate).getDay() == i){
+                            impactRain[i] = nextRain
+                        }                            
+                    }
+                    //*************************************************************************************************** */
                 });
 
                 this.rainTempset =
@@ -205,55 +179,51 @@ export default {
             })
 
 
-// ****************************************************************************************
-             axios.post('/api/weather/livedata', 
+            // ****************************************************************************************
+            axios.post('http://aghub.miphost.com/api/weather/livedata', 
             {
                 'latitude':this.addressVal.latitude,
                 'longitude': this.addressVal.longitude,
             })
             .then(response =>  {
-                console.log(response)
                 response.data.splice(0,2)
                 response.data.splice(-1,1)
 
                 response.data.forEach(item => {
                     var temp_now =   item.temperature
                     var rain_now =   item.rain
-                    // let date = item.date
 
-                        liveTempArr.push(temp_now)
-                        liveRainArr.push(rain_now)
+                    liveTempArr.push(temp_now)
+                    liveRainArr.push(rain_now)
                 });
             })
             .catch(error => {
                 console.log(error);
-            })
+            })                                        
 
 
-             this.tempset = 
+                this.tempset = 
                 [
-                {
-                    lables:datearr
-                },
-                ['Actual','Forcast'],
-                liveTempArr,
-                tempForcastArr
+                    {
+                        lables:datearr
+                    },
+                    ['Actual','Forcast'],
+                    liveTempArr,
+                    tempForcastArr
                 ]
-            
+        
 
-            this.rainset =
-               [ 
-                {
-                    lables:datearr
-                },
-                ['Actual','Forcast'],
-                liveRainArr,
-                rainForcastArr]
-            
-        }
+                this.rainset =
+                [ 
+                    {
+                        lables:datearr
+                    },
+                    ['Actual','Forcast'],
+                    liveRainArr,
+                    rainForcastArr
+                ]
+                
+            }
     },
 }
 </script>
-<style lang="">
-    
-</style>

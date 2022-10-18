@@ -77,7 +77,7 @@ export default {
             console.log(this.extension)
             // return
             var token = this.getCookie('token') 
-            axios.post('/api/broadcast/contact', this.extension,
+            axios.post('http://aghub.miphost.com/api/broadcast/contact', this.extension,
                 {headers:{'Authorization': `Bearer ${token}`}}
             ).then(response =>{
                 this.successMsg = response.data.name + ' has been added'
@@ -101,7 +101,7 @@ export default {
         update(){
             var token = this.getCookie('token')
             console.log(this.extension)
-            axios.post('/api/broadcast/contact/update/' + this.extension.updateId, 
+            axios.post('http://aghub.miphost.com/api/broadcast/contact/update/' + this.extension.updateId, 
                     this.extension
                 ,
                 {headers:{'Authorization': `Bearer ${token}`}}
@@ -135,7 +135,7 @@ export default {
     mounted(){
         var token = this.getCookie('token')
 
-        axios.get('/api/weather/locations', 
+        axios.get('http://aghub.miphost.com/api/weather/locations', 
             { headers:{'Authorization': `Bearer ${token}`}})
         .then(response =>  {
             response.data.forEach(element => {

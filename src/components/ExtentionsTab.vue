@@ -61,7 +61,6 @@
 
 
 
-                            
                             <button type="button" style="background-color:#061704"  class="btn rounded-pill text-light mx-2 shadow-md btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">+ contact</button>
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <Addcontent  @modalSubmit="reloadList()"  :updatedata="updateValues"/>
@@ -119,7 +118,6 @@
                 updateValues:null,
                 checkeddata : [],
                 extgroups:[],
-                allSelected: false,
                 resMsg:'',
                 extGroup:{
                     label:'',
@@ -156,7 +154,7 @@
             getallgroups(){
                  var token = this.getCookie('token')
 
-                axios.get('/api/broadcast/group/show', 
+                axios.get('http://aghub.miphost.com/api/broadcast/group/show', 
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
                     this.extgroups = response.data
@@ -173,7 +171,7 @@
                 let checkeddata2 = this.checkeddata
                     checkeddata2.forEach(data => 
                     {
-                        var newpromise = axios.post('/api/broadcast/grouplink/', 
+                        var newpromise = axios.post('http://aghub.miphost.com/api/broadcast/grouplink/', 
                             {
                                 extensionId:data,
                                 extGroupId:this.groupid
@@ -200,7 +198,7 @@
             getall(){
                  var token = this.getCookie('token')
 
-                axios.get('/api/broadcast/contact/show', 
+                axios.get('http://aghub.miphost.com/api/broadcast/contact/show', 
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
                     console.log(response.data)
@@ -218,7 +216,7 @@
                     this.searchRes = null
                     this.getall()
                 }else{
-                    axios.get('/api/broadcast/contact/'+ this.searchText, 
+                    axios.get('http://aghub.miphost.com/api/broadcast/contact/'+ this.searchText, 
                         { headers:{'Authorization': `Bearer ${token}`}})
                     .then(response =>  {
                         this.searchRes = response.data
@@ -230,7 +228,7 @@
             },
             createGroup(){
                 var token = this.getCookie('token')
-                axios.post('/api/broadcast/group', this.extGroup,
+                axios.post('http://aghub.miphost.com/api/broadcast/group', this.extGroup,
                     {headers:{'Authorization': `Bearer ${token}`, 'Content-Type':'application/json'}}
                 ).then(response =>{
                     this.resMsg = response.data.label + ' has been created'
@@ -258,7 +256,7 @@
                 if (confirm('All selection(s) will be deleted/distroyed(Permanently)')){
                     checkeddata2.forEach(data => 
                     {
-                        var newpromise = axios.get('/api/broadcast/contact/delete/'+ data, 
+                        var newpromise = axios.get('http://aghub.miphost.com/api/broadcast/contact/delete/'+ data, 
                             { headers:{'Authorization': `Bearer ${token}`}}
                         )
                         axiosarray.push(newpromise)
@@ -283,7 +281,7 @@
             },
             reloadList(){
                 var token = this.getCookie('token')
-                axios.get('/api/broadcast/contact/show', 
+                axios.get('http://aghub.miphost.com/api/broadcast/contact/show', 
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
                     this.contacts = response.data
@@ -295,7 +293,7 @@
             getContact(id){
                 var token = this.getCookie('token')
 
-                axios.get('/api/broadcast/contact/show/'+ id, 
+                axios.get('http://aghub.miphost.com/api/broadcast/contact/show/'+ id, 
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
                     console.log(response.data)

@@ -90,22 +90,21 @@
                                     <div class="dropdown  input-group-text d-inline" >
                                         <i class="bi bi-paperclip dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false" style="transform: rotate(45deg); font-size:20px;"></i>
                                         <div class="dropdown-menu px-2" style="width:3in" aria-labelledby="dropdownMenuButton1">
-                                            <div class="list-group" style="font-size:12px;" >
-                                            <a href="#" class="list-group-item py-1 ms-2  list-group-item-action">A second link item</a>
-                                            <a href="#" class="list-group-item py-1 ms-2 list-group-item-action">A third link item</a>
-                                            <a href="#" class="list-group-item py-1 ms-2 list-group-item-action">A fourth link item</a>
+                                            <div class="list-group" style="font-size:12px; width:fit-content" >
+                                            <a href="#" v-for="(podcast, i) in podcasts" :key="i" class="list-group-item py-1 ms-2  list-group-item-action"
+                                                @click="links.push({link:podcast.webViewLink, name:podcast.name})">{{podcast.name}}
+                                             </a>
                                             </div>
                                         </div>
                                     </div>
 
 
-                                    <textarea class="form-control form-control-sm" placeholder="Lorem ipsum, dolor sit amet consectetur adipisicing elit."  aria-label=".form-control-sm example" v-model="smsMsg" ></textarea>   
+                                    <textarea class="form-control form-control-sm" placeholder="Lorem ipsum, dolor sit amet consectetur adipisicing elit."  aria-label=".form-control-sm example" v-model="smsMsg"></textarea>   
                                     <i v-if="smsMsg.length > 0" class="bi bi-send-fill input-group-text ms-2" style="font-size:20px" @click="sendSms()"></i>
                                     <i v-else class="bi bi-chat-square-text-fill input-group-text ms-2" style="font-size:20px"></i>
                                 </div>
-                                    <small style="font-size:13px" class="text-success">{{smsRes}}</small>
-                                
-                                
+                                    <small style="font-size:13px" class="text-success">{{smsRes}}</small>     
+                                    <a href="#" class="btn btn-sm btn-success overflow-hidden m-1 rounded-pill" v-for="(link, i) in links" :key="i" style="width:100px; height:30px">{{link.name}}</a>                           
                             </div>
                         </div>
                         
@@ -126,6 +125,8 @@
         },
         data() {
             return {
+                links:[],
+                podcasts:'',
                 smsRes:'',
                 smsMsg:'',
                 phoneNo:[],
@@ -147,7 +148,8 @@
             }
         },
         beforeMount(){
-           this.getallgroups()
+           this.getallgroups();
+           this.getPodcasts()
         },
         computed:{
             delete_display(){
@@ -175,7 +177,7 @@
             getallgroups(){
                  var token = this.getCookie('token')
 
-                axios.get('/api/broadcast/group/show', 
+                axios.get('http://aghub.miphost.com/api/broadcast/group/show', 
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
                     console.log(response.data)
@@ -186,7 +188,7 @@
             },
             createGroup(){
                 var token = this.getCookie('token')
-                axios.post('/api/broadcast/group', this.extGroup,
+                axios.post('http://aghub.miphost.com/api/broadcast/group', this.extGroup,
                     {headers:{'Authorization': `Bearer ${token}`, 'Content-Type':'application/json'}}
                 ).then(response =>{
                     this.resMsg = response.data.label + ' has been created'
@@ -206,7 +208,7 @@
             },
              updateGroup(){
                  var token = this.getCookie('token')
-                axios.post('/api/broadcast/group/update/'+ this.groupid, 
+                axios.post('http://aghub.miphost.com/api/broadcast/group/update/'+ this.groupid, 
                     this.extGroup,
                     {headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
@@ -225,7 +227,7 @@
             },
             deleteGroup(groupid){
                 var token = this.getCookie('token')
-                axios.get('/api/broadcast/group/delete/'+ groupid, 
+                axios.get('http://aghub.miphost.com/api/broadcast/group/delete/'+ groupid, 
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
                     console.log(response)
@@ -239,7 +241,7 @@
             getallExt(groupid){
                 console.log(groupid)
                 var token = this.getCookie('token')
-                axios.get('/api/broadcast/grouplink/show/'+ groupid, 
+                axios.get('http://aghub.miphost.com/api/broadcast/grouplink/show/'+ groupid, 
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
                     this.extensions = response.data
@@ -253,7 +255,7 @@
             },
             deleteGrouplink(extId){
                 var token = this.getCookie('token')
-                axios.get('/api/broadcast/grouplink/delete/'+ extId, 
+                axios.get('http://aghub.miphost.com/api/broadcast/grouplink/delete/'+ extId, 
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
                     console.log(response)
@@ -264,7 +266,16 @@
             },
             sendSms(){
                 var token = this.getCookie('token')
-                axios.post('/api/broadcast/contact/notify', 
+                let linkarr = []
+                this.links.forEach(link => {
+                    linkarr.push(link.link)
+                });
+                let links2send = linkarr.join('\n')
+
+                this.smsMsg = `${this.smsMsg} \n ${links2send}`
+                console.log(this.smsMsg)
+                return
+                axios.post('http://aghub.miphost.com/api/broadcast/contact/notify', 
                     {
                         recipients:this.phoneNo,
                         msg:this.smsMsg
@@ -285,10 +296,21 @@
             },            
             reloadList(){
                 var token = this.getCookie('token')
-                axios.get('/api/broadcast/contact/show', 
+                axios.get('http://aghub.miphost.com/api/broadcast/contact/show', 
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
                     this.contacts = response.data
+                }).catch(error => {
+                    console.log(error);
+                })
+            },
+            getPodcasts(){
+                var token = this.getCookie('token')
+
+                axios.get('http://aghub.miphost.com/api/broadcast/podcast/', 
+                    { headers:{'Authorization': `Bearer ${token}`}})
+                .then(response =>  {
+                   this.podcasts = response.data
                 }).catch(error => {
                     console.log(error);
                 })

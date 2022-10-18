@@ -129,7 +129,7 @@ export default {
       if(!this.authenticated){
         setTimeout(() => {
           this.$refs.modalclick.click();
-        }, 3000);
+        }, 3001);
       }
     },
     methods: {
@@ -157,7 +157,7 @@ export default {
         }
       },
       centerLogin(){
-            axios.post('/api/broadcast/login',{
+            axios.post('http://aghub.miphost.com/api/broadcast/login',{
               email:this.username,
               password:this.password
             })

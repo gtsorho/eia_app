@@ -193,7 +193,7 @@ export default {
       if(!this.authenticated){
         setTimeout(() => {
           this.$refs.modalclick.click();
-        }, 3000);
+        }, 3001);
       }
     },
     methods: {
