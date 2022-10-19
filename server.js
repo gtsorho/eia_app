@@ -1,11 +1,8 @@
 const express = require('express')
 const path = require('path') 
-const cors = require('cors');
-require('dotenv').config()
+const serveStatic = require('serve-static')
 
 const app = express()
-app.use(express.json()) // for parsing application/json
-app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 
 app.use('/', serveStatic(path.join(__dirname,'/dist')))
