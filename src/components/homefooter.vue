@@ -124,9 +124,9 @@ export default {
         },
 
         search(location = null){
-            var url = `/api/weather/locations/${location}`
+            var url = `http://aghub.miphost.com/api/weather/locations/${location}`
             if(!location){
-                url = `/api/weather/locations`
+                url = `http://aghub.miphost.com/api/weather/locations`
             }
             axios.get(url)
             .then(response =>  {

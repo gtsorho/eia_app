@@ -15,7 +15,7 @@
               <ul class="navbar-nav ">
                 <a class="nav-link" :class="{active:active === 'cropping'}" href="#" @click="changeTopic(0), active = 'cropping'">Advisories</a>
                 <!-- <a class="nav-link" :class="{active:active === 'Dashbords'}" href="#" @click="changeTopic(1),  active = 'Dashbords'">Dashbords</a> -->
-                <a class="nav-link" :class="{active:active === 'Storyset'}" href="#" @click="changeTopic(2), active = 'Storyset'"> Assembled Knowledge</a>
+                <a class="nav-link" :class="{active:active === 'Storyset'}" href="#" @click="changeTopic(1), active = 'Storyset'"> Assembled Knowledge</a>
               </ul>       
           </div>
         </div>
@@ -74,7 +74,7 @@ data() {
       //   link:'/main/dashboard'
       // },
       {
-        id: 2,
+        id: 1,
         img:'story.svg',
         Title:' Assembled Knowledge',
         text:'This details findings from exploratory to in-depth analysis (quantitative and qualitative) of a decade of data gathered and stored by the Africa RISING Dataverse portal. This report’s focus is centered on the cultivation of maize, soybean, cowpea and groundnut in the upper regions of Ghana. However, highlights are thrown on other crops of interest where the data supports our objective.', 
@@ -82,7 +82,7 @@ data() {
       },
     ],
     displayParam:{
-        id: 2,
+        id: 1,
         img:'story.svg',
         Title:' Assembled Knowledge',
         text:'This details findings from exploratory to in-depth analysis (quantitative and qualitative) of a decade of data gathered and stored by the Africa RISING Dataverse portal. This report’s focus is centered on the cultivation of maize, soybean, cowpea and groundnut in the upper regions of Ghana. However, highlights are thrown on other crops of interest where the data supports our objective.', 
