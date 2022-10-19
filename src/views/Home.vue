@@ -14,7 +14,7 @@
           <div >
               <ul class="navbar-nav ">
                 <a class="nav-link" :class="{active:active === 'cropping'}" href="#" @click="changeTopic(0), active = 'cropping'">Advisories</a>
-                <a class="nav-link" :class="{active:active === 'Dashbords'}" href="#" @click="changeTopic(1),  active = 'Dashbords'">Dashbords</a>
+                <!-- <a class="nav-link" :class="{active:active === 'Dashbords'}" href="#" @click="changeTopic(1),  active = 'Dashbords'">Dashbords</a> -->
                 <a class="nav-link" :class="{active:active === 'Storyset'}" href="#" @click="changeTopic(2), active = 'Storyset'"> Assembled Knowledge</a>
               </ul>       
           </div>
@@ -62,21 +62,21 @@ data() {
       {
         id: 0,
         img:'tools.svg',
-        Title:'Our Services',
+        Title:'Advisories',
         text:'Utilize our Services created by our team of expects to assist you in your field of intrest, these are Applications created from the very data found here, these have been refined to develop Apps that suit you ',
         link:'/main/services'
       },
-      {
-        id: 1,
-        img:'dash.svg',
-        Title:'Dashbords',
-        text:'What of you could Select a dataset and choose a data field that intrests you, and we\ll populate graphs and charts that suit your selected data fields and if you are still not satisfied with the default charts you have options. This is an opportunity for you to tell your own story, be your own god.',
-        link:'/main/dashboard'
-      },
+      // {
+      //   id: 1,
+      //   img:'dash.svg',
+      //   Title:'Dashbords',
+      //   text:'What of you could Select a dataset and choose a data field that intrests you, and we\ll populate graphs and charts that suit your selected data fields and if you are still not satisfied with the default charts you have options. This is an opportunity for you to tell your own story, be your own god.',
+      //   link:'/main/dashboard'
+      // },
       {
         id: 2,
         img:'story.svg',
-        Title:'StorySet',
+        Title:' Assembled Knowledge',
         text:'This details findings from exploratory to in-depth analysis (quantitative and qualitative) of a decade of data gathered and stored by the Africa RISING Dataverse portal. This report’s focus is centered on the cultivation of maize, soybean, cowpea and groundnut in the upper regions of Ghana. However, highlights are thrown on other crops of interest where the data supports our objective.', 
         link:'/main/storyset'
       },
@@ -84,7 +84,7 @@ data() {
     displayParam:{
         id: 2,
         img:'story.svg',
-        Title:'Story Sets',
+        Title:' Assembled Knowledge',
         text:'This details findings from exploratory to in-depth analysis (quantitative and qualitative) of a decade of data gathered and stored by the Africa RISING Dataverse portal. This report’s focus is centered on the cultivation of maize, soybean, cowpea and groundnut in the upper regions of Ghana. However, highlights are thrown on other crops of interest where the data supports our objective.', 
         link:'/main/storyset'
       },

@@ -85,6 +85,12 @@ export default {
             password:'',
             tools:[
                 {
+                    title:'Dashboard',
+                    description:'Our Dashboard allows you to visualize our data based on you prefrences, parameters and desired output. Visualize any data collection agaist another and lets work out the magic.',
+                    dataset_id:'ss003',
+                    link: '/main/dashboard'
+                },
+                {
                     title:'Cropping Calendar',
                     description:'Data used for this report was collected from 24 distinct communities across the Northern, Savanna and Upper East regions of Ghana. 47% of records came from the Northern region, 30% of the records were collected in the Savanna region and the  remaining 23% came from the Upper East region. Details of records is shown to the left.',
                     dataset_id:'ss001',

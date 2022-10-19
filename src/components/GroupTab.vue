@@ -273,8 +273,6 @@
                 let links2send = linkarr.join('\n')
 
                 this.smsMsg = `${this.smsMsg} \n ${links2send}`
-                console.log(this.smsMsg)
-                return
                 axios.post('http://aghub.miphost.com/api/broadcast/contact/notify', 
                     {
                         recipients:this.phoneNo,

@@ -20,10 +20,10 @@
                                 <router-link to="/main/services" class="text-dark " @click="collapseCloseOnclick()">Advisories
                                 </router-link>
                             </li>
-                            <li class="w-100 px-2 rounded-pill">
+                            <!-- <li class="w-100 px-2 rounded-pill">
                                 <router-link to="/main/dashboard" class="text-dark" @click="collapseCloseOnclick()">
                                     Dashboards</router-link>
-                            </li>
+                            </li> -->
                             <li class="w-100 px-2 rounded-pill">
                                 <router-link to="/main/storyset" class="text-dark" @click="collapseCloseOnclick()">
                                     Assembled Knowledge</router-link>
