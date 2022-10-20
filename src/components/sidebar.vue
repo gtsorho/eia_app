@@ -4,7 +4,7 @@
     <span class="text-start" v-show="sidebarVal">
         <img  style="width:25%;" class="ms-0" src="../assets/logo.png" > 
       <hr class="bg-light mx-2">  
-      <a href="#" @click="$emit('currentTab', 'ExtentionsTab')"><i class="bi bi-box-seam me-1" ></i>Extentions</a>
+      <a href="#" @click="$emit('currentTab', 'ExtentionsTab')"><i class="bi bi-box-seam me-1" ></i>Farmers</a>
       <a href="#" @click="$emit('currentTab', 'GroupsTab')"><i class="bi bi-people me-1" ></i>Groups | Messages</a>
       <a href="#" @click="$emit('currentTab', 'UploadTab')"><i class="bi bi-box-seam me-1" ></i>Uploads</a>
     </span>

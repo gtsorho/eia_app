@@ -46,7 +46,7 @@
 
 
 
-                            <div class="dropdown d-inline" >
+                            <div class="dropdown d-inline">
                                 <i class="btn btn-sm bi bi-link-45deg mx-2 btn-success rounded-pill dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false" :class="delete_display" @click="getallgroups()"></i>
                                 <div class="dropdown-menu px-4 py-0" style="width:3.5in" aria-labelledby="dropdownMenuButton1">  
                                     <div class=" input-group"  style="font-size:13px !important">
@@ -186,9 +186,10 @@
                             res => arr.push(res.data)
                         )
                         if(arr.length == checkeddata2.length){
-                            this.resMsg =  ' contacts has been created'
+                            this.resMsg =  'contacts has been created'
                             setTimeout(() => {
                                     this.resMsg=''
+                                    this.checkeddata = []
                             }, 2000);
                         }                     
                     })).catch(error => {

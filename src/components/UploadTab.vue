@@ -107,7 +107,6 @@
             onFileChange(e) {
                 const file = e.target.files;
                 this.FormData = new FormData()
-
                 this.FormData.append('file',file[0]);
             },
              uploadfile () {

@@ -73,11 +73,11 @@
                     <div class="col-lg-4">
                         <div class="card " style="border:3px solid rgb(197 81 24) !important; margin-top: 2rem!important">
                         <div class="card-body">
-                            <h5 class="card-title text-start">Extensions</h5>
-                            <p v-if="extensions.length == 0" class="mt-5" style="font-size:10px" >no extensions results found</p>
+                            <h5 class="card-title text-start">Farmers</h5>
+                            <p v-if="extensions.length == 0" class="mt-5" style="font-size:10px" >no farmers results found</p>
                             <div class="alert rounded-pill text-start " v-for="(extension ,i) in extensions" :key="i" style="background-color: rgb(170 255 159)" role="alert">
                                 <strong style="font-size:13px" class="text-capitalize">{{extension.extension.name}} </strong> <small  style="font-size:10px" >{{extension.extension.phone}}</small>
-                                <button type="button" class="btn-close btn-close-sm float-end"  data-bs-dismiss="alert" aria-label="Close" @click="deleteGrouplink(extension.id), groupid=extension.extGroupId"></button>
+                                <button type="button" class="btn-close btn-close-sm float-end"  data-bs-dismiss="alert" aria-label="Close" @click="deleteGrouplink(extension.id, extension.extension.phone), groupid=extension.extGroupId"></button>
                             </div>
                         </div>
                         </div>
@@ -239,12 +239,13 @@
 
             //group links************************************************************************ 
             getallExt(groupid){
-                console.log(groupid)
                 var token = this.getCookie('token')
                 axios.get('http://aghub.miphost.com/api/broadcast/grouplink/show/'+ groupid, 
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
                     this.extensions = response.data
+                    console.log(this.extensions)
+
                     this.extensions.forEach(contact => {
                         this.phoneNo.push(contact.extension.phone)
                     });
@@ -253,13 +254,15 @@
                     console.log(error);
                 })
             },
-            deleteGrouplink(extId){
+            deleteGrouplink(extId, phoneNo){
                 var token = this.getCookie('token')
                 axios.get('http://aghub.miphost.com/api/broadcast/grouplink/delete/'+ extId, 
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
-                    console.log(response)
-                    this.getallExt(this.groupid)
+                    const index = this.phoneNo.indexOf(phoneNo);
+                    if (index > -1) { // only splice array when item is found
+                        this.phoneNo.splice(index, 1); // 2nd parameter means remove one item only
+                    }
                 }).catch(error => {
                     console.log(error);
                 })
