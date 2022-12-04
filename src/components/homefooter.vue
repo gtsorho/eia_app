@@ -140,7 +140,7 @@ export default {
             let sixDayArr = []
             let daysArr = []
 
-            axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${location[0]}&lon=${location[1]}&appid=c2df596100d32243755dd4827069e38b&units=metric`)
+            axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${location[0]}&lon=${location[1]}&appid=84e1433cb3c4fe512da5cc71b670f8fa&units=metric`)
                 .then(response =>  {
                     response.data.list.forEach(element => {
 
@@ -177,7 +177,7 @@ export default {
                     console.log(sixDayArr)
                     // ****************************************************************************
 
-                    axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${location[0]}&lon=${location[1]}&appid=c2df596100d32243755dd4827069e38b&units=metric`)
+                    axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${location[0]}&lon=${location[1]}&appid=84e1433cb3c4fe512da5cc71b670f8fa&units=metric`)
                     .then(response =>  {
                         this.$emit('getLocationDatas', [response.data, location[2]]);
                     }).catch(error => {
