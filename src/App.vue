@@ -16,7 +16,8 @@ export default {
 }
 </script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap'); */
 
     /* html, body{
         background-image: url('assets/pexels-pixabay-209831.jpg');
@@ -27,7 +28,8 @@ export default {
     } */
 
 p, h1,h2,h3,h4,h5, small, strong, a, li,option, form ,div{
-  font-family: 'Raleway', sans-serif;
+  /* font-family: 'Raleway', sans-serif; */
+  font-family: 'Open Sans', sans-serif;
 }
 body{
       background-color: #f5f5ff !important;

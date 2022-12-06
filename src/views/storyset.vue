@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="widget-49-meeting-action card-footer border-0 bg-transparent text-end">
-                <router-link class="btn rounded-pill btn-sm px-4" style="background-color:#4fab43" :to="{name:'Storysetchartboard', params:{data:JSON.stringify(storyset[index].category)}}" >View </router-link>
+                <router-link class="btn rounded-pill btn-sm px-4 text-light text-uppercase" style="background-color:rgb(85 176 71); font-weight:700; font-size:14px !important " :to="{name:'Storysetchartboard', params:{data:JSON.stringify(storyset[index].category)}}" >View <i class="bi bi-arrow-right-short"></i> </router-link>
             </div>
         </div>
     </div>
@@ -515,7 +515,7 @@ export default {
 }
 
 .card-footer a:hover{
-  background-color: #3fd42f!important;
+  background-color: rgb(0 104 56)!important;
 }
 
 .card {

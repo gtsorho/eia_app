@@ -58,7 +58,7 @@
             </div>
             <div class="widget-49-meeting-action card-footer border-0 bg-transparent">
               
-                <router-link :to="tool.link" class="btn btn-sm float-end fw-bold px-4 btn-flash-border-primary border-2 rounded-pill">Utilize</router-link>
+                <router-link :to="tool.link" class="btn btn-sm float-end fw-bold px-4 btn-flash-border-primary border-2 rounded-pill">Utilize <i class="bi bi-arrow-right-short"></i></router-link>
                 <!-- <a href="#" class="btn btn-sm float-end fw-bold px-4 btn-flash-border-primary border-2 rounded-pill">Utilize</a> -->
             </div>
         </div>
@@ -227,11 +227,15 @@ input[type=file]::file-selector-button {
   
 }
 .card-footer a{
-  background-color: rgb(255 148 95) !important;
+  background-color:rgb(0 104 56) !important;
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+   Font-size: 14px !important;
 }
 
 .card-footer a:hover{
-  border-color: rgb(28, 121, 26) !important;
+  background-color: rgb(85 176 71) !important;
 }
 
 .form-control[data-v-6a57b8d6]:focus {

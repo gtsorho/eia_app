@@ -13,9 +13,9 @@
           </div>
           <div >
               <ul class="navbar-nav ">
-                <a class="nav-link" :class="{active:active === 'cropping'}" href="#" @click="changeTopic(0), active = 'cropping'">Advisories</a>
-                <!-- <a class="nav-link" :class="{active:active === 'Dashbords'}" href="#" @click="changeTopic(1),  active = 'Dashbords'">Dashbords</a> -->
-                <a class="nav-link" :class="{active:active === 'Storyset'}" href="#" @click="changeTopic(1), active = 'Storyset'"> Assembled Knowledge</a>
+                <a class="nav-link" :class="{active:active === 'cropping'}" href="#" @click="$router.push('/main/services'), active = 'cropping'">Advisories</a>
+                <!-- <a class="nav-link" :class="{active:active === 'Dashbords'}" href="#" @click="$router.push(''),  active = 'Dashbords'">Dashbords</a> -->
+                <a class="nav-link" :class="{active:active === 'Storyset'}" href="#" @click="$router.push('/main/storyset'), active = 'Storyset'"> Assembled Knowledge</a>
               </ul>       
           </div>
         </div>
@@ -32,7 +32,7 @@
         <hr class="mx-auto" style="width:90%; background-color:#4fab43">
         <p class="lead fs-6 px-5">{{displayParam.text}}</p>
         <p class="lead">
-          <router-link :to="displayParam.link" class="btn btn-md btn-secondary fw-bold border-white bg-white">View More</router-link>
+          <router-link :to="displayParam.link" style="font-size:14px !important; font-weight: 700" class="btn btn-md btn-secondary text-uppercase rounded-pill border-white bg-white">View More <i class="bi bi-arrow-right-short"></i></router-link>
         </p>
         <a  class="float align-middle" href="#offcanvasExample"  aria-controls="offcanvasExample" @click="previous(displayParam.id)">
           <i class="bi bi-chevron-left fs-4 my-float" style="left: 6.4px;"></i>
@@ -171,16 +171,16 @@ methods:{
 }
 .my-float{
     position: absolute;
-      top: 4.5px;
+      top: 2.5px;
 }
 .float:hover{
   transform: scale(1.1); 
-	background-color: #4fab43d8;
+	background-color: rgb(0 104 56);
 
 }
 .float2:hover{
   transform: scale(1.1); 
-	background-color: #4fab43d8;
+	background-color: rgb(0 104 56);
 
 }
 
@@ -209,7 +209,7 @@ methods:{
   text-shadow: none; /* Prevent inheritance from `body` */
 }
 .btn-secondary:hover{
-  background-color: #4fab43d8 !important;
+  background-color: rgb(0 104 56) !important;
 }
 
 
