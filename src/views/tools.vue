@@ -3,7 +3,7 @@
 <div class="row">
 <div  class="col-lg-3 col-md-6">
   
-      <div class="card card-margin text-light" style="height:6.7in; background-image: linear-gradient(67deg, #000000, #4fab43)!important;" >
+      <div class="card card-margin text-light" style="height:fit-content !important; background-image: linear-gradient(67deg, #000000, #4fab43)!important;" >
           <div class="card-body pt-3 login_body" >
               <div class="widget-49">
                   <div class="widget-49-title-wrapper">
