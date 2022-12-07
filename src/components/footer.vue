@@ -4,7 +4,7 @@
             <!-- <a href="/" class="mb-3 me-2 mb-md-0 text-light text-decoration-none lh-1">
                 <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
             </a> -->
-            <span class="text-light ">&copy; {{new Date(Date.now()).getFullYear()}} EiA-Hub</span>
+            <span class="text-light"  style="font-size:12px">&copy; {{new Date(Date.now()).getFullYear()}} EiA-Hub</span>
         </div>
 
         <ul class="nav col-md-6  mx-auto  me-md-5  justify-content-end list-unstyled  d-flex">
@@ -32,7 +32,7 @@
         transition:  .5s;
     }
     li:hover{
-        background-color: #4fab43;
+        background-color: rgb(0 104 56);
         border-radius: 50px;
         padding-inline: 15px;
     }

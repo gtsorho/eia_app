@@ -16,15 +16,15 @@
                         <h4 class="text-dark">Menu</h4>
                         <hr style="color:#  4fab43 !important">
                         <ul class="list-unstyled">
-                            <li class="w-100 px-2 rounded-pill">
-                                <router-link to="/main/services" class="text-dark " @click="collapseCloseOnclick()">Advisories
+                            <li class="w-100 px-1 rounded-pill">
+                                <router-link to="/main/services" class="text-dark "  @click="collapseCloseOnclick()">Advisories
                                 </router-link>
                             </li>
                             <!-- <li class="w-100 px-2 rounded-pill">
                                 <router-link to="/main/dashboard" class="text-dark" @click="collapseCloseOnclick()">
                                     Dashboards</router-link>
                             </li> -->
-                            <li class="w-100 px-2 rounded-pill">
+                            <li class="w-100 px-1 rounded-pill">
                                 <router-link to="/main/storyset" class="text-dark" @click="collapseCloseOnclick()">
                                     Assembled Knowledge</router-link>
                             </li>
@@ -38,9 +38,9 @@
                 <a href="#" class="navbar-brand d-flex align-items-center">
                     <router-link to="/" class=" text-decoration-none">
                             <span class="float-start text-start">
-                                <img  style="width:15%;" class="ms-2" src="../assets/logo.png" > 
-                                <hr style="width:60px; background-color:white; height:2px" class="my-1">
-                                <h6 class=" fw-bold text-light mb-0">
+                                <img  style="width:15%;" class="ms-0" src="../assets/logo.png" > 
+                                <hr style="width:60px; background-color:white; height:2px" class="my-0">
+                                <h6 class=" fw-bold text-light mb-0 ms-2"  style="font-size:12px">
                                     {{ $route.name }}
                                 </h6>
                             </span>

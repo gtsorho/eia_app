@@ -31,7 +31,7 @@
               </div>
           </div>
           <div class="widget-49-meeting-action card-footer border-0 bg-transparent">
-            <a href="#" class="btn login float-end fw-bold px-4 btn-flash-border-primary border-2 rounded-pill "  @click="centerLogin">Login <i class="bi bi-arrow-right-short"></i></a>
+            <a href="#" class="btn btn-sm login float-end fw-bold px-4 btn-flash-border-primary border-2 rounded-pill "  @click="centerLogin">Login <i class="bi bi-arrow-right-short"></i></a>
             <Transition>
               <p v-if="resMsg" style="font-size:10px" class="text-danger">{{resMsg}}</p>
             </Transition>

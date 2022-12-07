@@ -4,7 +4,7 @@
   
     <nav class="navbar navbar-expand-lg fixed-top" >
       <div class="container">
-        <a class="navbar-brand" href="#"><img class="float-start"  width="50" height="44" src="../assets/logo.png" > </a>
+        <a class="navbar-brand" href="#"><img class="float-start"   height="44" src="../assets/logo.png" > </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -33,7 +33,7 @@
             <h1 style="color:#fff; font-family: 'Montserrat', sans-serif !important; font-weight:800" class="text-uppercase fw-bolder;">{{slide.title}}</h1>
             <hr class="bg-light w-75">
             <p style="color:#fff">{{slide.content}}</p>
-            <router-link :to="slide.link" style="font-size:14px !important; font-weight: 700" class="btn btn-md float-end btn-secondary text-uppercase rounded-pill border-white bg-white">View More <i class="bi bi-arrow-right-short"></i></router-link>
+            <router-link :to="slide.link" style="font-size:14px !important; font-weight: 700" class="btn btn-md  btn-secondary text-uppercase rounded-pill border-white bg-white">View More <i class="bi bi-arrow-right-short"></i></router-link>
           </div>
         </div>
       </template>
@@ -47,13 +47,13 @@
 </div>
 
 
-<div class="row">
+<div class="row container-fluid ">
   <div class="col-6 ">
       <p style="padding-inline:.2in; border-left: 5px rgb(195 82 31) solid; font-size: 15px; margin-left: 10px;" class="lh-lg my-5   text-start ">Excellence in Agronomy for Sustainable Intensification and Climate Change Adaptation is a CGIAR wide initiative that seeks to connect public and private sector partners with CGIAR centres to develop scalable agronomic solutions across 6 CGIAR regions. The solutions are developed within specific Use Cases, which are purpose driven and demand led partnerships that seek to package agronomy solutions as Minimum Viable Products, that can be validated and scaled in target geographies, cropping systems and within designated farmer communities The EiA Events platform convenes different conversations on agronomy happenning all over the world.</p>
       <a href="https://www.cgiar.org/initiative/11-excellence-in-agronomy-eia-solutions-for-agricultural-transformation/" class="btn rounded-pill float-start text-light mx-3 px-3 text-uppercase lmore" >learn more <i class="bi bi-arrow-right-short"></i></a>
   </div>
   <div class="col-6">
-    <img class="w-100" :src="require('../assets/Company-pana.svg')" alt="">  
+    <img  :src="require('../assets/Company-pana.svg')" alt="">  
   </div>
 </div>
  
@@ -82,7 +82,7 @@
 <nav class="navbar bg-light" style="font-size:12px">
   <div class="container">
       <span class="text-dark ">&copy; {{new Date(Date.now()).getFullYear()}} EiA-Hub</span>
-      <a class="navbar-brand float-end" href="#"><img class=""  width="50" height="44" src="../assets/logo.png" > </a>
+      <a class="navbar-brand float-end" href="#"><img class=""  height="44" src="../assets/logo.png" > </a>
   </div>
 </nav>
 </div>
@@ -350,7 +350,7 @@ methods:{
 }
 .main-div{
      height: 100%;
-     overflow-x: hidden !important;
+     /* overflow-x: hidden !important; */
     /* text-shadow: 0 0.05rem 0.1rem rgb(0 0 0 / 50%); */
     /* box-shadow: inset 0 0 5rem rgb(0 0 0 / 50%); */
 }
