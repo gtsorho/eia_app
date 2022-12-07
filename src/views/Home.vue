@@ -1,8 +1,8 @@
 <template>
     <div class="main-div d-flex text-center text-dark bg-light">
-         <div class="cover-container d-flex w-100 p-3 mx-auto flex-column">
-  <header class="mb-auto mx-5">
-    <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+         <div class="cover-container d-flex w-100 mx-auto flex-column">
+  
+    <nav class="navbar navbar-expand-lg fixed-top" >
       <div class="container">
         <a class="navbar-brand" href="#"><img class="float-start"  width="50" height="44" src="../assets/logo.png" > </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,11 +21,44 @@
         </div>
       </div>
     </nav>
-  </header>
 
-  
+  <vueper-slides fade :touchable="true" autoplay fixed-height="700px" ref="myVueperSlides">
+    <vueper-slide
+      v-for="(slide, i) in slides"
+      :key="i"
+      :image="slide.image">
+      <template #content  >
+        <div class="d-flex align-items-center text-start" style="  background-color: rgba(0, 0, 0, 0.578);  width: 100%;  height: 100%;">
+          <div class="jumb mx-auto rounded-3">
+            <h1 style="color:#fff; font-family: 'Montserrat', sans-serif !important; font-weight:800" class="text-uppercase fw-bolder;">{{slide.title}}</h1>
+            <hr class="bg-light w-75">
+            <p style="color:#fff">{{slide.content}}</p>
+            <router-link :to="slide.link" style="font-size:14px !important; font-weight: 700" class="btn btn-md float-end btn-secondary text-uppercase rounded-pill border-white bg-white">View More <i class="bi bi-arrow-right-short"></i></router-link>
+          </div>
+        </div>
+      </template>
+    </vueper-slide>
+  </vueper-slides>
 
-  <main class="px-3">
+<div>
+  <h2 class="fw-bolder mt-4">We Are <span style="color:rgb(195 82 31)">EIA-hub</span></h2>
+  <hr class="w-50 mx-auto my-0">
+  <p>Sourcing you with with data like no other, Ready?</p>
+</div>
+
+
+<div class="row">
+  <div class="col-6 ">
+      <p style="padding-inline:.2in; border-left: 5px rgb(195 82 31) solid; font-size: 15px; margin-left: 10px;" class="lh-lg my-5   text-start ">Excellence in Agronomy for Sustainable Intensification and Climate Change Adaptation is a CGIAR wide initiative that seeks to connect public and private sector partners with CGIAR centres to develop scalable agronomic solutions across 6 CGIAR regions. The solutions are developed within specific Use Cases, which are purpose driven and demand led partnerships that seek to package agronomy solutions as Minimum Viable Products, that can be validated and scaled in target geographies, cropping systems and within designated farmer communities The EiA Events platform convenes different conversations on agronomy happenning all over the world.</p>
+      <a href="https://www.cgiar.org/initiative/11-excellence-in-agronomy-eia-solutions-for-agricultural-transformation/" class="btn rounded-pill float-start text-light mx-3 px-3 text-uppercase lmore" >learn more <i class="bi bi-arrow-right-short"></i></a>
+  </div>
+  <div class="col-6">
+    <img class="w-100" :src="require('../assets/Company-pana.svg')" alt="">  
+  </div>
+</div>
+ 
+
+  <!-- <main class="px-3">
     <div class="row  row-cols-1  row-cols-md-2">
       <div class="col my-auto">
         <h1>{{displayParam.Title}}</h1>
@@ -45,49 +78,91 @@
         <img class="w-75" :src="require('../assets/' + displayParam.img)" alt="">        
       </div>
     </div>
-  </main>
-  <footer class="mt-auto text-dark-50">
-    <!-- <small>Want to know more about us @ <a href="http://poc.miphost.com/" class=" text-decoration-none ">poc.miphost.com</a>   let's walk you through our Proof of Concepts</small> -->
-  </footer>
+  </main> -->
+<nav class="navbar bg-light" style="font-size:12px">
+  <div class="container">
+      <span class="text-dark ">&copy; {{new Date(Date.now()).getFullYear()}} EiA-Hub</span>
+      <a class="navbar-brand float-end" href="#"><img class=""  width="50" height="44" src="../assets/logo.png" > </a>
+  </div>
+</nav>
 </div>
     </div>
 </template>
+
+
 <script>
+import { VueperSlides, VueperSlide } from 'vueperslides'
+import 'vueperslides/dist/vueperslides.css'
+
 export default {
-name: "Home",
+  components: { VueperSlides, VueperSlide },
+  name: "Home",
 data() {
   return {
     active:null,
-    vectordetails:[
-      {
-        id: 0,
-        img:'tools.svg',
-        Title:'Advisories',
-        text:'Utilize our Services created by our team of expects to assist you in your field of intrest, these are Applications created from the very data found here, these have been refined to develop Apps that suit you ',
-        link:'/main/services'
-      },
-      // {
-      //   id: 1,
-      //   img:'dash.svg',
-      //   Title:'Dashbords',
-      //   text:'What of you could Select a dataset and choose a data field that intrests you, and we\ll populate graphs and charts that suit your selected data fields and if you are still not satisfied with the default charts you have options. This is an opportunity for you to tell your own story, be your own god.',
-      //   link:'/main/dashboard'
-      // },
-      {
-        id: 1,
-        img:'story.svg',
-        Title:' Assembled Knowledge',
-        text:'This details findings from exploratory to in-depth analysis (quantitative and qualitative) of a decade of data gathered and stored by the Africa RISING Dataverse portal. This report’s focus is centered on the cultivation of maize, soybean, cowpea and groundnut in the upper regions of Ghana. However, highlights are thrown on other crops of interest where the data supports our objective.', 
-        link:'/main/storyset'
-      },
-    ],
-    displayParam:{
-        id: 1,
-        img:'story.svg',
-        Title:' Assembled Knowledge',
-        text:'This details findings from exploratory to in-depth analysis (quantitative and qualitative) of a decade of data gathered and stored by the Africa RISING Dataverse portal. This report’s focus is centered on the cultivation of maize, soybean, cowpea and groundnut in the upper regions of Ghana. However, highlights are thrown on other crops of interest where the data supports our objective.', 
-        link:'/main/storyset'
-      },
+
+    parallax: -1,
+    parallaxFixedContent: false,
+    pauseOnHover: true,
+    autoPlaying: true,
+    internalAutoPlaying: true,
+
+
+  slides: [
+    {
+      title:'Advisories',
+      content:'Utilize our Services created by our team of expects to assist you in your field of intrest, these are Applications created from the very data found here, these have been refined to develop Apps that suit you ',
+      image: require('@/assets/andrew-horodnii-yPZ_kLs7koA-unsplash.jpg'),
+      link:'/main/services'
+    },
+    {
+      title:' Assembled Knowledge',
+      content:'Exploratory & in-depth analysis (quantitative and qualitative) of data gathered and stored by the Africa RISING Dataverse portal over the past decade. ', 
+      image: require('@/assets/daniel-de-lima-ofPW5f2WmHc-unsplash.jpg'),
+      link:'/main/storyset'
+    }
+  ],
+
+
+
+
+
+
+
+
+
+
+
+    // vectordetails:[
+    //   {
+    //     id: 0,
+    //     img:'tools.svg',
+    //     Title:'Advisories',
+    //     text:'Utilize our Services created by our team of expects to assist you in your field of intrest, these are Applications created from the very data found here, these have been refined to develop Apps that suit you ',
+    //     link:'/main/services'
+    //   },
+    //   // {
+    //   //   id: 1,
+    //   //   img:'dash.svg',
+    //   //   Title:'Dashbords',
+    //   //   text:'What of you could Select a dataset and choose a data field that intrests you, and we\ll populate graphs and charts that suit your selected data fields and if you are still not satisfied with the default charts you have options. This is an opportunity for you to tell your own story, be your own god.',
+    //   //   link:'/main/dashboard'
+    //   // },
+    //   {
+    //     id: 1,
+    //     img:'story.svg',
+    //     Title:' Assembled Knowledge',
+    //     text:'This details findings from exploratory to in-depth analysis (quantitative and qualitative) of a decade of data gathered and stored by the Africa RISING Dataverse portal. This report’s focus is centered on the cultivation of maize, soybean, cowpea and groundnut in the upper regions of Ghana. However, highlights are thrown on other crops of interest where the data supports our objective.', 
+    //     link:'/main/storyset'
+    //   },
+    // ],
+    // displayParam:{
+    //     id: 1,
+    //     img:'story.svg',
+    //     Title:' Assembled Knowledge',
+    //     text:'This details findings from exploratory to in-depth analysis (quantitative and qualitative) of a decade of data gathered and stored by the Africa RISING Dataverse portal. This report’s focus is centered on the cultivation of maize, soybean, cowpea and groundnut in the upper regions of Ghana. However, highlights are thrown on other crops of interest where the data supports our objective.', 
+    //     link:'/main/storyset'
+    //   },
 
   }
 },
@@ -121,6 +196,25 @@ methods:{
 
 <style scoped>
 
+
+.lmore{
+  background-color: rgb(85 176 71);
+}
+
+.lmore:hover{
+  background-color: rgb(0 104 56);
+}
+
+.navbar{
+  background-color: rgba(0, 0, 0, 0.48);
+}
+.jumb{
+  padding: 20px;
+  /* background-color: rgba(0, 0, 0, 0.578); */
+  width: 50%;
+  /* border: 3px #c3521f solid; */
+  /* border-radius: 2rem!important; */
+}
 .dropdown-menu{
   min-width: 20rem !important;
   inset: 5px auto auto -100px !important
@@ -130,7 +224,7 @@ methods:{
   opacity: .8;
 }
 .nav-link{
-  color: #4fab43 !important;
+  color: #c7c7c7 !important;
   transition:  .5s;
 }
 .navbar-nav{
@@ -205,11 +299,11 @@ methods:{
 /* Custom default button */
 .btn-secondary,
 .btn-secondary:focus {
-  background-color: #4fab43 !important;
+  background-color: rgb(195 82 31) !important;
   text-shadow: none; /* Prevent inheritance from `body` */
 }
 .btn-secondary:hover{
-  background-color: rgb(0 104 56) !important;
+  background-color: rgb(69 45 34) !important;
 }
 
 
@@ -256,7 +350,8 @@ methods:{
 }
 .main-div{
      height: 100%;
-    text-shadow: 0 0.05rem 0.1rem rgb(0 0 0 / 50%);
+     overflow-x: hidden !important;
+    /* text-shadow: 0 0.05rem 0.1rem rgb(0 0 0 / 50%); */
     /* box-shadow: inset 0 0 5rem rgb(0 0 0 / 50%); */
 }
 </style>

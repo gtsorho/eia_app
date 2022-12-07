@@ -31,9 +31,9 @@
               </div>
           </div>
           <div class="widget-49-meeting-action card-footer border-0 bg-transparent">
-            <a href="#" class="btn btn-sm float-end fw-bold px-4 btn-flash-border-primary border-2 rounded-pill" @click="centerLogin">Login</a>
+            <a href="#" class="btn login float-end fw-bold px-4 btn-flash-border-primary border-2 rounded-pill "  @click="centerLogin">Login <i class="bi bi-arrow-right-short"></i></a>
             <Transition>
-              <p v-if="resMsg" style="font-size:15px" class="text-danger">{{resMsg}}</p>
+              <p v-if="resMsg" style="font-size:10px" class="text-danger">{{resMsg}}</p>
             </Transition>
           </div>
       </div>
@@ -207,6 +207,12 @@ export default {
 </script>
 
 <style scoped>
+.login{
+  background-color:#c3521f !important
+}
+.login:hover{
+  background-color:#452d22!important;
+}
   .v-enter-active,
   .v-leave-active {
     transition: opacity 0.5s ease;
@@ -227,7 +233,7 @@ input[type=file]::file-selector-button {
   
 }
 .card-footer a{
-  background-color:rgb(0 104 56) !important;
+  background-color:rgb(0 104 56);
   color: #fff;
   font-weight: 700;
   text-transform: uppercase;
@@ -235,7 +241,7 @@ input[type=file]::file-selector-button {
 }
 
 .card-footer a:hover{
-  background-color: rgb(85 176 71) !important;
+  background-color: rgb(85 176 71);
 }
 
 .form-control[data-v-6a57b8d6]:focus {
@@ -442,7 +448,7 @@ form i, .bi-search {
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
-  color: #1e721d;
+  color: #c3521f;
   font-weight: 500;
   font-size: 1.5rem;
   line-height: 1;
@@ -579,7 +585,7 @@ form i, .bi-search {
 }
 
 .widget-49 .widget-49-title-wrapper .widget-49-meeting-info .widget-49-pro-title {
-  color: #3c4142;
+  color: #c3521f;
   font-size: 14px;
 }
 
