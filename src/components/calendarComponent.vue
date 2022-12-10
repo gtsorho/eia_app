@@ -37,8 +37,11 @@
                   <Popper :content="`${calendar_day(harvest)} - Harvesting`" hover arrow style="width:130%"  v-for="harvest in calendar_data.Harvesting" :key="harvest" v-show="new Date(harvest).getMonth() == n-1">
                     <div class="progress-bar bg-warning" role="progressbar"  style="width: 130%; height:13px" aria-valuenow="30" aria-valuemin="0" aria-valuemax="130"></div>
                   </Popper>
-                  <Popper :content="`${calendar_day(firtilize)} - Fertilizer App.`" hover arrow style="width:130%"  v-for="firtilize in calendar_data.firtilizer" :key="firtilize" v-show="new Date(firtilize).getMonth() == n-1">
+                  <Popper :content="`${calendar_day(firtilize)} - Fertilizer App(Basel)`" hover arrow style="width:130%"  v-for="firtilize in calendar_data.firtilizerB" :key="firtilize" v-show="new Date(firtilize).getMonth() == n-1">
                     <div class="progress-bar bg-orange" role="progressbar"  style="width: 130%; height:13px" aria-valuenow="30" aria-valuemin="0" aria-valuemax="130"></div>
+                  </Popper>
+                  <Popper :content="`${calendar_day(firtilize)} - Fertilizer App(Top Dress)`" hover arrow style="width:130%"  v-for="firtilize in calendar_data.firtilizerT" :key="firtilize" v-show="new Date(firtilize).getMonth() == n-1">
+                    <div class="progress-bar bg-wine" role="progressbar"  style="width: 130%; height:13px" aria-valuenow="30" aria-valuemin="0" aria-valuemax="130"></div>
                   </Popper>
                 </div>
             </div>
@@ -103,6 +106,9 @@ export default {
 }
 .bg-orange{
   background-color: rgb(148, 45, 173) !important;
+}
+.bg-wine{
+  background-color: rgb(45, 173, 166) !important;
 }
 .bg-dark{
   background-color: rgb(32, 32, 32) !important;

@@ -47,31 +47,35 @@
 
   <div class="form-check form-check-inline mt-4">
     <input class="form-check-input bg-warning" disabled type="checkbox" />
-    <label class="form-check-label">Harvesting</label>
+    <label class="form-check-label">Land Preparation</label>
   </div>
   <div class="form-check form-check-inline mt-4">
     <input class="form-check-input bg-success" disabled type="checkbox" />
-    <label class="form-check-label">Planting</label>
+    <label class="form-check-label">Rain </label>
   </div>
   <div class="form-check form-check-inline mt-4">
     <input class="form-check-input bg-info" disabled type="checkbox" />
-    <label class="form-check-label">Rain</label>
+    <label class="form-check-label">Planting</label>
   </div>
   <div class="form-check form-check-inline mt-4">
     <input class="form-check-input bg-brown" disabled type="checkbox" />
-    <label class="form-check-label">Land Preparation</label>
+    <label class="form-check-label">Fertilizer App(Basal)</label>
   </div>
   <div class="form-check form-check-inline mt-4">
     <input class="form-check-input bg-secondary" disabled type="checkbox" />
     <label class="form-check-label">Weeding</label>
   </div>
   <div class="form-check form-check-inline mt-4">
+    <input class="form-check-input bg-wine" disabled type="checkbox" />
+    <label class="form-check-label">Fertilizer App(Top Dressing)</label>
+  </div>
+    <div class="form-check form-check-inline mt-4">
     <input class="form-check-input bg-orange" disabled type="checkbox" />
-    <label class="form-check-label">Fertilizer App.</label>
+    <label class="form-check-label">Pesticide App.</label>
   </div>
   <div class="form-check form-check-inline mt-4">
     <input class="form-check-input bg-danger" disabled type="checkbox" />
-    <label class="form-check-label">Pesticide</label>
+    <label class="form-check-label"> Harvesting </label>
   </div>
   <div class="calendar">
     <Calendar
@@ -82,7 +86,7 @@
     />
     <p
       v-show="selectionChange.length == 0"
-      class="fw-bolder fs-5 my-5 text-danger"
+      class="fw-bolder fs-6 my-5 text-danger"
     >
       No result found, Please make your selections
     </p>
@@ -1053,19 +1057,28 @@ export default {
         rainOnset = new Date(this.cropdata[i].Rain[0])
         landpreparation = new Date(rainOnset).setDate(rainOnset.getDate() - 30); 
         this.cropdata[i].landpreparation = [new Date(landpreparation)]
+
         planting = new Date(landpreparation).setDate(new Date(landpreparation).getDate() + 7);
         this.cropdata[i].planting = [new Date(planting)]
+
         basalfertApp = new Date(planting).setDate(new Date(planting).getDate() + 14); //*** */
-        this.cropdata[i].firtilizer = [new Date(basalfertApp)]
+        this.cropdata[i].firtilizerB = [new Date(basalfertApp)]
+
         topDressFertApp = new Date(basalfertApp).setDate(new Date(basalfertApp).getDate() + 21);//** */
-        this.cropdata[i].firtilizer.push(new Date(topDressFertApp))
+        // this.cropdata[i].firtilizerT.push(new Date(topDressFertApp))
+        this.cropdata[i].firtilizerT = [new Date(topDressFertApp)]
+
+
         weedingOne = new Date(planting).setDate(new Date(planting).getDate() + 30); 
         this.cropdata[i].weeding = [new Date(weedingOne)]
+
         weedingTwo = new Date(weedingOne).setDate(new Date(weedingOne).getDate() + 30); //** */
         this.cropdata[i].weeding.push(new Date(weedingTwo))
+
         // droughtStess = new Date(planting).setDate(new Date(planting).getDate() + 40);//** */
         perstidideApp = new Date(planting).setDate(new Date(planting).getDate() + 40);
         this.cropdata[i].pesticide = [new Date(perstidideApp)]
+        
         // cobForm = new Date(planting).setDate(new Date(planting).getDate() + 42); 
         haverting = new Date(planting).setDate(new Date(planting).getDate() + 70);
         this.cropdata[i].Harvesting = [new Date(haverting)]
@@ -1078,6 +1091,11 @@ export default {
 </script>
 
 <style scoped>
+label{
+  font-weight: 400 !important;
+  font-size: 13px !important;
+  font-family: 'Open Sans', sans-serif !important;
+}
 .calendar {
   padding: 10px;
   padding-bottom: 50px; /* Height of the footer */
@@ -1186,5 +1204,8 @@ export default {
 }
 .bg-danger {
   background-color: rgb(255, 109, 73) !important;
+}
+.bg-wine{
+  background-color: rgb(45, 173, 166) !important;
 }
 </style>
