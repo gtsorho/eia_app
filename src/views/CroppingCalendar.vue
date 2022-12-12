@@ -46,19 +46,19 @@
     </div> -->
 
   <div class="form-check form-check-inline mt-4">
-    <input class="form-check-input bg-warning" disabled type="checkbox" />
+    <input class="form-check-input bg-brown" disabled type="checkbox" />
     <label class="form-check-label">Land Preparation</label>
   </div>
   <div class="form-check form-check-inline mt-4">
-    <input class="form-check-input bg-success" disabled type="checkbox" />
+    <input class="form-check-input bg-info" disabled type="checkbox" />
     <label class="form-check-label">Rain </label>
   </div>
   <div class="form-check form-check-inline mt-4">
-    <input class="form-check-input bg-info" disabled type="checkbox" />
+    <input class="form-check-input bg-success" disabled type="checkbox" />
     <label class="form-check-label">Planting</label>
   </div>
   <div class="form-check form-check-inline mt-4">
-    <input class="form-check-input bg-brown" disabled type="checkbox" />
+    <input class="form-check-input bg-orange" disabled type="checkbox" />
     <label class="form-check-label">Fertilizer App(Basal)</label>
   </div>
   <div class="form-check form-check-inline mt-4">
@@ -70,11 +70,11 @@
     <label class="form-check-label">Fertilizer App(Top Dressing)</label>
   </div>
     <div class="form-check form-check-inline mt-4">
-    <input class="form-check-input bg-orange" disabled type="checkbox" />
+    <input class="form-check-input bg-danger" disabled type="checkbox" />
     <label class="form-check-label">Pesticide App.</label>
   </div>
   <div class="form-check form-check-inline mt-4">
-    <input class="form-check-input bg-danger" disabled type="checkbox" />
+    <input class="form-check-input bg-warning" disabled type="checkbox" />
     <label class="form-check-label"> Harvesting </label>
   </div>
   <div class="calendar">
@@ -1206,6 +1206,6 @@ label{
   background-color: rgb(255, 109, 73) !important;
 }
 .bg-wine{
-  background-color: rgb(45, 173, 166) !important;
+  background-color: rgb(150, 58, 58) !important;
 }
 </style>

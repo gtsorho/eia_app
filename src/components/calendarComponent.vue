@@ -108,7 +108,7 @@ export default {
   background-color: rgb(148, 45, 173) !important;
 }
 .bg-wine{
-  background-color: rgb(45, 173, 166) !important;
+  background-color: rgb(150, 58, 58) !important;
 }
 .bg-dark{
   background-color: rgb(32, 32, 32) !important;
