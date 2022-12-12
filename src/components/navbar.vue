@@ -49,7 +49,8 @@
                 <button class="navbar-toggler" style="border-color:#ffffffa6!important" type="button"
                     ref="toggleCollapse" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
                     aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <!-- <span class="navbar-toggler-icon"></span> -->
+                    <i class="bi bi-list text-light"></i>
                 </button>
             </div>
         </div>

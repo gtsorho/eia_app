@@ -1,30 +1,40 @@
 <template>
-    <div class="container my-5">
-<div class="row row-cols-md-2 justify-content-center row-cols-lg-3">
-    <div  class="col-lg-4" v-for="(story, index) in storyset" :key="index">
-        <div class="card card-margin">
-            <div class="card-body pt-3" style="min-height:80%">
-                <div class="widget-49">
-                    <div class="widget-49-title-wrapper">
-                        <div class="widget-49-date-primary">
-                          <img  :src="require('../assets/icons/' + story.icons)">
-                            <!-- bi bi-bar-chart-line fs-2 -->
-                        </div>
-                        <div class="widget-49-meeting-info mx-auto" style="width: 70%;">
-                            <span class="widget-49-pro-title fw-bold text-uppercase">{{story.title}}</span>
-                            <!-- <span class="widget-49-meeting-time">12:00 to 13.30 Hrs</span> -->
-                        </div>
-                    </div>
-                    <p class="widget-49-meeting-points">{{story.description}}</p>
-                </div>
-            </div>
-            <div class="widget-49-meeting-action card-footer border-0 bg-transparent text-end">
-                <router-link class="btn rounded-pill btn-sm px-4 text-light text-uppercase" style="background-color:rgb(85 176 71); font-weight:700; font-size:14px !important " :to="{name:'Storysetchartboard', params:{data:JSON.stringify(storyset[index].category)}}" >View <i class="bi bi-arrow-right-short"></i> </router-link>
-            </div>
-        </div>
-    </div>
-</div>
-<br><br>
+<div class="container my-5">
+  <div class="my-4 text-start">
+    <h3>Our Narrative</h3>
+    <p >
+      This Page details findings from exploratory to in-depth analysis (quantitative and qualitative) of a decade 
+      of data gathered and stored by the Africa RISING Dataverse portal. This report’s focus is centered on the 
+      cultivation of maize, soybean, cowpea and groundnut in the upper regions of Ghana. However, highlights are 
+      thrown on other crops of interest where the data supports our objective. 
+    </p>
+    <a class="btn rounded-pill btn-sm px-4 text-light text-uppercase lmore border border-success border-2"  href="http://aghub.miphost.com/api/datalake/download/Assembled_Knowledge_V2.pdf">learn More <i class="bi bi-arrow-right-short"></i></a>
+  </div>
+  <div class="row row-cols-md-2 justify-content-center row-cols-lg-3">
+      <div  class="col-lg-4" v-for="(story, index) in storyset" :key="index">
+          <div class="card card-margin">
+              <div class="card-body pt-3" style="min-height:80%">
+                  <div class="widget-49">
+                      <div class="widget-49-title-wrapper">
+                          <div class="widget-49-date-primary">
+                            <img  :src="require('../assets/icons/' + story.icons)">
+                              <!-- bi bi-bar-chart-line fs-2 -->
+                          </div>
+                          <div class="widget-49-meeting-info mx-auto" style="width: 70%;">
+                              <span class="widget-49-pro-title fw-bold text-uppercase">{{story.title}}</span>
+                              <!-- <span class="widget-49-meeting-time">12:00 to 13.30 Hrs</span> -->
+                          </div>
+                      </div>
+                      <p class="widget-49-meeting-points">{{story.description}}</p>
+                  </div>
+              </div>
+              <div class="widget-49-meeting-action card-footer border-0 bg-transparent text-end">
+                  <router-link class="btn rounded-pill btn-sm px-4 text-light text-uppercase" style="background-color:rgb(85 176 71); font-weight:700; font-size:14px !important " :to="{name:'Storysetchartboard', params:{data:JSON.stringify(storyset[index].category)}}" >View <i class="bi bi-arrow-right-short"></i> </router-link>
+              </div>
+          </div>
+      </div>
+  </div>
+  <br><br>
 </div>
 </template>
 <script>
@@ -509,6 +519,13 @@ export default {
 </script>
 
 <style scoped>
+.lmore{
+  background-color:#c3521f !important;
+}
+
+.lmore:hover{
+  background-color: #452d22 !important;
+}
 
 .card-margin {
     margin-bottom: 1.875rem;

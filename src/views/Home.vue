@@ -6,7 +6,8 @@
       <div class="container">
         <a class="navbar-brand" href="#"><img class="float-start"   height="44" src="../assets/logo.png" > </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+          <!-- <span class="navbar-toggler-icon"></span> -->
+          <i class="bi bi-list text-light"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -48,11 +49,11 @@
 
 
 <div class="row container-fluid ">
-  <div class="col-6 ">
+  <div class="col-sm-12 col-lg-6">
       <p style="padding-inline:.2in; border-left: 5px rgb(195 82 31) solid; font-size: 15px; margin-left: 10px;" class="lh-lg my-5   text-start ">Excellence in Agronomy for Sustainable Intensification and Climate Change Adaptation is a CGIAR wide initiative that seeks to connect public and private sector partners with CGIAR centres to develop scalable agronomic solutions across 6 CGIAR regions. The solutions are developed within specific Use Cases, which are purpose driven and demand led partnerships that seek to package agronomy solutions as Minimum Viable Products, that can be validated and scaled in target geographies, cropping systems and within designated farmer communities The EiA Events platform convenes different conversations on agronomy happenning all over the world.</p>
       <a href="https://www.cgiar.org/initiative/11-excellence-in-agronomy-eia-solutions-for-agricultural-transformation/" class="btn rounded-pill float-start text-light mx-3 px-3 text-uppercase lmore" >learn more <i class="bi bi-arrow-right-short"></i></a>
   </div>
-  <div class="col-6">
+  <div class="col-sm-12 col-lg-6">
     <img  :src="require('../assets/Company-pana.svg')" alt="">  
   </div>
 </div>
