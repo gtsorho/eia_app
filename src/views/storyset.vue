@@ -8,7 +8,7 @@
       cultivation of maize, soybean, cowpea and groundnut in the upper regions of Ghana. However, highlights are 
       thrown on other crops of interest where the data supports our objective. 
     </p>
-    <a class="btn rounded-pill btn-sm px-4 text-light text-uppercase lmore border border-success border-2"  href="http://aghub.miphost.com/api/datalake/download/Assembled Knowledge.pdf">learn More <i class="bi bi-arrow-right-short"></i></a>
+    <a class="btn rounded-pill btn-sm px-4 text-light text-uppercase lmore border border-success border-2"  href="http://aghub.miphost.com/api/datalake/download/Assembled Knowledge.pdf">Download Report <i class="bi bi-download"></i></a>
   </div>
   <div class="row row-cols-md-2 justify-content-center row-cols-lg-3">
       <div  class="col-lg-4" v-for="(story, index) in storyset" :key="index">
