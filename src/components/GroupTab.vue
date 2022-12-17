@@ -2,306 +2,217 @@
         <div class="card bg-light shadow-lg p-3 mb-5">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-12 col-md-6 col-lg-6">
-                        <!-- ********************************** -->
-                        <div class="card border-0 mt-0" v-if="showupdate">
-                            <div class="card-body p-0 text-start row">
-                                <div class="col-4">
-                                    <label for="Label" class="form-label" style="font-size:15px !important">Label</label>
-                                    <input type="text" class="form-control form-control-sm mb-0" required v-model="extGroup.label" id="label" placeholder="eg.Livestock Farmers">
-                                </div>
-                                <div class="col-6">
-                                    <label for="description" class="form-label" style="font-size:15px !important">Description</label>
-                                    <input type="text" class="form-control form-control-sm mb-0" id="description" required v-model="extGroup.description" placeholder="lorem ipsum init">
-                                </div>
-                                <div class="col-2">
-                                    <button type="submit" class="btn btn-sm float-end rounded-pill text-light d-inline mt-3 me-2" style="font-size:15px !important; background-image: linear-gradient(198deg, #000000, #1f6c15) !important;" @click="updateGroup()">Update</button>
-                                </div>
-                            </div>
-                            <span style="font-size:12px !important" class="text-warning fw-bold">{{resMsg}}</span>
-                        </div>
+                    <div class="col-12 col-md-3 col-lg-3">
+                                <input type="text" class="form-control-sm form-control border-end-0 border-start-0 fs-6 border-3"
+                                    id="dropdownMenuButton2" aria-expanded="false"
+                                    placeholder="&#xF52A;"  aria-describedby="basic-addon2" 
+                                    style=" font-family:'bootstrap-icons'"
+                                    v-model="searchText"
+                                    @keyup="searchPodcasts()"
+                                >
                     </div>
-                    <div class="col-12 col-md-6 col-lg-6">
-                        <div class="float-end">
-                            <Transition>
-                                <p style="font-size:11px" v-if="resMsg" class="text-warning text-capitalize d-inline fw-bold px-3">{{resMsg}}</p>
-                            </Transition>
+                    <div class="col">
+                        <p style="font-size:11px" v-if="resMsg" class="text-warning text-capitalize d-inline fw-bold px-3">{{resMsg}}</p>
 
+                        <i class="btn btn-sm btn-danger rounded-pill bi bi-trash3 mx-2" v-if="checkeddata.length > 0" @click="deletePodcast"></i>
+                        
                             <div class="dropdown d-inline" >
-                                <a href="#" class="dropdown-toggle text-light fw-bold text-decoration-none btn btn-sm btn-secondary rounded-pill"  data-bs-toggle="dropdown" aria-expanded="false">+<i class="bi bi-people"></i></a>
-                                <div class="dropdown-menu px-4" style="width:3in" aria-labelledby="dropdownMenuButton1">
-                                    <div class="mb-3">
-                                        <label for="Label" class="form-label" style="font-size:15px !important">Label</label>
-                                        <input type="text" class="form-control form-control-sm" required v-model="extGroup.label" id="label" placeholder="eg.Livestock Farmers">
+                                <i class="btn btn-sm rounded-pill btn-warning bi bi-share-fill mx-2dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false"  v-if="checkeddata.length > 0" @click="getUsers()" ></i>
+                                <div class="dropdown-menu px-4 py-0" style="width:3.5in" aria-labelledby="dropdownMenuButton1">  
+                                    <div class=" input-group"  style="font-size:13px !important">
+                                        <select class="form-select form-select-sm "  aria-label=".form-select-sm example" v-model="officerId" >
+                                            <option value="default">please select an Officer</option>
+                                            <option  v-for="(officer, i) in officers" :key="i" :value="officer.id">{{officer.name}}</option>
+                                        </select>   
+                                        <i class="bi bi-arrow-right-circle-fill input-group-text" style="font-size:18px" @click="shareContact()"></i>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="description" class="form-label" style="font-size:15px !important">Description</label>
-                                        <input type="text" class="form-control form-control-sm" id="description" required v-model="extGroup.description" placeholder="lorem ipsum init">
-                                    </div>
-                                    <button type="submit" class="btn btn-sm float-end rounded-pill text-light" style="font-size:15px !important; background-image: linear-gradient(198deg, #000000, #1f6c15) !important;" @click="createGroup()">create group</button>
                                 </div>
                             </div>
-                            <i class="btn bi bi-trash3 mx-2 rounded-pill" :class="delete_display" @click="deletedata" style="color:#fa0101; "></i>
-                            <button type="button" style="background-color:#061704"  class="btn rounded-pill text-light mx-2 shadow-md btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">+ contact</button>
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <Addcontent  @modalSubmit="reloadList()"  :updatedata="updateValues"/>
-                            </div>
-                        </div>
+                    </div>
+                    
+                    <div class="col-12 col-md-4 col-lg-4">
+                           <div>
+                                <input type="text" v-model="filename"  class="d-block form-control-sm form-control mb-2 text-secondary" placeholder="Name or Description (less than 40 letters)" id="">
+                                <input class="form-control mb-0 form-control-sm  fileUpload" @change="onFileChange" id="formFileSm"   ref="importfile"  type="file">
+                                <button class="btn btn-sm rounded-pill px-3 text-light"  @click="uploadfile()" v-if="!isLoading && !uploadDone" style="background-color:#006d0bea ">Add</button>
+                                <button class="btn btn-sm rounded-pill px-3 text-light"  v-if="uploadDone" style="background-color:#006d0bea"><i class="bi bi-file-earmark-check"></i></button>
+
+                                <div class="spinner-border "  v-if="isLoading" role="status">
+                                    <div class="spinner-grow spinner-grow-sm"  role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
+                           </div>
                     </div>
                 </div>
                 <hr>
-                <h5 class="card-title text-start fw-bolder" style="color:#061704">Groups and Messaging</h5>
+                <h5 class="card-title fw-bolder text-start">Uploads
 
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="card" style=" border:3px solid rgb(21 84 12) !important;">
-                        <div class="card-body text-start">
-                            <h5 class="card-title">Groups</h5>
-                            <a href="#" class="text-decoration-none text-dark">
-                                <div class="alert rounded-pill " v-for="(group ,i) in extgroups" :key="i" style="background-color: rgb(252 191 161)" @click="getallExt(group.id)" role="alert">
-                                    <strong style="font-size:13px" class="text-capitalize">{{group.label}} </strong>
-                                    <button type="button" class="btn-close btn-close-sm float-end"  data-bs-dismiss="alert" aria-label="Close" @click="deleteGroup(group.id)"></button>
-                                    <a href="#"  style="font-size:13px" class="text-decoration-none text-body me-2 float-end" 
-                                        @click="groupid = group.id, showupdate = !showupdate, extGroup.label= group.label, extGroup.description = group.description">
-                                        <i class="bi bi-pencil-fill"></i>
-                                    </a>
-                                </div>
-                            </a> 
-                        </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card " style="border:3px solid rgb(197 81 24) !important; margin-top: 2rem!important">
-                        <div class="card-body">
-                            <h5 class="card-title text-start">Farmers</h5>
-                            <p v-if="extensions.length == 0" class="mt-5" style="font-size:10px" >no farmers results found</p>
-                            <div class="alert rounded-pill text-start " v-for="(extension ,i) in extensions" :key="i" style="background-color: rgb(170 255 159)" role="alert">
-                                <strong style="font-size:13px" class="text-capitalize">{{extension.extension.name}} </strong> <small  style="font-size:10px" >{{extension.extension.phone}}</small>
-                                <button type="button" class="btn-close btn-close-sm float-end"  data-bs-dismiss="alert" aria-label="Close" @click="deleteGrouplink(extension.id, extension.extension.phone), groupid=extension.extGroupId"></button>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card mt-5" style="border: 3px solid rgb(42 42 42) !important;">
-                            <div class="card-body">
-                            <h5 class="card-title text-start">Messaging</h5>
-                                <div class=" input-group"  style="font-size:13px !important">
-                                    <div class="dropdown  input-group-text d-inline" >
-                                        <i class="bi bi-paperclip dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false" style="transform: rotate(45deg); font-size:20px;"></i>
-                                        <div class="dropdown-menu px-2" style="width:3in" aria-labelledby="dropdownMenuButton1">
-                                            <div class="list-group" style="font-size:12px; width:fit-content" >
-                                            <a href="#" v-for="(podcast, i) in podcasts" :key="i" class="list-group-item py-1 ms-2  list-group-item-action"
-                                                @click="links.push({link:podcast.webViewLink, name:podcast.name})">{{podcast.name}}
-                                             </a>
+                    <span class="float-end">
+                        <input type="checkbox" class="btn-check btn-check-sm rounded-pill" v-model="selectAll" id="btn-check-2-outlined" autocomplete="off">
+                        <label class="btn btn-sm rounded-pill btn-outline-warning " for="btn-check-2-outlined" @click="select">{{ checkeddata.length != podcasts.length ? 'Select All': 'Unselect'}}</label><br>
+                    </span>
+                </h5>
+                    
+
+                <div class="row text-start justify-content-md-center" style="font-size:13px !important;">
+                        <div class="col-md-auto" v-for="(podcast, i) in podcasts" :key="i" >
+                            <a :href="podcast.webViewLink" class="text-decoration-none text-dark">
+                                <div class="card mb-3"   >
+                                    <div class="row g-0">
+                                        <div class="col-4">
+                                            <img :src="require('../assets/icons/' + imgURL(podcast.gName))" class="img-fluid rounded-start" style="width: 60px;" alt="">
+                                        </div>
+                                        <div class="col position-relative">
+                                            <div class="form-check form-check-reverse position-absolute top-0 end-0">
+                                            <input class="form-check-input" type="checkbox"  id="reverseCheck1" :value="podcast.id" v-model="checkeddata" >
+                                            </div>
+                                            <div class="card-body p-1">
+                                                <p class="card-text mb-1 fw-bold text-capitalize">{{podcast.name}} <i class="bi bi-share-fill mx-3" v-show="jwt['id'] + '.0' === podcast.accessPemission"></i></p>
+                                                <p class="card-text mb-1"><small class="text-muted">Last updated {{new Date(podcast.updatedAt).toGMTString()}}</small></p>
                                             </div>
                                         </div>
                                     </div>
-
-
-                                    <textarea class="form-control form-control-sm" placeholder="Lorem ipsum, dolor sit amet consectetur adipisicing elit."  aria-label=".form-control-sm example" v-model="smsMsg"></textarea>   
-                                    <i v-if="smsMsg.length > 0" class="bi bi-send-fill input-group-text ms-2" style="font-size:20px" @click="sendSms()"></i>
-                                    <i v-else class="bi bi-chat-square-text-fill input-group-text ms-2" style="font-size:20px"></i>
                                 </div>
-                                    <small style="font-size:13px" class="text-success">{{smsRes}}</small>     
-                                    <a href="#" class="btn btn-sm btn-success overflow-hidden m-1 rounded-pill" v-for="(link, i) in links" :key="i" style="width:100px; height:30px">{{link.name}}</a>                           
-                            </div>
+                            </a>
                         </div>
-                        
                     </div>
                 </div>
             </div>
-        </div>
 </template>
 
     <script>
-    import axios from 'axios'    
-        import Addcontent from './contactmodal.vue'
-
-
+    import axios from 'axios'
+    import jwt_decode from "jwt-decode";
+    
     export default {
-        components: { 
-            Addcontent
+        components: {
         },
         data() {
             return {
-                links:[],
-                podcasts:'',
-                smsRes:'',
-                smsMsg:'',
-                phoneNo:[],
-                groupid:null,
-                showupdate:false,
-                searchText:'',
-                extgroups:[],
-                extensions:[],
-                searchRes:[],
-                updateValues:null,
-                checkeddata : [],
-                allSelected: false,
                 resMsg:'',
-                extGroup:{
-                    label:'',
-                    description:''
-                }
-
+                jwt:[],
+                officerId:'default',
+                officers:[],
+                checkeddata : [],
+                filename:'',
+                FormData: new FormData(),
+                searchText:'',
+                currentModal: 'Stock',
+                podcasts:[],
+                searchRes:[],
+                refCount: 0,
+                isLoading: false,
+                uploadDone:false
             }
         },
+       
         beforeMount(){
-           this.getallgroups();
-           this.getPodcasts()
-        },
-        computed:{
-            delete_display(){
-                if(this.checkeddata.length == 0){
-                    return 'd-none'
-                }
-            },
-            selectAll: {
-                get: function () {
-                    return this.contacts ? this.checkeddata.length == this.contacts.length : false;
-                },
-                set: function (value) {
-                    var checkeddata = [];
-                    if (value) {
-                        this.contacts.forEach(function (data) {
-                            checkeddata.push(data.id);
-                        });
-                    }
-                    this.checkeddata = checkeddata;
-                }
-            },
+            this.getPodcasts()
         },
         methods: {
-            // groups*************************************************************************
-            getallgroups(){
+            setLoading(isLoading) {
+            if (isLoading) {
+                this.refCount++;
+                this.isLoading = true;
+            } else if (this.refCount > 0) {
+            this.refCount--;
+            this.isLoading = (this.refCount > 0);
+            this.uploadDone = true
+            setInterval(() => {
+                this.uploadDone = false              
+            }, 2000);
+            
+            }
+            },
+            getUsers(){
                  var token = this.getCookie('token')
-
-                axios.get('http://aghub.miphost.com/api/broadcast/group/show', 
+                axios.get('http://aghub.miphost.com/api/broadcast/', 
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
-                    console.log(response.data)
-                    this.extgroups = response.data
+                    this.officers = response.data
                 }).catch(error => {
                     console.log(error);
                 })
             },
-            createGroup(){
-                var token = this.getCookie('token')
-                axios.post('http://aghub.miphost.com/api/broadcast/group', this.extGroup,
-                    {headers:{'Authorization': `Bearer ${token}`, 'Content-Type':'application/json'}}
-                ).then(response =>{
-                    this.resMsg = response.data.label + ' has been created'
-                    this.extGroup.label=''
-                    this.extGroup.description=''
-                    setTimeout(() => {
-                            this.resMsg=''
-                    }, 2000);
+            shareContact(){
+            var token = this.getCookie('token')
 
-                }).catch(error =>{
-                    console.log(error)
-                    this.resMsg = error.response.data
-                    setTimeout(() => {
-                        this.resMsg=''
-                    }, 2000);
+            let arr = []
+            let axiosarray = []
+            let checkeddata2 = this.checkeddata
+                checkeddata2.forEach(data => 
+                {
+                    var newpromise = axios.post('http://aghub.miphost.com/api/broadcast/podcasts/share/', 
+                        {
+                            extId:data,
+                            partnerId:this.officerId
+                        },
+                        { headers:{'Authorization': `Bearer ${token}`}}
+                    )
+                    axiosarray.push(newpromise)
                 })
+                axios.all(axiosarray)
+                .then(axios.spread((...responses) =>{ 
+                    responses.forEach(
+                        res => arr.push(res.data)
+                    )
+                    if(arr.length == checkeddata2.length){
+                        this.resMsg =  'contact(s) shared'
+                        setTimeout(() => {
+                                this.resMsg=''
+                                this.checkeddata = []
+                        }, 2000);
+                    }                     
+                })).catch(error => {
+                    this.resMsg =  error.response.data
+                }) 
             },
-             updateGroup(){
-                 var token = this.getCookie('token')
-                axios.post('http://aghub.miphost.com/api/broadcast/group/update/'+ this.groupid, 
-                    this.extGroup,
-                    {headers:{'Authorization': `Bearer ${token}`}})
-                .then(response =>  {
-                     this.resMsg = response.data
-                    setTimeout(() => {
-                            this.extGroup.label=''
-                            this.extGroup.description=''
-                            this.resMsg=''
-                            this.showupdate = !this.showupdate
-                            this.getallgroups()
-                    }, 2000);
-
-                }).catch(error => {
-                    console.log(error);
-                })
+            onFileChange(e) {
+                const file = e.target.files;
+                this.FormData = new FormData()
+                this.FormData.append('file',file[0]);
             },
-            deleteGroup(groupid){
-                var token = this.getCookie('token')
-                axios.get('http://aghub.miphost.com/api/broadcast/group/delete/'+ groupid, 
-                    { headers:{'Authorization': `Bearer ${token}`}})
-                .then(response =>  {
-                    console.log(response)
-                    this.getallgroups()
-                }).catch(error => {
-                    console.log(error);
-                })
-            },
-
-            //group links************************************************************************ 
-            getallExt(groupid){
-                var token = this.getCookie('token')
-                axios.get('http://aghub.miphost.com/api/broadcast/grouplink/show/'+ groupid, 
-                    { headers:{'Authorization': `Bearer ${token}`}})
-                .then(response =>  {
-                    this.extensions = response.data
-                    console.log(this.extensions)
-
-                    this.extensions.forEach(contact => {
-                        this.phoneNo.push(contact.extension.phone)
-                    });
-
-                }).catch(error => {
-                    console.log(error);
-                })
-            },
-            deleteGrouplink(extId, phoneNo){
-                var token = this.getCookie('token')
-                axios.get('http://aghub.miphost.com/api/broadcast/grouplink/delete/'+ extId, 
-                    { headers:{'Authorization': `Bearer ${token}`}})
-                .then(response =>  {
-                    const index = this.phoneNo.indexOf(phoneNo);
-                    if (index > -1) { // only splice array when item is found
-                        this.phoneNo.splice(index, 1); // 2nd parameter means remove one item only
-                    }
-                }).catch(error => {
-                    console.log(error);
-                })
-            },
-            sendSms(){
-                var token = this.getCookie('token')
-                let linkarr = []
-                this.links.forEach(link => {
-                    linkarr.push(link.link)
+             uploadfile () {
+                axios.interceptors.request.use((config) => {
+                    this.setLoading(true);
+                    return config;
+                    }, (error) => {
+                    this.setLoading(false);
+                    return Promise.reject(error);
                 });
-                let links2send = linkarr.join('\n')
 
-                this.smsMsg = `${this.smsMsg} \n ${links2send}`
-                axios.post('http://aghub.miphost.com/api/broadcast/contact/notify', 
-                    {
-                        recipients:this.phoneNo,
-                        msg:this.smsMsg
-                    },
-                    { headers:{'Authorization': `Bearer ${token}`}})
-                .then(response =>  {
-                    console.log(response.data)
-                    if(response.data.code == 2000){
-                        this.smsRes = response.data.message
-                        this.smsMsg=''
-                    setTimeout(() => {
-                            this.smsRes=''
-                    }, 2000);
-                    }
-                }).catch(error => {
-                    console.log(error);
-                })
-            },            
-            reloadList(){
+                axios.interceptors.response.use((response) => {
+                    this.setLoading(false);
+                    return response;
+                    }, (error) => {
+                    this.setLoading(false);
+                    return Promise.reject(error);
+                });
+
                 var token = this.getCookie('token')
-                axios.get('http://aghub.miphost.com/api/broadcast/contact/show', 
-                    { headers:{'Authorization': `Bearer ${token}`}})
-                .then(response =>  {
-                    this.contacts = response.data
-                }).catch(error => {
+                this.FormData.append('fileName', this.filename)
+
+                var contentType = {
+                    headers: {
+                        'content-type':'multipart/form-data',
+                        'Authorization': `Bearer ${token}`
+                    }
+                }
+                axios.post(`http://aghub.miphost.com/api/broadcast/podcast/upload`, 
+                this.FormData, 
+                contentType 
+                )
+                .then( response =>{
+                    console.log(response)
+
+                    this.filename = ''
+                    this.$refs.importfile.type = 'text'
+                    this.$refs.importfile.type = 'file'
+                    this.FormData = new FormData()
+                    this.getPodcasts()
+                })
+                .catch( error => {
                     console.log(error);
                 })
             },
@@ -312,10 +223,92 @@
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
                    this.podcasts = response.data
+                axios.get('http://aghub.miphost.com/api/broadcast/podcasts/share', 
+                    { headers:{'Authorization': `Bearer ${token}`}})
+                .then(response =>  {
+                    this.jwt = jwt_decode(token);
+                    response.data.forEach(podcast => {
+                        this.podcasts.push(podcast)
+                    });
+                }).catch(error => {
+                    console.log(error);
+                })
+                }).catch(error => {
+                    console.log(error);
+                })
+
+            },
+
+            imgURL(name){
+                if(name.endsWith('.pdf')) return 'pdf.png'
+                else if(name.endsWith('.mp3')) return 'music.png'
+                else if(name.endsWith('.jpg') || name.endsWith('.jpeg') || name.endsWith('.png')) return 'image.png'
+                else if(name.endsWith('.mp4') || name.endsWith('.mkv')) return 'video.png'
+                else if(name.endsWith('.docx') || name.endsWith('.xlsx') || name.endsWith('.txt')) return 'doc.png'
+                else return 'unknown.png'
+                
+            },
+            searchPodcasts(){
+                var token = this.getCookie('token')
+
+                if(this.searchText.length <= 0) return this.getPodcasts()
+
+                // console.log(this.searchText)
+                axios.get('http://aghub.miphost.com/api/broadcast/podcast/' +  this.searchText, 
+                    { headers:{'Authorization': `Bearer ${token}`}})
+                .then(response =>  {
+                    this.podcasts = response.data
+                    console.log(response.data)
                 }).catch(error => {
                     console.log(error);
                 })
             },
+            // getProduct(name){
+            //     var token = this.getCookie('token')
+
+            //     axios.get('/api/searchStockReport/'+ name, 
+            //         { headers:{'Authorization': `Bearer ${token}`}})
+            //     .then(response =>  {
+            //         console.log(response.data)
+            //         this.stocks = response.data
+            //     }).catch(error => {
+            //         console.log(error);
+            //     })
+            // },
+            deletePodcast() {
+                var token = this.getCookie('token')
+
+                let arr = []
+                let axiosarray = []
+                let checkeddata2 = this.checkeddata
+                console.log(checkeddata2)
+                if (confirm('All selection(s) will be deleted/distroyed(Permanently)')){
+                    checkeddata2.forEach(data => 
+                    {
+                        var newpromise = axios.get('http://aghub.miphost.com/api/broadcast/podcast/delete/'+ data, 
+                            { headers:{'Authorization': `Bearer ${token}`}}
+                        )
+                        axiosarray.push(newpromise)
+                    })
+                    axios.all(axiosarray)
+                    .then(axios.spread((...responses) =>{ 
+                        responses.forEach(
+                            res =>arr.push(res.data)
+                        )
+                        console.log(arr)
+
+                        if(arr.length == checkeddata2.length){
+                            console.log('success')
+                            this.getPodcasts()
+                        }                     
+                    })).catch(error => {
+                        console.log(error);
+                    }) 
+                }else{
+                    console.log('cancelled')
+                }
+            },
+
             getCookie(cname) {
                 let name = cname + "=";
                 let ca = document.cookie.split(';');
@@ -331,6 +324,22 @@
                 return "";
             },
         },
+        computed:{            
+            selectAll: {
+                get: function () {
+                    return this.podcasts ? this.checkeddata.length == this.podcasts.length : false;
+                },
+                set: function (value) {
+                    var checkeddata = [];
+                    if (value) {
+                        this.podcasts.forEach(function (data) {
+                            checkeddata.push(data.id);
+                        });
+                    }
+                    this.checkeddata = checkeddata;
+                }
+            },
+        }    
     }
 </script>
 <style scoped>

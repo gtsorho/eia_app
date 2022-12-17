@@ -16,35 +16,29 @@
   <span v-if="chartdata == null || chartdata.length < 1"> 
     <iframe v-if="powerBi " title="IITA" style="width:100%; height:6.2in"  src="https://app.powerbi.com/view?r=eyJrIjoiYzM2MmIyNGItYTYwYy00MzEwLTliYjktMDljYjNhYTNlMjdiIiwidCI6IjA1Y2UxNTMyLWZjY2ItNDc2Mi04YjRkLTkxOWIxNzRmZDkxMSIsImMiOjh9&amp;pageName=ReportSection039b7f79d60b91083bf9" frameborder="0" allowfullscreen="true"></iframe>
   </span>
-
   <div class="row row-cols-sm-1 justify-content-center row-cols-md-2 mb-4">
     <div class="col mb-4" v-for="(data , i) in chartdata" :key="i" v-show="i < 4" >
         <div class="card">
           <div class="card-header text-start text-capitalize">
             <small class="fw-bold" v-if="!data.xyKeys[0] || !data.xyKeys[1] ">{{`plot of x data by y data`}}</small>
-            <small v-else class="fw-bold">{{`plot of ${data.xyKeys[0]} by ${data.xyKeys[1]}`}}</small>
+            <small v-else class="fw-bold" style="font-size:12px">{{`plot of ${data.y_data} against ${data.x_data}`}}</small>
             <select class="form-select form-select-sm w-25 float-end" v-model="currentChart[i]" aria-label=".form-select-sm example">
               <option value="type">Type</option>
               <option value="Chart">Bar Chart</option>
               <option value="Doughnut">Doughnut</option>
-              <option value="Radar">Radar Chart</option>
-              <option value="Scatter">Scatter Chart</option>
               <option value="Line">Line Chart</option>
-              
             </select>
           </div>
           <div class="card-body">
-            <KeepAlive>
-              <component :is="currentChart[i]" :graphValues="
+              <component :is="currentChart[i]" v-if="data.show" :graphValues="
                 [
                   {
-                    lables: data.x_data
+                    lables:  data.chartVals[1]
+
                   },
-                  ['16 and above', '11 to 15 Acres',' 5 to 10 Acres',' 1 to 4 Acres'],
-                  data.y_data
-                ]
+                  data.chartVals[0].x_data
+                ].concat(data.chartVals[0].y_data)
               "></component>
-            </KeepAlive>
           </div>
         </div>
     </div>
@@ -61,8 +55,6 @@
 import Chart from "../components/barchart.vue"
 import Line from "../components/lineChart.vue"
 import Doughnut from"../components/doughnut.vue"
-import Radar from "../components/radar.vue"
-import Scatter from "../components/scatter.vue"
 import Dashboardform from '../components/dashboardform.vue'
 
 
@@ -73,31 +65,33 @@ export default {
     Chart,
     Line,
     Doughnut,
-    Radar,
-    Scatter,
     Dashboardform
   },
   data() {
     return {
       powerBi:false,
       chartdata:[],
+      newChartData:[],
       currentChart:{
         0:'Line',
         1:'Chart',
         2:'Doughnut',
-        3:'Scatter',
-        4:'Radar'
+        3:'Chart'
       }
     }
   },
   methods:{
     formValues(n){
       this.chartdata =  n
+      console.log(this.chartdata)
     }
   },
-  computed:{
+    watch: {
+    chartdata(newData, oldData) {
+      this.newChartData = newData
+    }
+  },
 
-  }
 }
 </script>
 

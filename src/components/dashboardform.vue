@@ -3,8 +3,9 @@
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <!-- offcanvas header -->
         <div class="offcanvas-header">
-                <h6 class="offcanvas-title fw-bolder" style="color:#c55118" id="offcanvasExampleLabel">Dashboard</h6>
+                <h6 class="offcanvas-title fw-bolder text-capitalize" id="offcanvasExampleLabel">Dashboard</h6>
             
+            <button class="btn btn-warning px-3 btn-sm rounded-pill" style="font-size:12px" @click="addPanel()">Add Panel</button>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <!-- offcanvas header end | offcanvas body start -->
@@ -16,11 +17,11 @@
                     <!-- accordion header -->
                     <div class="accordion-header " :id="`panelsStayOpen-heading${index}`">
                         <button class="btn  float-end text-danger trashbtn"  @click="datasets.splice(index, 1)"><i class="bi bi-trash3-fill"></i></button>
-                        <button class="accordion-button text-light fw-normal" style="width:90% !important; background-color:#4fab43" type="button" data-bs-toggle="collapse"
+                        <button class="accordion-button text-light fw-normal" style="width:90% !important; background-color:#e76e83" type="button" data-bs-toggle="collapse"
                             :data-bs-target="`#panelsStayOpen-collapse${index}`" aria-expanded="true"
                             :aria-controls="`panelsStayOpen-collapse${index}`">
                             P {{index + 1}}
-                            <select class="form-select form-select-sm w-50 mx-4" @change="getFormValue()" v-model="data.datasetVal" aria-label=".form-select-sm example">
+                            <select class="form-select form-select-sm w-50 mx-4" v-model="data.datasetVal" aria-label=".form-select-sm example">
                                 <option value="default">Select Dataset</option>
                                 <option value="1">IITA Dataset</option>
                                 <!-- <option value="2">Two</option>
@@ -37,63 +38,37 @@
                                 <div class="text-start mb-1">
                                     <label for="exampleFormControlInput1" class="form-label mb-0"
                                         style="font-size:10px">Y-data</label>
-                                    <select class="form-select form-select-sm" @change="getFormValue()" v-model="datasets[index].y_data" aria-label=".form-select-sm example">
-                                        <option value="choose data" >Y-Data</option>
-                                        <option :value="option" v-for="(option, i) in y_data" :key="i">{{i}}</option>
+                                    <select class="form-select form-select-sm"  v-model="datasets[index].y_data" aria-label=".form-select-sm example">
+                                        <option value="choose data" disabled >Y-Data</option>
+                                        <option :value="option" v-for="(option, i) in y_data" :key="i">{{option}}</option>
                                         {{datasets[index].xyKeys[1] = this.getKeyByValue(y_data, datasets[index].y_data) }}
-                                    
-                                        <!-- <option value="2">Two</option>
-                                        <option value="3">Three</option> -->
                                     </select>
                                 </div>
                                 <div class="text-start mb-1">
                                     <label for="exampleFormControlInput1" class="form-label mb-0"
                                         style="font-size:10px">X-Data</label>
-                                    <select class="form-select form-select-sm" @change="getFormValue()" v-model="datasets[index].x_data" aria-label=".form-select-sm example">
-                                        <option :value="option" v-for="(option, i) in x_data" :key="i">{{i}}</option>
-                                        <option value="choose data" >X-Data</option>
+                                    <select class="form-select form-select-sm" @change="getFormValue(index)" v-model="datasets[index].x_data" aria-label=".form-select-sm example">
+                                        <option value="choose data" disabled >X-Data</option>
+                                        <option :value="option" v-for="(option, i) in x_data" :key="i">{{option}}</option>
                                         {{datasets[index].xyKeys[0] = this.getKeyByValue(x_data, datasets[index].x_data) }}
-                                        <!-- <option value="2">Two</option>
-                                        <option value="3">Three</option> -->
                                     </select>
                                 </div>
-                                <!-- <div class="row">
-                                    <div class="col text-start">
-                                        <label for="exampleFormControlInput1" class="form-label mb-0"
-                                            style="font-size:10px">Category</label>
-                                        <select class="form-select form-select-sm" @change="getFormValue()" v-model="data.data3" aria-label=".form-select-sm example">
-                                            <option >X-Data</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                        </select>
-                                    </div>
-                                    <div class="col text-start">
-                                        <label for="exampleFormControlInput1" class="form-label mb-0"
-                                            style="font-size:10px">Properties</label>
-                                        <select class="form-select form-select-sm" @change="getFormValue()" v-model="data.data4" aria-label=".form-select-sm example">
-                                            <option >X-Data</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                        </select>
-                                    </div>
-                                </div> -->
                             </form>
                             <!-- form item end-->
+                            <p class="text-danger mt-3" style="font-size:12px" v-show="datasets[index].errMsg != ''"> <i class="bi bi-exclamation-circle-fill"></i> {{datasets[index].errMsg}}</p>
                         </div>
                     </div>
                 </div>
                 <!-- accordion item end -->
             </div>
-            <button class="btn btn-warning px-5 btn-sm float-start rounded-pill" @click="addPanel()">Add Panel</button>
-
             <a class="text-warning float-end text-decoration-none fw-bolder "  href="#" @click="$emit('powerClick')">Go to PowerBi</a>
             <!-- accordion end -->
         </div>
     </div>
 </template>
 <script>
+    import axios from 'axios'
+
     export default {
         name: "dashboardform",
         emits:[
@@ -107,31 +82,48 @@
                         datasetVal:'default',
                         x_data: "choose data",
                         y_data: "choose data",
-                        xyKeys:['x data', ' y data']
+                        errMsg:'',
+                        chartVals:[
+                            { 
+                                x_data: ['xdump'],
+                                y_data:[[0]]
+                            },
+                            ['legend']
+                        ],
+                        xyKeys:['x data', ' y data'],
+                        show:true
                     },
                 ],
 
                 // form data to send************************
-                y_data: {
-                    'population': [6,46,68,155,391],
-                    'farmer population':[6,36,68,74, 82],
-                    'insurance perventables':[11, 8, 2, 21],
-                    'stress affected Farmers':[6,46,27,101,71]
-                },  
+                y_data: 
+                    [
+                        'Population',
+                        
+                    ]
+                ,  
 
-                x_data:{
-                    'farm size': ['1-4', '5-10', '11-15', '16 up'],
-                    'age group': ['18-22', '23-27', '28-32', '33-37', '38-up'],
-                    
-                    'sex':['male', 'female'],
-                    'croptype':['maize', 'cowpea', 'groundnut']
-                },
+                x_data:
+                    [
 
-                datagroup:{
-                    'sex':['male', 'female'],
-                    'croptype':['maize', 'cowpea', 'groundnut']
-                },
+                    ],
+
+                // datagroup:{
+                //     'sex':['male', 'female'],
+                //     'croptype':['maize', 'cowpea', 'groundnut']
+                // },
             }
+        },
+        mounted(){
+            axios.get('http://aghub.miphost.com/api/datalake/columns')
+            .then(response =>  {
+                response.data.forEach(table => {
+                    this.y_data.push(table)
+                    this.x_data.push(table)
+                });
+            }).catch(error => {
+                console.log(error)
+            })
         },
         methods: {
             getKeyByValue(object, value){
@@ -143,13 +135,51 @@
                         datasetVal:'default',
                         x_data: "choose x data",
                         y_data: "choose y data",
-                        xyKeys:['x data', ' y data']
+                        errMsg:'',
+                        xyKeys:['x data', ' y data'],
+                        chartVals:[
+                            { 
+                                x_data: ['xdump'],
+                                y_data:[[0]]
+                            },
+                            ['legend']
+                        ],
+                        show:false
 
                     }
                 )
+                console.log(this.datasets)
             },
-            getFormValue(){
-                this.$emit("panelValues", this.datasets)
+            getFormValue(i){
+                console.log(i)
+                let url
+                    if(this.datasets[i].x_data == this.datasets[i].y_data){
+                        this.datasets[i].errMsg= 'independent and dependent data must be of different fields'
+                        return
+                    }else{
+                        this.datasets[i].errMsg= ''
+
+                        if (this.datasets[i].y_data == 'Population' ){
+                            url = 'http://aghub.miphost.com/api/datalake/ixd'
+                        }else{
+                            url= 'http://aghub.miphost.com/api/datalake/dxd'
+                        }
+
+                        axios.post(url,{
+                        x:this.datasets[i].x_data,
+                        y:this.datasets[i].y_data
+                        })
+                        .then(response =>  {
+                            this.datasets[i].chartVals = response.data
+                            this.datasets[i].show = true
+                            if(this.datasets[i].chartVals){
+                                this.$emit("panelValues", this.datasets)
+                            }
+                            console.log(this.datasets)
+                        }).catch(error => {
+                        console.log(error)
+                        })
+                    }
             },
             // submit () {
             //     const data = {

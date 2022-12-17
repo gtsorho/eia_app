@@ -39,19 +39,29 @@
                                         <label for="discription" class="form-label" style="font-size:15px !important">Description</label>
                                         <input type="text" class="form-control form-control-sm" id="description" required v-model="extGroup.description" placeholder="lorem ipsum init">
                                     </div>
-                                    <button type="submit" class="btn btn-sm float-end rounded-pill text-light" style="font-size:15px !important; background-image: linear-gradient(198deg, #000000, #1f6c15) !important;" @click="createGroup()">create group</button>
+                                    <button type="submit" class="btn btn-sm float-end rounded-pill text-light" style="font-size:15px !important; background-image: linear-gradient(198deg, #000000, #c2213d) !important;" @click="createGroup()">create group</button>
                                 </div>
                             </div>
                             <i class="btn btn-sm btn-danger rounded-pill bi bi-trash3 mx-2" :class="delete_display" @click="deletedata"></i>
-
-
+                            <div class="dropdown d-inline">
+                                <i class="btn btn-sm rounded-pill btn-warning bi bi-share-fill mx-2dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false" :class="delete_display" @click="getUsers()" ></i>
+                                <div class="dropdown-menu px-4 py-0" style="width:3.5in" aria-labelledby="dropdownMenuButton1">  
+                                    <div class=" input-group"  style="font-size:13px !important">
+                                        <select class="form-select form-select-sm "  aria-label=".form-select-sm example" v-model="officerId" >
+                                            <option value="default">please select an Officer</option>
+                                            <option  v-for="(officer, i) in officers" :key="i" :value="officer.id">{{officer.name}}</option>
+                                        </select>   
+                                        <i class="bi bi-arrow-right-circle-fill input-group-text" style="font-size:18px" @click="shareContact()"></i>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="dropdown d-inline">
                                 <i class="btn btn-sm bi bi-link-45deg mx-2 btn-success rounded-pill dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false" :class="delete_display" @click="getallgroups()"></i>
                                 <div class="dropdown-menu px-4 py-0" style="width:3.5in" aria-labelledby="dropdownMenuButton1">  
                                     <div class=" input-group"  style="font-size:13px !important">
                                         <select class="form-select form-select-sm "  aria-label=".form-select-sm example" v-model="groupid" >
-                                            <option value="default">please select an Group</option>
+                                            <option value="default">please select a Group</option>
                                             <option  v-for="(group, i) in extgroups" :key="i" :value="group.id">{{group.label}}</option>
                                         </select>   
                                         <i class="bi bi-send-fill input-group-text" style="font-size:15px" @click="addtoGroup()"></i>
@@ -69,7 +79,7 @@
                     </div>
                 </div>
                 <hr>
-                <h5 class="card-title text-start fw-bolder" style="color:#061704">Extension List</h5>
+                <h5 class="card-title text-start fw-bolder" style="color:#061704">Farmers</h5>
 
                 <div class="table-responsive">
                 <table class="table table-striped table-sm table-hover table-sm" style="min-width: 7.5in" id="accordionExample">
@@ -84,7 +94,7 @@
                         </tr>
                     </thead>
                         <tbody>
-                            <tr v-for="(contact , i) in contacts" :key="i">
+                            <tr v-for="(contact , i) in contacts" :key="i"  :class="jwt['id'] + '.0' == contact.accessPemission ? 'bg-warning':''" >
                                 <th><input class="form-check-input" type="checkbox" :value="contact.id" v-model="checkeddata" ></th>
                                 <th scope="row">003{{contact.id}}</th>
                                 <td>{{contact.name}}</td>
@@ -102,8 +112,8 @@
 
     <script>
     import axios from 'axios'    
-        import Addcontent from './contactmodal.vue'
-
+    import Addcontent from './contactmodal.vue'
+    import jwt_decode from "jwt-decode";
 
     export default {
         components: { 
@@ -111,9 +121,12 @@
         },
         data() {
             return {
+                jwt:[],
                 groupid:'default',
+                officerId:'default',
                 searchText:'',
                 contacts:[],
+                officers:[],
                 searchRes:[],
                 updateValues:null,
                 checkeddata : [],
@@ -151,9 +164,18 @@
             },
         },
         methods: {
+            getUsers(){
+                 var token = this.getCookie('token')
+                axios.get('http://aghub.miphost.com/api/broadcast/', 
+                    { headers:{'Authorization': `Bearer ${token}`}})
+                .then(response =>  {
+                    this.officers = response.data
+                }).catch(error => {
+                    console.log(error);
+                })
+            },
             getallgroups(){
                  var token = this.getCookie('token')
-
                 axios.get('http://aghub.miphost.com/api/broadcast/group/show', 
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
@@ -162,8 +184,40 @@
                     console.log(error);
                 })
             },
+        shareContact(){
+            var token = this.getCookie('token')
+
+            let arr = []
+            let axiosarray = []
+            let checkeddata2 = this.checkeddata
+                checkeddata2.forEach(data => 
+                {
+                    var newpromise = axios.post('http://aghub.miphost.com/api/broadcast/share/', 
+                        {
+                            extId:data,
+                            partnerId:this.officerId
+                        },
+                        { headers:{'Authorization': `Bearer ${token}`}}
+                    )
+                    axiosarray.push(newpromise)
+                })
+                axios.all(axiosarray)
+                .then(axios.spread((...responses) =>{ 
+                    responses.forEach(
+                        res => arr.push(res.data)
+                    )
+                    if(arr.length == checkeddata2.length){
+                        this.resMsg =  'contact(s) shared'
+                        setTimeout(() => {
+                                this.resMsg=''
+                                this.checkeddata = []
+                        }, 2000);
+                    }                     
+                })).catch(error => {
+                    this.resMsg =  error.response.data
+                }) 
+            },
             addtoGroup(){
-                // console.log(this.groupid, this.checkeddata)
                 var token = this.getCookie('token')
 
                 let arr = []
@@ -193,7 +247,7 @@
                             }, 2000);
                         }                     
                     })).catch(error => {
-                        console.log(error);
+                        this.resMsg =  error.response.data
                     }) 
             },
             getall(){
@@ -202,11 +256,24 @@
                 axios.get('http://aghub.miphost.com/api/broadcast/contact/show', 
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
-                    console.log(response.data)
                     this.contacts = response.data
+                    axios.get('http://aghub.miphost.com/api/broadcast/share/', 
+                    { headers:{'Authorization': `Bearer ${token}`}})
+                    .then(response =>  {
+                        this.jwt = jwt_decode(token);
+                        console.log(response.data)
+                        response.data.forEach(contact => {
+                            this.contacts.push(contact)
+                        });
+                    }).catch(error => {
+                        console.log(error);
+                    })
                 }).catch(error => {
                     console.log(error);
                 })
+
+
+
             },
             onlySpaces(str) {
                 return str.trim().length === 0;
