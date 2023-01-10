@@ -10,7 +10,7 @@
                 <h5 class="fs-6 text-capitalize">{{getday}}</h5>
             </div>
             <div class="col-4  align-self-center text-center text-md-start">
-                <img :src="'http://openweathermap.org/img/wn/'+ getdata.weather[0].icon +'@2x.png'" width="70">
+                <img :src="'https://openweathermap.org/img/wn/'+ getdata.weather[0].icon +'@2x.png'" width="70">
                 <h6 class="text-capitalize">{{getdata.weather[0].description}}</h6>
             </div>
         </div>

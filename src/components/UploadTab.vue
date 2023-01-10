@@ -135,7 +135,7 @@
                         'Authorization': `Bearer ${token}`
                     }
                 }
-                axios.post(`http://aghub.miphost.com/api/broadcast/podcast/upload`, 
+                axios.post(`https://aghub.miphost.com/api/broadcast/podcast/upload`, 
                 this.FormData, 
                 contentType 
                 )
@@ -155,7 +155,7 @@
             getPodcasts(){
                 var token = this.getCookie('token')
 
-                axios.get('http://aghub.miphost.com/api/broadcast/podcast/', 
+                axios.get('https://aghub.miphost.com/api/broadcast/podcast/', 
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
                 //    console.log( response.data)
@@ -179,7 +179,7 @@
                 if(this.searchText.length <= 0) return this.getPodcasts()
 
                 // console.log(this.searchText)
-                axios.get('http://aghub.miphost.com/api/broadcast/podcast/' +  this.searchText, 
+                axios.get('https://aghub.miphost.com/api/broadcast/podcast/' +  this.searchText, 
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
                     this.podcasts = response.data
@@ -210,7 +210,7 @@
                 if (confirm('All selection(s) will be deleted/distroyed(Permanently)')){
                     checkeddata2.forEach(data => 
                     {
-                        var newpromise = axios.get('http://aghub.miphost.com/api/broadcast/podcast/delete/'+ data, 
+                        var newpromise = axios.get('https://aghub.miphost.com/api/broadcast/podcast/delete/'+ data, 
                             { headers:{'Authorization': `Bearer ${token}`}}
                         )
                         axiosarray.push(newpromise)

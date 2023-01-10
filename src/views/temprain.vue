@@ -73,7 +73,7 @@ export default {
             return Promise.reject(error);
             });
 
-        axios.get('http://aghub.miphost.com/api/weather/locations')
+        axios.get('https://aghub.miphost.com/api/weather/locations')
             .then(response =>  {
                 this.locations = response.data
             }).catch(error => {
@@ -103,7 +103,7 @@ export default {
                         
             await axios({
                 method: 'post',       
-                url: 'http://aghub.miphost.com/api/weather/weatherdata',
+                url: 'https://aghub.miphost.com/api/weather/weatherdata',
                 data: {
                     'latitude':this.addressVal.latitude,
                     'longitude': this.addressVal.longitude,
@@ -180,7 +180,7 @@ export default {
 
 
             // ****************************************************************************************
-            axios.post('http://aghub.miphost.com/api/weather/livedata', 
+            axios.post('https://aghub.miphost.com/api/weather/livedata', 
             {
                 'latitude':this.addressVal.latitude,
                 'longitude': this.addressVal.longitude,

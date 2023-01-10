@@ -166,7 +166,7 @@
         methods: {
             getUsers(){
                  var token = this.getCookie('token')
-                axios.get('http://aghub.miphost.com/api/broadcast/', 
+                axios.get('https://aghub.miphost.com/api/broadcast/', 
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
                     this.officers = response.data
@@ -176,7 +176,7 @@
             },
             getallgroups(){
                  var token = this.getCookie('token')
-                axios.get('http://aghub.miphost.com/api/broadcast/group/show', 
+                axios.get('https://aghub.miphost.com/api/broadcast/group/show', 
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
                     this.extgroups = response.data
@@ -192,7 +192,7 @@
             let checkeddata2 = this.checkeddata
                 checkeddata2.forEach(data => 
                 {
-                    var newpromise = axios.post('http://aghub.miphost.com/api/broadcast/share/', 
+                    var newpromise = axios.post('https://aghub.miphost.com/api/broadcast/share/', 
                         {
                             extId:data,
                             partnerId:this.officerId
@@ -225,7 +225,7 @@
                 let checkeddata2 = this.checkeddata
                     checkeddata2.forEach(data => 
                     {
-                        var newpromise = axios.post('http://aghub.miphost.com/api/broadcast/grouplink/', 
+                        var newpromise = axios.post('https://aghub.miphost.com/api/broadcast/grouplink/', 
                             {
                                 extensionId:data,
                                 extGroupId:this.groupid
@@ -253,11 +253,11 @@
             getall(){
                  var token = this.getCookie('token')
 
-                axios.get('http://aghub.miphost.com/api/broadcast/contact/show', 
+                axios.get('https://aghub.miphost.com/api/broadcast/contact/show', 
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
                     this.contacts = response.data
-                    axios.get('http://aghub.miphost.com/api/broadcast/share/', 
+                    axios.get('https://aghub.miphost.com/api/broadcast/share/', 
                     { headers:{'Authorization': `Bearer ${token}`}})
                     .then(response =>  {
                         this.jwt = jwt_decode(token);
@@ -284,7 +284,7 @@
                     this.searchRes = null
                     this.getall()
                 }else{
-                    axios.get('http://aghub.miphost.com/api/broadcast/contact/'+ this.searchText, 
+                    axios.get('https://aghub.miphost.com/api/broadcast/contact/'+ this.searchText, 
                         { headers:{'Authorization': `Bearer ${token}`}})
                     .then(response =>  {
                         this.searchRes = response.data
@@ -296,7 +296,7 @@
             },
             createGroup(){
                 var token = this.getCookie('token')
-                axios.post('http://aghub.miphost.com/api/broadcast/group', this.extGroup,
+                axios.post('https://aghub.miphost.com/api/broadcast/group', this.extGroup,
                     {headers:{'Authorization': `Bearer ${token}`, 'Content-Type':'application/json'}}
                 ).then(response =>{
                     this.resMsg = response.data.label + ' has been created'
@@ -324,7 +324,7 @@
                 if (confirm('All selection(s) will be deleted/distroyed(Permanently)')){
                     checkeddata2.forEach(data => 
                     {
-                        var newpromise = axios.get('http://aghub.miphost.com/api/broadcast/contact/delete/'+ data, 
+                        var newpromise = axios.get('https://aghub.miphost.com/api/broadcast/contact/delete/'+ data, 
                             { headers:{'Authorization': `Bearer ${token}`}}
                         )
                         axiosarray.push(newpromise)
@@ -349,7 +349,7 @@
             },
             reloadList(){
                 var token = this.getCookie('token')
-                axios.get('http://aghub.miphost.com/api/broadcast/contact/show', 
+                axios.get('https://aghub.miphost.com/api/broadcast/contact/show', 
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
                     this.contacts = response.data
@@ -361,7 +361,7 @@
             getContact(id){
                 var token = this.getCookie('token')
 
-                axios.get('http://aghub.miphost.com/api/broadcast/contact/show/'+ id, 
+                axios.get('https://aghub.miphost.com/api/broadcast/contact/show/'+ id, 
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
                     console.log(response.data)

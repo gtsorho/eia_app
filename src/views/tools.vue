@@ -163,11 +163,11 @@ export default {
         }
       },
       centerLogin(){
-            axios.post('http://aghub.miphost.com/api/broadcast/login',{
+            axios.post('https://aghub.miphost.com/api/broadcast/login',{
               email:this.username,
               password:this.password
             })
-            .then(response =>  {
+            .then(response =>  {  
               this.setCookie('token', response.data, 1 )
               this.$router.push({name : 'ControlCenter'})
             }).catch(error => {

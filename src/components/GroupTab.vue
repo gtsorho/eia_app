@@ -187,7 +187,7 @@
             getallgroups(){
                  var token = this.getCookie('token')
 
-                axios.get('http://aghub.miphost.com/api/broadcast/group/show', 
+                axios.get('https://aghub.miphost.com/api/broadcast/group/show', 
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
                     console.log(response.data)
@@ -198,7 +198,7 @@
             },
             createGroup(){
                 var token = this.getCookie('token')
-                axios.post('http://aghub.miphost.com/api/broadcast/group', this.extGroup,
+                axios.post('https://aghub.miphost.com/api/broadcast/group', this.extGroup,
                     {headers:{'Authorization': `Bearer ${token}`, 'Content-Type':'application/json'}}
                 ).then(response =>{
                     this.resMsg = response.data.label + ' has been created'
@@ -218,7 +218,7 @@
             },
              updateGroup(){
                  var token = this.getCookie('token')
-                axios.post('http://aghub.miphost.com/api/broadcast/group/update/'+ this.groupid, 
+                axios.post('https://aghub.miphost.com/api/broadcast/group/update/'+ this.groupid, 
                     this.extGroup,
                     {headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
@@ -237,7 +237,7 @@
             },
             deleteGroup(groupid){
                 var token = this.getCookie('token')
-                axios.get('http://aghub.miphost.com/api/broadcast/group/delete/'+ groupid, 
+                axios.get('https://aghub.miphost.com/api/broadcast/group/delete/'+ groupid, 
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
                     console.log(response)
@@ -250,7 +250,7 @@
             //group links************************************************************************ 
             getallExt(groupid){
                 var token = this.getCookie('token')
-                axios.get('http://aghub.miphost.com/api/broadcast/grouplink/show/'+ groupid, 
+                axios.get('https://aghub.miphost.com/api/broadcast/grouplink/show/'+ groupid, 
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
                     this.extensions = response.data
@@ -266,7 +266,7 @@
             },
             deleteGrouplink(extId, phoneNo){
                 var token = this.getCookie('token')
-                axios.get('http://aghub.miphost.com/api/broadcast/grouplink/delete/'+ extId, 
+                axios.get('https://aghub.miphost.com/api/broadcast/grouplink/delete/'+ extId, 
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
                     const index = this.phoneNo.indexOf(phoneNo);
@@ -316,7 +316,7 @@
                 let links2send = linkarr.join('\n -------------------- \n')
 
                 this.smsMsg = `${this.smsMsg} \n ${links2send}`
-                axios.post('http://aghub.miphost.com/api/broadcast/contact/notify', 
+                axios.post('https://aghub.miphost.com/api/broadcast/contact/notify', 
                     {
                         recipients:this.phoneNo,
                         msg:this.smsMsg
@@ -339,7 +339,7 @@
             },            
             reloadList(){
                 var token = this.getCookie('token')
-                axios.get('http://aghub.miphost.com/api/broadcast/contact/show', 
+                axios.get('https://aghub.miphost.com/api/broadcast/contact/show', 
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
                     this.contacts = response.data
@@ -350,7 +350,7 @@
             getPodcasts(){
                 var token = this.getCookie('token')
 
-                axios.get('http://aghub.miphost.com/api/broadcast/podcast/', 
+                axios.get('https://aghub.miphost.com/api/broadcast/podcast/', 
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
                    this.podcasts = response.data

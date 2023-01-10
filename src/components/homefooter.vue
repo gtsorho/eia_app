@@ -23,7 +23,7 @@
                     <ul class="nav flex-column">
                         <li class="nav-item my-2"><h3>{{daydata[0].main.temp}}°</h3></li>
                         <li class="nav-item mb-2">
-                            <img :src="'http://openweathermap.org/img/wn/'+daydata[0].weather[0].icon +'@2x.png'" width="65">
+                            <img :src="'https://openweathermap.org/img/wn/'+daydata[0].weather[0].icon +'@2x.png'" width="65">
                             <h6 >{{daydata[0].weather[0].description}}</h6>
                         </li>
                     </ul>
@@ -124,9 +124,9 @@ export default {
         },
 
         search(location = null){
-            var url = `http://aghub.miphost.com/api/weather/locations/${location}`
+            var url = `https://aghub.miphost.com/api/weather/locations/${location}`
             if(!location){
-                url = `http://aghub.miphost.com/api/weather/locations`
+                url = `https://aghub.miphost.com/api/weather/locations`
             }
             axios.get(url)
             .then(response =>  {

@@ -115,7 +115,7 @@
             }
         },
         mounted(){
-            axios.get('http://aghub.miphost.com/api/datalake/columns')
+            axios.get('https://aghub.miphost.com/api/datalake/columns')
             .then(response =>  {
                 response.data.forEach(table => {
                     this.y_data.push(table)
@@ -160,9 +160,9 @@
                         this.datasets[i].errMsg= ''
 
                         if (this.datasets[i].y_data == 'Population' ){
-                            url = 'http://aghub.miphost.com/api/datalake/ixd'
+                            url = 'https://aghub.miphost.com/api/datalake/ixd'
                         }else{
-                            url= 'http://aghub.miphost.com/api/datalake/dxd'
+                            url= 'https://aghub.miphost.com/api/datalake/dxd'
                         }
 
                         axios.post(url,{
