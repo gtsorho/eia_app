@@ -14,7 +14,7 @@
                           <span class="widget-49-pro-title fw-bold text-uppercase px-3">Ext. Portal</span>
                       </div>
                   </div>
-                  <p class="widget-49-meeting-points mt-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum error corporis repellat maxime molestiae obcaecati vero saepe. Sed, velit dolore repudiandae, assumenda dicta aperiam consequatur ullam voluptatum eveniet est nihil?</p>
+                  <p class="widget-49-meeting-points mt-4">Our Extention Officers help manage Farmers Digitaly, The Ext. Portal helps them add, groups, send messges and also share information with farmers. we wish to grow a community of farmers and agronomists of information and Network.</p>
                   <div class="row mb-0 login_section" >
                     <div class="mb-3 col-sm-12">
                       <label for="password"  class="form-label text-light float-start " style="font-size:13px">Username</label>
