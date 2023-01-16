@@ -113,13 +113,13 @@ data() {
     {
       title:'Advisories',
       content:'Utilize our Services created by our team of expects to assist you in your field of intrest, these are Applications created from the very data found here, these have been refined to develop Apps that suit you ',
-      image: require('@/assets/andrew-horodnii-yPZ_kLs7koA-unsplash.jpg'),
+      image: require('@/assets/andrew-horodnii-yPZ_kLs7koA-unsplash (1).jpg'),
       link:'/main/services'
     },
     {
       title:' Assembled Knowledge',
       content:'Exploratory & in-depth analysis (quantitative and qualitative) of data gathered and stored by the Africa RISING Dataverse portal over the past decade. ', 
-      image: require('@/assets/daniel-de-lima-ofPW5f2WmHc-unsplash.jpg'),
+      image: require('@/assets/daniel-de-lima-ofPW5f2WmHc-unsplash (1).jpg'),
       link:'/main/storyset'
     }
   ],
