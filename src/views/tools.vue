@@ -15,7 +15,6 @@
                       </div>
                   </div>
                   <p class="widget-49-meeting-points mt-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum error corporis repellat maxime molestiae obcaecati vero saepe. Sed, velit dolore repudiandae, assumenda dicta aperiam consequatur ullam voluptatum eveniet est nihil?</p>
-                    <img src="../assets/tablet-login-animate.svg" style="height:200px" alt="">
                   <div class="row mb-0 login_section" >
                     <div class="mb-3 col-sm-12">
                       <label for="password"  class="form-label text-light float-start " style="font-size:13px">Username</label>
@@ -131,7 +130,7 @@ export default {
             ]
         }
     },  
-    mounted(){
+        mounted(){
       if(!this.authenticated){
         setTimeout(() => {
           this.$refs.modalclick.click();
@@ -147,36 +146,34 @@ export default {
         }
       },
 
-      showpassword(){
-        const password = document.getElementsByClassName('password')[0];
-        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-        password.setAttribute('type', type);
+      // showpassword(){
+      //   const password = document.getElementsByClassName('password')[0];
+      //   const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+      //   password.setAttribute('type', type);
 
-        // Toggle the eye and bi-eye icon
+      //   // Toggle the eye and bi-eye icon
         
-        if(type === 'password'){
-          document.getElementById('togglePassword').classList.add('bi-eye');
-          document.getElementById('togglePassword').classList.remove('bi-eye-slash');
-        }else{
-          document.getElementById('togglePassword').classList.add('bi-eye-slash');
-          document.getElementById('togglePassword').classList.remove('bi-eye');
-        }
-      },
+      //   if(type === 'password'){
+      //     document.getElementById('togglePassword').classList.add('bi-eye');
+      //     document.getElementById('togglePassword').classList.remove('bi-eye-slash');
+      //   }else{
+      //     document.getElementById('togglePassword').classList.add('bi-eye-slash');
+      //     document.getElementById('togglePassword').classList.remove('bi-eye');
+      //   }
+      // },
       centerLogin(){
             axios.post('https://aghub.miphost.com/api/broadcast/login',{
               email:this.username,
               password:this.password
             })
-            .then(response =>  {  
+            .then(response =>  {
               this.setCookie('token', response.data, 1 )
               this.$router.push({name : 'ControlCenter'})
             }).catch(error => {
                 this.resMsg = error.response.data
                 setInterval(() => {
                   this.resMsg = null
-                  
                 }, 2000);
-                console.log(error.response.data);
             })
       },
         getCookie(cname) {

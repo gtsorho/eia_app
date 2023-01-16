@@ -417,7 +417,7 @@
     }
     .card{
         margin-top:4%;
-        min-height: 90% !important;
+        /* min-height: 90% !important; */
         min-width: 80% !important;
         /* overflow-x: scroll; */
         border-radius: 1rem;
@@ -438,14 +438,14 @@
 .form-control-sm {
     background-color: #1a222600;
     border: none;
-    border-bottom: 2px solid #01600a;
+    border-bottom: 2px solid #2b9f1b;
     border-top: 0px;
     border-radius: 0px;
     font-weight:100;
     outline: 0;
     margin-bottom: 20px;
     padding-left: 10px;
-    color: #1a1a1a;
+    color: #c3c3c3;
 }
 .form-control-sm{
     font-size: 0.75rem !important;
@@ -454,10 +454,10 @@
     border-color: inherit;
     -webkit-box-shadow: none;
     box-shadow: none;
-    border-bottom: 2px solid #01600a !important ;
+    border-bottom: 2px solid #2b9f1b !important ;
     outline: 0;
     background-color: #31383b00;
-    color: #1e1e1e;
+    color: #c3c3c3;
 }
 
 input:focus {
@@ -474,5 +474,20 @@ label {
     color: #6C6C6C;
     font-weight:100;
     letter-spacing: 1px;
+}
+
+.spinner-border {
+    display: block  !important;;
+    width: 1rem;
+    height: 1rem;
+    color: #2b9f1b;
+    border: .2em solid currentColor;
+    border-right-color: transparent !important;
+}
+.spinner-grow-sm {
+    width: .45rem;
+    height: .45rem;
+    vertical-align: 0.576em !important;
+    color: #acffa1;
 }
 </style>

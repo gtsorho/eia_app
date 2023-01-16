@@ -93,14 +93,35 @@ export default {
         },
         async selectAddress(){
             let datearr = [] 
+            let dayArr = []
             let tempForcastArr = []
             let rainForcastArr = []
-            let liveTempArr = []
-            let liveRainArr = []
-            
-            console.log(this.addressVal.longitude, this.addressVal.latitude)
-
+            var liveTempArr = []
+            var liveRainArr = []
                         
+
+            console.log(this.addressVal.latitude, this.addressVal.longitude)
+
+            await axios.post('https://aghub.miphost.com/api/weather/livedata', 
+            {
+                'latitude':this.addressVal.latitude,
+                'longitude': this.addressVal.longitude,
+            })
+            .then(response =>  {
+                console.log(response.data)
+                // return
+                response.data.splice(-1,1)
+
+                response.data.forEach(item => {  
+                    liveTempArr.push(item.temperature)
+                    liveRainArr.push(item.rain)
+                });
+            })
+            .catch(error => {
+                console.log(error);
+            })  
+
+
             await axios({
                 method: 'post',       
                 url: 'https://aghub.miphost.com/api/weather/weatherdata',
@@ -110,98 +131,46 @@ export default {
                 }
             })
             .then(response =>  {
+                console.log(response.data)
+                
+                // return
                 let impactTemp = []
                 let impactRain = []
-
-                response.data.splice(0,2)
-                response.data.splice(-1,1)
-
-               
                 
                 response.data.forEach(item => {
 
-                    let date = new Date(item.date)
-                    let forcastDate = new Date(date).setDate(date.getDate() + 2);
-
-                   let tempForcast_val = item.current_temperature
-
-                   let RainForcast_val =   item.current_rain_level
-
-                    
+                    let forcastDate = new Date(item.date)
+                    let tempForcast_val = item.temperature
+                    let RainForcast_val =   item.rain
                     
                     datearr.push(new Date(forcastDate).toDateString().split(' ').slice(1,3).join(' '))
+                    dayArr.push(new Date(forcastDate).toDateString().split(' ').slice(0,1).join(' '))
                     tempForcastArr.push(tempForcast_val)
                     rainForcastArr.push(RainForcast_val)
 
-                    // *************************************************************************************************
-                    var nextTemp = item.current_temperature
-
-                    var nextRain = item.current_rain_level
-
-
-                    
-            
-                    var beforeTempDate, afterTempDate, beforeRainDate, afterRainDate
-                        beforeTempDate = new Date(date).setDate(date.getDate() + 2);
-                        afterTempDate = new Date(date).setDate(date.getDate() + 4);
-                        beforeRainDate = new Date(date).setDate(date.getDate() + 2);
-                        afterRainDate = new Date(date).setDate(date.getDate() + 4);
-
-                        console.log(date)
-
-                    for (let i = 0; i <= 6; i++) {
-                        if(new Date(beforeTempDate).getDay() == i){
-                            impactTemp[i] = tempForcast_val
-                        }else if(new Date(afterTempDate).getDay() == i){
-                            impactTemp[i] = nextTemp
-                        }
-
-                        if(new Date(beforeRainDate).getDay() == i){
-                            impactRain[i] = RainForcast_val
-                        }else if(new Date(afterRainDate).getDay() == i){
-                            impactRain[i] = nextRain
-                        }                            
+                    for (let i = 0; i < response.data.length; i++){
+                        impactTemp[i] = tempForcast_val
+                        impactRain[i] = RainForcast_val                          
                     }
-                    //*************************************************************************************************** */
                 });
 
+                
                 this.rainTempset =
                 [ 
                     {
-                        lables: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+                        lables: dayArr.reverse()
                     },
                     ['Temp Forcast', 'Rain Forcast'],
-                    impactTemp,
-                    impactRain
+                    impactTemp.reverse(),
+                    impactRain.reverse()
                 ]
+
             }).catch(error => {
                 console.log(error);
             })
 
-
-            // ****************************************************************************************
-            axios.post('https://aghub.miphost.com/api/weather/livedata', 
-            {
-                'latitude':this.addressVal.latitude,
-                'longitude': this.addressVal.longitude,
-            })
-            .then(response =>  {
-                response.data.splice(0,2)
-                response.data.splice(-1,1)
-
-                response.data.forEach(item => {
-                    var temp_now =   item.temperature
-                    var rain_now =   item.rain
-
-                    liveTempArr.push(temp_now)
-                    liveRainArr.push(rain_now)
-                });
-            })
-            .catch(error => {
-                console.log(error);
-            })                                        
-
-
+            
+            
                 this.tempset = 
                 [
                     {
@@ -211,7 +180,8 @@ export default {
                     liveTempArr,
                     tempForcastArr
                 ]
-        
+
+                console.log(this.tempset)
 
                 this.rainset =
                 [ 
@@ -222,8 +192,9 @@ export default {
                     liveRainArr,
                     rainForcastArr
                 ]
-                
-            }
+
+               
+        }
     },
 }
 </script>

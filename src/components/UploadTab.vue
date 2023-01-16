@@ -12,17 +12,50 @@
                                 >
                     </div>
                     <div class="col">
+                        <p style="font-size:11px" v-if="resMsg" class="text-warning text-capitalize d-inline fw-bold px-3">{{resMsg}}</p>
+
                         <i class="btn btn-sm btn-danger rounded-pill bi bi-trash3 mx-2" v-if="checkeddata.length > 0" @click="deletePodcast"></i>
+                        
+                            <div class="dropdown d-inline">
+                                <i class="btn btn-sm rounded-pill btn-danger bi  bi-x-circle-fill  mx-2 dropdown"  data-bs-toggle="dropdown" aria-expanded="false" v-if="checkeddata.length > 0" @click="getSharedUsers()" ><i class="bi  mx-1 bi-share-fill"></i></i>
+                                <div class="dropdown-menu px-4 py-0" style="width:3.5in" aria-labelledby="dropdownMenuButton1">  
+                                    <div class=" input-group"  style="font-size:13px !important">
+                                        <select class="form-select form-select-sm "  aria-label=".form-select-sm example" v-model="officerId" @change="unsharePodcast()" >
+                                            <option value="default">Select an Officer</option>
+                                            <option  v-for="(sharedUser, i) in sharedUsers" :key="i" :value="sharedUser.id">{{sharedUser.name}}</option>
+                                        </select>   
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dropdown d-inline" >
+                                <i class="btn btn-sm rounded-pill btn-warning bi bi-share-fill mx-2dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false"  v-if="checkeddata.length > 0" @click="getUsers()" ></i>
+                                <div class="dropdown-menu px-4 py-0" style="width:3.5in" aria-labelledby="dropdownMenuButton1">  
+                                    <div class=" input-group"  style="font-size:13px !important">
+                                        <select class="form-select form-select-sm "  aria-label=".form-select-sm example" v-model="officerId" >
+                                            <option value="default">please select an Officer</option>
+                                            <option  v-for="(officer, i) in officers" :key="i" :value="officer.id">{{officer.name}}</option>
+                                        </select>   
+                                        <i class="bi bi-arrow-right-circle-fill input-group-text" style="font-size:18px" @click="sharePodcast()"></i>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
+                    
                     <div class="col-12 col-md-4 col-lg-4">
                            <div>
-                                <input type="text" v-model="filename"  class="d-block form-control-sm form-control mb-2 text-secondary" placeholder="Name or Description (less than 40 letters)" id="">
-                                <input class="form-control mb-0 form-control-sm  fileUpload" @change="onFileChange" id="formFileSm"   ref="importfile"  type="file">
-                                <button class="btn btn-sm rounded-pill px-3 text-light"  @click="uploadfile()" v-if="!isLoading && !uploadDone" style="background-color:#006d0bea ">Add</button>
-                                <button class="btn btn-sm rounded-pill px-3 text-light"  v-if="uploadDone" style="background-color:#006d0bea"><i class="bi bi-file-earmark-check"></i></button>
+                                <input class="form-control mb-0 form-control-sm  float-start fileUpload" @change="onFileChange" id="formFileSm"   ref="importfile"  type="file">
+                                
+                                
+                                <div class="input-group mb-3">
+                                    <input type="text" v-model="filename"  class="d-block form-control-sm form-control mb-2 text-secondary" placeholder="Name or Description (less than 40 letters)" id="">
+                                    <button class="btn btn-sm rounded-pill px-3 mx-2 text-light input-group-text"  @click="uploadfile()" v-if="!isLoading && !uploadDone" style="background-color:#006d0bea;height: fit-content; ">Add</button>
+                                    <button class="btn btn-sm rounded-pill px-3 mx-2 text-light input-group-text"  v-if="uploadDone" style="background-color:#006d0bea;height: fit-content;"><i class="bi bi-file-earmark-check"></i></button>
 
-                                <div class="spinner-border " style="color:#006d0bea " v-if="isLoading" role="status">
-                                    <div class="spinner-grow spinner-grow-sm" style="color:#c55118 " role="status">
+                                </div>
+
+
+                                <div class="spinner-border "  v-if="isLoading" role="status">
+                                    <div class="spinner-grow spinner-grow-sm"  role="status">
                                         <span class="visually-hidden">Loading...</span>
                                     </div>
                                 </div>
@@ -40,20 +73,27 @@
                     
 
                 <div class="row text-start justify-content-md-center" style="font-size:13px !important;">
-                        <div class="col-md-auto" v-for="(podcast, i) in podcasts" :key="i">
+                        <div class="col-md-auto" v-for="(podcast, i) in podcasts" :key="i" >
                             <a :href="podcast.webViewLink" class="text-decoration-none text-dark">
-                                <div class="card mb-3" >
+                                <div class="card mb-3"   >
                                     <div class="row g-0">
                                         <div class="col-4">
                                             <img :src="require('../assets/icons/' + imgURL(podcast.gName))" class="img-fluid rounded-start" style="width: 60px;" alt="">
                                         </div>
                                         <div class="col position-relative">
-                                            <div class="form-check form-check-reverse position-absolute top-0 end-0">
+                                            <div class="form-check form-check-reverse position-absolute top-0 end-0">                         
                                             <input class="form-check-input" type="checkbox"  id="reverseCheck1" :value="podcast.id" v-model="checkeddata" >
                                             </div>
                                             <div class="card-body p-1">
-                                                <p class="card-text mb-1 fw-bold text-capitalize">{{podcast.name}}</p>
+                                                <p class="card-text mb-1 fw-bold text-capitalize">{{podcast.name}} <i class="bi bi-share-fill mx-3" v-show="jwt['id'] + '.0' === podcast.accessPemission"></i></p>
                                                 <p class="card-text mb-1"><small class="text-muted">Last updated {{new Date(podcast.updatedAt).toGMTString()}}</small></p>
+                                            </div>
+
+                                            <div class="float-end px-2" v-if="podcast.accessPemission != null && podcast.accessPemission.includes(jwt['id'] + '.0')">
+                                                <a href="#" @mouseover="brokenlink = true" @mouseleave="brokenlink = false" @click="unshareRequest(podcast.id, podcast.extensionsOfficerId)">
+                                                    <img src="https://cdn-icons-png.flaticon.com/512/8111/8111361.png"  height="15" v-show="brokenlink"> 
+                                                    <img src="https://cdn-icons-png.flaticon.com/512/154/154843.png"  height="15" v-show="!brokenlink">
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -67,12 +107,19 @@
 
     <script>
     import axios from 'axios'
-
+    import jwt_decode from "jwt-decode";
+    
     export default {
         components: {
         },
         data() {
             return {
+                sharedUsers: [],
+                brokenlink:false,
+                resMsg:'',
+                jwt:[],
+                officerId:'default',
+                officers:[],
                 checkeddata : [],
                 filename:'',
                 FormData: new FormData(),
@@ -95,14 +142,140 @@
                 this.refCount++;
                 this.isLoading = true;
             } else if (this.refCount > 0) {
-                this.refCount--;
-                this.isLoading = (this.refCount > 0);
-                this.uploadDone = true
-                setInterval(() => {
-                    this.uploadDone = false              
-                }, 2000);
-                
-                }
+            this.refCount--;
+            this.isLoading = (this.refCount > 0);
+            this.uploadDone = true
+            setInterval(() => {
+                this.uploadDone = false              
+            }, 2000);
+            
+            }
+            },
+            getUsers(){
+                 var token = this.getCookie('token')
+                axios.get('https://aghub.miphost.com/api/broadcast/', 
+                    { headers:{'Authorization': `Bearer ${token}`}})
+                .then(response =>  {
+                    this.officers = response.data
+                }).catch(error => {
+                    console.log(error);
+                })
+            },
+            getSharedUsers(){
+            var token = this.getCookie('token')
+            
+            this.sharedUsers = []
+            let axiosarray = []
+            let checkeddata2 = this.checkeddata
+                checkeddata2.forEach(data => 
+                {
+                    var newpromise = axios.get('https://aghub.miphost.com/api/broadcast/podcasts/show/'+ data, 
+                        { headers:{'Authorization': `Bearer ${token}`}}
+                    )
+                    axiosarray.push(newpromise)
+                })
+                let user
+                axios.all(axiosarray)
+                .then(axios.spread((...responses) =>{ 
+                    responses.forEach(res => {
+
+                            console.log(res.data[0].accessPemission)
+                        res.data[0].accessPemission.split(',').forEach(user=>{
+                            user.slice(0,-2)
+                            axios.get('https://aghub.miphost.com/api/broadcast/show/'+ user.slice(0,-2), 
+                            { headers:{'Authorization': `Bearer ${token}`}})
+                            .then(response =>  {
+                                this.sharedUsers.push(response.data)
+                            }).catch(error => {
+                                console.log(error);
+                            })
+                        })
+                    })                   
+                })).catch(error => {
+                    console.log(error)
+                }) 
+            },
+            unsharePodcast(){
+                var token = this.getCookie('token')
+
+                let arr = []
+                let axiosarray = []
+                let checkeddata2 = this.checkeddata
+                checkeddata2.forEach(data => 
+                {
+                    var newpromise = axios.post('https://aghub.miphost.com/api/broadcast/podcasts/unshare/', 
+                        {
+                            podcastId:data,
+                            partnerId:this.officerId
+                        },
+                        { headers:{'Authorization': `Bearer ${token}`}}
+                    )
+                    axiosarray.push(newpromise)
+                })
+                axios.all(axiosarray)
+                .then(axios.spread((...responses) =>{ 
+                    responses.forEach(
+                        res => arr.push(res.data)
+                    )
+                    if(arr.length == checkeddata2.length){
+                        this.resMsg =  'contact(s) unshared'
+                        setTimeout(() => {
+                                this.resMsg=''
+                                this.checkeddata = []
+                        }, 2000);
+                    }                     
+                })).catch(error => {
+                    this.resMsg =  error.response.data
+                }) 
+            },
+            unshareRequest(id,OfficerId){
+             var token = this.getCookie('token')
+             axios.post('https://aghub.miphost.com/api/broadcast/podcasts/unshare/request/', 
+             {
+                ownerId:OfficerId,
+                sharedUserId:this.jwt.id,
+                podcastId:id,
+                description:'unshare farmer podcast.'
+            },
+            { headers:{'Authorization': `Bearer ${token}`}})
+            .then(response =>  {
+                // this.sharedUsers.push(response.data)
+            }).catch(error => {
+                console.log(error);
+            })
+        },
+            sharePodcast(){
+            var token = this.getCookie('token')
+
+            let arr = []
+            let axiosarray = []
+            let checkeddata2 = this.checkeddata
+                checkeddata2.forEach(data => 
+                {
+                    var newpromise = axios.post('https://aghub.miphost.com/api/broadcast/podcasts/share/', 
+                        {
+                            extId:data,
+                            partnerId:this.officerId
+                        },
+                        { headers:{'Authorization': `Bearer ${token}`}}
+                    )
+                    axiosarray.push(newpromise)
+                })
+                axios.all(axiosarray)
+                .then(axios.spread((...responses) =>{ 
+                    responses.forEach(
+                        res => arr.push(res.data)
+                    )
+                    if(arr.length == checkeddata2.length){
+                        this.resMsg =  'contact(s) shared'
+                        setTimeout(() => {
+                                this.resMsg=''
+                                this.checkeddata = []
+                        }, 2000);
+                    }                     
+                })).catch(error => {
+                    this.resMsg =  error.response.data
+                }) 
             },
             onFileChange(e) {
                 const file = e.target.files;
@@ -158,12 +331,24 @@
                 axios.get('https://aghub.miphost.com/api/broadcast/podcast/', 
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
-                //    console.log( response.data)
                    this.podcasts = response.data
+                    axios.get('https://aghub.miphost.com/api/broadcast/podcasts/share', 
+                        { headers:{'Authorization': `Bearer ${token}`}})
+                    .then(response =>  {
+                        this.jwt = jwt_decode(token);
+                        response.data.forEach(podcast => {
+                            this.podcasts.push(podcast)
+                        });
+                        console.log(response.data)
+                    }).catch(error => {
+                        console.log(error);
+                    })
                 }).catch(error => {
                     console.log(error);
                 })
+
             },
+
             imgURL(name){
                 if(name.endsWith('.pdf')) return 'pdf.png'
                 else if(name.endsWith('.mp3')) return 'music.png'
@@ -268,17 +453,30 @@
     }
 </script>
 <style scoped>
+    .spinner-border {
+        width: 1rem;
+        height: 1rem;
+        color: #dc3545;
+        border: .2em solid currentColor;
+        border-right-color: transparent !important;
+    }
+    .spinner-grow-sm {
+        width: .45rem;
+        height: .45rem;
+        vertical-align: 0.576em !important;
+        color: #f68888;
+    }
     input[type=file]::file-selector-button {
     border: 2px solid #7567d900;
     padding: .2em .4em;
     border-radius: .2em;
     color: rgb(209, 209, 209);
-    background-color: #2c8d36;
+    background-color: #2b9f1b;
     transition: .3s;
     }
 
     input[type=file]::file-selector-button:hover{
-    background-color: #00ff1aea !important;
+    background-color: #2b9f1b !important;
     }
 
     .form-control[data-v-6a57b8d6]:focus {
@@ -301,16 +499,17 @@
         margin-inline: 5px;
     }
 
-.btn-check:active+.btn-outline-warning:focus, .btn-check:checked+.btn-outline-warning:focus, .btn-outline-warning.active:focus, .btn-outline-warning.dropdown-toggle.show:focus, .btn-outline-warning:active:focus {
-    box-shadow: 0 0 0 0.25rem rgb(108 117 125 / 0%) !important;
-}
-.btn-check:focus+.btn-outline-warning, .btn-outline-warning:focus {
-    box-shadow: 0 0 0 0.25rem rgb(108 117 125 / 0%) !important;
-}
+    .btn-check:active+.btn-outline-warning:focus, .btn-check:checked+.btn-outline-warning:focus, .btn-outline-warning.active:focus, .btn-outline-warning.dropdown-toggle.show:focus, .btn-outline-warning:active:focus {
+        box-shadow: 0 0 0 0.25rem rgb(108 117 125 / 0%) !important;
+    }
+    .btn-check:focus+.btn-outline-warning, .btn-outline-warning:focus {
+        box-shadow: 0 0 0 0.25rem rgb(108 117 125 / 0%) !important;
+    }
+
     .form-control-sm, .form-select-sm {
         background-color: #1a222600;
         border: none;
-        border-bottom: 2px solid #01600a;
+        border-bottom: 2px solid #2b9f1b;
         border-top: 0px;
         border-radius: 0px;
         font-weight:100;
@@ -326,7 +525,7 @@
         border-color: inherit;
         -webkit-box-shadow: none;
         box-shadow: none;
-        border-bottom: 2px solid #01600a !important ;
+        border-bottom: 2px solid #2b9f1b !important ;
         outline: 0;
         background-color: #31383b00;
         color: #1e1e1e;
@@ -348,7 +547,7 @@
         letter-spacing: 1px;
     }
     .form-check-input:checked{
-        background-color: #008a0e;
+        background-color: #2b9f1b;
     }
     .card{
         margin-top:4%;

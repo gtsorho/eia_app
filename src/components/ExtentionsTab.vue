@@ -39,12 +39,27 @@
                                         <label for="discription" class="form-label" style="font-size:15px !important">Description</label>
                                         <input type="text" class="form-control form-control-sm" id="description" required v-model="extGroup.description" placeholder="lorem ipsum init">
                                     </div>
-                                    <button type="submit" class="btn btn-sm float-end rounded-pill text-light" style="font-size:15px !important; background-image: linear-gradient(198deg, #000000, #c2213d) !important;" @click="createGroup()">create group</button>
+                                    <button type="submit" class="btn btn-sm float-end rounded-pill text-light" style="font-size:15px !important; background-image: linear-gradient(198deg, #000000, #2b9f1b) !important;" @click="createGroup()">create group</button>
                                 </div>
                             </div>
                             <i class="btn btn-sm btn-danger rounded-pill bi bi-trash3 mx-2" :class="delete_display" @click="deletedata"></i>
+                            
+                            <!-- <i class="btn btn-sm rounded-pill btn-danger bi  bi-x-circle-fill  mx-2 "   :class="delete_display" @click="request()" ><i class="bi  mx-1 bi-share-fill"></i></i> -->
                             <div class="dropdown d-inline">
-                                <i class="btn btn-sm rounded-pill btn-warning bi bi-share-fill mx-2dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false" :class="delete_display" @click="getUsers()" ></i>
+                                <i class="btn btn-sm rounded-pill btn-danger bi  bi-x-circle-fill  mx-2 dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false" :class="delete_display" @click="getSharedUsers()" ><i class="bi  mx-1 bi-share-fill"></i></i>
+                                <div class="dropdown-menu px-4 py-0" style="width:3.5in" aria-labelledby="dropdownMenuButton1">  
+                                    <div class=" input-group"  style="font-size:13px !important">
+                                        <select class="form-select form-select-sm "  aria-label=".form-select-sm example" v-model="officerId" @change="unshareContact()" >
+                                            <option value="default">Select an Officer</option>
+                                            <option  v-for="(sharedUser, i) in sharedUsers" :key="i" :value="sharedUser.id">{{sharedUser.name}}</option>
+                                        </select>   
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="dropdown d-inline">
+                                <i class="btn btn-sm rounded-pill btn-warning text-light bi bi-share-fill mx-2 dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false" :class="delete_display" @click="getUsers()" ></i>
                                 <div class="dropdown-menu px-4 py-0" style="width:3.5in" aria-labelledby="dropdownMenuButton1">  
                                     <div class=" input-group"  style="font-size:13px !important">
                                         <select class="form-select form-select-sm "  aria-label=".form-select-sm example" v-model="officerId" >
@@ -82,7 +97,7 @@
                 <h5 class="card-title text-start fw-bolder" style="color:#061704">Farmers</h5>
 
                 <div class="table-responsive">
-                <table class="table table-striped table-sm table-hover table-sm" style="min-width: 7.5in" id="accordionExample">
+                <table class="table table-striped table-sm table-hover table-sm" style="min-width: 7.5in; font-size:14px" id="accordionExample">
                     <thead>
                         <tr>
                             <th scope="col"><input class="form-check-input" type="checkbox" v-model="selectAll"></th>
@@ -94,14 +109,23 @@
                         </tr>
                     </thead>
                         <tbody>
-                            <tr v-for="(contact , i) in contacts" :key="i"  :class="jwt['id'] + '.0' == contact.accessPemission ? 'bg-warning':''" >
-                                <th><input class="form-check-input" type="checkbox" :value="contact.id" v-model="checkeddata" ></th>
+                            <!-- v-if="contact.accessPemission != null && contact.accessPemission.includes(jwt['id'] + '.0')"  -->
+                            <tr v-for="(contact , i) in contacts" :key="i"  :class="contact.accessPemission != null && contact.accessPemission.includes(jwt['id'] + '.0') ? 'bg-warn':''" >
+                                <th>
+                                    <input class="form-check-input my-2" type="checkbox" :value="contact.id" v-model="checkeddata" >
+                                </th>                                                             
                                 <th scope="row">003{{contact.id}}</th>
                                 <td>{{contact.name}}</td>
                                 <td>{{contact.email}}</td>
                                 <td>{{contact.phone}}</td>
-                                <td>{{contact.address.location}}</td>
-                                <td><i @click="updateValues = contact" data-bs-toggle="modal" data-bs-target="#exampleModal" class="bi bi-pencil-square mx-2 btn" ></i></td>
+                                <td >{{contact.address.location}}</td>
+                                <td v-if="contact.accessPemission != null && contact.accessPemission.includes(jwt['id'] + '.0')">
+                                    <span class="" @mouseover="brokenlink = true" @mouseleave="brokenlink = false" @click="unshareRequest(contact.id,contact.extensionsOfficerId)">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/8111/8111361.png"  height="15" v-show="brokenlink"> 
+                                        <img src="https://cdn-icons-png.flaticon.com/512/154/154843.png"  height="15" v-show="!brokenlink">
+                                    </span>
+                                </td>
+                                <td v-else><i @click="updateValues = contact" data-bs-toggle="modal" data-bs-target="#exampleModal" class="bi bi-pencil-square mx-2 btn" ></i></td>
                             </tr>
                         </tbody>
                 </table>
@@ -116,11 +140,14 @@
     import jwt_decode from "jwt-decode";
 
     export default {
+        emits: ['notification'],
         components: { 
             Addcontent
         },
         data() {
             return {
+                brokenlink:false,
+                sharedUsers: [],
                 jwt:[],
                 groupid:'default',
                 officerId:'default',
@@ -190,33 +217,117 @@
             let arr = []
             let axiosarray = []
             let checkeddata2 = this.checkeddata
-                checkeddata2.forEach(data => 
-                {
-                    var newpromise = axios.post('https://aghub.miphost.com/api/broadcast/share/', 
-                        {
-                            extId:data,
-                            partnerId:this.officerId
-                        },
-                        { headers:{'Authorization': `Bearer ${token}`}}
-                    )
-                    axiosarray.push(newpromise)
-                })
-                axios.all(axiosarray)
-                .then(axios.spread((...responses) =>{ 
-                    responses.forEach(
-                        res => arr.push(res.data)
-                    )
-                    if(arr.length == checkeddata2.length){
-                        this.resMsg =  'contact(s) shared'
-                        setTimeout(() => {
-                                this.resMsg=''
-                                this.checkeddata = []
-                        }, 2000);
-                    }                     
-                })).catch(error => {
-                    this.resMsg =  error.response.data
-                }) 
+            checkeddata2.forEach(data => 
+            {
+                var newpromise = axios.post('https://aghub.miphost.com/api/broadcast/share/', 
+                    {
+                        extId:data,
+                        partnerId:this.officerId
+                    },
+                    { headers:{'Authorization': `Bearer ${token}`}}
+                )
+                axiosarray.push(newpromise)
+            })
+            axios.all(axiosarray)
+            .then(axios.spread((...responses) =>{ 
+                responses.forEach(
+                    res => arr.push(res.data)
+                )
+                if(arr.length == checkeddata2.length){
+                    this.resMsg =  'contact(s) shared'
+                    setTimeout(() => {
+                            this.resMsg=''
+                            this.checkeddata = []
+                    }, 2000);
+                }                     
+            })).catch(error => {
+                this.resMsg =  error.response.data
+            }) 
+        },
+        getSharedUsers(){
+        var token = this.getCookie('token')
+        
+        this.sharedUsers = []
+        let axiosarray = []
+        let checkeddata2 = this.checkeddata
+            checkeddata2.forEach(data => 
+            {
+                var newpromise = axios.get('https://aghub.miphost.com/api/broadcast/contact/show/'+ data, 
+                    { headers:{'Authorization': `Bearer ${token}`}}
+                )
+                axiosarray.push(newpromise)
+            })
+            let user
+            axios.all(axiosarray)
+            .then(axios.spread((...responses) =>{ 
+                responses.forEach(res => {
+
+                        console.log(res.data[0].accessPemission)
+                    res.data[0].accessPemission.split(',').forEach(user=>{
+                        user.slice(0,-2)
+                         axios.get('https://aghub.miphost.com/api/broadcast/show/'+ user.slice(0,-2), 
+                        { headers:{'Authorization': `Bearer ${token}`}})
+                        .then(response =>  {
+                            this.sharedUsers.push(response.data)
+                        }).catch(error => {
+                            console.log(error);
+                        })
+                    })
+                })                   
+            })).catch(error => {
+                console.log(error)
+                // this.resMsg =  error.response
+            }) 
+        },
+        unshareContact(){
+            var token = this.getCookie('token')
+
+            let arr = []
+            let axiosarray = []
+            let checkeddata2 = this.checkeddata
+            checkeddata2.forEach(data => 
+            {
+                var newpromise = axios.post('https://aghub.miphost.com/api/broadcast/unshare/', 
+                    {
+                        extId:data,
+                        partnerId:this.officerId
+                    },
+                    { headers:{'Authorization': `Bearer ${token}`}}
+                )
+                axiosarray.push(newpromise)
+            })
+            axios.all(axiosarray)
+            .then(axios.spread((...responses) =>{ 
+                responses.forEach(
+                    res => arr.push(res.data)
+                )
+                if(arr.length == checkeddata2.length){
+                    this.resMsg =  'contact(s) unshared'
+                    setTimeout(() => {
+                            this.resMsg=''
+                            this.checkeddata = []
+                    }, 2000);
+                }                     
+            })).catch(error => {
+                this.resMsg =  error.response.data
+            }) 
+        },
+        unshareRequest(id,OfficerId){
+             var token = this.getCookie('token')
+             axios.post('https://aghub.miphost.com/api/broadcast/unshare/request/', 
+             {
+                ownerId:OfficerId,
+                sharedUserId:this.jwt.id,
+                extId:id,
+                description:'unshare farmer ext.'
             },
+            { headers:{'Authorization': `Bearer ${token}`}})
+            .then(response =>  {
+                // this.sharedUsers.push(response.data)
+            }).catch(error => {
+                console.log(error);
+            })
+        },
             addtoGroup(){
                 var token = this.getCookie('token')
 
@@ -256,12 +367,14 @@
                 axios.get('https://aghub.miphost.com/api/broadcast/contact/show', 
                     { headers:{'Authorization': `Bearer ${token}`}})
                 .then(response =>  {
-                    this.contacts = response.data
+                    // console.log(response.data[1])
+                    this.$emit('notification', response.data[1])
+                    this.contacts = response.data[0]
                     axios.get('https://aghub.miphost.com/api/broadcast/share/', 
                     { headers:{'Authorization': `Bearer ${token}`}})
                     .then(response =>  {
                         this.jwt = jwt_decode(token);
-                        console.log(response.data)
+                        // console.log(response.data)
                         response.data.forEach(contact => {
                             this.contacts.push(contact)
                         });
@@ -389,6 +502,9 @@
     }
 </script>
 <style scoped>
+        .bg-warn{
+            background-color: #fff261b5;
+        }
         /* we will explain what these classes do next! */
         .v-enter-active,
         .v-leave-active {
@@ -414,7 +530,7 @@
         padding: 25px 5px !important;
     }
     .input-group-text:hover{
-        color:#037205 !important;
+        color:#2b9f1b !important;
         cursor: pointer;
     }
     .card{
@@ -440,7 +556,7 @@
 .form-control-sm, .form-select-sm {
     background-color: #1a222600;
     border: none;
-    border-bottom: 2px solid #01600a;
+    border-bottom: 2px solid #2b9f1b;
     border-top: 0px;
     border-radius: 0px;
     font-weight:100;
@@ -456,7 +572,7 @@
     border-color: inherit;
     -webkit-box-shadow: none;
     box-shadow: none;
-    border-bottom: 2px solid #01600a !important ;
+    border-bottom: 2px solid #2b9f1b !important ;
     outline: 0;
     background-color: #31383b00;
     color: #1e1e1e;

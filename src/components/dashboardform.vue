@@ -5,40 +5,39 @@
         <div class="offcanvas-header">
                 <h6 class="offcanvas-title fw-bolder text-capitalize" id="offcanvasExampleLabel">Dashboard</h6>
             
-            <button class="btn btn-warning px-3 btn-sm rounded-pill" style="font-size:12px" @click="addPanel()">Add Panel</button>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <!-- offcanvas header end | offcanvas body start -->
         <div class="offcanvas-body">
             <!-- accordion -->
-            <div class="accordion" id="accordionPanelsStayOpenExample">
+            <div class="accordion accordion-flush border-0" id="accordionPanelsStayOpenExample">
                 <!-- accordion item  -->
-                <div class="accordion-item mb-3" v-for="(data, index) in datasets" :key="index" v-show=" index < 4">
+                <div class="accordion-item border-0 border-bottom rounded-0 border-dark mb-3" v-for="(data, index) in datasets" :key="index" v-show=" index < 4">
                     <!-- accordion header -->
                     <div class="accordion-header " :id="`panelsStayOpen-heading${index}`">
                         <button class="btn  float-end text-danger trashbtn"  @click="datasets.splice(index, 1)"><i class="bi bi-trash3-fill"></i></button>
-                        <button class="accordion-button text-light fw-normal" style="width:90% !important; background-color:#e76e83" type="button" data-bs-toggle="collapse"
+                        <button class="accordion-button text-light fw-normal" style="width:90% !important;font-size:12px; background-color:#4fab43" type="button" data-bs-toggle="collapse"
                             :data-bs-target="`#panelsStayOpen-collapse${index}`" aria-expanded="true"
-                            :aria-controls="`panelsStayOpen-collapse${index}`">
+                            :aria-controls="`panelsStayOpen-collapse${index}` ">
                             P {{index + 1}}
-                            <select class="form-select form-select-sm w-50 mx-4" v-model="data.datasetVal" aria-label=".form-select-sm example">
+                            <!-- <select class="form-select rounded-pill form-select-sm w-50 mx-4" v-model="data.datasetVal" aria-label=".form-select-sm example">
                                 <option value="default">Select Dataset</option>
-                                <option value="1">IITA Dataset</option>
+                                <option value="1">IITA Dataset</option> -->
                                 <!-- <option value="2">Two</option>
                                 <option value="3">Three</option> -->
-                            </select>
+                            <!-- </select> -->
                         </button>
                     </div>
                     <!-- accordion header end -->
                     <div :id="`panelsStayOpen-collapse${index}`" class="accordion-collapse collapse show"
                         :aria-labelledby="`panelsStayOpen-heading${index}`">
-                        <div class="accordion-body">
+                        <div class="accordion-body p-0">
                             <!-- form item -->
-                            <form class="border p-3 rounded-3 ">
+                            <form class=" p-3 rounded-3 ">
                                 <div class="text-start mb-1">
                                     <label for="exampleFormControlInput1" class="form-label mb-0"
                                         style="font-size:10px">Y-data</label>
-                                    <select class="form-select form-select-sm"  v-model="datasets[index].y_data" aria-label=".form-select-sm example">
+                                    <select class="form-select rounded-pill form-select-sm"  v-model="datasets[index].y_data" aria-label=".form-select-sm example">
                                         <option value="choose data" disabled >Y-Data</option>
                                         <option :value="option" v-for="(option, i) in y_data" :key="i">{{option}}</option>
                                         {{datasets[index].xyKeys[1] = this.getKeyByValue(y_data, datasets[index].y_data) }}
@@ -47,7 +46,7 @@
                                 <div class="text-start mb-1">
                                     <label for="exampleFormControlInput1" class="form-label mb-0"
                                         style="font-size:10px">X-Data</label>
-                                    <select class="form-select form-select-sm" @change="getFormValue(index)" v-model="datasets[index].x_data" aria-label=".form-select-sm example">
+                                    <select class="form-select rounded-pill form-select-sm" @change="getFormValue(index)" v-model="datasets[index].x_data" aria-label=".form-select-sm example">
                                         <option value="choose data" disabled >X-Data</option>
                                         <option :value="option" v-for="(option, i) in x_data" :key="i">{{option}}</option>
                                         {{datasets[index].xyKeys[0] = this.getKeyByValue(x_data, datasets[index].x_data) }}
@@ -61,7 +60,9 @@
                 </div>
                 <!-- accordion item end -->
             </div>
-            <a class="text-warning float-end text-decoration-none fw-bolder "  href="#" @click="$emit('powerClick')">Go to PowerBi</a>
+            <button class="btn btn-warning float-end btn-sm rounded-pill" style="font-size:12px" @click="addPanel()">Add Panel</button>
+
+            <a class="text-warning float-start text-decoration-none fw-bolder " style="font-size:12px"  href="#" @click="$emit('powerClick')">Go to PowerBi</a>
             <!-- accordion end -->
         </div>
     </div>
@@ -197,20 +198,21 @@
 </script>
 <style scoped>
 .accordion-button{
-    height: 40px;
+    height: 30px;
 }
 .trashbtn{
+
     width: 10% !important;
     padding: 0rem 0.25rem;
     border-end-start-radius: 0px;
     border-end-end-radius: 0px;
     border-start-start-radius: 0px;
     border: 0px !important;
-    height: 40px;
+    height: 32px;
     background-color: #4fab43;
 }
 .form-select{
-    background-color: #b3fca970;
+    background-color: #4fab431d;
 }
 .trashbtn:focus {
     outline: 0;

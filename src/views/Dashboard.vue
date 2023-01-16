@@ -4,12 +4,12 @@
 
 <div class="container-fluid p-4">
   <span v-if="!powerBi">
-    <div class="container fw-bolder text-dark" style="margin-top: 23rem;" v-show="chartdata == null || chartdata.length < 1">
+    <div class="container fw-bolder text-dark" style="margin-top: 23rem; font-size:12px" v-show="chartdata == null || chartdata.length < 1">
       <p class="d-inline me-2"> No charts available Please select</p>
         <a disabled class="float2 align-middle" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
           <i class="bi bi-menu-button-wide fs-6 my-float2 "></i>
         </a>
-      <p class="d-inline ms-2"> to add a chart, go to <a href="#" class="text-decoration-none text-warning" @click="powerBi = true">PowerBi</a></p>
+      <p class="d-inline ms-2" > to add a chart, go to <a href="#" class="text-decoration-none text-warning" @click="powerBi = true">PowerBi</a></p>
     </div>
   </span>
   
@@ -138,7 +138,7 @@ export default {
 }
 .float:hover{
   transform: scale(1.1); 
-	background-color:#28891c;
+	background-color:#1c7f0e;
 
 }
 </style>
