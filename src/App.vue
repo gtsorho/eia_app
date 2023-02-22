@@ -16,7 +16,7 @@ export default {
 }
 </script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Open+Sans:wght@300&display=swap');;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Open+Sans:wght@300;500&display=swap');;
 /* @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap'); */
 
     /* html, body{
