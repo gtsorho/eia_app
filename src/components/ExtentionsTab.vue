@@ -166,6 +166,9 @@
 
             }
         },
+        mounted(){
+            console.log(this.getCookie('token'))
+        },
         beforeMount(){
            this.getall()
         },

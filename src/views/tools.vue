@@ -167,9 +167,9 @@ export default {
               password:this.password
             })
             .then(response =>  {
-              console.log(response.data)
-              this.setCookie('token', response.data, 1 )
+              this.setCookie('token', response.data, 1)
               this.$router.push({name : 'ControlCenter'})
+              console.log(this.getCookie('token'))
             }).catch(error => {
                 this.resMsg = error.response.data
                 setInterval(() => {
@@ -177,7 +177,7 @@ export default {
                 }, 2000);
             })
       },
-        getCookie(cname) {
+        getCookie(cname){
           let name = cname + "=";
           let ca = document.cookie.split(';');
           for(let i = 0; i < ca.length; i++) {
