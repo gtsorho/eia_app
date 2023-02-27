@@ -72,7 +72,7 @@ export default {
 }
 
 li a {
-    padding-inline-end: 100%;
+    padding-inline-end: 0%;
 }
 
 li:hover {

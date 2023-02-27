@@ -363,7 +363,6 @@
             },
             getall(){
                 var token = this.getCookie('token')
-
                 console.log(token)
                 axios.get('https://aghub.miphost.com/api/broadcast/contact/show', 
                     { headers:{'Authorization': `Bearer ${token}`}})

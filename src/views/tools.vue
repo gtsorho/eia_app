@@ -167,6 +167,7 @@ export default {
               password:this.password
             })
             .then(response =>  {
+              console.log(response.data)
               this.setCookie('token', response.data, 1 )
               this.$router.push({name : 'ControlCenter'})
             }).catch(error => {
