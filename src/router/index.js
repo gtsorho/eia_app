@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory,createWebHashHistory } from 'vue-router'
-import CroppingCalendar from '../views/CroppingCalendar.vue'
+import CroppingCalendar from '../views/CroppingCalendarNew.vue'
 import Home from '../views/Home.vue'
 import Weather from '../views/weatherHome.vue'
 import Main from '../views/Main.vue'

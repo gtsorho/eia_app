@@ -12,20 +12,20 @@
             <!-- accordion -->
             <div class="accordion accordion-flush border-0" id="accordionPanelsStayOpenExample">
                 <!-- accordion item  -->
-                <div class="accordion-item border-0 border-bottom rounded-0 border-dark mb-3" v-for="(data, index) in datasets" :key="index" v-show=" index < 4">
+                <div class="accordion-item shadow-lg border-0 border-bottom rounded-3 mb-3" v-for="(data, index) in datasets" :key="index" v-show="index < 6">
                     <!-- accordion header -->
                     <div class="accordion-header " :id="`panelsStayOpen-heading${index}`">
-                        <button class="btn  float-end text-danger trashbtn"  @click="datasets.splice(index, 1)"><i class="bi bi-trash3-fill"></i></button>
-                        <button class="accordion-button text-light fw-normal" style="width:90% !important;font-size:12px; background-color:#4fab43" type="button" data-bs-toggle="collapse"
+                        <button class="accordion-button text-dark fw-normal rounded-3 " style="width:100% !important;font-size:12px;background-image: linear-gradient(45deg, #80c976, transparent)"  data-bs-toggle="collapse"
                             :data-bs-target="`#panelsStayOpen-collapse${index}`" aria-expanded="true"
                             :aria-controls="`panelsStayOpen-collapse${index}` ">
-                            P {{index + 1}}
-                            <!-- <select class="form-select rounded-pill form-select-sm w-50 mx-4" v-model="data.datasetVal" aria-label=".form-select-sm example">
-                                <option value="default">Select Dataset</option>
-                                <option value="1">IITA Dataset</option> -->
-                                <!-- <option value="2">Two</option>
-                                <option value="3">Three</option> -->
-                            <!-- </select> -->
+                            <span class="d-flex justify-content-between w-100 pt-0">
+                                <select class="form-select sourceBtn form-select-sm border-0" @change="getColumns(datasets[index].activeSrc, index)" style="background-color: transparent !important; border-bottom: 1px solid #aaaaaa75  !important;"  v-model="datasets[index].activeSrc" aria-label=".form-select-sm example">
+                                    <!-- <option :value="source.dbref" v-for="(source, i) in dataSources" :key="i">{{source.dbname}}</option> -->
+                                    <option value="datalake" >Africa Rising</option>
+                                    <option value="" v-show="datasets[index].activeSrc == ''">No source selected</option>
+                                </select>
+                                <img src="../assets/trash.gif" style="width: 20px; height: 20px;" @click="datasets.splice(index, 1)">
+                            </span>
                         </button>
                     </div>
                     <!-- accordion header end -->
@@ -33,14 +33,14 @@
                         :aria-labelledby="`panelsStayOpen-heading${index}`">
                         <div class="accordion-body p-0">
                             <!-- form item -->
-                            <form class=" p-3 rounded-3 ">
+                            <form class=" py-1 px-3 rounded-3 ">
                                 <div class="text-start mb-1">
                                     <label for="exampleFormControlInput1" class="form-label mb-0"
                                         style="font-size:10px">Y-data</label>
                                     <select class="form-select rounded-pill form-select-sm"  v-model="datasets[index].y_data" aria-label=".form-select-sm example">
                                         <option value="choose data" disabled >Y-Data</option>
-                                        <option :value="option" v-for="(option, i) in y_data" :key="i">{{option}}</option>
-                                        {{datasets[index].xyKeys[1] = this.getKeyByValue(y_data, datasets[index].y_data) }}
+                                        <option :value="option" v-for="(option, i) in datasets[index].y_dataArr" :key="i">{{option}}</option>
+                                        {{datasets[index].xyKeys[1] = this.getKeyByValue( datasets[index].y_dataArr, datasets[index].y_data) }}
                                     </select>
                                 </div>
                                 <div class="text-start mb-1">
@@ -48,8 +48,8 @@
                                         style="font-size:10px">X-Data</label>
                                     <select class="form-select rounded-pill form-select-sm" @change="getFormValue(index)" v-model="datasets[index].x_data" aria-label=".form-select-sm example">
                                         <option value="choose data" disabled >X-Data</option>
-                                        <option :value="option" v-for="(option, i) in x_data" :key="i">{{option}}</option>
-                                        {{datasets[index].xyKeys[0] = this.getKeyByValue(x_data, datasets[index].x_data) }}
+                                        <option v-show="option != 'Population'" :value="option" v-for="(option, i) in datasets[index].x_dataArr" :key="i">{{option}}</option>
+                                        {{datasets[index].xyKeys[0] = this.getKeyByValue(datasets[index].x_dataArr, datasets[index].x_data) }}
                                     </select>
                                 </div>
                             </form>
@@ -69,6 +69,7 @@
 </template>
 <script>
     import axios from 'axios'
+import { reactive } from 'vue'
 
     export default {
         name: "dashboardform",
@@ -78,8 +79,11 @@
             ],
         data() {
             return {
+                
+                dataSources:[],
                 datasets: [
-                    {
+                    {   
+                        activeSrc:'',
                         datasetVal:'default',
                         x_data: "choose data",
                         y_data: "choose data",
@@ -92,47 +96,46 @@
                             ['legend']
                         ],
                         xyKeys:['x data', ' y data'],
-                        show:true
+                        show:true,
+                        y_dataArr:[],
+                        x_dataArr:[],
                     },
                 ],
 
                 // form data to send************************
-                y_data: 
-                    [
-                        'Population',
-                        
-                    ]
-                ,  
-
-                x_data:
-                    [
-
-                    ],
-
-                // datagroup:{
-                //     'sex':['male', 'female'],
-                //     'croptype':['maize', 'cowpea', 'groundnut']
-                // },
+                
             }
         },
-        mounted(){
-            axios.get('https://aghub.miphost.com/api/datalake/columns')
-            .then(response =>  {
-                response.data.forEach(table => {
-                    this.y_data.push(table)
-                    this.x_data.push(table)
-                });
-            }).catch(error => {
-                console.log(error)
-            })
+        created(){
+            
+            this.getSources()
         },
         methods: {
+            getColumns(db, index){
+                axios.get(`https://aghub.miphost.com/api/datalake/columns/${db}`)
+                .then(response =>  {
+                    this.datasets[index].y_dataArr = response.data
+                    this.datasets[index].x_dataArr = response.data
+                    this.datasets[index].y_dataArr.unshift("Population"); 
+                }).catch(error => {
+                    console.log(error)
+                })
+            },
+            getSources(){
+                axios.get('https://aghub.miphost.com/api/datalake/sources')
+                .then(response =>  {
+                    this.dataSources = response.data
+                }).catch(error => {
+                    console.log(error)
+                })
+            },
             getKeyByValue(object, value){
                 return Object.keys(object).find(key => object[key] === value);
             },
             addPanel() {
                 this.datasets.push(
                     {
+                        activeSrc:'',
                         datasetVal:'default',
                         x_data: "choose x data",
                         y_data: "choose y data",
@@ -145,11 +148,11 @@
                             },
                             ['legend']
                         ],
-                        show:false
-
+                        show:false,
+                        y_dataArr:[],
+                        x_dataArr:[],
                     }
                 )
-                console.log(this.datasets)
             },
             getFormValue(i){
                 console.log(i)
@@ -182,12 +185,6 @@
                         })
                     }
             },
-            // submit () {
-            //     const data = {
-            //         workExperiences: this.workExperiences
-            //     }
-            //     alert(JSON.stringify(data, null, 2))
-            // }
         },
         computed:{
             jsColor(){
@@ -198,6 +195,63 @@
 </script>
 <style scoped>
 .accordion-button{
+    height: 30px;
+}
+
+.sourceBtn{
+    border-radius: 0%;
+    padding-bottom: .1rem;
+    font-size: .7rem;
+    width: 200px;
+    background: none;
+}
+.form-select:focus {
+    border-color: #86b6fe00;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13, 109, 253, 0);
+}
+.trashbtn{
+
+    width: 10% !important;
+    padding: 0rem 0.25rem;
+    border-end-start-radius: 0px;
+    border-end-end-radius: 0px;
+    border-start-start-radius: 0px;
+    border: 0px !important;
+    height: 32px;
+    background-color: #4fab43;
+}
+.form-select{
+    background-color: #c1ebbb8d;
+    font-size: .75rem!important;
+}
+.trashbtn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 0%);
+}
+.bi-trash3-fill:hover{
+    opacity: .5;
+}
+.accordion-button:not(.collapsed)::after {
+   display: none;
+}
+.accordion-button::after {
+   display: none ;
+}
+.accordion-button:focus {
+    z-index: 3;
+    border-color: #86b6fe00;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13, 109, 253, 0);
+}
+.accordion-button:not(.collapsed) {
+    
+    background-color: #ffffff;
+}
+
+</style>
+<style scoped>
+/* .accordion-button{
     height: 30px;
 }
 .trashbtn{
@@ -220,5 +274,5 @@
 }
 .bi-trash3-fill:hover{
     opacity: .5;
-}
+} */
 </style>

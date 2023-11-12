@@ -1,7 +1,5 @@
 <template >
     <Navbar/>
-    
-
     <Homemain :maindata="weatherdatamain"/>
 
     <Homefooter :weekdata="weatherdataweek" 
@@ -15,7 +13,7 @@ import Navbar from "../components/navbar.vue";
 import Homefooter from '../components/homefooter.vue'
 import Homeheader from '../components/homeheader.vue'
 import Homemain from '../components/homemain.vue'
-import axios from 'axios'
+
 export default {
     components:{
         Homefooter,
@@ -37,7 +35,6 @@ export default {
             this.weatherdatamain = data
         }
     }
-    
 }
 </script>
 <style scoped>

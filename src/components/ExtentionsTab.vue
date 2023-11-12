@@ -116,8 +116,8 @@
                                 </th>                                                             
                                 <th scope="row">003{{contact.id}}</th>
                                 <td>{{contact.name}}</td>
-                                <td>{{contact.email}}</td>
                                 <td>{{contact.phone}}</td>
+                                <td>{{contact.email}}</td>
                                 <td >{{contact.address.location}}</td>
                                 <td v-if="contact.accessPemission != null && contact.accessPemission.includes(jwt['id'] + '.0')">
                                     <span class="" @mouseover="brokenlink = true" @mouseleave="brokenlink = false" @click="unshareRequest(contact.id,contact.extensionsOfficerId)">
