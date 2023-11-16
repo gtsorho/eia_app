@@ -1,7 +1,7 @@
 <template>
 
 <div class="  d-lg-flex py-2 align-items-center justify-content-around shadow">
-  <div class="border-start border-2 border-danger ps-1   mx-auto" style="width:fit-content">
+  <div class="border-start border-2 border-danger ps-1 " style="width:fit-content">
     <select class="form-select  rounded-3 " style="width: 250px" @change="getVariety()" id="inputGroupSelect01" v-model="searchCrop">
       <option selected value="default">Select CropType</option>
       <option v-for="(res, i) in crops" :key="i" :value="res.crop_id"  >{{res.crop}}</option>
@@ -12,38 +12,41 @@
     </select>
   </div>
 
-  <i class="bi  mx-5 bi-chevron-right"></i>
 
   <div>
-    <select class="form-select mx-auto rounded-3 my-3" style="width: 250px" @change="getTowns()" id="inputGroupSelect01" v-model="searchRegion">
-      <option  value="default">Choose Region</option>
-      <option v-for="(res, i) in regions" :key="i" :value="res.region_id" >{{res.region}}</option>
-    </select>
 
-    <div class="form-check form-switch  d-flex justify-content-around ">
-      <label class="form-check-label " for="flexSwitchCheckDefault"> Month Chart</label>
-      <input class="form-check-input mx-0" v-model="chartSwitch" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-      <label class="form-check-label " for="flexSwitchCheckDefault"> Gnatt Chart</label>
+
+    <div class=" border-end border-2 pe-1 border-danger" style="width:fit-content"> 
+      <select class="form-select rounded-3" style="width: 250px" @change="getTowns()" id="inputGroupSelect01" v-model="searchRegion">
+        <option  value="default">Choose Region</option>
+        <option v-for="(res, i) in regions" :key="i" :value="res.region_id" >{{res.region}}</option>
+      </select>
+      <select class="form-select  rounded-3 mt-3" v-if="searchRegion != 'default'" style="width: 250px" id="inputGroupSelect01" @change="searchVariety == null || searchVariety == 'default' ?  errFx() : getCropData()" v-model="searchTown">
+        <option selected value="default">Change Town</option>
+        <option v-for="(res, i) in towns" :key="i" :value="res.town_id">{{res.town}}</option>
+      </select>
     </div>
+
     <p class="text-danger" style="font-size:13px" v-if="errMsg"><i class="bi bi-exclamation-circle" ></i>  all fields required</p>
 
   </div>
 
 
-  <i class="bi mx-5 bi-chevron-right"></i>
-
-  <div class="mx-auto border-end border-2 pe-1 border-danger" style="width:fit-content"> 
-    <select class="form-select  rounded-3 " style="width: 250px" id="inputGroupSelect01" @change="searchVariety == null || searchVariety == 'default' ?  errFx() : getCropData()" v-model="searchTown">
-      <option selected value="default">Change District</option>
-      <option v-for="(res, i) in towns" :key="i" :value="res.town_id">{{res.town}}</option>
-    </select>
-    <button style="font-size:12px" data-bs-toggle="offcanvas" data-bs-target="#resources" class="btn btn-danger btn-sm rounded-4 mt-1 w-100"><i class="bi me-1 bi-bootstrap-reboot"></i> Resources</button>
+  <div>
+    <button style="font-size:12px my-3" data-bs-toggle="offcanvas" data-bs-target="#resources" class="btn btn-danger btn-sm rounded-4 mt-1 w-100"><i class="bi me-1 bi-bootstrap-reboot"></i> Resources</button>
+    
+    <div class="form-check form-switch py-3  px-0 d-flex justify-content-around ">
+      <label class="form-check-label px-2 " for="flexSwitchCheckDefault"> Month Chart</label>
+      <input class="form-check-input mx-0" v-model="chartSwitch" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+      <label class="form-check-label px-2" for="flexSwitchCheckDefault"> Gnatt Chart</label>
+    </div>
   </div>
+
 </div>
-    <p class="text-center fw-bold" style="margin-top: 9%;"  v-if="cropdata == null || cropdata.length == 0" >no result found</p>
 
 <!-- month chart******************************************************** -->
   <div  class="row croppingPage  mx-0" v-if="!chartSwitch" >
+    <p class="text-center my-4 fw-bold" v-if="cropdata == null" >no result found</p>
     <div class="col p-4 ">
       <div class="row row-cols-1 row-cols-md-3  pb-3  g-3" style=" overflow-y: scroll;"  v-if="cropdata" :class="close ? 'row-cols-md-3 row-cols-lg-4' : 'row-cols-md-2 row-cols-lg-3'">
         <div class="col monthlyCard" ref="monthlyCard" id="" v-for="(data, i) in cropdata" :key="i" aria-controls="offcanvasExample" >
@@ -111,10 +114,29 @@
       <button type="button" style="height:10px" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
         <div class="text-start" style="font-size:14px" v-if="activityDetails != null">
-          <div>
-            <h4 for="" style="font-size:15px" class="fw-bold ps-2">{{findCrop.toUpperCase()}} {{findVariety.variety}}</h4>
+          <div class="ps-3">
+            <h4 for="" style="font-size:15px" class="fw-bold">{{findCrop.toUpperCase()}} {{findVariety.variety}}</h4>
           </div>
-          <div>
+
+          <div class="accordion" id="accordionExample2 ">
+            <div class="accordion-item bg-transparent border-0" v-for="(activity, i) in activityDetails.activityDetails" :key="i">
+              <h4 class="accordion-header" >
+                <button style="font-size: 14px" class="accordion-button py-2  bg-transparent text-black collapsed" type="button" data-bs-toggle="collapse" :data-bs-target="'#collapseD'+ i" aria-expanded="false" :aria-controls="'collapse' + i">
+                {{i+1}}. {{activity.detail}}
+                </button>
+              </h4>
+              <div :id="'collapseD'+ i" class="accordion-collapse collapse" data-bs-parent="#accordionExample2">
+                <div class="accordion-body ms-4 text-start"  v-if="activity.comments == '' || activity.comments == null" >
+                  - no further comments
+                </div>
+                <div class="accordion-body ms-4 text-start" v-else>
+                  - {{activity.comments}}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="my-4">
             <div class=" d-flex justify-content-around">
               <div class="bg-success mt-2 me-1 rounded-pill " style="width:100px; height:1px"></div>
               <label class="fw-bolder text-center" >Fertilizer Recommendation </label>
@@ -154,8 +176,9 @@
           </div>
         </div>
     </div>
-
-
+ <br>
+ <br>
+ <br>
 </template>
 
 <script>
@@ -233,8 +256,9 @@ export default {
     },
     ganttEvent(data){
       this.$refs.ganttCanvas.click()
-
+    console.log(data)
       this.activityDetails = {
+        activityDetails:data.activityDetails,
         activity : data.ganttBarConfig.label,
         risk_advisory : data.risk_advisories,
       }
@@ -324,7 +348,7 @@ export default {
       }
 
       if (words.includes('pest')) {
-          return 'bg-orange'
+          return 'bg-red'
       }
 
       if (words.includes('harvesting')) {
@@ -457,6 +481,7 @@ export default {
       })
       .then(response => {
         this.cropdata = response.data[0]
+        console.log(response.data)
         this.cropdataActivity = []
         response.data[1].forEach(activity => {
          let createData = { 
@@ -465,6 +490,7 @@ export default {
               {
                 beginDate: this.formatDate(activity.activityStart),
                 endDate: this.formatDate(activity.activityEnd),
+                activityDetails:activity.activityDetails,
                 activityStart:activity.activityStart,
                 activityEnd:activity.activityEnd,
                 risk_advisories: activity.risk_Advisory,
@@ -779,7 +805,7 @@ label{
   background-color: #1e98bd !important;
 }
 .bg-dark {
-  background-color: #292929 !important;
+  background-color: #565656 !important;
 }
 .bg-danger {
   background-color: #da421c !important;
@@ -789,6 +815,9 @@ label{
 }
 .bg-volet{
   background-color: #ff04a3 !important;
+}
+.bg-red{
+  background-color: #b00606 !important;
 }
 .bg-lemon{
   background-color: #00177e !important;
