@@ -11,9 +11,9 @@ jobs:
       - name: Connect to cPanel and List Files
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
-          server: ${{ secrets.GIT_CPANEL_EIA_SERVER }}
-          username: ${{ secrets.GIT_CPANEL_EIA_USER }}
-          password: ${{ secrets.GIT_CPANEL_EIA_PWD }}
-          protocol: ${{ secrets.GIT_CPANEL_EIA_PROTOCOL }}
+          server: '198.187.29.26'
+          username: 'admin'
+          password: 'Capslock@14'
+          protocol: 'ftps'
           server-dir: /public_html  # Adjust to your directory
           dry-run: true             # Enables dry run mode for testing connection
