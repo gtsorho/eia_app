@@ -1,0 +1,19 @@
+name: Test FTP Connection to cPanel
+
+on:
+  workflow_dispatch:  # Allows you to manually trigger the workflow
+
+jobs:
+  test-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Connect to cPanel and List Files
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+          server: ${{ secrets.GIT_CPANEL_EIA_SERVER }}
+          username: ${{ secrets.GIT_CPANEL_EIA_USER }}
+          password: ${{ secrets.GIT_CPANEL_EIA_PWD }}
+          protocol: ${{ secrets.GIT_CPANEL_EIA_PROTOCOL }}
+          server-dir: /public_html  # Adjust to your directory
+          dry-run: true             # Enables dry run mode for testing connection
