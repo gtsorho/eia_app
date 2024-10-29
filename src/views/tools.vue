@@ -2,7 +2,6 @@
     <div class="container my-5">
 <div class="row">
 <div  class="col-lg-3 col-md-6">
-  
       <div class="card card-margin text-light" style="height:fit-content !important; background-image: linear-gradient(67deg, #000000, #4fab43)!important;" >
           <div class="card-body pt-3 login_body" >
               <div class="widget-49">
@@ -130,7 +129,7 @@ export default {
             ]
         }
     },  
-        mounted(){
+    mounted(){
       if(!this.authenticated){
         setTimeout(() => {
           this.$refs.modalclick.click();

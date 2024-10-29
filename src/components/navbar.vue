@@ -1,6 +1,6 @@
 <template>
     <header>
-        <div class="collapse text-dark" id="navbarHeader" style="background-color:rgb(27 244 0 / 10%)!important">
+        <div class="collapse text-dark" id="navbarHeader" style="background-color:rgb(185, 226, 180)!important; font-size:14px;">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-8 col-md-7 py-4">
@@ -14,26 +14,38 @@
                     </div>
                     <div class="col-sm-4 offset-md-1 py-4">
                         <h4 class="text-dark">Menu</h4>
-                        <hr style="color:#  4fab43 !important">
+                        <hr style="color:#4fab43 !important">
                         <ul class="list-unstyled">
                             <li class="w-100 px-1 rounded-pill">
-                                <router-link to="/main/services" class="text-dark "  @click="collapseCloseOnclick()">Advisories
+                                <router-link to="/main/CroppingCalendar" class="text-dark "  @click="collapseCloseOnclick()">Cropping Calendar
                                 </router-link>
                             </li>
-                            <!-- <li class="w-100 px-2 rounded-pill">
-                                <router-link to="/main/dashboard" class="text-dark" @click="collapseCloseOnclick()">
-                                    Dashboards</router-link>
-                            </li> -->
+                            <li class="w-100 px-1 rounded-pill">
+                                <router-link to="/main/tempRain" class="text-dark "  @click="collapseCloseOnclick()">Temp & Rain
+                                </router-link>
+                            </li>
+                            <li class="w-100 px-1 rounded-pill">
+                                <router-link to="/weather" class="text-dark "  @click="collapseCloseOnclick()">Weather
+                                </router-link>
+                            </li>
+                            <li class="w-100 px-1 rounded-pill">
+                                <router-link to="/main/dashboard" class="text-dark "  @click="collapseCloseOnclick()">Dashboard
+                                </router-link>
+                            </li>
                             <li class="w-100 px-1 rounded-pill">
                                 <router-link to="/main/storyset" class="text-dark" @click="collapseCloseOnclick()">
                                     Assembled Knowledge</router-link>
                             </li>
+
+
+
+              
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="navbar navbar-dark shadow-sm" style="    background-image: linear-gradient(113deg, #0e140d, #4fab43);!important">
+        <div class="navbar navbar-dark shadow-sm" style="    background-image: linear-gradient(113deg, #0e140d, #4fab43)!important">
             <div class="container">
                 <a href="#" class="navbar-brand d-flex align-items-center">
                     <router-link to="/" class=" text-decoration-none">

@@ -1,5 +1,5 @@
 <template>
-    <div class="card rounded-pill m-auto">
+    <div class="card rounded-5 m-auto">
     <div class="card-body">
         <div class="row" v-if="getdata">
             <div class="col-4 align-self-center text-center text-md-end">
@@ -14,7 +14,7 @@
                 <h6 class="text-capitalize">{{getdata.weather[0].description}}</h6>
             </div>
         </div>
-        <hr class="text-light mx-auto w-75" style="margin-block: 3px !important;">
+        <hr class="text-light mx-auto w-75" v-if="maindatatwo && maindatatwo.length > 0" style="margin-block: 3px !important;">
         <div class="row justify-content-md-center">
             <div class="col text-center" v-for="data in maindatatwo" :key="data.id">
                 <p class=" text-capitalize pb-0 text-success fw-bolder" style="font-size:13px; margin-bottom: 0px !important;">{{data.main.temp}}° {{data.weather[0].description}}</p>

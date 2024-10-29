@@ -1,18 +1,20 @@
 import { createRouter, createWebHistory,createWebHashHistory } from 'vue-router'
-import CroppingCalendar from '../views/CroppingCalendarNew.vue'
 import Home from '../views/Home.vue'
 import Weather from '../views/weatherHome.vue'
 import Main from '../views/Main.vue'
 import StorySet from '../views/storyset.vue'
-import DataSets from '../views/datasets.vue'
-import services from '../views/tools.vue'
-import DatasetPreview from '../views/datasetpreview.vue'
 import Storysetchartboard from '../views/storysetchartboard'
 import tempRain from '../views/temprain'
 import ControlCenter from '../views/controlCenter'
-import weatherBg from "@/assets/pexels-pixabay-209831.jpg";
+import leaflet from '../views/leaflet'
+import weatherBg from "@/assets/hero-sky-dramatic-lightning-weather-shutterstock_2200924189.jpg";
+import CroppingCalendarNew from '../views/CroppingCalendarUpdating.vue'
+import CalendarMore from '../views/calenderMore.vue'
 
 
+// import services from '../views/tools.vue'
+// import DataSets from '../views/datasets.vue'
+// import DatasetPreview from '../views/datasetpreview.vue'
 
 
 
@@ -40,14 +42,24 @@ const routes = [
     component: Main,
     children: [
       {
-        path: 'Croppingcalendar',
+        path: 'croppingcalendar',
         name: 'CroppingCalendar',
-        component: CroppingCalendar
+        component: CroppingCalendarNew,
+      },
+      {
+        path:'more',
+        name:'More',
+        component:CalendarMore
       },
       {
         path: 'temprain',
         name: 'TempRain',
         component: tempRain
+      },
+      {
+        path: 'leaflet',
+        name: 'leaflet',
+        component: leaflet
       },
       {
         path: 'storyset',
@@ -63,27 +75,24 @@ const routes = [
           ...route.params
         })
       },
-      {
-        path: 'services',
-        name: 'services',
-        component: services
-      },
-      {
-        path: 'datasets',
-        name: 'Datasets',
-        component: DataSets,
-      },
-      {
-        path: 'datasetpreview',
-        name: 'DatasetPreview',
-        component: DatasetPreview
-      },
+      // {
+      //   path: 'services',
+      //   name: 'services',
+      //   component: services
+      // },
+      // {
+      //   path: 'datasets',
+      //   name: 'Datasets',
+      //   component: DataSets,
+      // },
+      // {
+      //   path: 'datasetpreview',
+      //   name: 'DatasetPreview',
+      //   component: DatasetPreview
+      // },
       {
         path: 'dashboard',
         name: 'Dashbord',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "about" */ '../views/Dashboard.vue')
       }
     ]

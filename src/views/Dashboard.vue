@@ -9,7 +9,7 @@
         <a disabled class="float2 align-middle" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
           <i class="bi bi-menu-button-wide fs-6 my-float2 "></i>
         </a>
-      <p class="d-inline ms-2" > to add a chart, go to <a href="#" class="text-decoration-none text-warning" @click="powerBi = true">PowerBi</a></p>
+      <p class="d-inline ms-2" > to add a chart</p>
     </div>
   </span>
   

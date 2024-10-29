@@ -76,10 +76,21 @@ export default {
         axios.get('https://aghub.miphost.com/api/weather/locations')
             .then(response =>  {
                 this.locations = response.data
+                if(this.locations){                    
+                    this.addressVal = {
+                    "id": 1,
+                    "longitude": "-2.5",
+                    "latitude": "4.8",
+                    "location": "Ghana",
+                    "createdAt": "2022-08-09T02:00:39.000Z",
+                    "updatedAt": "2022-08-09T02:00:39.000Z"
+                    }
+                    this.selectAddress()
+                }
             }).catch(error => {
                 console.log(error);
             })
-
+            
     },
     methods: {
         setLoading(isLoading) {
@@ -99,17 +110,12 @@ export default {
             var liveTempArr = []
             var liveRainArr = []
                         
-
-            console.log(this.addressVal.latitude, this.addressVal.longitude)
-
             await axios.post('https://aghub.miphost.com/api/weather/livedata', 
             {
                 'latitude':this.addressVal.latitude,
                 'longitude': this.addressVal.longitude,
             })
             .then(response =>  {
-                console.log(response.data)
-                // return
                 response.data.splice(-1,1)
 
                 response.data.forEach(item => {  
@@ -131,9 +137,6 @@ export default {
                 }
             })
             .then(response =>  {
-                console.log(response.data)
-                
-                // return
                 let impactTemp = []
                 let impactRain = []
                 
@@ -180,8 +183,6 @@ export default {
                     liveTempArr,
                     tempForcastArr
                 ]
-
-                console.log(this.tempset)
 
                 this.rainset =
                 [ 

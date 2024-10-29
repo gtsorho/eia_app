@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@infectoone/vue-ganttastic": "^2.2.0",
+    "@turf/turf": "^7.0.0",
     "@popperjs/core": "^2.11.4",
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
@@ -35,13 +36,18 @@
     "vue-chartjs": "^4.0.4",
     "vue-router": "^4.0.0-0",
     "vue3-popper": "^1.4.2",
-    "vueperslides": "^3.5.1"
+    "vueperslides": "^3.5.1",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
+    "@types/leaflet": "^1.9.8",
+    "@vue-leaflet/vue-leaflet": "^0.10.1",
     "@vue/cli-plugin-babel": "^5.0.4",
     "@vue/cli-plugin-router": "^5.0.4",
     "@vue/cli-service": "^5.0.4",
     "@vue/compiler-sfc": "^3.0.0",
+    "json-loader": "^0.5.7",
+    "leaflet": "^1.9.4",
     "node-sass": "^7.0.3",
     "sass-loader": "^13.0.2"
   },

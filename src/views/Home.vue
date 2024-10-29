@@ -14,8 +14,10 @@
           </div>
           <div >
               <ul class="navbar-nav ">
-                <a class="nav-link" :class="{active:active === 'cropping'}" href="#" @click="$router.push('/main/services'), active = 'cropping'">Advisories</a>
-                <!-- <a class="nav-link" :class="{active:active === 'Dashbords'}" href="#" @click="$router.push(''),  active = 'Dashbords'">Dashbords</a> -->
+                <a class="nav-link" :class="{active:active === 'CroppingCalendar'}" href="#" @click="$router.push('/main/CroppingCalendar'), active = 'CroppingCalendar'">Cropping Calendar</a>
+                <a class="nav-link" :class="{active:active === 'tempRain'}" href="#" @click="$router.push('/main/tempRain'), active = 'tempRain'">Temp & Rain</a>
+                <a class="nav-link" :class="{active:active === 'weather'}" href="#" @click="$router.push('/weather'), active = 'weather'">Weather</a>
+                <a class="nav-link" :class="{active:active === 'dashboard'}" href="#" @click="$router.push('/main/services'), active = 'dashboard'">Dashboard</a>
                 <a class="nav-link" :class="{active:active === 'Storyset'}" href="#" @click="$router.push('/main/storyset'), active = 'Storyset'"> Assembled Knowledge</a>
               </ul>       
           </div>
@@ -57,32 +59,44 @@
     <img  :src="require('../assets/Company-pana.svg')" alt="">  
   </div>
 </div>
- 
 
-  <!-- <main class="px-3">
-    <div class="row  row-cols-1  row-cols-md-2">
-      <div class="col my-auto">
-        <h1>{{displayParam.Title}}</h1>
-        <hr class="mx-auto" style="width:90%; background-color:#4fab43">
-        <p class="lead fs-6 px-5">{{displayParam.text}}</p>
-        <p class="lead">
-          <router-link :to="displayParam.link" style="font-size:14px !important; font-weight: 700" class="btn btn-md btn-secondary text-uppercase rounded-pill border-white bg-white">View More <i class="bi bi-arrow-right-short"></i></router-link>
-        </p>
-        <a  class="float align-middle" href="#offcanvasExample"  aria-controls="offcanvasExample" @click="previous(displayParam.id)">
-          <i class="bi bi-chevron-left fs-4 my-float" style="left: 6.4px;"></i>
-        </a>
-        <a  class="float2 align-middle"  href="#offcanvasExample"  aria-controls="offcanvasExample"  @click="nextitem(displayParam.id)" >
-          <i class="bi bi-chevron-right fs-4 my-float" style="left: 10.4px;"></i>
-        </a>
-      </div>
-      <div class="col">
-        <img class="w-75" :src="require('../assets/' + displayParam.img)" alt="">        
-      </div>
+<div class="card card-margin text-light mx-4 my-4" style="height:fit-content !important; background-image: linear-gradient(67deg, #000000, #4fab43)!important;">
+    <div class="card-body pt-3 login_body d-flex flex-column flex-md-row align-items-center justify-content-around">
+        <div class="widget-49 col-6">
+            <!-- <div class="widget-49-date-primary me-md-3 mb-3 mb-md-0" style="background-color: #ffffffe8;">
+                <img style="width:70%;" class="ms-0" src="../assets/logo.png">
+            </div> -->
+            <div class=" py-1 rounded-pill text-center" style="background-color:#aeffa39a; width:fit-content">
+                <span class="fw-bold text-uppercase px-3" style="font-size:14px">Ext. Portal</span>
+            </div>
+            <p class="widget-49-meeting-points mt-4 mt-md-3 text-md-start ms-md-0" style="font-size:14px">Our Extension Officers help manage farmers digitally. The Ext. Portal helps them add groups, send messages, and share information with farmers, aiming to grow a community of farmers and agronomists.</p>
+        </div>
+        <div class="login_section col-4 ms-md-3 d-flex justify-content-end mt-4 mt-md-0">
+          <div>
+            <div class="mb-3 ">
+                <label for="username" class="form-label text-light float-start" style="font-size:13px">Username</label>
+                <input type="email" v-model="username" class="form-control form-control-sm rounded-pill" id="username" placeholder="name@example.com">
+            </div>
+            <div class="mb-1 ">
+                <label for="password" class="form-label text-light float-start" style="font-size:13px">Password</label>
+                <div class="position-relative">
+                    <input type="password" v-model="password" class="form-control form-control-sm rounded-pill" id="password" placeholder="Password">
+                    <i class="bi bi-eye position-absolute text-secondary end-0 mt-1 me-2" id="togglePassword" @click="showpassword" style="cursor: pointer;   top: 25px;"></i>
+                </div>
+            </div>
+            <div class="card-footer border-0 bg-transparent text-center text-md-end px-0">
+                <a href="#" class="btn btn-sm login fw-bold btn-flash-border-primary border-2 rounded-pill" @click="centerLogin">Login <i class="bi bi-arrow-right-short"></i></a>
+                <Transition>
+                    <p v-if="resMsg" style="font-size:10px" class="text-danger">{{resMsg}}</p>
+                </Transition>
+            </div>
+          </div>
+        </div>
     </div>
-  </main> -->
+</div>
 <nav class="navbar footer text-light pt-5 pb-2" style="font-size:12px" >
     <div class="container text-center ">
-    <div class="row row-cols-2 pb-4">
+    <div class="row row-cols-3 pb-4">
       <div class="col">
         <span class="d-flex flex-row mb-3">
           <img src="../assets/logo_white.png" class="mx-2" width="70">
@@ -96,7 +110,14 @@
         <ul class="list-group " >
           <p class="fw-bold list-group-item border-0 text-light" style="font-size:20px;background-color: #fff0 !important;">Quick Links</p>
           <a class="list-group-item border-0 text-light" style="background-color: #fff0 !important;"  href="#" @click="$router.push('/') ">Home</a>
-          <a class="list-group-item border-0 text-light"  style="background-color: #fff0 !important;"  href="#" @click="$router.push('/main/services')"> Advisories</a>
+          <a class="list-group-item border-0 text-light"  style="background-color: #fff0 !important;"  href="#" @click="$router.push('/main/CroppingCalendar')"> Cropping Calendar</a>
+          <a class="list-group-item border-0 text-light"  style="background-color: #fff0 !important;"  href="#" @click="$router.push('/main/tempRain')">Temp & Rain</a>
+        </ul>
+      </div>
+            <div class="col text-start">
+        <ul class="list-group pt-5" >
+          <a class="list-group-item border-0 text-light"  style="background-color: #fff0 !important;"  href="#" @click="$router.push('/weather')"> Weather</a>
+          <a class="list-group-item border-0 text-light"  style="background-color: #fff0 !important;"  href="#" @click="$router.push('/main/dashboard')"> Dashboard</a>
           <a class="list-group-item border-0 text-light"  style="background-color: #fff0 !important;"  href="#" @click="$router.push('/main/storyset')"> Assembled Knowledge</a>
         </ul>
       </div>
@@ -115,6 +136,7 @@
 <script>
 import { VueperSlides, VueperSlide } from 'vueperslides'
 import 'vueperslides/dist/vueperslides.css'
+import axios from 'axios'
 
 export default {
   components: { VueperSlides, VueperSlide },
@@ -122,75 +144,33 @@ export default {
 data() {
   return {
     active:null,
-
+    resMsg:'',
     parallax: -1,
     parallaxFixedContent: false,
     pauseOnHover: true,
     autoPlaying: true,
     internalAutoPlaying: true,
-
-
-  slides: [
-    {
-      title:'Advisories',
-      content:'Utilize our Services created by our team of expects to assist you in your field of intrest, these are Applications created from the very data found here, these have been refined to develop Apps that suit you ',
-      image: require('@/assets/andrew-horodnii-yPZ_kLs7koA-unsplash (1).jpg'),
-      link:'/main/services'
-    },
-    {
-      title:' Assembled Knowledge',
-      content:'Exploratory & in-depth analysis (quantitative and qualitative) of data gathered and stored by the Africa RISING Dataverse portal over the past decade. ', 
-      image: require('@/assets/daniel-de-lima-ofPW5f2WmHc-unsplash (1).jpg'),
-      link:'/main/storyset'
-    }
-  ],
-
-
-
-
-
-
-
-
-
-
-
-    // vectordetails:[
-    //   {
-    //     id: 0,
-    //     img:'tools.svg',
-    //     Title:'Advisories',
-    //     text:'Utilize our Services created by our team of expects to assist you in your field of intrest, these are Applications created from the very data found here, these have been refined to develop Apps that suit you ',
-    //     link:'/main/services'
-    //   },
-    //   // {
-    //   //   id: 1,
-    //   //   img:'dash.svg',
-    //   //   Title:'Dashbords',
-    //   //   text:'What of you could Select a dataset and choose a data field that intrests you, and we\ll populate graphs and charts that suit your selected data fields and if you are still not satisfied with the default charts you have options. This is an opportunity for you to tell your own story, be your own god.',
-    //   //   link:'/main/dashboard'
-    //   // },
-    //   {
-    //     id: 1,
-    //     img:'story.svg',
-    //     Title:' Assembled Knowledge',
-    //     text:'This details findings from exploratory to in-depth analysis (quantitative and qualitative) of a decade of data gathered and stored by the Africa RISING Dataverse portal. This report’s focus is centered on the cultivation of maize, soybean, cowpea and groundnut in the upper regions of Ghana. However, highlights are thrown on other crops of interest where the data supports our objective.', 
-    //     link:'/main/storyset'
-    //   },
-    // ],
-    // displayParam:{
-    //     id: 1,
-    //     img:'story.svg',
-    //     Title:' Assembled Knowledge',
-    //     text:'This details findings from exploratory to in-depth analysis (quantitative and qualitative) of a decade of data gathered and stored by the Africa RISING Dataverse portal. This report’s focus is centered on the cultivation of maize, soybean, cowpea and groundnut in the upper regions of Ghana. However, highlights are thrown on other crops of interest where the data supports our objective.', 
-    //     link:'/main/storyset'
-    //   },
+    username:'',
+    password:'',
+    slides: [
+      {
+        title:'Advisories',
+        content:'Utilize our Services created by our team of expects to assist you in your field of intrest, these are Applications created from the very data found here, these have been refined to develop Apps that suit you ',
+        image: require('@/assets/andrew-horodnii-yPZ_kLs7koA-unsplash (1).jpg'),
+        link:'/main/services'
+      },
+      {
+        title:' Assembled Knowledge',
+        content:'Exploratory & in-depth analysis (quantitative and qualitative) of data gathered and stored by the Africa RISING Dataverse portal over the past decade. ', 
+        image: require('@/assets/daniel-de-lima-ofPW5f2WmHc-unsplash (1).jpg'),
+        link:'/main/storyset'
+      }
+    ],
 
   }
 },
 beforeCreate(){
    document.getElementById('app').className = 'home';
-   console.log([0.07,0.27,0.94,0.54,0.46,0.90,0.68,0.04,0.03,0.63,0.38,0.20,0.68,0.39,0.13,0.62,0.70,0.13,0.20,0.64,0.95,0.05,0.04,0.95,0.06,0.66,0.38,0.98,0.08,0.02,0.10,0.30,0.69,0.93,0.20,0.51,0.83,0.66,0.18,0.94,0.50,0.37,0.58,0.05,0.58,0.85,0.58,0.68,0.44,0.80,0.82,0.07,0.28,0.66,0.79,0.14,0.58,0.38,0.95,0.09,0.86,0.01,0.12,0.31,0.69,0.58,0.04,0.37,0.68,0.65,0.34,0.81,0.61,0.63,0.18,0.87,0.03,0.32,0.79,0.21,0.56,0.32,0.89,0.51,0.18,0.17,0.75,0.76,0.25,0.91,0.97,0.99,0.91,0.39,0.01,0.93,0.48,0.89,0.84,0.88,0.56,0.45,0.86,0.18,0.79,0.45,0.84,0.02,0.56,0.57,0.65,0.58,0.88,0.78,0.31,0.57,0.37,0.59,0.32,0.49,0.92,0.55,0.65,0.57,0.82,0.34,0.63,0.40,0.43,0.06,0.82,0.24,0.19,0.24,0.87,0.58,0.84,0.74,0.91,0.97,0.38,0.95,0.24,0.03,0.57,0.89,0.64,0.07,0.36,0.36,0.77,0.90,0.16,0.83,0.93,0.89,0.10,0.33,0.53,0.59,0.75,0.60,0.65,0.61,0.81,0.99,0.44,0.52,0.07,0.50,0.17,0.06,0.39,0.61,0.17,0.82,0.76,0.46,0.95,0.43,0.32,0.99,0.04,0.63,0.13,0.33,0.91,0.61,0.43,0.95,0.30,0.32,0.94,0.03,0.38,0.34,0.65,0.19,0.57,0.49,0.71,0.40,0.65,0.97,0.34,0.49,0.47,0.77,0.80,0.72,0.91,0.83,0.22,0.55,0.24,0.41,0.14,0.35,0.97,0.65,0.35,0.90,0.84,0.92,0.41,0.96,0.53,0.93,0.64,0.66,0.83,0.66,0.66,0.78,0.54,0.18,0.82,0.65,0.79,0.47,0.61,0.88,0.91,0.81,0.01,0.03,0.55,0.90,0.35,0.91,0.91,0.81,0.38,0.78,0.46,0.55,0.33,0.81,0.04,0.49,0.51,0.33,0.89,0.34,0.49,0.96,0.41,0.87,0.26,0.44,0.28,0.22,0.61,0.66,0.17,0.91,0.69,0.65,0.30,0.57,0.94,0.97,0.91,0.57,0.93,0.21,0.07,0.63,0.63,0.38,0.38,0.64,0.53,0.97,0.59,0.75,0.99,0.04,0.89,0.04,0.03,0.80,0.40,0.81,0.99,0.95,0.08,0.90,0.08,0.52,0.68,0.55,0.80,0.02,0.87,0.56,0.55,0.03,0.41,0.76,0.59,0.33,0.42,0.76,0.83,0.40,0.56,0.08,0.43,0.88,0.73,0.88,0.93,0.13,0.82,0.13,0.91,0.66,0.63,0.20,0.72,0.66,0.02,0.33,0.58,0.26,0.92,0.25,0.01,0.27,0.68,0.53,0.34,0.02,0.98,0.95,0.16,0.65,0.69,0.15,0.36,0.99,0.23,0.27,0.43,0.52,0.67,0.77,0.16,0.60,0.23,0.91,0.39,0.85,0.85,0.66,0.69,0.58,0.22,0.03,0.36,0.16,0.35,0.52,0.42,0.77,0.62,0.01,0.09,0.86,0.90,0.07,0.74,0.03,0.82,0.57,0.17,0.20,0.81,0.35,0.07,0.42,0.10,0.33,0.61,0.88,0.08,0.60,0.39,0.57,0.02,0.17,0.27,0.67,0.31,0.70,0.25,0.09,0.98,0.37,0.12,0.31,0.61,0.22,0.16,0.11,0.42,0.14,0.79,0.28,0.39,0.95,0.72,0.61,0.96,0.61,0.17,0.56,0.32,0.42,0.37,0.40,0.13,0.31,0.80,0.66,0.54,0.85,0.85,0.97,0.99,0.52,0.99,0.56,0.52,0.48,0.87,0.36,0.15,0.94,0.35,0.04,0.59,0.58,0.52,0.69,0.74,0.91,0.83,0.65,0.63,0.03,0.18,0.41,0.75,0.47,0.73,0.33,0.94,0.91,0.99,0.69,0.59,0.97,0.80,0.90,0.85,0.36,0.84,0.70,0.04,0.61,0.94,0.27,0.43,0.55,0.37,0.63,0.82,0.84,0.84,0.92,0.99,0.68,0.12,0.01,0.27,0.87,0.12,0.72,0.19,0.19,0.44,0.57,0.44,0.27,0.67,0.26,0.30,0.87,0.29,0.66,0.49,0.32,0.40,0.98,0.34,0.73,0.93,0.55,0.61,0.20,0.17,0.77,0.14,0.90,0.18,0.61,0.18,0.33,0.26,0.03,0.82,0.49,0.68,0.97,0.11,0.28,0.55,0.80,0.78,0.41,0.14,0.19,0.57,0.22,0.89,0.70,0.70,0.99,0.74,0.55,0.45,0.53,0.08,0.55,0.74,0.20,0.93,0.32,0.16,0.89,0.08,0.87,0.62,0.59,0.38,0.86,0.43,0.94,0.56,0.65,0.67,0.38,0.59,0.18,0.29,0.10,0.78,0.82,0.43,0.72,0.09,0.54,0.44,0.19,0.11,0.74,0.80,0.78,0.90,0.19,0.05,0.13,0.08,0.69,0.77,0.34,0.21,0.57,0.47,0.13,0.93,0.18,0.15,0.71,0.73,0.52,0.29,0.92,0.91,0.20,0.57,0.07,0.73,0.34,0.58,0.55,0.21,0.76,0.97,0.90,0.07,0.78,0.51,0.26,0.36,0.09,0.18,0.15,0.23,0.65,0.36,0.94,0.94,0.57,0.48,0.12,0.62,0.09,0.96,0.20,0.66,0.09,0.90,0.96,0.88,0.89,0.52,0.59,0.40,0.64,0.74,0.67,0.39,0.26,0.61,0.45,0.55,0.90,0.04,0.83,0.21,0.23,0.90,0.91,0.30,0.55,0.43,0.93,0.21,0.50,0.35,0.75,0.08,0.08,0.47,0.09,0.09,0.11,0.66,0.50,0.39,0.35,0.13,0.24,0.08,0.19,0.74,0.65,0.89,0.43,0.41,0.24,0.88,0.66,0.51,0.07,0.98,0.01,0.36,0.24,0.21,0.66,0.36,0.81,0.32,0.76,0.59,0.36,0.57,0.12,0.84,0.35,0.16,0.39,0.53,0.96,0.22,0.36,0.07,0.52,0.15,0.73,0.18,0.39,0.24,0.19,0.55,0.97,0.66,0.93,0.64,0.84,0.19,0.10,0.53,0.57,0.65,0.45,0.52,0.55,0.19,0.92,0.82,0.74,0.54,0.31,0.32,0.62,0.31,0.99,0.13,0.41,0.82,0.29,0.74,0.42,0.98,0.13,0.14,0.02,0.20,0.49,0.37,0.71,0.24,0.72,0.94,0.23,0.87,0.91,0.47,0.46,0.58,0.31,0.16,0.08,0.15,0.89,0.72,0.36,0.87,0.25,0.18,0.44,0.20,0.73,0.59,0.58,0.22,0.28,0.71,0.10,0.08,0.51,0.04,0.20,0.47,0.72,0.29,0.21,0.90,0.53,0.39,0.38,0.78,0.83,0.45,0.30,0.33,0.11,0.46,0.97,0.80,0.81,0.33,0.71,0.82,0.96,0.53,0.93,0.24,0.08,0.19,0.35,0.83,0.38,0.45,0.96,0.73,0.03,0.87,0.07,0.21,0.67,0.57,0.06,0.67,0.65,0.63,0.08,0.56,0.55,0.08,0.97,0.06,0.15,0.92,0.12,0.24,0.82,0.02,0.08,0.01,0.15,0.79,0.30,0.20,0.54,0.49,0.40,0.97,0.26,0.96,0.38,0.68,0.41,0.86,0.88,0.07,0.26,0.03,0.13,0.73,0.86,0.95,0.48,0.30,0.89,0.73,0.98,0.40,0.79,0.33,0.67,0.95,0.02,0.62,0.10,0.36,0.12,0.26,0.82,0.88,0.01,0.68,0.36,0.95,0.73,0.45,0.92,0.34,0.64,0.33,0.18,0.06,0.08,0.37,0.15,0.51,0.05,0.64,0.46,0.15,0.25,0.69,0.01,0.11,0.48,0.42,0.10,0.54,0.65,0.34,0.14,0.49,0.89,0.80,0.31,0.33,0.07,0.17,0.71,0.57,0.69,0.28,0.28,0.93,0.68,0.99,0.47,0.69,0.79,0.03,0.87,0.60,0.18,0.61,0.80,0.16,0.53,0.17,0.49,0.59,0.04,0.84,0.12,0.45,0.93,0.89,0.67,0.47,0.04,0.82,0.12,0.18,0.29,0.70,0.41,0.85,0.20,0.53,0.71,0.46,0.50,0.88,0.14,0.24,0.01,0.63,0.86,0.92,0.05,0.39,0.61,0.64,0.16,0.71,0.13].length)
 },
 methods:{
   changeTopic(param){
@@ -212,12 +192,112 @@ methods:{
     }else{
       this.changeTopic(id + 1)
     } 
-  }
+  },
+  centerLogin(){
+    axios.post('https://aghub.miphost.com/api/broadcast/login',{
+      email:this.username,
+      password:this.password
+    })
+    .then(response =>  {
+      this.setCookie('token', response.data, 1)
+      this.$router.push({name : 'ControlCenter'})
+    }).catch(error => {
+        this.resMsg = error.response.data
+        setInterval(() => {
+          this.resMsg = null
+        }, 2000);
+    })
+  },
+  getCookie(cname){
+    let name = cname + "=";
+    let ca = document.cookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+  },
+  setCookie(cname, cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    let expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";"+ expires + ";path=/";
+  },
 }
 }
 </script>
 
 <style scoped>
+
+.login{
+  background-color:#c3521f !important;
+  width:100%
+}
+.login:hover{
+  background-color:#452d22!important;
+}
+  .v-enter-active,
+  .v-leave-active {
+    transition: opacity 0.5s ease;
+  }
+
+  .v-enter-from,
+  .v-leave-to {
+    opacity: 0;
+  }
+
+/*  */
+input[type=file]::file-selector-button {
+  border: 2px solid #7567d900;
+  padding: .2em .4em;
+  border-radius: .2em;
+  background-color: #5c5c5c;
+  transition: 1s;
+  
+}
+.card-footer a{
+  background-color:rgb(0 104 56);
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 14px !important;
+}
+
+.card-footer a:hover{
+  background-color: rgb(85 176 71);
+}
+
+.form-control[data-v-6a57b8d6]:focus {
+    background-color: rgb(176 176 176 / 0%) !important;
+    box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 0%) !important;
+}
+
+input[type = file]{
+    display: inline !important;
+    width: auto !important;
+    border: none !important;
+    background-color:#d2691e00;
+    margin-inline: 5px;
+}
+input[type=file]::file-selector-button:hover {
+  background-color: #81ecec;
+  border: 2px solid #00cec9;
+}
+
+.modal-header {
+    border-bottom: 1px solid #dee2e634;
+}
+
+.modal-footer{
+    border-top: 1px solid #dee2e634;
+}
+
+
 .footer{
   background-image: url('../assets/footer_bg.png');
   background-repeat: no-repeat;
@@ -250,10 +330,12 @@ methods:{
 .dropdown-menu .nav-link:hover{
   background-color: rgb(99, 99, 99);
   opacity: .8;
+  font-size: 14px;
 }
 .nav-link{
   color: #c7c7c7 !important;
   transition:  .5s;
+  font-size: 14px;
 }
 .navbar-nav{
     width: fit-content !important;

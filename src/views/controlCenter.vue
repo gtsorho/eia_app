@@ -68,7 +68,7 @@ export default {
         var decoded = jwt_decode(token);
         this.username = decoded.name
         if(token == ''|| token == null){
-            this.$router.push('/main/services/')
+            this.$router.push('/')
         }
     },
     methods: {
@@ -158,7 +158,7 @@ export default {
         },
         logout(){
             this.setCookie('token', null, 1 )
-            this.$router.push('/main/services/')
+            this.$router.push('/')
         },
         toLogin(){
             this.$router.push({name:'Home'})

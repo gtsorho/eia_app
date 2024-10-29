@@ -12,19 +12,20 @@
             <!-- accordion -->
             <div class="accordion accordion-flush border-0" id="accordionPanelsStayOpenExample">
                 <!-- accordion item  -->
-                <div class="accordion-item shadow-lg border-0 border-bottom rounded-3 mb-3" v-for="(data, index) in datasets" :key="index" v-show="index < 6">
+                <div class="accordion-item shadow-lg border-0 border-bottom rounded-3 mb-3" v-for="(data, index) in datasets" :key="index" v-show=" index < 6">
                     <!-- accordion header -->
                     <div class="accordion-header " :id="`panelsStayOpen-heading${index}`">
-                        <button class="accordion-button text-dark fw-normal rounded-3 " style="width:100% !important;font-size:12px;background-image: linear-gradient(45deg, #80c976, transparent)"  data-bs-toggle="collapse"
+                        <button class="accordion-button text-dark fw-normal rounded-3 " style="width:100% !important;font-size:12px;background-image: linear-gradient(45deg, #306102e0, transparent)"  data-bs-toggle="collapse"
                             :data-bs-target="`#panelsStayOpen-collapse${index}`" aria-expanded="true"
                             :aria-controls="`panelsStayOpen-collapse${index}` ">
                             <span class="d-flex justify-content-between w-100 pt-0">
                                 <select class="form-select sourceBtn form-select-sm border-0" @change="getColumns(datasets[index].activeSrc, index)" style="background-color: transparent !important; border-bottom: 1px solid #aaaaaa75  !important;"  v-model="datasets[index].activeSrc" aria-label=".form-select-sm example">
-                                    <!-- <option :value="source.dbref" v-for="(source, i) in dataSources" :key="i">{{source.dbname}}</option> -->
                                     <option value="datalake" >Africa Rising</option>
+                                    <option value="csa">CSA</option>
                                     <option value="" v-show="datasets[index].activeSrc == ''">No source selected</option>
                                 </select>
                                 <img src="../assets/trash.gif" style="width: 20px; height: 20px;" @click="datasets.splice(index, 1)">
+                                <!-- <i class="bi bi-trash3-fill"  @click="datasets.splice(index, 1)"></i> -->
                             </span>
                         </button>
                     </div>
@@ -60,9 +61,9 @@
                 </div>
                 <!-- accordion item end -->
             </div>
-            <button class="btn btn-warning float-end btn-sm rounded-pill" style="font-size:12px" @click="addPanel()">Add Panel</button>
+            <button class="btn text-light float-end btn-sm rounded-pill" style="font-size:12px; background-color:#e6b600" @click="addPanel()">Add Panel</button>
 
-            <a class="text-warning float-start text-decoration-none fw-bolder " style="font-size:12px"  href="#" @click="$emit('powerClick')">Go to PowerBi</a>
+            <!-- <a class=" float-start text-decoration-none fw-bolder " style="font-size:12px;color:#e6b600"  href="#" @click="$emit('powerClick')">Go to PowerBi</a> -->
             <!-- accordion end -->
         </div>
     </div>
@@ -111,7 +112,7 @@ import { reactive } from 'vue'
             this.getSources()
         },
         methods: {
-            getColumns(db, index){
+            getColumns(db, index){ 
                 axios.get(`https://aghub.miphost.com/api/datalake/columns/${db}`)
                 .then(response =>  {
                     this.datasets[index].y_dataArr = response.data
@@ -155,7 +156,6 @@ import { reactive } from 'vue'
                 )
             },
             getFormValue(i){
-                console.log(i)
                 let url
                     if(this.datasets[i].x_data == this.datasets[i].y_data){
                         this.datasets[i].errMsg= 'independent and dependent data must be of different fields'
@@ -166,25 +166,32 @@ import { reactive } from 'vue'
                         if (this.datasets[i].y_data == 'Population' ){
                             url = 'https://aghub.miphost.com/api/datalake/ixd'
                         }else{
-                            url= 'https://aghub.miphost.com/api/datalake/dxd'
+                            url=  'https://aghub.miphost.com/api/datalake/dxd'
                         }
 
-                        axios.post(url,{
-                        x:this.datasets[i].x_data,
-                        y:this.datasets[i].y_data
+                        axios.post(url, {
+                            x:this.datasets[i].x_data,
+                            y:this.datasets[i].y_data
                         })
                         .then(response =>  {
+                            console.log(response.data)
+
                             this.datasets[i].chartVals = response.data
                             this.datasets[i].show = true
                             if(this.datasets[i].chartVals){
                                 this.$emit("panelValues", this.datasets)
                             }
-                            console.log(this.datasets)
                         }).catch(error => {
                         console.log(error)
                         })
                     }
             },
+            // submit () {
+            //     const data = {
+            //         workExperiences: this.workExperiences
+            //     }
+            //     alert(JSON.stringify(data, null, 2))
+            // }
         },
         computed:{
             jsColor(){
@@ -219,10 +226,10 @@ import { reactive } from 'vue'
     border-start-start-radius: 0px;
     border: 0px !important;
     height: 32px;
-    background-color: #4fab43;
+    background-color: #e6b600;
 }
 .form-select{
-    background-color: #c1ebbb8d;
+    background-color: #a8bd94de;
     font-size: .75rem!important;
 }
 .trashbtn:focus {
@@ -249,30 +256,4 @@ import { reactive } from 'vue'
     background-color: #ffffff;
 }
 
-</style>
-<style scoped>
-/* .accordion-button{
-    height: 30px;
-}
-.trashbtn{
-
-    width: 10% !important;
-    padding: 0rem 0.25rem;
-    border-end-start-radius: 0px;
-    border-end-end-radius: 0px;
-    border-start-start-radius: 0px;
-    border: 0px !important;
-    height: 32px;
-    background-color: #4fab43;
-}
-.form-select{
-    background-color: #4fab431d;
-}
-.trashbtn:focus {
-    outline: 0;
-    box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 0%);
-}
-.bi-trash3-fill:hover{
-    opacity: .5;
-} */
 </style>

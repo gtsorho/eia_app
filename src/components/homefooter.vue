@@ -4,7 +4,7 @@
                 <div class="col-lg-4 col-sm-8 px-5 py-2 ">
                     <div class="input-group input-group-sm mb-3">
                         <input class="form-control d-inline" type="text" v-model="searchdata" @keyup="search(searchdata)" placeholder="Search">
-                        <button type="button" style="background-color:#c2213d !important" class="btn d-inline text-light" @click="search()">All locations</button>
+                        <button type="button" style="background-color:#397931 !important" class="btn d-inline text-light" @click="search()">All locations</button>
                     </div>
 
                     <div class="list-group mt-2 text-sm-center text-lg-start">
@@ -15,8 +15,6 @@
                         </a>
                     </div>
                 </div>
-                
-                
                 
                 <div class="col px-5 py-3 align-items-center" @click="$emit('populatemain',[daydata, addressVal])" v-for="(daydata, id) in reusltdata" :key="id">
                     <span class="badge rounded-pill  p-2 fw-light" :class="badgecolors()">{{getday(daydata[0].dt)}}</span>
@@ -271,7 +269,7 @@ export default {
     }
     .list-group-item-action:focus, .list-group-item-action:hover {
     color: #f47d91 !important;
-    border-radius: 51px;
+    border-radius:5px;
     border: 10px !important;
     background-color: #6c757d29 !important;
     }

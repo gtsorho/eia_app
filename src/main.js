@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import ganttastic from '@infectoone/vue-ganttastic'
-import moment from 'moment';
+import store from './store'
 
 
 router.afterEach(to => {
@@ -27,4 +27,5 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 const app = createApp(App)
 app.use(router)
 app.use(ganttastic)
+app.use(store)
 app.mount('#app')
