@@ -15,5 +15,4 @@ jobs:
           username: ${{ secrets.GIT_CPANEL_EIA_USER }}
           password: ${{ secrets.GIT_CPANEL_EIA_PWD }}
           protocol: ${{ secrets.GIT_CPANEL_EIA_PROTOCOL }}
-          server-dir: /public_html  # Adjust to your directory
           dry-run: true             # Enables dry run mode for testing connection
