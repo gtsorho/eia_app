@@ -6,7 +6,7 @@ import StorySet from '../views/storyset.vue'
 import Storysetchartboard from '../views/storysetchartboard'
 import tempRain from '../views/temprain'
 import ControlCenter from '../views/controlCenter'
-import leaflet from '../views/leaflet'
+// import leaflet from '../views/leaflet'
 import weatherBg from "@/assets/hero-sky-dramatic-lightning-weather-shutterstock_2200924189.jpg";
 import CroppingCalendarNew from '../views/CroppingCalendarUpdating.vue'
 import CalendarMore from '../views/calenderMore.vue'
@@ -56,11 +56,11 @@ const routes = [
         name: 'TempRain',
         component: tempRain
       },
-      {
-        path: 'leaflet',
-        name: 'leaflet',
-        component: leaflet
-      },
+      // {
+      //   path: 'leaflet',
+      //   name: 'leaflet',
+      //   component: leaflet
+      // },
       {
         path: 'storyset',
         name: 'Storyset',
