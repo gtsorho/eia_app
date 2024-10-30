@@ -33,6 +33,9 @@ export default {
 p, small, a, li,option, form ,div{
   font-family: 'Open Sans', sans-serif;
 }
+a{
+  cursor: pointer !important;
+}
 body{
       background-color: #f5f5ff !important;
 }

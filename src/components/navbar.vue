@@ -36,10 +36,6 @@
                                 <router-link to="/main/storyset" class="text-dark" @click="collapseCloseOnclick()">
                                     Assembled Knowledge</router-link>
                             </li>
-
-
-
-              
                         </ul>
                     </div>
                 </div>

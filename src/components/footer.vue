@@ -24,13 +24,20 @@
       <div class="col text-start">
         <ul class="list-group " >
           <p class="fw-bold list-group-item border-0 text-light" style="font-size:20px;background-color: #fff0 !important;">Quick Links</p>
-          <a class="list-group-item border-0 text-light" style="background-color: #fff0 !important;"  href="#" @click="$router.push('/') ">Home</a>
-          <a class="list-group-item border-0 text-light"  style="background-color: #fff0 !important;"  href="#" @click="$router.push('/main/services')"> Advisories</a>
-          <a class="list-group-item border-0 text-light"  style="background-color: #fff0 !important;"  href="#" @click="$router.push('/main/storyset')"> Assembled Knowledge</a>
+          <a class="list-group-item border-0 text-light" style="background-color: #fff0 !important;"  @click="$router.push('/')">Home</a>
+          <a class="list-group-item border-0 text-light"  style="background-color: #fff0 !important;"  @click="$router.push('/main/CroppingCalendar')"> Cropping Calendar</a>
+          <a class="list-group-item border-0 text-light"  style="background-color: #fff0 !important;"  @click="$router.push('/main/tempRain')">Temp & Rain</a>
+        </ul>
+      </div>
+      <div class="col text-start">
+        <ul class="list-group pt-5" >
+          <a class="list-group-item border-0 text-light"  style="background-color: #fff0 !important;"  @click="$router.push('/weather')"> Weather</a>
+          <a class="list-group-item border-0 text-light"  style="background-color: #fff0 !important;"  @click="$router.push('/main/dashboard')"> Dashboard</a>
+          <a class="list-group-item border-0 text-light"  style="background-color: #fff0 !important;"  @click="$router.push('/main/storyset')"> Assembled Knowledge</a>
         </ul>
       </div>
     </div>
-  </div>
+    </div>
   <div class="container pt-4" style="border-top:1px solid rgba(255, 255, 255, 0.1)">
       <span class="text-light ">&copy; Copyright {{new Date(Date.now()).getFullYear()}} by Excellence in Agronomy</span>
       <a class="navbar-brand float-end" href="#"><img class=""  height="44" src="../assets/logo.png" > </a>

@@ -14,11 +14,11 @@
           </div>
           <div >
               <ul class="navbar-nav ">
-                <a class="nav-link" :class="{active:active === 'CroppingCalendar'}" href="#" @click="$router.push('/main/CroppingCalendar'), active = 'CroppingCalendar'">Cropping Calendar</a>
-                <a class="nav-link" :class="{active:active === 'tempRain'}" href="#" @click="$router.push('/main/tempRain'), active = 'tempRain'">Temp & Rain</a>
-                <a class="nav-link" :class="{active:active === 'weather'}" href="#" @click="$router.push('/weather'), active = 'weather'">Weather</a>
-                <a class="nav-link" :class="{active:active === 'dashboard'}" href="#" @click="$router.push('/main/services'), active = 'dashboard'">Dashboard</a>
-                <a class="nav-link" :class="{active:active === 'Storyset'}" href="#" @click="$router.push('/main/storyset'), active = 'Storyset'"> Assembled Knowledge</a>
+                <a class="nav-link" :class="{active:active === 'CroppingCalendar'}"  @click="$router.push('/main/CroppingCalendar'), active = 'CroppingCalendar'">Cropping Calendar</a>
+                <a class="nav-link" :class="{active:active === 'tempRain'}"  @click="$router.push('/main/tempRain'), active = 'tempRain'">Temp & Rain</a>
+                <a class="nav-link" :class="{active:active === 'weather'}"  @click="$router.push('/weather'), active = 'weather'">Weather</a>
+                <a class="nav-link" :class="{active:active === 'dashboard'}"  @click="$router.push('/main/dashboard'), active = 'dashboard'">Dashboard</a>
+                <a class="nav-link" :class="{active:active === 'Storyset'}"  @click="$router.push('/main/storyset'), active = 'Storyset'"> Assembled Knowledge</a>
               </ul>       
           </div>
         </div>
@@ -85,7 +85,7 @@
                 </div>
             </div>
             <div class="card-footer border-0 bg-transparent text-center text-md-end px-0">
-                <a href="#" class="btn btn-sm login fw-bold btn-flash-border-primary border-2 rounded-pill" @click="centerLogin">Login <i class="bi bi-arrow-right-short"></i></a>
+                <a  class="btn btn-sm login fw-bold btn-flash-border-primary border-2 rounded-pill" @click="centerLogin">Login <i class="bi bi-arrow-right-short"></i></a>
                 <Transition>
                     <p v-if="resMsg" style="font-size:10px" class="text-danger">{{resMsg}}</p>
                 </Transition>
@@ -109,23 +109,23 @@
       <div class="col text-start">
         <ul class="list-group " >
           <p class="fw-bold list-group-item border-0 text-light" style="font-size:20px;background-color: #fff0 !important;">Quick Links</p>
-          <a class="list-group-item border-0 text-light" style="background-color: #fff0 !important;"  href="#" @click="$router.push('/') ">Home</a>
-          <a class="list-group-item border-0 text-light"  style="background-color: #fff0 !important;"  href="#" @click="$router.push('/main/CroppingCalendar')"> Cropping Calendar</a>
-          <a class="list-group-item border-0 text-light"  style="background-color: #fff0 !important;"  href="#" @click="$router.push('/main/tempRain')">Temp & Rain</a>
+          <a class="list-group-item border-0 text-light" style="background-color: #fff0 !important;"  @click="$router.push('/') ">Home</a>
+          <a class="list-group-item border-0 text-light"  style="background-color: #fff0 !important;"  @click="$router.push('/main/CroppingCalendar')"> Cropping Calendar</a>
+          <a class="list-group-item border-0 text-light"  style="background-color: #fff0 !important;"  @click="$router.push('/main/tempRain')">Temp & Rain</a>
         </ul>
       </div>
-            <div class="col text-start">
+      <div class="col text-start">
         <ul class="list-group pt-5" >
-          <a class="list-group-item border-0 text-light"  style="background-color: #fff0 !important;"  href="#" @click="$router.push('/weather')"> Weather</a>
-          <a class="list-group-item border-0 text-light"  style="background-color: #fff0 !important;"  href="#" @click="$router.push('/main/dashboard')"> Dashboard</a>
-          <a class="list-group-item border-0 text-light"  style="background-color: #fff0 !important;"  href="#" @click="$router.push('/main/storyset')"> Assembled Knowledge</a>
+          <a class="list-group-item border-0 text-light"  style="background-color: #fff0 !important;"  @click="$router.push('/weather')"> Weather</a>
+          <a class="list-group-item border-0 text-light"  style="background-color: #fff0 !important;"  @click="$router.push('/main/dashboard')"> Dashboard</a>
+          <a class="list-group-item border-0 text-light"  style="background-color: #fff0 !important;"  @click="$router.push('/main/storyset')"> Assembled Knowledge</a>
         </ul>
       </div>
     </div>
   </div>
   <div class="container pt-4" style="border-top:1px solid rgba(255, 255, 255, 0.1)">
       <span class="text-light ">&copy; Copyright {{new Date(Date.now()).getFullYear()}} by Excellence in Agronomy</span>
-      <a class="navbar-brand float-end" href="#"><img class=""  height="44" src="../assets/logo.png" > </a>
+      <a class="navbar-brand float-end"><img class=""  height="44" src="../assets/logo.png" > </a>
   </div>
 </nav>
 </div>
