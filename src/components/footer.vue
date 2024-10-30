@@ -11,7 +11,7 @@
     </footer> -->
     <nav class="navbar footer text-light pt-5 pb-2" style="font-size:12px" >
     <div class="container text-center ">
-    <div class="row row-cols-2 pb-4">
+    <div class="row row-cols-3 pb-4">
       <div class="col">
         <span class="d-flex flex-row mb-3">
           <img src="../assets/logo_white.png" class="mx-2" width="70">
@@ -24,7 +24,7 @@
       <div class="col text-start">
         <ul class="list-group " >
           <p class="fw-bold list-group-item border-0 text-light" style="font-size:20px;background-color: #fff0 !important;">Quick Links</p>
-          <a class="list-group-item border-0 text-light" style="background-color: #fff0 !important;"  @click="$router.push('/')">Home</a>
+          <a class="list-group-item border-0 text-light" style="background-color: #fff0 !important;"  @click="$router.push('/') ">Home</a>
           <a class="list-group-item border-0 text-light"  style="background-color: #fff0 !important;"  @click="$router.push('/main/CroppingCalendar')"> Cropping Calendar</a>
           <a class="list-group-item border-0 text-light"  style="background-color: #fff0 !important;"  @click="$router.push('/main/tempRain')">Temp & Rain</a>
         </ul>
@@ -37,10 +37,10 @@
         </ul>
       </div>
     </div>
-    </div>
+  </div>
   <div class="container pt-4" style="border-top:1px solid rgba(255, 255, 255, 0.1)">
       <span class="text-light ">&copy; Copyright {{new Date(Date.now()).getFullYear()}} by Excellence in Agronomy</span>
-      <a class="navbar-brand float-end" href="#"><img class=""  height="44" src="../assets/logo.png" > </a>
+      <a class="navbar-brand float-end"><img class=""  height="44" src="../assets/logo.png" > </a>
   </div>
 </nav>
 </template>
