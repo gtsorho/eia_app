@@ -98,9 +98,10 @@
     <div class="container text-center ">
     <div class="row row-cols-3 pb-4">
       <div class="col">
-        <span class="d-flex flex-row mb-3">
+        <span class="d-flex flex-row mb-3 gap-3">
           <img src="../assets/logo_white.png" class="mx-2" width="70">
           <img src="../assets/cgiar-logo-white.png" width="50">
+          <img src="../assets/output-onlinepngtools.png" width="180">
         </span> 
         <p class="text-start " style="font-weight:400">
           CGIAR is a global research partnership for a food-secure future dedicated to transforming food, land, and water systems in a climate crisis.
